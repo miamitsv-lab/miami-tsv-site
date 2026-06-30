@@ -412,6 +412,36 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
 }
 
 
+
+/* Responsive Project Progress layout */
+.project-progress-card {
+  width: 66.7%;
+  max-width: 100%;
+  margin: 0 auto 24px auto;
+}
+.project-progress-card .progress-header,
+.project-progress-card .progress-header h2 {
+  text-align: center;
+}
+.project-progress-card .progress-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  cursor: pointer;
+}
+.project-progress-card .progress-link:hover,
+.project-progress-card .progress-link:focus {
+  box-shadow: 0 10px 22px rgba(23, 50, 77, 0.14);
+  transform: translateY(-1px);
+  outline: none;
+}
+@media (max-width: 1024px) {
+  .project-progress-card { width: 80%; }
+}
+@media (max-width: 760px) {
+  .project-progress-card { width: 100%; }
+}
+
 </style>
 </head>
 <body>
@@ -425,26 +455,29 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
     <a href="priority-tasks.html">Priorities</a>
     <a href="deadline-reminder.html">Deadlines</a>
     <a href="note-section.html">Notes</a></nav>
+
   <section class="project-progress-card" aria-label="WebEx project progress status">
     <div class="progress-header">
       <div>
-        <h2>WebEx Project Progress</h2>
+        <h2>Project Progress</h2>
         <p><strong>Current checkpoint:</strong> Scripts are finalized. Run-of-show, storyboard, demo map, and other pre-production materials are completed and up for review.</p>
       </div>
     </div>
     <div class="progress-grid">
-      <article class="progress-panel">
+      <a class="progress-panel progress-link" href="action-items.html" aria-label="Open Action Items for current progress">
         <div class="progress-meta"><strong>Current Progress</strong><span class="progress-percent">20%</span></div>
         <div class="progress-track" role="progressbar" aria-label="Current WebEx project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20"><div class="progress-fill" style="width: 20%;"></div></div>
         <p>Scripts and pre-production materials are completed and ready for review before the visual proof test and recording work.</p>
-      </article>
-      <article class="progress-panel target-progress">
+      </a>
+      <a class="progress-panel target-progress progress-link" href="deadline-reminder.html" aria-label="Open Deadlines for target progress">
         <div class="progress-meta"><strong>Target Progress</strong><span class="progress-percent">25%</span></div>
         <div class="progress-track" role="progressbar" aria-label="Target WebEx project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="25"><div class="progress-fill" style="width: 25%;"></div></div>
         <p>Target progress is slightly ahead of current progress, with review notes, proof-test preparation, and setup confirmation already underway.</p>
-      </article>
+      </a>
     </div>
   </section>
+
+  
 
 
   <section class="immediate">
@@ -456,7 +489,7 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
 
   <h2 class="section-title">WebEx Team Tables</h2>
   <section class="card-grid">
-    <a class="tile" href="team-members-assigned-tasks.html"><h2>Team</h2><p>Roles and assigned tasks for each WebEx team member.</p></a><a class="tile" href="priority-tasks.html"><h2>Priorities</h2><p>Main due dates, leads, and helpers for the WebEx project.</p></a><a class="tile" href="deadline-reminder.html"><h2>Deadlines</h2><p>Shared deadline schedule from planning to final submission.</p></a><a class="tile" href="note-section.html"><h2>Notes</h2><p>Simple definitions for lower thirds, labels, callouts, run-of-show, storyboard, and demo map.</p></a>
+    <a class="tile" href="action-items.html"><h2>Action Items</h2><p>View action items assigned for this week's sprint.</p></a><a class="tile" href="team-members-assigned-tasks.html"><h2>Team</h2><p>Roles and assigned tasks for each WebEx team member.</p></a><a class="tile" href="priority-tasks.html"><h2>Priorities</h2><p>Main due dates, leads, and helpers for the WebEx project.</p></a><a class="tile" href="deadline-reminder.html"><h2>Deadlines</h2><p>Shared deadline schedule from planning to final submission.</p></a><a class="tile" href="note-section.html"><h2>Notes</h2><p>Simple definitions for lower thirds, labels, callouts, run-of-show, storyboard, and demo map.</p></a>
   </section>
 
   <p class="footer">Keep all files in the same folder so the links continue to work.</p>
