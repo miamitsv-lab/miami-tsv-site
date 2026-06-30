@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Signal Flow Notes Section</title>
+<style>
+:root {
+  --navy: #17324D;
+  --blue: #2F6FAE;
+  --border: #C9D6E6;
+  --bg: #F6F9FD;
+  --text: #1C2733;
+  --muted: #51606F;
+  --gold: #FFF3DC;
+  --green: #EAF7EF;
+  --purple: #F2ECFF;
+  --red: #FFEAEA;
+  --light-blue: #EAF3FF;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  padding: 24px;
+}
+.wrap { max-width: 1280px; margin: 0 auto; }
+.header {
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  color: white;
+  border-radius: 20px;
+  padding: 28px 32px;
+  margin-bottom: 18px;
+  box-shadow: 0 10px 24px rgba(23, 50, 77, 0.18);
+}
+h1 {
+  margin: 0;
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.1;
+}
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 20px 0;
+}
+.nav a {
+  color: var(--navy);
+  background: white;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+.nav a:hover,
+.nav a.active {
+  background: var(--light-blue);
+  border-color: var(--blue);
+}
+.table-card,
+.card-grid,
+.immediate {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+}
+.section-title {
+  margin: 26px 0 12px 0;
+  color: var(--navy);
+  font-size: clamp(22px, 3vw, 30px);
+}
+.immediate {
+  margin-bottom: 24px;
+  padding: 18px;
+}
+.immediate-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.action-card {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 20px;
+  min-height: 175px;
+}
+.action-card:nth-child(1) { background: var(--light-blue); }
+.action-card:nth-child(2) { background: var(--green); }
+.action-card:nth-child(3) { background: var(--gold); }
+.action-card h2 {
+  margin: 0 0 10px 0;
+  color: var(--navy);
+  font-size: 24px;
+}
+.action-card p {
+  margin: 0;
+  line-height: 1.5;
+  font-size: 17px;
+}
+table { width: 100%; border-collapse: collapse; }
+thead { background: #255D91; color: white; }
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.45;
+}
+th { font-size: 18px; letter-spacing: 0.02em; }
+td { font-size: 17px; }
+tbody tr:nth-child(5n+1) { background: var(--light-blue); }
+tbody tr:nth-child(5n+2) { background: var(--gold); }
+tbody tr:nth-child(5n+3) { background: var(--green); }
+tbody tr:nth-child(5n+4) { background: var(--purple); }
+tbody tr:nth-child(5n+5) { background: var(--red); }
+tbody tr:last-child td { border-bottom: none; }
+td:first-child { color: var(--navy); font-size: 19px; font-weight: 700; }
+td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0;
+  padding: 14px;
+}
+.tile {
+  margin: 10px;
+  padding: 22px;
+  min-height: 150px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: var(--light-blue);
+  text-decoration: none;
+  color: var(--text);
+  display: block;
+}
+.tile:nth-child(2) { background: var(--gold); }
+.tile:nth-child(3) { background: var(--green); }
+.tile:nth-child(4) { background: var(--purple); }
+.tile h2 {
+  margin: 0 0 12px 0;
+  color: var(--navy);
+  font-size: 24px;
+}
+.tile p {
+  margin: 0;
+  line-height: 1.45;
+}
+.footer {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 14px;
+}
+@media (max-width: 900px) {
+  .immediate-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  body { padding: 14px; }
+  .header { padding: 22px; border-radius: 16px; }
+  .table-card, .immediate { border-radius: 16px; }
+  table, thead, tbody, th, td, tr { display: block; }
+  thead { display: none; }
+  tbody tr {
+    margin: 14px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(23, 50, 77, 0.08);
+  }
+  td {
+    width: 100% !important;
+    border-bottom: 1px solid rgba(201, 214, 230, 0.8);
+    padding: 14px 16px 14px 140px;
+    position: relative;
+    min-height: 54px;
+    font-size: 16px;
+  }
+  td:last-child { border-bottom: none; }
+  td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 16px;
+    top: 14px;
+    width: 110px;
+    color: var(--muted);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  td:first-child { font-size: 18px; }
+}
+@media print {
+  body { background: white; padding: 0; }
+  .header, .table-card, .card-grid, .immediate { box-shadow: none; }
+  th, td { font-size: 12px; padding: 9px 10px; }
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <section class="header"><h1>Signal Flow Notes Section</h1></section>
+  <nav class="nav"><a href="index.html">Home</a>
+    <a href="action-items.html">Action Items</a>
+    <a href="team-members-assigned-tasks.html">Team</a>
+    <a href="priority-tasks.html">Priorities</a>
+    <a href="deadline-reminder.html">Deadlines</a>
+    <a href="note-section.html" class="active">Notes</a></nav>
+  <section class="table-card"><table><thead><tr><th>Term</th><th>Meaning / Note</th></tr></thead><tbody><tr><td data-label="Term">Run-of-show</td><td data-label="Meaning / Note">The order of the full video from beginning to end.</td></tr><tr><td data-label="Term">Storyboard</td><td data-label="Meaning / Note">What viewers will see in each section.</td></tr><tr><td data-label="Term">Animation scene list</td><td data-label="Meaning / Note">The list of animated scenes needed for the Signal Flow video.</td></tr><tr><td data-label="Term">Avatar movement</td><td data-label="Meaning / Note">Simple movement for the animated host/guest, such as mouth movement, head movement, blinking, or hand gestures.</td></tr><tr><td data-label="Term">Lower thirds</td><td data-label="Meaning / Note">Name/role banners for people speaking.</td></tr><tr><td data-label="Term">Labels</td><td data-label="Meaning / Note">Short text that identifies parts of the diagram or topic.</td></tr><tr><td data-label="Term">Callouts</td><td data-label="Meaning / Note">Arrows, boxes, or short notes pointing to important visuals.</td></tr><tr><td data-label="Term">SME</td><td data-label="Meaning / Note">Subject Matter Expert who checks technical accuracy.</td></tr><tr><td data-label="Term">Simple production rule</td><td data-label="Meaning / Note">Keep the animation simple: clear diagrams, readable labels, simple movement, and clean audio are more important than fancy effects.</td></tr></tbody></table></section>
+  
+</main>
+</body>
+</html>
