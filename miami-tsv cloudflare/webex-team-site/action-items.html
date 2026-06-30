@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WebEx Team Action Items</title>
+<style>
+
+:root {
+  --navy: #17324D;
+  --blue: #2F6FAE;
+  --border: #C9D6E6;
+  --bg: #F6F9FD;
+  --text: #1C2733;
+  --muted: #51606F;
+  --gold: #FFF3DC;
+  --green: #EAF7EF;
+  --purple: #F2ECFF;
+  --red: #FFEAEA;
+  --light-blue: #EAF3FF;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  padding: 24px;
+}
+.wrap { max-width: 1280px; margin: 0 auto; }
+.header {
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  color: white;
+  border-radius: 20px;
+  padding: 28px 32px;
+  margin-bottom: 18px;
+  box-shadow: 0 10px 24px rgba(23, 50, 77, 0.18);
+}
+h1 {
+  margin: 0;
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.1;
+}
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 20px 0;
+}
+.nav .sep {
+  color: var(--navy);
+  font-weight: 800;
+  opacity: 0.75;
+}
+.nav a {
+  color: var(--navy);
+  background: white;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+.nav a:hover,
+.nav a.active {
+  background: var(--light-blue);
+  border-color: var(--blue);
+}
+.table-card,
+.card-grid,
+.immediate {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+}
+.section-title {
+  margin: 26px 0 12px 0;
+  color: var(--navy);
+  font-size: clamp(22px, 3vw, 30px);
+}
+.immediate {
+  margin-bottom: 24px;
+  padding: 18px;
+}
+.immediate-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.action-card {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 20px;
+  min-height: 175px;
+}
+.action-card:nth-child(1) { background: var(--light-blue); }
+.action-card:nth-child(2) { background: var(--green); }
+.action-card:nth-child(3) { background: var(--gold); }
+.action-card h2 {
+  margin: 0 0 10px 0;
+  color: var(--navy);
+  font-size: 24px;
+}
+.action-card p {
+  margin: 0;
+  line-height: 1.5;
+  font-size: 17px;
+}
+table { width: 100%; border-collapse: collapse; }
+thead { background: #255D91; color: white; }
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.45;
+}
+th { font-size: 18px; letter-spacing: 0.02em; }
+td { font-size: 17px; }
+tbody tr:nth-child(5n+1) { background: var(--light-blue); }
+tbody tr:nth-child(5n+2) { background: var(--gold); }
+tbody tr:nth-child(5n+3) { background: var(--green); }
+tbody tr:nth-child(5n+4) { background: var(--purple); }
+tbody tr:nth-child(5n+5) { background: var(--red); }
+tbody tr:last-child td { border-bottom: none; }
+td:first-child { color: var(--navy); font-size: 19px; font-weight: 700; }
+td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0;
+  padding: 14px;
+}
+.tile {
+  margin: 10px;
+  padding: 22px;
+  min-height: 150px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: var(--light-blue);
+  text-decoration: none;
+  color: var(--text);
+  display: block;
+}
+.tile:nth-child(2) { background: var(--gold); }
+.tile:nth-child(3) { background: var(--green); }
+.tile:nth-child(4) { background: var(--purple); }
+.tile h2 {
+  margin: 0 0 12px 0;
+  color: var(--navy);
+  font-size: 24px;
+}
+.tile p {
+  margin: 0;
+  line-height: 1.45;
+}
+.footer {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 14px;
+}
+@media (max-width: 900px) {
+  .immediate-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  body { padding: 14px; }
+  .header { padding: 22px; border-radius: 16px; }
+  .table-card, .immediate { border-radius: 16px; }
+  table, thead, tbody, th, td, tr { display: block; }
+  thead { display: none; }
+  tbody tr {
+    margin: 14px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(23, 50, 77, 0.08);
+  }
+  td {
+    width: 100% !important;
+    border-bottom: 1px solid rgba(201, 214, 230, 0.8);
+    padding: 14px 16px 14px 140px;
+    position: relative;
+    min-height: 54px;
+    font-size: 16px;
+  }
+  td:last-child { border-bottom: none; }
+  td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 16px;
+    top: 14px;
+    width: 110px;
+    color: var(--muted);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  td:first-child { font-size: 18px; }
+}
+@media print {
+  body { background: white; padding: 0; }
+  .header, .table-card, .card-grid, .immediate { box-shadow: none; }
+  th, td { font-size: 12px; padding: 9px 10px; }
+}
+
+.action-filter-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+  padding: 22px;
+  margin-bottom: 22px;
+}
+.filter-row {
+  display: grid;
+  grid-template-columns: minmax(180px, 260px) minmax(220px, 1fr);
+  gap: 14px;
+  align-items: center;
+}
+.filter-row label {
+  color: var(--navy);
+  font-weight: 800;
+  font-size: 19px;
+}
+.member-select {
+  width: 100%;
+  color: var(--text);
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 13px 14px;
+  font-size: 17px;
+  font-weight: 700;
+}
+.select-note {
+  color: var(--muted);
+  margin: 12px 0 0 0;
+  line-height: 1.5;
+}
+.empty-state {
+  background: var(--light-blue);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 28px;
+  color: var(--navy);
+  font-size: 20px;
+  font-weight: 800;
+  text-align: center;
+}
+.action-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+.member-card {
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+}
+.member-card:nth-child(5n+1) .member-card-head { background: var(--light-blue); }
+.member-card:nth-child(5n+2) .member-card-head { background: var(--gold); }
+.member-card:nth-child(5n+3) .member-card-head { background: var(--green); }
+.member-card:nth-child(5n+4) .member-card-head { background: var(--purple); }
+.member-card:nth-child(5n+5) .member-card-head { background: var(--red); }
+.member-card-head {
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--border);
+}
+.member-card h2 {
+  margin: 0;
+  color: var(--navy);
+  font-size: 28px;
+}
+.member-role {
+  margin: 8px 0 0 0;
+  color: #1D5F8F;
+  font-weight: 700;
+  line-height: 1.45;
+}
+.member-card-body {
+  padding: 20px 22px;
+}
+.member-card-body h3 {
+  margin: 0 0 12px 0;
+  color: var(--navy);
+  font-size: 21px;
+}
+.member-card-body ul {
+  margin: 0;
+  padding-left: 22px;
+}
+.member-card-body li {
+  margin: 0 0 10px 0;
+  line-height: 1.5;
+  font-size: 17px;
+}
+.member-card-body li:last-child { margin-bottom: 0; }
+.due-chip {
+  display: inline-block;
+  background: var(--navy);
+  color: white;
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+.home-action-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  padding: 14px;
+  margin-bottom: 24px;
+}
+.tile.action-items-tile {
+  grid-column: 1 / -1;
+  background: var(--light-blue);
+  min-height: 120px;
+}
+.tile.action-items-tile h2 {
+  font-size: clamp(26px, 3vw, 34px);
+}
+@media (max-width: 760px) {
+  .filter-row { grid-template-columns: 1fr; }
+  .member-card h2 { font-size: 24px; }
+}
+
+</style>
+</head>
+<body>
+<main class="wrap">
+  <section class="header">
+    <h1>WebEx Team Action Items</h1>
+  </section>
+  <nav class="nav"><a href="index.html">Home</a>
+    <a href="action-items.html" class="active">Action Items</a>
+    <a href="team-members-assigned-tasks.html">Team</a>
+    <a href="priority-tasks.html">Priorities</a>
+    <a href="deadline-reminder.html">Deadlines</a>
+    <a href="note-section.html">Notes</a></nav>
+
+  <section class="action-filter-card" aria-label="Select a team member">
+    <div class="filter-row">
+      <label for="memberSelect">Action Items for:</label>
+      <select id="memberSelect" class="member-select" aria-label="Select a team member to view action items">
+        <option value="" selected>Select a Name</option>
+      <option value="Justyn">Justyn</option>
+      <option value="Julia">Julia</option>
+      <option value="Dennis">Dennis</option>
+      <option value="Frank">Frank</option>
+      <option value="Angelino">Angelino</option>
+      <option value="Jules T">Jules T</option>
+      <option value="Janna">Janna</option>
+      <option value="NJ">NJ</option>
+      <option value="TJ">TJ</option>
+      <option value="Jhules B">Jhules B</option>
+      <option value="Boon">Boon</option>
+      <option value="Eden">Eden</option>
+      <option value="Eduard">Eduard</option>
+      </select>
+    </div>
+    <p class="select-note">Choose a member name to show only that person's action items. Choose <strong>Select a Name</strong> to hide all action items.</p>
+  </section>
+
+  <section id="emptyState" class="empty-state">Select a Name to view action items.</section>
+
+  <section id="actionList" class="action-list" aria-live="polite">
+    <article class="member-card" data-member="Justyn" hidden>
+      <div class="member-card-head">
+        <h2>Justyn</h2>
+        <p class="member-role">Director</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+        <li>Finalize the WebEx recording plan and confirm the podcast/interview setup.</li>
+        <li>Create and communicate the recording schedule for the team.</li>
+        <li>Prepare the WebEx test meeting, host/cohost accounts, Backup TSV PC workflow, and screen recording checklist.</li>
+        <li>Confirm the team is ready for July 10 recording week.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="member-card" data-member="Julia" hidden>
+      <div class="member-card-head">
+        <h2>Julia</h2>
+        <p class="member-role">Scriptwriter</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+        <li>Finish the WebEx run-of-show, storyboard, and demo map.</li>
+        <li>Make sure every scene has matching screen demo notes.</li>
+        <li>Cover Meeting Options, Audio/Video Settings, Layouts, Sync Stage, Breakout Sessions, Host Recovery, Audio Issues, and Camera Issues.</li>
+        <li>Coordinate wording updates with Justyn, Dennis, Frank, Angelino, and Jules T.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="member-card" data-member="Dennis" hidden>
+      <div class="member-card-head">
+        <h2>Dennis</h2>
+        <p class="member-role">Main SME / Recording Support / Optional Music</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+        <li>Review the WebEx demo map for technical accuracy.</li>
+        <li>Validate host/cohost setup, Backup TSV PC workflow, Meeting Options, Sync Stage, Breakout Sessions, and audio/camera troubleshooting.</li>
+        <li>Help confirm recording quality standards before main recording week.</li>
+        <li>Keep optional music/soundtrack very limited, if used at all.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="member-card" data-member="Frank" hidden>
+      <div class="member-card-head">
+        <h2>Frank</h2>
+        <p class="member-role">Main SME / Director Helper</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+        <li>Review the WebEx workflow and troubleshooting steps.</li>
+        <li>Confirm the host/cohost process and Backup TSV PC takeover are technically correct.</li>
+        <li>Review storyboard flow so the demo is clear and practical.</li>
+        <li>Provide corrections before the pre-production lock.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="member-card" data-member="Angelino" hidden>
+      <div class="member-card-head">
+        <h2>Angelino</h2>
+        <p class="member-role">Scriptwriter / SME Support Only</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+        <li>Help Julia improve script and demo wording.</li>
+        <li>Review technical clarity of the WebEx explanations.</li>
+        <li>Make sure the demo instructions are simple and easy to follow.</li>
+        <li>Support SME review but do not act as the main WebEx SME.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="member-card" data-member="Jules T" hidden>
+      <div class="member-card-head">
+        <h2>Jules T</h2>
+        <p class="member-role">Script Support / Talent / Voiceover</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+        <li>Review podcast question flow and transitions.</li>
+        <li>Improve closing lines and spoken flow where needed.</li>
+        <li>Confirm talent/voiceover readiness for recording week.</li>
+        <li>Coordinate lower-third name/title needs if appearing on camera or voiceover.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="member-card" data-member="Janna" hidden>
+      <div class="member-card-head">
+        <h2>Janna</h2>
+        <p class="member-role">Talent / Voiceover</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+        <li>Confirm availability as talent/voiceover.</li>
+        <li>Review any assigned lines or speaking parts.</li>
+        <li>Confirm lower-third name/title details.</li>
+        <li>Be ready for recording week once the final run-of-show is locked.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="member-card" data-member="NJ" hidden>
+      <div class="member-card-head">
+        <h2>NJ</h2>
+        <p class="member-role">Video Editor / Recording Support</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+        <li>Prepare the WebEx editing project folder structure.</li>
+        <li>Confirm screen recording format, audio sync plan, file naming, and backup method.</li>
+        <li>Start a placeholder timeline if footage or graphics are available.</li>
+        <li>Coordinate with TJ and Jhules B for graphics, captions, and callout placement.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="member-card" data-member="TJ" hidden>
+      <div class="member-card-head">
+        <h2>TJ</h2>
+        <p class="member-role">Animator / Graphics</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+        <li>Create first draft lower thirds, WebEx labels, and callout style.</li>
+        <li>Create troubleshooting cards, title card, closing card, and summary card.</li>
+        <li>Prepare a visual proof test for July 6.</li>
+        <li>Coordinate with NJ and Jhules B so graphics fit the edit.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="member-card" data-member="Jhules B" hidden>
+      <div class="member-card-head">
+        <h2>Jhules B</h2>
+        <p class="member-role">Video Editor / Animator Helper</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+        <li>Help TJ and NJ with callout/caption style and screen recording polish.</li>
+        <li>Support graphic cleanup and animation cleanup as needed.</li>
+        <li>Check that captions and callouts are readable on screen.</li>
+        <li>Assist with final visual proof preparation for July 6.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="member-card" data-member="Boon" hidden>
+      <div class="member-card-head">
+        <h2>Boon</h2>
+        <p class="member-role">July 10 Recording Support Only</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+        <li>Confirm July 10 recording support availability if needed.</li>
+        <li>Support the WebEx recording session only as assigned.</li>
+        <li>No ongoing WebEx ownership unless reassigned by the director.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="member-card" data-member="Eden" hidden>
+      <div class="member-card-head">
+        <h2>Eden</h2>
+        <p class="member-role">July 10 Recording Support Only</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+        <li>Confirm July 10 recording support availability if needed.</li>
+        <li>Support the WebEx recording session only as assigned.</li>
+        <li>No ongoing WebEx ownership unless reassigned by the director.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="member-card" data-member="Eduard" hidden>
+      <div class="member-card-head">
+        <h2>Eduard</h2>
+        <p class="member-role">July 10 Recording Support Only</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+        <li>Confirm July 10 recording support availability if needed.</li>
+        <li>Support the WebEx recording session only as assigned.</li>
+        <li>No ongoing WebEx ownership unless reassigned by the director.</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <p class="footer">Keep all files in the same folder so the links continue to work.</p>
+</main>
+<script>
+const select = document.getElementById('memberSelect');
+const cards = Array.from(document.querySelectorAll('.member-card'));
+const emptyState = document.getElementById('emptyState');
+
+function updateActionItems() {
+  const selectedName = select.value;
+  let shown = false;
+  cards.forEach(card => {
+    const shouldShow = selectedName !== '' && card.dataset.member === selectedName;
+    card.hidden = !shouldShow;
+    if (shouldShow) shown = true;
+  });
+  emptyState.hidden = shown;
+}
+
+select.addEventListener('change', updateActionItems);
+updateActionItems();
+</script>
+</body>
+</html>
