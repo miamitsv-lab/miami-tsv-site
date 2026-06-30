@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Signal Flow Team Schedule Checkpoints</title>
 <style>
+
 :root {
   --navy: #17324D;
   --blue: #2F6FAE;
@@ -155,13 +156,211 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
   color: var(--muted);
   font-size: 14px;
 }
+.action-filter-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+  padding: 22px;
+  margin-bottom: 22px;
+}
+.filter-row {
+  display: grid;
+  grid-template-columns: minmax(180px, 260px) minmax(220px, 1fr);
+  gap: 14px;
+  align-items: center;
+}
+.filter-row label {
+  color: var(--navy);
+  font-weight: 800;
+  font-size: 19px;
+}
+.member-select {
+  width: 100%;
+  color: var(--text);
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 13px 14px;
+  font-size: 17px;
+  font-weight: 700;
+}
+.select-note {
+  color: var(--muted);
+  margin: 12px 0 0 0;
+  line-height: 1.5;
+}
+.empty-state {
+  background: var(--light-blue);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 28px;
+  color: var(--navy);
+  font-size: 20px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 22px;
+}
+.action-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+.member-card {
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+}
+.member-card:nth-child(5n+1) .member-card-head { background: var(--light-blue); }
+.member-card:nth-child(5n+2) .member-card-head { background: var(--gold); }
+.member-card:nth-child(5n+3) .member-card-head { background: var(--green); }
+.member-card:nth-child(5n+4) .member-card-head { background: var(--purple); }
+.member-card:nth-child(5n+5) .member-card-head { background: var(--red); }
+.member-card-head {
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--border);
+}
+.member-card h2 {
+  margin: 0;
+  color: var(--navy);
+  font-size: 28px;
+}
+.member-role {
+  margin: 8px 0 0 0;
+  color: #1D5F8F;
+  font-weight: 700;
+  line-height: 1.45;
+}
+.member-card-body {
+  padding: 20px 22px;
+}
+.member-card-body h3 {
+  margin: 0 0 12px 0;
+  color: var(--navy);
+  font-size: 21px;
+}
+.member-card-body ul {
+  margin: 0;
+  padding-left: 22px;
+}
+.member-card-body li {
+  margin: 0 0 10px 0;
+  line-height: 1.5;
+  font-size: 17px;
+}
+.member-card-body li:last-child { margin-bottom: 0; }
+.home-action-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  padding: 14px;
+  margin-bottom: 24px;
+}
+.tile.action-items-tile {
+  grid-column: 1 / -1;
+  background: var(--light-blue);
+  min-height: 120px;
+}
+.tile.action-items-tile h2 {
+  font-size: clamp(26px, 3vw, 34px);
+}
+/* Signal Flow Project Progress */
+.project-progress-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 20px;
+  margin: 0 auto 24px auto;
+  width: 66.7%;
+  box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+}
+.project-progress-card.at-page-end { margin-top: 26px; margin-bottom: 0; }
+.progress-header {
+  margin-bottom: 16px;
+  text-align: center;
+}
+.progress-header h2 {
+  margin: 0 0 8px 0;
+  color: var(--navy);
+  font-size: clamp(24px, 3vw, 34px);
+  text-align: center;
+}
+.progress-header p,
+.progress-panel p,
+.progress-note {
+  margin: 0;
+  line-height: 1.5;
+  color: var(--text);
+  font-size: 16px;
+}
+.progress-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin: 16px 0 0 0;
+}
+.progress-panel {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 16px;
+  background: var(--light-blue);
+  display: block;
+  color: var(--text);
+  text-decoration: none;
+}
+a.progress-panel:hover {
+  border-color: var(--blue);
+  box-shadow: 0 6px 16px rgba(23, 50, 77, 0.14);
+  transform: translateY(-1px);
+}
+.progress-panel.target-progress {
+  background: var(--gold);
+}
+.progress-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  color: var(--navy);
+  font-size: 18px;
+}
+.progress-percent {
+  font-weight: 900;
+  font-size: 22px;
+}
+.progress-track {
+  height: 20px;
+  background: #E6EEF7;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--navy), var(--blue));
+  border-radius: 999px;
+}
+.progress-note {
+  background: var(--green);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 14px 16px;
+}
 @media (max-width: 900px) {
   .immediate-grid { grid-template-columns: 1fr; }
+  .project-progress-card { width: 80%; }
 }
 @media (max-width: 760px) {
   body { padding: 14px; }
   .header { padding: 22px; border-radius: 16px; }
   .table-card, .immediate { border-radius: 16px; }
+  .filter-row { grid-template-columns: 1fr; }
+  .member-card h2 { font-size: 24px; }
+  .project-progress-card { width: 100%; padding: 18px; border-radius: 16px; }
   table, thead, tbody, th, td, tr { display: block; }
   thead { display: none; }
   tbody tr {
@@ -196,9 +395,10 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
 }
 @media print {
   body { background: white; padding: 0; }
-  .header, .table-card, .card-grid, .immediate { box-shadow: none; }
+  .header, .table-card, .card-grid, .immediate, .project-progress-card, .member-card { box-shadow: none; }
   th, td { font-size: 12px; padding: 9px 10px; }
 }
+
 </style>
 </head>
 <body>
@@ -210,8 +410,8 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
     <a href="priority-tasks.html">Priorities</a>
     <a href="deadline-reminder.html" class="active">Deadlines</a>
     <a href="note-section.html">Notes</a></nav>
-  <section class="table-card"><table><thead><tr><th>Date</th><th>Deadline and Checkpoints</th></tr></thead><tbody><tr><td data-label="Date">June 30</td><td data-label="Deadline and Checkpoints">Run-of-show, storyboard, animation scene list, and visual plan completed</td></tr><tr><td data-label="Date">July 6</td><td data-label="Deadline and Checkpoints">Graphics style, animation test, avatar test, lower thirds, labels, and diagram style completed</td></tr><tr><td data-label="Date">July 10–19</td><td data-label="Deadline and Checkpoints">Main voiceover recording, animation building, early editing, and production-ready graphics</td></tr><tr><td data-label="Date">July 20–26</td><td data-label="Deadline and Checkpoints">Light work / break week: file organization, audio cleanup, missing asset list, and light editing only</td></tr><tr><td data-label="Date">August 2</td><td data-label="Deadline and Checkpoints">Full rough cut completed</td></tr><tr><td data-label="Date">August 3–7</td><td data-label="Deadline and Checkpoints">Polished edit: captions, callouts, graphics, transitions, audio cleanup, and optional very limited music/soundtrack if any</td></tr><tr><td data-label="Date">August 8–10</td><td data-label="Deadline and Checkpoints">Internal team review</td></tr><tr><td data-label="Date">August 11–13</td><td data-label="Deadline and Checkpoints">Final fixes only</td></tr><tr><td data-label="Date">August 14</td><td data-label="Deadline and Checkpoints">Final export and backup copy</td></tr><tr><td data-label="Date">August 15–16</td><td data-label="Deadline and Checkpoints">Final District TSV / District Office review</td></tr><tr><td data-label="Date">August 17</td><td data-label="Deadline and Checkpoints">Final submission deadline</td></tr></tbody></table></section>
-  
+<section class="table-card"><table><thead><tr><th>Date</th><th>Deadline and Checkpoints</th></tr></thead><tbody><tr><td data-label="Date">June 30</td><td data-label="Deadline and Checkpoints">Run-of-show, storyboard, animation scene list, and visual plan completed.</td></tr><tr><td data-label="Date">July 3</td><td data-label="Deadline and Checkpoints">Simple visual style, avatar test, and signal flow diagram list prepared.</td></tr><tr><td data-label="Date">July 6</td><td data-label="Deadline and Checkpoints">Basic animation test, title cards, lower thirds, labels, and diagram style completed.</td></tr><tr><td data-label="Date">July 10</td><td data-label="Deadline and Checkpoints">Voiceover/talent parts and any needed reference video recorded.</td></tr><tr><td data-label="Date">July 10–19</td><td data-label="Deadline and Checkpoints">Main animation scenes built, early editing started, and production-ready diagrams/graphics assembled.</td></tr><tr><td data-label="Date">July 20–26</td><td data-label="Deadline and Checkpoints">Light work / break week: file organization, audio cleanup, missing visual list, and light editing only.</td></tr><tr><td data-label="Date">August 2</td><td data-label="Deadline and Checkpoints">Full rough cut completed.</td></tr><tr><td data-label="Date">August 3–7</td><td data-label="Deadline and Checkpoints">Polished edit: captions, callouts, diagrams, transitions, audio cleanup, and final visual polish.</td></tr><tr><td data-label="Date">August 8–10</td><td data-label="Deadline and Checkpoints">Internal team review for audio accuracy, animation clarity, timing, readability, and final fix list.</td></tr><tr><td data-label="Date">August 11–13</td><td data-label="Deadline and Checkpoints">Final fixes only. No new creative ideas, major length changes, or new technical sections.</td></tr><tr><td data-label="Date">August 14</td><td data-label="Deadline and Checkpoints">Final export and backup copy.</td></tr><tr><td data-label="Date">August 15–16</td><td data-label="Deadline and Checkpoints">Final District TSV / District Office review.</td></tr><tr><td data-label="Date">August 17</td><td data-label="Deadline and Checkpoints">Final submission due.</td></tr></tbody></table></section>
+  <p class="footer">Keep all files in the same folder so the links continue to work.</p>
 </main>
 </body>
 </html>

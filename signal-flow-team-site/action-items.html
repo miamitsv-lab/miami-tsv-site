@@ -156,52 +156,6 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
   color: var(--muted);
   font-size: 14px;
 }
-@media (max-width: 900px) {
-  .immediate-grid { grid-template-columns: 1fr; }
-}
-@media (max-width: 760px) {
-  body { padding: 14px; }
-  .header { padding: 22px; border-radius: 16px; }
-  .table-card, .immediate { border-radius: 16px; }
-  table, thead, tbody, th, td, tr { display: block; }
-  thead { display: none; }
-  tbody tr {
-    margin: 14px;
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(23, 50, 77, 0.08);
-  }
-  td {
-    width: 100% !important;
-    border-bottom: 1px solid rgba(201, 214, 230, 0.8);
-    padding: 14px 16px 14px 140px;
-    position: relative;
-    min-height: 54px;
-    font-size: 16px;
-  }
-  td:last-child { border-bottom: none; }
-  td::before {
-    content: attr(data-label);
-    position: absolute;
-    left: 16px;
-    top: 14px;
-    width: 110px;
-    color: var(--muted);
-    font-weight: 700;
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-  td:first-child { font-size: 18px; }
-}
-@media print {
-  body { background: white; padding: 0; }
-  .header, .table-card, .card-grid, .immediate { box-shadow: none; }
-  th, td { font-size: 12px; padding: 9px 10px; }
-}
-
-
 .action-filter-card {
   background: white;
   border: 1px solid var(--border);
@@ -245,6 +199,7 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
   font-size: 20px;
   font-weight: 800;
   text-align: center;
+  margin-bottom: 22px;
 }
 .action-list {
   display: grid;
@@ -311,29 +266,26 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
 .tile.action-items-tile h2 {
   font-size: clamp(26px, 3vw, 34px);
 }
-@media (max-width: 760px) {
-  .filter-row { grid-template-columns: 1fr; }
-  .member-card h2 { font-size: 24px; }
-}
-
-
-
 /* Signal Flow Project Progress */
 .project-progress-card {
   background: white;
   border: 1px solid var(--border);
   border-radius: 20px;
   padding: 20px;
-  margin: 0 0 24px 0;
+  margin: 0 auto 24px auto;
+  width: 66.7%;
   box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
 }
+.project-progress-card.at-page-end { margin-top: 26px; margin-bottom: 0; }
 .progress-header {
   margin-bottom: 16px;
+  text-align: center;
 }
 .progress-header h2 {
   margin: 0 0 8px 0;
   color: var(--navy);
   font-size: clamp(24px, 3vw, 34px);
+  text-align: center;
 }
 .progress-header p,
 .progress-panel p,
@@ -347,13 +299,21 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
   display: grid;
   grid-template-columns: 1fr;
   gap: 14px;
-  margin: 16px 0;
+  margin: 16px 0 0 0;
 }
 .progress-panel {
   border: 1px solid var(--border);
   border-radius: 18px;
   padding: 16px;
   background: var(--light-blue);
+  display: block;
+  color: var(--text);
+  text-decoration: none;
+}
+a.progress-panel:hover {
+  border-color: var(--blue);
+  box-shadow: 0 6px 16px rgba(23, 50, 77, 0.14);
+  transform: translateY(-1px);
 }
 .progress-panel.target-progress {
   background: var(--gold);
@@ -391,19 +351,59 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
   padding: 14px 16px;
 }
 @media (max-width: 900px) {
-  .progress-grid { grid-template-columns: 1fr; }
+  .immediate-grid { grid-template-columns: 1fr; }
+  .project-progress-card { width: 80%; }
+}
+@media (max-width: 760px) {
+  body { padding: 14px; }
+  .header { padding: 22px; border-radius: 16px; }
+  .table-card, .immediate { border-radius: 16px; }
+  .filter-row { grid-template-columns: 1fr; }
+  .member-card h2 { font-size: 24px; }
+  .project-progress-card { width: 100%; padding: 18px; border-radius: 16px; }
+  table, thead, tbody, th, td, tr { display: block; }
+  thead { display: none; }
+  tbody tr {
+    margin: 14px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(23, 50, 77, 0.08);
+  }
+  td {
+    width: 100% !important;
+    border-bottom: 1px solid rgba(201, 214, 230, 0.8);
+    padding: 14px 16px 14px 140px;
+    position: relative;
+    min-height: 54px;
+    font-size: 16px;
+  }
+  td:last-child { border-bottom: none; }
+  td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 16px;
+    top: 14px;
+    width: 110px;
+    color: var(--muted);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  td:first-child { font-size: 18px; }
 }
 @media print {
-  .project-progress-card { box-shadow: none; }
+  body { background: white; padding: 0; }
+  .header, .table-card, .card-grid, .immediate, .project-progress-card, .member-card { box-shadow: none; }
+  th, td { font-size: 12px; padding: 9px 10px; }
 }
 
 </style>
 </head>
 <body>
 <main class="wrap">
-  <section class="header">
-    <h1>Signal Flow Team Action Items</h1>
-  </section>
+  <section class="header"><h1>Signal Flow Team Action Items</h1></section>
   <nav class="nav"><a href="index.html">Home</a>
     <a href="action-items.html" class="active">Action Items</a>
     <a href="team-members-assigned-tasks.html">Team</a>
@@ -411,9 +411,10 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
     <a href="deadline-reminder.html">Deadlines</a>
     <a href="note-section.html">Notes</a></nav>
 
-    <section id="emptyState" class="empty-state">Select a Name to view action items.</section>
 
-<section class="action-filter-card" aria-label="Select a team member">
+  <section id="emptyState" class="empty-state">Select a Name to view action items.</section>
+
+  <section class="action-filter-card" aria-label="Select a team member">
     <div class="filter-row">
       <label for="memberSelect">Action Items for:</label>
       <select id="memberSelect" class="member-select" aria-label="Select a team member to view action items">
@@ -430,167 +431,56 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
         <option value="Jhules B">Jhules B</option>
       </select>
     </div>
-</section>
+  </section>
+
   <section id="actionList" class="action-list" aria-live="polite">
     <article class="member-card" data-member="Jules T" hidden>
-      <div class="member-card-head">
-        <h2>Jules T</h2>
-        <p class="member-role">Director / Script Support / Talent / Voiceover</p>
-      </div>
-      <div class="member-card-body">
-        <h3>Action Items This Week</h3>
-        <ul>
-          <li>Finalize the Signal Flow run-of-show with Janna.</li>
-          <li>Confirm the host/guest flow, scene order, transitions, and closing.</li>
-          <li>Prepare the talent/voiceover plan for recording week.</li>
-          <li>Check that the story flow stays clear, practical, and not too long.</li>
-        </ul>
-      </div>
+      <div class="member-card-head"><h2>Jules T</h2><p class="member-role">Director / Script Support / Talent / Voiceover</p></div>
+      <div class="member-card-body"><h3>Action Items This Week</h3><ul><li>Finalize the Signal Flow run-of-show with Janna.</li><li>Confirm the host/guest flow, scene order, transitions, and closing.</li><li>Prepare the talent/voiceover plan for recording week.</li><li>Check that the story flow stays clear, practical, and not too long.</li></ul></div>
     </article>
     <article class="member-card" data-member="Janna" hidden>
-      <div class="member-card-head">
-        <h2>Janna</h2>
-        <p class="member-role">Scriptwriter / Animation Lead / Style Direction / Talent</p>
-      </div>
-      <div class="member-card-body">
-        <h3>Action Items This Week</h3>
-        <ul>
-          <li>Lead the run-of-show, storyboard, and animation scene list.</li>
-          <li>Prepare the simple visual style, avatar test, and diagram list.</li>
-          <li>Start the title card and lower-third style.</li>
-          <li>Keep avatar movement simple so diagrams and audio clarity stay the priority.</li>
-        </ul>
-      </div>
+      <div class="member-card-head"><h2>Janna</h2><p class="member-role">Scriptwriter / Animation Lead / Style Direction / Talent</p></div>
+      <div class="member-card-body"><h3>Action Items This Week</h3><ul><li>Lead the run-of-show, storyboard, and animation scene list.</li><li>Prepare the simple visual style, avatar test, and diagram list.</li><li>Start the title card and lower-third style.</li><li>Keep avatar movement simple so diagrams and audio clarity stay the priority.</li></ul></div>
     </article>
     <article class="member-card" data-member="Jay" hidden>
-      <div class="member-card-head">
-        <h2>Jay</h2>
-        <p class="member-role">Main SME</p>
-      </div>
-      <div class="member-card-body">
-        <h3>Action Items This Week</h3>
-        <ul>
-          <li>Review technical accuracy before voiceover is recorded.</li>
-          <li>Check the signal path, cable types, microphone choices, gain structure, EQ/compression, mixer/DSP, control room monitors, and WebEx/streaming feed.</li>
-          <li>Mark any wording that is technically unclear or too advanced.</li>
-          <li>Approve the technical direction before full animation work continues.</li>
-        </ul>
-      </div>
+      <div class="member-card-head"><h2>Jay</h2><p class="member-role">Main SME</p></div>
+      <div class="member-card-body"><h3>Action Items This Week</h3><ul><li>Review technical accuracy before voiceover is recorded.</li><li>Check the signal path, cable types, microphone choices, gain structure, EQ/compression, mixer/DSP, control room monitors, and WebEx/streaming feed.</li><li>Mark any wording that is technically unclear or too advanced.</li><li>Approve the technical direction before full animation work continues.</li></ul></div>
     </article>
     <article class="member-card" data-member="Dennis" hidden>
-      <div class="member-card-head">
-        <h2>Dennis</h2>
-        <p class="member-role">Support Role / Script Review / Recording Support / Final Review</p>
-      </div>
-      <div class="member-card-body">
-        <h3>Action Items This Week</h3>
-        <ul>
-          <li>Support script review, production coordination, recording quality checklist, and final review preparation.</li>
-          <li>Help keep the animation simple, readable, and technically accurate.</li>
-          <li>Confirm that the team has clear file organization and recording-quality standards.</li>
-          <li>Support final review notes without taking over the main SME role.</li>
-        </ul>
-      </div>
+      <div class="member-card-head"><h2>Dennis</h2><p class="member-role">Support Role / Script Review / Recording Support / Final Review</p></div>
+      <div class="member-card-body"><h3>Action Items This Week</h3><ul><li>Support script review, production coordination, recording quality checklist, and final review preparation.</li><li>Help keep the animation simple, readable, and technically accurate.</li><li>Confirm that the team has clear file organization and recording-quality standards.</li><li>Support final review notes without taking over the main SME role.</li></ul></div>
     </article>
     <article class="member-card" data-member="Frank" hidden>
-      <div class="member-card-head">
-        <h2>Frank</h2>
-        <p class="member-role">SME / Director Support</p>
-      </div>
-      <div class="member-card-body">
-        <h3>Action Items This Week</h3>
-        <ul>
-          <li>Help Jay review the technical explanations.</li>
-          <li>Remove or simplify confusing audio wording.</li>
-          <li>Check troubleshooting points and production direction.</li>
-          <li>Help confirm the content is practical for TSV officers.</li>
-        </ul>
-      </div>
+      <div class="member-card-head"><h2>Frank</h2><p class="member-role">SME / Director Support</p></div>
+      <div class="member-card-body"><h3>Action Items This Week</h3><ul><li>Help Jay review the technical explanations.</li><li>Remove or simplify confusing audio wording.</li><li>Check troubleshooting points and production direction.</li><li>Help confirm the content is practical for TSV officers.</li></ul></div>
     </article>
     <article class="member-card" data-member="Jlyn" hidden>
-      <div class="member-card-head">
-        <h2>Jlyn</h2>
-        <p class="member-role">Animator / Graphics Support</p>
-      </div>
-      <div class="member-card-body">
-        <h3>Action Items This Week</h3>
-        <ul>
-          <li>Create a simple avatar movement test.</li>
-          <li>Use only basic movements such as mouth movement, blinking, and small head nods.</li>
-          <li>Help define the animation cleanup approach.</li>
-          <li>Support animation assets that match the chosen Signal Flow visual style.</li>
-        </ul>
-      </div>
+      <div class="member-card-head"><h2>Jlyn</h2><p class="member-role">Animator / Graphics Support</p></div>
+      <div class="member-card-body"><h3>Action Items This Week</h3><ul><li>Create a simple avatar movement test.</li><li>Use only basic movements such as mouth movement, blinking, and small head nods.</li><li>Help define the animation cleanup approach.</li><li>Support animation assets that match the chosen Signal Flow visual style.</li></ul></div>
     </article>
     <article class="member-card" data-member="Aiden" hidden>
-      <div class="member-card-head">
-        <h2>Aiden</h2>
-        <p class="member-role">Graphics / Diagram Support / Avatar Movement Support</p>
-      </div>
-      <div class="member-card-body">
-        <h3>Action Items This Week</h3>
-        <ul>
-          <li>Create the signal flow diagram list and first draft visuals.</li>
-          <li>Prepare visuals for mic → cable → mixer → speaker, cables, DI box, gain, EQ/compression, and aux/USB/WebEx path.</li>
-          <li>Create arrows, labels, section graphics, and simple visual callouts.</li>
-          <li>Assist with simple avatar movement support as needed.</li>
-        </ul>
-      </div>
+      <div class="member-card-head"><h2>Aiden</h2><p class="member-role">Graphics / Diagram Support / Avatar Movement Support</p></div>
+      <div class="member-card-body"><h3>Action Items This Week</h3><ul><li>Create simple diagrams, labels, callouts, and lower-third support graphics.</li><li>Help with signal path visuals and animation cleanup.</li><li>Make sure labels are readable and match the team style.</li><li>Support visual proof preparation.</li></ul></div>
     </article>
     <article class="member-card" data-member="Charles" hidden>
-      <div class="member-card-head">
-        <h2>Charles</h2>
-        <p class="member-role">Main Video Editor / Optional Music</p>
-      </div>
-      <div class="member-card-body">
-        <h3>Action Items This Week</h3>
-        <ul>
-          <li>Prepare the editing project folder and animation scene assembly template.</li>
-          <li>Confirm how voiceover, animation clips, captions, callouts, transitions, and music will be organized.</li>
-          <li>Set up the placeholder edit timeline for the Signal Flow project.</li>
-          <li>Keep optional music very limited and only if it does not distract from the explanation.</li>
-        </ul>
-      </div>
+      <div class="member-card-head"><h2>Charles</h2><p class="member-role">Main Video Editor / Music-Soundtrack Support</p></div>
+      <div class="member-card-body"><h3>Action Items This Week</h3><ul><li>Prepare the editing project and folder structure.</li><li>Plan rough-cut organization, diagram timing, voiceover sync, and transition placeholders.</li><li>Coordinate with Janna, Jlyn, Aiden, NJ, and Jhules B for animation and graphics needs.</li><li>Keep any music/soundtrack very limited and optional.</li></ul></div>
     </article>
     <article class="member-card" data-member="NJ" hidden>
-      <div class="member-card-head">
-        <h2>NJ</h2>
-        <p class="member-role">Video Editing Support / Animation Support</p>
-      </div>
-      <div class="member-card-body">
-        <h3>Action Items This Week</h3>
-        <ul>
-          <li>Support animation and editing setup.</li>
-          <li>Help prepare reusable title, caption, and lower-third structure.</li>
-          <li>Assist with animation cleanup and edit organization.</li>
-          <li>Coordinate with Charles, Janna, Jlyn, Aiden, and Jhules B.</li>
-        </ul>
-      </div>
+      <div class="member-card-head"><h2>NJ</h2><p class="member-role">Animation / Graphics / Editing Support</p></div>
+      <div class="member-card-body"><h3>Action Items This Week</h3><ul><li>Help with avatar test support, diagram setup, and animation cleanup.</li><li>Check that captions and labels are readable on screen.</li><li>Support early edit organization and review notes.</li><li>Help prepare visual proof materials.</li></ul></div>
     </article>
     <article class="member-card" data-member="Jhules B" hidden>
-      <div class="member-card-head">
-        <h2>Jhules B</h2>
-        <p class="member-role">Video Editor / Animator Helper</p>
-      </div>
-      <div class="member-card-body">
-        <h3>Action Items This Week</h3>
-        <ul>
-          <li>Help with diagram cleanup, callouts, captions, and animation support.</li>
-          <li>Check that captions and labels are readable on screen.</li>
-          <li>Support transitions and visual polish where needed.</li>
-          <li>Assist with the visual proof preparation for the Signal Flow animation/diagram test.</li>
-        </ul>
-      </div>
+      <div class="member-card-head"><h2>Jhules B</h2><p class="member-role">Video Editor / Animator Helper</p></div>
+      <div class="member-card-body"><h3>Action Items This Week</h3><ul><li>Help with diagram cleanup, callouts, captions, and animation support.</li><li>Check that captions and labels are readable on screen.</li><li>Support transitions and visual polish where needed.</li><li>Assist with the visual proof preparation for the Signal Flow animation/diagram test.</li></ul></div>
     </article>
   </section>
 
-  
-  <section class="project-progress-card" aria-label="Signal Flow project progress status">
+
+  <section class="project-progress-card at-page-end" aria-label="Signal Flow project progress status">
     <div class="progress-header">
-      <div>
-        <h2>Signal Flow Project Progress</h2>
-        <p><strong>Current checkpoint:</strong> Scripts are finalized. Run-of-show, storyboard, animation scene list, visual plan, and other pre-production materials are completed and up for review.</p>
-      </div>
+      <h2>Project Progress</h2>
+      <p><strong>Current checkpoint:</strong> Scripts are finalized. Run-of-show, storyboard, animation scene list, visual plan, and other pre-production materials are completed and up for review.</p>
     </div>
     <div class="progress-grid">
       <article class="progress-panel">
@@ -606,14 +496,12 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
     </div>
   </section>
 
-
   <p class="footer">Keep all files in the same folder so the links continue to work.</p>
 </main>
 <script>
 const select = document.getElementById('memberSelect');
 const cards = Array.from(document.querySelectorAll('.member-card'));
 const emptyState = document.getElementById('emptyState');
-
 function updateActionItems() {
   const selectedName = select.value;
   let shown = false;
@@ -624,7 +512,6 @@ function updateActionItems() {
   });
   emptyState.hidden = shown;
 }
-
 select.addEventListener('change', updateActionItems);
 updateActionItems();
 </script>
