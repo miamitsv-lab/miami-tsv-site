@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crimping Team Action Items</title>
+<style>
+
+:root{--navy:#17324D;--blue:#2F6FAE;--border:#C9D6E6;--bg:#F6F9FD;--text:#1C2733;--muted:#51606F;--gold:#FFF3DC;--green:#EAF7EF;--purple:#F2ECFF;--red:#FFEAEA;--light-blue:#EAF3FF}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);padding:24px}.wrap{max-width:1280px;margin:0 auto}.header{background:linear-gradient(135deg,var(--navy),var(--blue));color:white;border-radius:20px;padding:28px 32px;margin-bottom:18px;box-shadow:0 10px 24px rgba(23,50,77,.18)}h1{margin:0;font-size:clamp(30px,4vw,48px);line-height:1.1}.nav{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 20px}.nav a{color:var(--navy);background:white;border:1px solid var(--border);text-decoration:none;padding:10px 14px;border-radius:999px;font-weight:700}.nav a:hover,.nav a.active{background:var(--light-blue);border-color:var(--blue)}.table-card,.card-grid,.immediate{background:white;border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:0 8px 22px rgba(23,50,77,.10)}.section-title{margin:26px 0 12px;color:var(--navy);font-size:clamp(22px,3vw,30px)}.immediate{margin-bottom:24px;padding:18px}.immediate-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.action-card{border:1px solid var(--border);border-radius:18px;padding:20px;min-height:175px}.action-card:nth-child(1){background:var(--light-blue)}.action-card:nth-child(2){background:var(--green)}.action-card:nth-child(3){background:var(--gold)}.action-card h2{margin:0 0 10px;color:var(--navy);font-size:24px}.action-card p{margin:0;line-height:1.5;font-size:17px}table{width:100%;border-collapse:collapse}thead{background:#255D91;color:white}th,td{text-align:left;vertical-align:top;padding:18px 20px;border-bottom:1px solid var(--border);line-height:1.45}th{font-size:18px;letter-spacing:.02em}td{font-size:17px}tbody tr:nth-child(5n+1){background:var(--light-blue)}tbody tr:nth-child(5n+2){background:var(--gold)}tbody tr:nth-child(5n+3){background:var(--green)}tbody tr:nth-child(5n+4){background:var(--purple)}tbody tr:nth-child(5n+5){background:var(--red)}tbody tr:last-child td{border-bottom:none}td:first-child{color:var(--navy);font-size:19px;font-weight:700}td:nth-child(2){color:#1D5F8F;font-weight:600}.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0;padding:14px}.tile{margin:10px;padding:22px;min-height:150px;border-radius:18px;border:1px solid var(--border);background:var(--light-blue);text-decoration:none;color:var(--text);display:block}.tile:nth-child(2){background:var(--gold)}.tile:nth-child(3){background:var(--green)}.tile:nth-child(4){background:var(--purple)}.tile h2{margin:0 0 12px;color:var(--navy);font-size:24px}.tile p{margin:0;line-height:1.45}.footer{margin-top:18px;color:var(--muted);font-size:14px}@media(max-width:900px){.immediate-grid{grid-template-columns:1fr}}@media(max-width:760px){body{padding:14px}.header{padding:22px;border-radius:16px}.table-card,.immediate{border-radius:16px}table,thead,tbody,th,td,tr{display:block}thead{display:none}tbody tr{margin:14px;border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 4px 10px rgba(23,50,77,.08)}td{width:100%!important;border-bottom:1px solid rgba(201,214,230,.8);padding:14px 16px 14px 140px;position:relative;min-height:54px;font-size:16px}td:last-child{border-bottom:none}td::before{content:attr(data-label);position:absolute;left:16px;top:14px;width:110px;color:var(--muted);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.04em}td:first-child{font-size:18px}}@media print{body{background:white;padding:0}.header,.table-card,.card-grid,.immediate{box-shadow:none}th,td{font-size:12px;padding:9px 10px}}
+
+
+.action-filter-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+  padding: 22px;
+  margin-bottom: 22px;
+}
+.filter-row {
+  display: grid;
+  grid-template-columns: minmax(180px, 260px) minmax(220px, 1fr);
+  gap: 14px;
+  align-items: center;
+}
+.filter-row label {
+  color: var(--navy);
+  font-weight: 800;
+  font-size: 19px;
+}
+.member-select {
+  width: 100%;
+  color: var(--text);
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 13px 14px;
+  font-size: 17px;
+  font-weight: 700;
+}
+.select-note {
+  color: var(--muted);
+  margin: 12px 0 0 0;
+  line-height: 1.5;
+}
+.empty-state {
+  background: var(--light-blue);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 28px;
+  color: var(--navy);
+  font-size: 20px;
+  font-weight: 800;
+  text-align: center;
+}
+.action-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+.member-card {
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+}
+.member-card:nth-child(5n+1) .member-card-head { background: var(--light-blue); }
+.member-card:nth-child(5n+2) .member-card-head { background: var(--gold); }
+.member-card:nth-child(5n+3) .member-card-head { background: var(--green); }
+.member-card:nth-child(5n+4) .member-card-head { background: var(--purple); }
+.member-card:nth-child(5n+5) .member-card-head { background: var(--red); }
+.member-card-head {
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--border);
+}
+.member-card h2 {
+  margin: 0;
+  color: var(--navy);
+  font-size: 28px;
+}
+.member-role {
+  margin: 8px 0 0 0;
+  color: #1D5F8F;
+  font-weight: 700;
+  line-height: 1.45;
+}
+.member-card-body {
+  padding: 20px 22px;
+}
+.member-card-body h3 {
+  margin: 0 0 12px 0;
+  color: var(--navy);
+  font-size: 21px;
+}
+.member-card-body ul {
+  margin: 0;
+  padding-left: 22px;
+}
+.member-card-body li {
+  margin: 0 0 10px 0;
+  line-height: 1.5;
+  font-size: 17px;
+}
+.member-card-body li:last-child { margin-bottom: 0; }
+.home-action-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  padding: 14px;
+  margin-bottom: 24px;
+}
+.tile.action-items-tile {
+  grid-column: 1 / -1;
+  background: var(--light-blue);
+  min-height: 120px;
+}
+.tile.action-items-tile h2 {
+  font-size: clamp(26px, 3vw, 34px);
+}
+@media (max-width: 760px) {
+  .filter-row { grid-template-columns: 1fr; }
+  .member-card h2 { font-size: 24px; }
+}
+
+
+
+/* Crimping Project Progress */
+.project-progress-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 20px;
+  margin: 0 0 24px 0;
+  box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+}
+.progress-header {
+  margin-bottom: 16px;
+}
+.progress-header h2 {
+  margin: 0 0 8px 0;
+  color: var(--navy);
+  font-size: clamp(24px, 3vw, 34px);
+}
+.progress-header p,
+.progress-panel p,
+.progress-note {
+  margin: 0;
+  line-height: 1.5;
+  color: var(--text);
+  font-size: 16px;
+}
+.progress-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin: 16px 0;
+}
+.progress-panel {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 16px;
+  background: var(--light-blue);
+}
+.progress-panel.target-progress {
+  background: var(--gold);
+}
+.progress-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  color: var(--navy);
+  font-size: 18px;
+}
+.progress-percent {
+  font-weight: 900;
+  font-size: 22px;
+}
+.progress-track {
+  height: 20px;
+  background: #E6EEF7;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--navy), var(--blue));
+  border-radius: 999px;
+}
+.progress-note {
+  background: var(--green);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 14px 16px;
+}
+@media (max-width: 900px) {
+  .progress-grid { grid-template-columns: 1fr; }
+}
+@media print {
+  .project-progress-card { box-shadow: none; }
+}
+
+</style>
+</head>
+<body>
+<main class="wrap">
+  <section class="header">
+    <h1>Crimping Team Action Items</h1>
+  </section>
+  <nav class="nav"><a href="index.html">Home</a>
+    <a href="action-items.html" class="active">Action Items</a>
+    <a href="team-members-assigned-tasks.html">Team</a>
+    <a href="priority-tasks.html">Priorities</a>
+    <a href="deadline-reminder.html">Deadlines</a>
+    <a href="note-section.html">Notes</a></nav>
+  <section id="emptyState" class="empty-state">Select a Name to view action items.</section>
+
+
+
+  <section class="action-filter-card" aria-label="Select a team member">
+    <div class="filter-row">
+      <label for="memberSelect">Action Items for:</label>
+      <select id="memberSelect" class="member-select" aria-label="Select a team member to view action items">
+        <option value="" selected>Select a Name</option>
+        <option value="Boon">Boon</option>
+        <option value="AJ">AJ</option>
+        <option value="Dennis">Dennis</option>
+        <option value="Eduard">Eduard</option>
+        <option value="Austin">Austin</option>
+        <option value="Aiden">Aiden</option>
+        <option value="Eden">Eden</option>
+        <option value="Jhules B">Jhules B</option>
+        <option value="Dianne">Dianne</option>
+        <option value="NJ">NJ</option>
+      </select>
+    </div>
+</section><section id="actionList" class="action-list" aria-live="polite">
+    <article class="member-card" data-member="Boon" hidden>
+      <div class="member-card-head">
+        <h2>Boon</h2>
+        <p class="member-role">Director / SME Support / Recording Support</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+          <li>Lead the crimping production setup and tutorial demo flow.</li>
+          <li>Finish the shot list, visual plan, and tutorial flow with AJ.</li>
+          <li>Prepare tools, Ethernet cable, RJ45 connectors, cable tester, camera setup, and demo table.</li>
+          <li>Check that the tutorial steps are clear enough for close-up recording.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="member-card" data-member="AJ" hidden>
+      <div class="member-card-head">
+        <h2>AJ</h2>
+        <p class="member-role">Scriptwriter</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+          <li>Finish the shot list, visual plan, and tutorial flow.</li>
+          <li>Make sure each tutorial step matches the script: tools, measure, cut, strip, T568B order, insert RJ45, crimp, repeat the other end, test cable, and closing.</li>
+          <li>Keep the wording beginner-friendly and easy for the narrator/talent to follow.</li>
+          <li>Confirm that the tutorial can stay close to the target time.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="member-card" data-member="Dennis" hidden>
+      <div class="member-card-head">
+        <h2>Dennis</h2>
+        <p class="member-role">Scriptwriter / SME Helper / Recording Support</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+          <li>Support script review, crimping accuracy, T568B order, recording setup, shot clarity, and tutorial flow.</li>
+          <li>Help ensure the demo is beginner-friendly and technically correct.</li>
+          <li>Check that close-up shots will clearly show wire order and RJ45 connector orientation.</li>
+          <li>Support/helper role only for script review, crimping accuracy, recording quality, and final review.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="member-card" data-member="Eduard" hidden>
+      <div class="member-card-head">
+        <h2>Eduard</h2>
+        <p class="member-role">Director Support / SME Helper / Recording Support</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+          <li>Help Boon verify tools, cable tester, RJ45 connector orientation, cable testing process, and demo table setup.</li>
+          <li>Check that the finished cable test can be shown clearly on camera.</li>
+          <li>Help prepare the recording area so the camera can capture steady close-up shots.</li>
+          <li>Support the technical review of the crimping procedure.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="member-card" data-member="Austin" hidden>
+      <div class="member-card-head">
+        <h2>Austin</h2>
+        <p class="member-role">Main Video Editor</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+          <li>Prepare the editing folder and project structure.</li>
+          <li>Confirm file naming, footage organization, and placeholder edit timeline.</li>
+          <li>Prepare the edit plan for close-up shots, labels, captions, and step cards.</li>
+          <li>Coordinate with Aiden, Jhules B, Dianne, and Boon for graphics and footage needs.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="member-card" data-member="Aiden" hidden>
+      <div class="member-card-head">
+        <h2>Aiden</h2>
+        <p class="member-role">Animator / Graphics</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+          <li>Create the T568B wire-order graphic.</li>
+          <li>Create tool labels, step cards, arrows, and warning callouts.</li>
+          <li>Make sure graphics are readable on screen and match the team site color style.</li>
+          <li>Prepare visuals for the visual proof test.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="member-card" data-member="Eden" hidden>
+      <div class="member-card-head">
+        <h2>Eden</h2>
+        <p class="member-role">Talent / Voiceover / Recording Support</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+          <li>Confirm talent/voiceover availability.</li>
+          <li>Practice narration timing against the tutorial flow.</li>
+          <li>Prepare to record clean voiceover or on-camera tutorial lines.</li>
+          <li>Review the tutorial steps so the delivery sounds natural and clear.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="member-card" data-member="Jhules B" hidden>
+      <div class="member-card-head">
+        <h2>Jhules B</h2>
+        <p class="member-role">Video Editor / Animator Helper</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+          <li>Help Aiden and Austin with graphics cleanup, captions, callouts, and editing support.</li>
+          <li>Check that labels and captions are readable during close-up shots.</li>
+          <li>Support the visual proof preparation for step cards and wire-order graphics.</li>
+          <li>Help polish any graphics or edit placeholders before full recording week.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="member-card" data-member="Dianne" hidden>
+      <div class="member-card-head">
+        <h2>Dianne</h2>
+        <p class="member-role">Video Editor Support</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+          <li>Help Austin prepare the caption and editing support checklist.</li>
+          <li>Review text readability, step order, and cleanup needs.</li>
+          <li>Support editing organization and rough-cut preparation.</li>
+          <li>Help identify any missing captions or labels needed for the tutorial.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="member-card" data-member="NJ" hidden>
+      <div class="member-card-head">
+        <h2>NJ</h2>
+        <p class="member-role">Recording Support</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+          <li>Help prepare the recording support plan.</li>
+          <li>Check camera angle, audio check, close-up framing, lighting, and backup shot list.</li>
+          <li>Help make sure wire colors and cable tester lights can be seen clearly.</li>
+          <li>Support the recording setup before main recording begins.</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+
+  <section class="project-progress-card" aria-label="Crimping project progress status">
+    <div class="progress-header">
+      <div>
+        <h2>Crimping Project Progress</h2>
+        <p><strong>Current checkpoint:</strong> Scripts are finalized. Shot list, visual plan, tutorial flow, and other pre-production materials are completed and up for review.</p>
+      </div>
+    </div>
+    <div class="progress-grid">
+      <article class="progress-panel">
+        <div class="progress-meta"><strong>Current Progress</strong><span class="progress-percent">23%</span></div>
+        <div class="progress-track" role="progressbar" aria-label="Current Crimping project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="23"><div class="progress-fill" style="width: 23%;"></div></div>
+        <p>Scripts and pre-production materials are completed and ready for review before the close-up recording setup test and production work.</p>
+      </article>
+      <article class="progress-panel target-progress">
+        <div class="progress-meta"><strong>Target Progress</strong><span class="progress-percent">25%</span></div>
+        <div class="progress-track" role="progressbar" aria-label="Target Crimping project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="25"><div class="progress-fill" style="width: 25%;"></div></div>
+        <p>Target progress is slightly ahead of current progress, with review notes, visual proof-test preparation, tool setup, and T568B graphic confirmation already underway.</p>
+      </article>
+    </div>
+  </section>
+
+  <p class="footer">Keep all files in the same folder so the links continue to work.</p>
+</main>
+<script>
+const select = document.getElementById('memberSelect');
+const cards = Array.from(document.querySelectorAll('.member-card'));
+const emptyState = document.getElementById('emptyState');
+
+function updateActionItems() {
+  const selectedName = select.value;
+  let shown = false;
+  cards.forEach(card => {
+    const shouldShow = selectedName !== '' && card.dataset.member === selectedName;
+    card.hidden = !shouldShow;
+    if (shouldShow) shown = true;
+  });
+  emptyState.hidden = shown;
+}
+
+select.addEventListener('change', updateActionItems);
+updateActionItems();
+</script>
+</body>
+</html>
