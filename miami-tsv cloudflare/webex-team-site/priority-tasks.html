@@ -330,6 +330,36 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
   .member-card h2 { font-size: 24px; }
 }
 
+
+/* Responsive Project Progress layout */
+.project-progress-card {
+  width: 66.7%;
+  max-width: 100%;
+  margin: 0 auto 24px auto;
+}
+.project-progress-card .progress-header,
+.project-progress-card .progress-header h2 {
+  text-align: center;
+}
+.project-progress-card .progress-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  cursor: pointer;
+}
+.project-progress-card .progress-link:hover,
+.project-progress-card .progress-link:focus {
+  box-shadow: 0 10px 22px rgba(23, 50, 77, 0.14);
+  transform: translateY(-1px);
+  outline: none;
+}
+@media (max-width: 1024px) {
+  .project-progress-card { width: 80%; }
+}
+@media (max-width: 760px) {
+  .project-progress-card { width: 100%; }
+}
+
 </style>
 </head>
 <body>
