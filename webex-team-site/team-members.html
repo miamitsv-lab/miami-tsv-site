@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Signal Flow Notes Section</title>
+<title>WebEx Team Members</title>
 <style>
 
 :root {
@@ -46,6 +46,11 @@ h1 {
   flex-wrap: wrap;
   gap: 10px;
   margin: 0 0 20px 0;
+}
+.nav .sep {
+  color: var(--navy);
+  font-weight: 800;
+  opacity: 0.75;
 }
 .nav a {
   color: var(--navy);
@@ -156,6 +161,51 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
   color: var(--muted);
   font-size: 14px;
 }
+@media (max-width: 900px) {
+  .immediate-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  body { padding: 14px; }
+  .header { padding: 22px; border-radius: 16px; }
+  .table-card, .immediate { border-radius: 16px; }
+  table, thead, tbody, th, td, tr { display: block; }
+  thead { display: none; }
+  tbody tr {
+    margin: 14px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(23, 50, 77, 0.08);
+  }
+  td {
+    width: 100% !important;
+    border-bottom: 1px solid rgba(201, 214, 230, 0.8);
+    padding: 14px 16px 14px 140px;
+    position: relative;
+    min-height: 54px;
+    font-size: 16px;
+  }
+  td:last-child { border-bottom: none; }
+  td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 16px;
+    top: 14px;
+    width: 110px;
+    color: var(--muted);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  td:first-child { font-size: 18px; }
+}
+@media print {
+  body { background: white; padding: 0; }
+  .header, .table-card, .card-grid, .immediate { box-shadow: none; }
+  th, td { font-size: 12px; padding: 9px 10px; }
+}
+
 .action-filter-card {
   background: white;
   border: 1px solid var(--border);
@@ -199,7 +249,6 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
   font-size: 20px;
   font-weight: 800;
   text-align: center;
-  margin-bottom: 22px;
 }
 .action-list {
   display: grid;
@@ -251,6 +300,16 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
   font-size: 17px;
 }
 .member-card-body li:last-child { margin-bottom: 0; }
+.due-chip {
+  display: inline-block;
+  background: var(--navy);
+  color: white;
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 14px;
+}
 .home-action-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -266,155 +325,61 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
 .tile.action-items-tile h2 {
   font-size: clamp(26px, 3vw, 34px);
 }
-/* Signal Flow Project Progress */
+@media (max-width: 760px) {
+  .filter-row { grid-template-columns: 1fr; }
+  .member-card h2 { font-size: 24px; }
+}
+
+
+/* Responsive Project Progress layout */
 .project-progress-card {
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 20px;
-  margin: 0 auto 24px auto;
   width: 66.7%;
-  box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+  max-width: 100%;
+  margin: 0 auto 24px auto;
 }
-.project-progress-card.at-page-end { margin-top: 26px; margin-bottom: 0; }
-.progress-header {
-  margin-bottom: 16px;
+.project-progress-card .progress-header,
+.project-progress-card .progress-header h2 {
   text-align: center;
 }
-.progress-header h2 {
-  margin: 0 0 8px 0;
-  color: var(--navy);
-  font-size: clamp(24px, 3vw, 34px);
-  text-align: center;
-}
-.progress-header p,
-.progress-panel p,
-.progress-note {
-  margin: 0;
-  line-height: 1.5;
-  color: var(--text);
-  font-size: 16px;
-}
-.progress-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 14px;
-  margin: 16px 0 0 0;
-}
-.progress-panel {
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 16px;
-  background: var(--light-blue);
-  display: block;
-  color: var(--text);
+.project-progress-card .progress-link {
   text-decoration: none;
+  color: inherit;
+  display: block;
+  cursor: pointer;
 }
-a.progress-panel:hover {
-  border-color: var(--blue);
-  box-shadow: 0 6px 16px rgba(23, 50, 77, 0.14);
+.project-progress-card .progress-link:hover,
+.project-progress-card .progress-link:focus {
+  box-shadow: 0 10px 22px rgba(23, 50, 77, 0.14);
   transform: translateY(-1px);
+  outline: none;
 }
-.progress-panel.target-progress {
-  background: var(--gold);
-}
-.progress-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 10px;
-  color: var(--navy);
-  font-size: 18px;
-}
-.progress-percent {
-  font-weight: 900;
-  font-size: 22px;
-}
-.progress-track {
-  height: 20px;
-  background: #E6EEF7;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  overflow: hidden;
-  margin-bottom: 10px;
-}
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--navy), var(--blue));
-  border-radius: 999px;
-}
-.progress-note {
-  background: var(--green);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 14px 16px;
-}
-@media (max-width: 900px) {
-  .immediate-grid { grid-template-columns: 1fr; }
+@media (max-width: 1024px) {
   .project-progress-card { width: 80%; }
 }
 @media (max-width: 760px) {
-  body { padding: 14px; }
-  .header { padding: 22px; border-radius: 16px; }
-  .table-card, .immediate { border-radius: 16px; }
-  .filter-row { grid-template-columns: 1fr; }
-  .member-card h2 { font-size: 24px; }
-  .project-progress-card { width: 100%; padding: 18px; border-radius: 16px; }
-  table, thead, tbody, th, td, tr { display: block; }
-  thead { display: none; }
-  tbody tr {
-    margin: 14px;
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(23, 50, 77, 0.08);
-  }
-  td {
-    width: 100% !important;
-    border-bottom: 1px solid rgba(201, 214, 230, 0.8);
-    padding: 14px 16px 14px 140px;
-    position: relative;
-    min-height: 54px;
-    font-size: 16px;
-  }
-  td:last-child { border-bottom: none; }
-  td::before {
-    content: attr(data-label);
-    position: absolute;
-    left: 16px;
-    top: 14px;
-    width: 110px;
-    color: var(--muted);
-    font-weight: 700;
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-  td:first-child { font-size: 18px; }
-}
-@media print {
-  body { background: white; padding: 0; }
-  .header, .table-card, .card-grid, .immediate, .project-progress-card, .member-card { box-shadow: none; }
-  th, td { font-size: 12px; padding: 9px 10px; }
+  .project-progress-card { width: 100%; }
 }
 
 </style>
 </head>
 <body>
 <main class="wrap">
-  <section class="header"><h1>Signal Flow Notes Section</h1></section>
-  <nav class="nav">
-    <a href="index.html">Home</a>
+  <section class="header">
+    <h1>WebEx Team Members</h1>
+  </section>
+  <nav class="nav"><a href="index.html">Home</a>
     <a href="action-items.html">Action Items</a>
-    <a href="team-members.html">Team</a>
+    <a href="team-members.html" class="active">Team</a>
     <a href="priority-tasks.html">Priorities</a>
     <a href="deadline-reminder.html">Deliverables</a>
-    <a href="note-section.html" class="active">Notes</a>
-    <a href="resources.html">Resources</a>
-  </nav>
-<section class="table-card"><table><thead><tr><th>Term</th><th>Meaning / Note</th></tr></thead><tbody><tr><td data-label="Term">Run-of-show</td><td data-label="Meaning / Note">The full order of the video from opening to closing.</td></tr><tr><td data-label="Term">Storyboard</td><td data-label="Meaning / Note">A scene-by-scene guide showing visuals, graphics, avatar scenes, transitions, and timing.</td></tr><tr><td data-label="Term">Animation scene list</td><td data-label="Meaning / Note">A checklist of every animated scene, diagram, label, avatar movement, and transition needed.</td></tr><tr><td data-label="Term">Avatar movement</td><td data-label="Meaning / Note">Simple host/guest movement such as mouth movement, blinking, and small head nods.</td></tr><tr><td data-label="Term">Signal flow path</td><td data-label="Meaning / Note">The audio path from microphone/input through mixer/processing and out to speakers/WebEx/streaming.</td></tr><tr><td data-label="Term">Diagram labels</td><td data-label="Meaning / Note">Short text used to identify microphones, mixers, cables, outputs, speakers, and WebEx feed.</td></tr><tr><td data-label="Term">Callouts</td><td data-label="Meaning / Note">Arrows, boxes, or short notes pointing to important signal flow details.</td></tr><tr><td data-label="Term">Visual proof test</td><td data-label="Meaning / Note">A short test to confirm the diagram style, avatar movement, labels, and readability before full production.</td></tr><tr><td data-label="Term">Simple production rule</td><td data-label="Meaning / Note">Keep diagrams readable and use simple movement. Clarity is more important than complex animation.</td></tr></tbody></table></section>
-  
+    <a href="note-section.html">Notes</a>
+    <a href="resources.html">Resources</a></nav>
+  <section class="table-card">
+    <table aria-label="WebEx Team Members">
+      <thead><tr><th>Member</th><th>Role</th><th>Responsibilities</th></tr></thead>
+      <tbody><tr><td data-label="Member">Justyn</td><td data-label="Role">Director</td><td data-label="Responsibilities">Lead the WebEx podcast/interview production. Coordinate the recording schedule, production workflow, and final review plan. Keep the video focused and close to the 10–11 minute expected duration.</td></tr><tr><td data-label="Member">Julia</td><td data-label="Role">Scriptwriter</td><td data-label="Responsibilities">Convert the locked script into a clear podcast run-of-show, storyboard, and WebEx demo map.</td></tr><tr><td data-label="Member">NJ</td><td data-label="Role">Video Editor; Recording Support</td><td data-label="Responsibilities">Edit podcast footage and screen recordings. Add captions, zoom-ins, callouts, lower thirds, transitions, audio cleanup, and final export. Help with video and voiceover recording.</td></tr><tr><td data-label="Member">TJ</td><td data-label="Role">Animator / Graphics</td><td data-label="Responsibilities">Create lower thirds, feature labels, callout boxes, troubleshooting graphics, intro/outro slides, and summary cards.</td></tr><tr><td data-label="Member">Angelino</td><td data-label="Role">Scriptwriter; SME Support Only</td><td data-label="Responsibilities">Help Julia improve script/demo wording and support technical review. Angelino supports SME review but is not the main WebEx SME.</td></tr><tr><td data-label="Member">Dennis</td><td data-label="Role">Main SME; Director / Scriptwriter Helper; Recording Support; Optional Music/Soundtrack Support</td><td data-label="Responsibilities">Serve as one of the main WebEx SMEs. Help review demo accuracy, app demonstration flow, script timing, storyboard accuracy, and recording quality. Music/soundtrack support is optional, very limited, if any.</td></tr><tr><td data-label="Member">Frank</td><td data-label="Role">Main SME; Director Helper</td><td data-label="Responsibilities">Serve as one of the main WebEx SMEs. Help validate workflow, host/cohost process, troubleshooting steps, storyboard flow, and production direction.</td></tr><tr><td data-label="Member">Jules T</td><td data-label="Role">Scriptwriter Support; Talent / Voiceover</td><td data-label="Responsibilities">Help improve podcast flow, question wording, transitions, and closing lines. Serve as talent/voiceover.</td></tr><tr><td data-label="Member">Janna</td><td data-label="Role">Talent / Voiceover</td><td data-label="Responsibilities">Serve as talent/voiceover.</td></tr><tr><td data-label="Member">Jhules B</td><td data-label="Role">Video Editor / Animator Helper</td><td data-label="Responsibilities">Help NJ and TJ with screen recording polish, graphics, callouts, captions, animation cleanup, and final editing support.</td></tr></tbody>
+    </table>
+  </section>
 </main>
 </body>
 </html>
