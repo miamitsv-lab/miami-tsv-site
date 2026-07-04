@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Miami TSV//WebEx Group 3 Meeting//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:tsv-webex-group3-20260706-2000@miami-tsv.com
+DTSTAMP:20260704T095331Z
+DTSTART;TZID=America/New_York:20260706T200000
+DTEND;TZID=America/New_York:20260706T210000
+SUMMARY:TSV Group 3 Meeting
+LOCATION:WebEx - https://miami-tsv.com/webex-group3-meeting
+DESCRIPTION:(ONLINE) TSV Group 3 Meeting • MONDAY • July 6th • 8PM EDT/7PM AST • District of Florida and Caribbean\n\nMeeting link: https://miami-tsv.com/webex-group3-meeting\nMeeting number: 2870 380 1926\nMeeting password: MONDAYJULY6TH\nAlternate link: https://inc-maimi-tsv.my.webex.com/inc-maimi-tsv.my/j.php?MTID=m2b199f5e1aa5e1586ae3fb19674bb7bc
+URL:https://miami-tsv.com/webex-group3-meeting
+END:VEVENT
+END:VCALENDAR
