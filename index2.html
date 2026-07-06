@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TSV Technical Video Competition | District of Florida and Caribbean Entry</title>
+  <style>
+    :root {
+      --navy: #17324D;
+      --blue: #2F6FAE;
+      --border: #C9D6E6;
+      --bg: #F6F9FD;
+      --text: #1C2733;
+      --muted: #51606F;
+      --gold: #FFF3DC;
+      --green: #EAF7EF;
+      --purple: #F2ECFF;
+      --red: #FFEAEA;
+      --light-blue: #EAF3FF;
+      --white: #FFFFFF;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(47, 111, 174, 0.16), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(255, 243, 220, 0.95), transparent 34%),
+        var(--bg);
+      color: var(--text);
+      padding: 24px;
+      min-height: 100vh;
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      color: white;
+      border-radius: 22px;
+      padding: 34px 34px 36px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 24px rgba(23, 50, 77, 0.18);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before,
+    .header::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.10);
+      pointer-events: none;
+    }
+
+    .header::before {
+      width: 180px;
+      height: 180px;
+      top: -70px;
+      left: -55px;
+    }
+
+    .header::after {
+      width: 240px;
+      height: 240px;
+      right: -90px;
+      bottom: -115px;
+    }
+
+    .kicker {
+      position: relative;
+      display: inline-block;
+      z-index: 1;
+      margin: 0 0 14px;
+      padding: 8px 14px;
+      color: var(--navy);
+      background: var(--gold);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      font-size: clamp(32px, 5vw, 54px);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
+      margin: 16px auto 0;
+      color: rgba(255, 255, 255, 0.92);
+      font-size: clamp(17px, 2.2vw, 21px);
+      line-height: 1.5;
+    }
+
+    .intro-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 22px 24px;
+      margin: 0 0 22px;
+      box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+      text-align: center;
+    }
+
+    .intro-card h2 {
+      margin: 0 0 10px;
+      color: var(--navy);
+      font-size: clamp(24px, 3vw, 34px);
+    }
+
+    .intro-card p {
+      max-width: 820px;
+      margin: 0 auto;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 17px;
+    }
+
+    .portal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .portal-card {
+      display: block;
+      min-height: 260px;
+      color: var(--text);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+      transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .portal-card:nth-child(1) {
+      background: var(--light-blue);
+    }
+
+    .portal-card:nth-child(2) {
+      background: var(--gold);
+    }
+
+    .portal-card:nth-child(3) {
+      background: var(--green);
+    }
+
+    .portal-card::after {
+      content: "";
+      position: absolute;
+      right: -42px;
+      bottom: -42px;
+      width: 130px;
+      height: 130px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid rgba(201, 214, 230, 0.7);
+    }
+
+    .portal-card:hover,
+    .portal-card:focus-visible {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 28px rgba(23, 50, 77, 0.16);
+      border-color: var(--blue);
+      outline: none;
+    }
+
+    .portal-card:focus-visible {
+      outline: 3px solid var(--blue);
+      outline-offset: 4px;
+    }
+
+    .portal-icon {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      width: 64px;
+      height: 64px;
+      margin-bottom: 20px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      color: var(--navy);
+      font-size: 32px;
+      box-shadow: 0 4px 12px rgba(23, 50, 77, 0.08);
+    }
+
+    .portal-icon.crimp-icon {
+      color: #111111;
+      font-family: "Arial Black", Arial, Helvetica, sans-serif;
+      font-size: 50px;
+      font-weight: 900;
+      line-height: 1;
+      text-shadow:
+        0.7px 0 currentColor,
+        -0.7px 0 currentColor,
+        0 0.7px currentColor,
+        0 -0.7px currentColor;
+    }
+
+    .portal-icon svg {
+      width: 38px;
+      height: 38px;
+      display: block;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.1;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .portal-icon .person-icon-svg {
+      fill: currentColor;
+      stroke: none;
+    }
+
+    .portal-icon.webex-icon {
+      color: #111111;
+      background: white;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 12px rgba(23, 50, 77, 0.08);
+    }
+
+    .portal-icon.mic-icon {
+      color: #111111;
+      background: white;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 12px rgba(23, 50, 77, 0.08);
+    }
+
+    .portal-card h2 {
+      position: relative;
+      z-index: 1;
+      margin: 0 0 12px;
+      color: var(--navy);
+      font-size: clamp(24px, 2.6vw, 31px);
+      line-height: 1.16;
+    }
+
+    .portal-card p {
+      position: relative;
+      z-index: 1;
+      margin: 0 0 20px;
+      color: var(--text);
+      font-size: 17px;
+      line-height: 1.5;
+    }
+
+    .portal-link-text {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: white;
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      border: 1px solid var(--blue);
+      border-radius: 999px;
+      padding: 11px 16px;
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .footer {
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 920px) {
+      .portal-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .portal-card {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 760px) {
+      body {
+        padding: 14px;
+      }
+
+      .header {
+        border-radius: 18px;
+        padding: 28px 20px;
+      }
+
+      .intro-card,
+      .portal-card {
+        border-radius: 18px;
+      }
+    }
+
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+
+      .header,
+      .intro-card,
+      .portal-card {
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="header" aria-label="TSV Technical Video Competition Entry Header">
+      <p class="kicker">District of Florida and Caribbean Entry</p>
+      <h1>TSV Technical Video Competition</h1>
+      <p class="subtitle">Select a team group portal below to view its project site, action items, production materials, schedules, and supporting resources.</p>
+    </section>
+
+    <section class="intro-card" aria-label="Entry portal overview">
+      <h2>Production Team Portals</h2>
+    </section>
+
+    <section class="portal-grid" aria-label="TSV group entry portal links">
+      <a class="portal-card" href="crimping-team-site/index.html">
+        <div class="portal-icon crimp-icon" aria-hidden="true">⌁</div>
+        <h2>Crimping Team Group</h2>
+        <p>Open the Crimping team site for cable preparation, RJ45 crimping tutorial planning, action items, resources, and deliverables.</p>
+        <span class="portal-link-text">Open Portal →</span>
+      </a>
+
+      <a class="portal-card" href="signal-flow-team-site/index.html">
+        <div class="portal-icon mic-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false">
+            <path d="M12 14.5a3.5 3.5 0 0 0 3.5-3.5V6a3.5 3.5 0 0 0-7 0v5a3.5 3.5 0 0 0 3.5 3.5Z" />
+            <path d="M6.5 10.5v.5a5.5 5.5 0 0 0 11 0v-.5" />
+            <path d="M12 16.5V20" />
+            <path d="M8.5 20h7" />
+          </svg>
+        </div>
+        <h2>Signal Team Group</h2>
+        <p>Open the Signal Flow team site for audio signal path planning, visual script materials, graphics, production notes, and team resources.</p>
+        <span class="portal-link-text">Open Portal →</span>
+      </a>
+
+      <a class="portal-card" href="webex-team-site/index.html">
+        <div class="portal-icon webex-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" focusable="false" class="person-icon-svg">
+            <circle cx="32" cy="20" r="13" />
+            <path d="M12 58c0-14.9 8.9-24.8 20-24.8S52 43.1 52 58H12Z" />
+          </svg>
+        </div>
+        <h2>WebEx Team Group</h2>
+        <p>Open the WebEx team site for hosting workflow, screen-recording demos, troubleshooting sections, action items, and deliverables.</p>
+        <span class="portal-link-text">Open Portal →</span>
+      </a>
+    </section>
+
+    <p class="footer">TSV Technical Video Competition • District of Florida and Caribbean</p>
+  </main>
+</body>
+</html>
