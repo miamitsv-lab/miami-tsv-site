@@ -574,6 +574,31 @@ body.meeting-popup-open {
   .meeting-popup-button { width: 100%; }
 }
 
+
+
+/* Site Menu Tile Hover - matches Project Progress hover behavior */
+.card-grid .tile {
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, filter .15s ease;
+}
+.card-grid .tile:hover,
+.card-grid .tile:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(23, 50, 77, 0.14);
+  border-color: var(--blue);
+  outline: none;
+  filter: brightness(.995);
+}
+.card-grid .tile:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-grid .tile { transition: none; }
+  .card-grid .tile:hover,
+  .card-grid .tile:focus { transform: none; }
+}
+
 </style>
 </head>
 <body>
