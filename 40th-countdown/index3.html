@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Miami 40th Anniversary Countdown</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      background: #06130f;
+      font-family: Arial, Helvetica, sans-serif;
+      overflow: hidden;
+    }
+
+    .banner {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      background-image: url("miami-banner-desktop.png");
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+
+    .countdown-box {
+      position: absolute;
+      left: 50%;
+      bottom: 5.8%;
+      transform: translateX(-50%);
+      width: min(880px, 56vw);
+      background: linear-gradient(180deg, rgba(0, 63, 42, 0.96), rgba(3, 38, 29, 0.98));
+      border: 3px solid #d6a534;
+      border-radius: 22px;
+      padding: 18px 24px;
+      color: white;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), inset 0 0 15px rgba(255, 214, 120, 0.08);
+    }
+
+    .countdown-title {
+      font-size: clamp(18px, 1.55vw, 30px);
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      letter-spacing: 1px;
+      color: #f1c660;
+      text-shadow: 0 2px 3px rgba(0, 0, 0, 0.45);
+    }
+
+    .countdown-timer {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr 1fr;
+      align-items: center;
+    }
+
+    .time-card {
+      padding: 10px 14px;
+      border-right: 2px solid rgba(214, 165, 52, 0.75);
+    }
+
+    .time-card:last-child {
+      border-right: none;
+    }
+
+    .time-card span {
+      display: block;
+      font-size: clamp(44px, 4.2vw, 78px);
+      font-weight: 900;
+      color: #d6a534;
+      line-height: 0.95;
+      font-variant-numeric: tabular-nums;
+      text-shadow: 0 3px 5px rgba(0, 0, 0, 0.45);
+    }
+
+    .time-card label {
+      display: block;
+      margin-top: 8px;
+      font-size: clamp(13px, 1.15vw, 20px);
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #ffffff;
+    }
+
+    /* Tablet */
+    @media (max-width: 1199px) and (min-width: 768px) {
+      .banner {
+        background-image: url("miami-banner-tablet.png");
+        background-position: center center;
+      }
+
+      .countdown-box {
+        width: min(760px, 72vw);
+        bottom: 5.2%;
+        padding: 16px 20px;
+        border-radius: 20px;
+      }
+
+      .countdown-title {
+        font-size: clamp(18px, 2.2vw, 28px);
+      }
+
+      .time-card span {
+        font-size: clamp(42px, 5.5vw, 72px);
+      }
+
+      .time-card label {
+        font-size: clamp(12px, 1.6vw, 18px);
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 767px) {
+      .banner {
+        background-image: url("miami-banner-mobile.png");
+        background-position: center center;
+      }
+
+      .countdown-box {
+        width: 84vw;
+        bottom: 5.5%;
+        padding: 12px 12px 11px;
+        border-width: 2px;
+        border-radius: 18px;
+      }
+
+      .countdown-title {
+        font-size: clamp(14px, 4vw, 22px);
+        margin-bottom: 9px;
+        line-height: 1.15;
+      }
+
+      .countdown-timer {
+        grid-template-columns: 1fr 1fr;
+        row-gap: 8px;
+      }
+
+      .time-card {
+        padding: 8px 6px;
+        border-right: none;
+      }
+
+      .time-card:nth-child(odd) {
+        border-right: 1px solid rgba(214, 165, 52, 0.7);
+      }
+
+      .time-card:nth-child(-n+2) {
+        border-bottom: 1px solid rgba(214, 165, 52, 0.7);
+      }
+
+      .time-card span {
+        font-size: clamp(34px, 10vw, 58px);
+      }
+
+      .time-card label {
+        margin-top: 5px;
+        font-size: clamp(11px, 3.3vw, 16px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="banner">
+    <div class="countdown-box">
+      <div class="countdown-title">Countdown to March 12, 2027</div>
+
+      <div class="countdown-timer">
+        <div class="time-card">
+          <span id="days">000</span>
+          <label>Days</label>
+        </div>
+
+        <div class="time-card">
+          <span id="hours">00</span>
+          <label>Hours</label>
+        </div>
+
+        <div class="time-card">
+          <span id="minutes">00</span>
+          <label>Minutes</label>
+        </div>
+
+        <div class="time-card">
+          <span id="seconds">00</span>
+          <label>Seconds</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Miami, Florida target date: March 12, 2027 at 12:00 AM Eastern Standard Time.
+    const targetDate = new Date("2027-03-12T00:00:00-05:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance <= 0) {
+        document.getElementById("days").innerText = "000";
+        document.getElementById("hours").innerText = "00";
+        document.getElementById("minutes").innerText = "00";
+        document.getElementById("seconds").innerText = "00";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor(
+        (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+      );
+      const minutes = Math.floor(
+        (distance % (1000 * 60 * 60)) / (1000 * 60)
+      );
+      const seconds = Math.floor(
+        (distance % (1000 * 60)) / 1000
+      );
+
+      document.getElementById("days").innerText = String(days).padStart(3, "0");
+      document.getElementById("hours").innerText = String(hours).padStart(2, "0");
+      document.getElementById("minutes").innerText = String(minutes).padStart(2, "0");
+      document.getElementById("seconds").innerText = String(seconds).padStart(2, "0");
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
