@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>WebEx Team Action Items</title>
 <style>
 
@@ -446,257 +447,190 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
 </head>
 <body>
 <main class="wrap">
-  <section class="header">
-    <h1>WebEx Team Action Items</h1>
-  </section>
-  <nav class="nav"><a href="home.html">Home</a>
-    <a href="action-items.html" class="active">Action Items</a>
-    <a href="team-members.html">Team</a>
-    <a href="priority-tasks.html">Priorities</a>
-    <a href="deadline-reminder.html">Deliverables</a>
-    <a href="note-section.html">Notes</a>
-    <a href="resources.html">Resources</a></nav>
-
-  <section id="emptyState" class="empty-state">Select a Name to view action items.</section>
-
-
-  <section class="action-filter-card" aria-label="Select a team member">
-    <div class="filter-row">
-      <label for="memberSelect">Action Items for:</label>
-      <select id="memberSelect" class="member-select" aria-label="Select a team member to view action items">
-        <option value="" selected>Select a Name</option>
-      <option value="Justyn">Justyn</option>
-      <option value="Julia">Julia</option>
-      <option value="Dennis">Dennis</option>
-      <option value="Frank">Frank</option>
-      <option value="Angelino">Angelino</option>
-      <option value="Jules T">Jules T</option>
-      <option value="Janna">Janna</option>
-      <option value="NJ">NJ</option>
-      <option value="TJ">TJ</option>
-      <option value="Jhules B">Jhules B</option>
-      <option value="Boon">Boon</option>
-      <option value="Eden">Eden</option>
-      <option value="Eduard">Eduard</option>
-      </select>
-    </div>
-  </section>
-
-  <section id="actionList" class="action-list" aria-live="polite">
-    <article class="member-card" data-member="Justyn" hidden>
-      <div class="member-card-head">
-        <h2>Justyn</h2>
-        <p class="member-role">Director</p>
-      </div>
-      <div class="member-card-body">
-        <h3>Action Items This Week</h3>
-        <ul>
-        <li>Finalize the WebEx recording plan and confirm the podcast/interview setup.</li>
-        <li>Create and communicate the recording schedule for the team.</li>
-        <li>Prepare the WebEx test meeting, host/cohost accounts, Backup TSV PC workflow, and screen recording checklist.</li>
-        <li>Confirm the team is ready for July 10 recording week.</li>
-        </ul>
-      </div>
-    </article>
-    <article class="member-card" data-member="Julia" hidden>
-      <div class="member-card-head">
-        <h2>Julia</h2>
-        <p class="member-role">Scriptwriter</p>
-      </div>
-      <div class="member-card-body">
-        <h3>Action Items This Week</h3>
-        <ul>
-        <li>Finish the WebEx run-of-show, storyboard, and demo map.</li>
-        <li>Make sure every scene has matching screen demo notes.</li>
-        <li>Cover Meeting Options, Audio/Video Settings, Layouts, Sync Stage, Breakout Sessions, Host Recovery, Audio Issues, and Camera Issues.</li>
-        <li>Coordinate wording updates with Justyn, Dennis, Frank, Angelino, and Jules T.</li>
-        </ul>
-      </div>
-    </article>
-    <article class="member-card" data-member="Dennis" hidden>
-      <div class="member-card-head">
-        <h2>Dennis</h2>
-        <p class="member-role">Main SME / Recording Support / Optional Music</p>
-      </div>
-      <div class="member-card-body">
-        <h3>Action Items This Week</h3>
-        <ul>
-        <li>Review the WebEx demo map for technical accuracy.</li>
-        <li>Validate host/cohost setup, Backup TSV PC workflow, Meeting Options, Sync Stage, Breakout Sessions, and audio/camera troubleshooting.</li>
-        <li>Help confirm recording quality standards before main recording week.</li>
-        <li>Keep optional music/soundtrack very limited, if used at all.</li>
-        </ul>
-      </div>
-    </article>
-    <article class="member-card" data-member="Frank" hidden>
-      <div class="member-card-head">
-        <h2>Frank</h2>
-        <p class="member-role">Main SME / Director Helper</p>
-      </div>
-      <div class="member-card-body">
-        <h3>Action Items This Week</h3>
-        <ul>
-        <li>Review the WebEx workflow and troubleshooting steps.</li>
-        <li>Confirm the host/cohost process and Backup TSV PC takeover are technically correct.</li>
-        <li>Review storyboard flow so the demo is clear and practical.</li>
-        <li>Provide corrections before the pre-production lock.</li>
-        </ul>
-      </div>
-    </article>
-    <article class="member-card" data-member="Angelino" hidden>
-      <div class="member-card-head">
-        <h2>Angelino</h2>
-        <p class="member-role">Scriptwriter / SME Support Only</p>
-      </div>
-      <div class="member-card-body">
-        <h3>Action Items This Week</h3>
-        <ul>
-        <li>Help Julia improve script and demo wording.</li>
-        <li>Review technical clarity of the WebEx explanations.</li>
-        <li>Make sure the demo instructions are simple and easy to follow.</li>
-        <li>Support SME review but do not act as the main WebEx SME.</li>
-        </ul>
-      </div>
-    </article>
-    <article class="member-card" data-member="Jules T" hidden>
-      <div class="member-card-head">
-        <h2>Jules T</h2>
-        <p class="member-role">Script Support / Talent / Voiceover</p>
-      </div>
-      <div class="member-card-body">
-        <h3>Action Items This Week</h3>
-        <ul>
-        <li>Review podcast question flow and transitions.</li>
-        <li>Improve closing lines and spoken flow where needed.</li>
-        <li>Confirm talent/voiceover readiness for recording week.</li>
-        <li>Coordinate lower-third name/title needs if appearing on camera or voiceover.</li>
-        </ul>
-      </div>
-    </article>
-    <article class="member-card" data-member="Janna" hidden>
-      <div class="member-card-head">
-        <h2>Janna</h2>
-        <p class="member-role">Talent / Voiceover</p>
-      </div>
-      <div class="member-card-body">
-        <h3>Action Items This Week</h3>
-        <ul>
-        <li>Confirm availability as talent/voiceover.</li>
-        <li>Review any assigned lines or speaking parts.</li>
-        <li>Confirm lower-third name/title details.</li>
-        <li>Be ready for recording week once the final run-of-show is locked.</li>
-        </ul>
-      </div>
-    </article>
-    <article class="member-card" data-member="NJ" hidden>
-      <div class="member-card-head">
-        <h2>NJ</h2>
-        <p class="member-role">Video Editor / Recording Support</p>
-      </div>
-      <div class="member-card-body">
-        <h3>Action Items This Week</h3>
-        <ul>
-        <li>Prepare the WebEx editing project folder structure.</li>
-        <li>Confirm screen recording format, audio sync plan, file naming, and backup method.</li>
-        <li>Start a placeholder timeline if footage or graphics are available.</li>
-        <li>Coordinate with TJ and Jhules B for graphics, captions, and callout placement.</li>
-        </ul>
-      </div>
-    </article>
-    <article class="member-card" data-member="TJ" hidden>
-      <div class="member-card-head">
-        <h2>TJ</h2>
-        <p class="member-role">Animator / Graphics</p>
-      </div>
-      <div class="member-card-body">
-        <h3>Action Items This Week</h3>
-        <ul>
-        <li>Create first draft lower thirds, WebEx labels, and callout style.</li>
-        <li>Create troubleshooting cards, title card, closing card, and summary card.</li>
-        <li>Prepare a visual proof test for July 6.</li>
-        <li>Coordinate with NJ and Jhules B so graphics fit the edit.</li>
-        </ul>
-      </div>
-    </article>
-    <article class="member-card" data-member="Jhules B" hidden>
-      <div class="member-card-head">
-        <h2>Jhules B</h2>
-        <p class="member-role">Video Editor / Animator Helper</p>
-      </div>
-      <div class="member-card-body">
-        <h3>Action Items This Week</h3>
-        <ul>
-        <li>Help TJ and NJ with callout/caption style and screen recording polish.</li>
-        <li>Support graphic cleanup and animation cleanup as needed.</li>
-        <li>Check that captions and callouts are readable on screen.</li>
-        <li>Assist with final visual proof preparation for July 6.</li>
-        </ul>
-      </div>
-    </article>
-    <article class="member-card" data-member="Boon" hidden>
-      <div class="member-card-head">
-        <h2>Boon</h2>
-        <p class="member-role">July 10 Recording Support Only</p>
-      </div>
-      <div class="member-card-body">
-        <h3>Action Items This Week</h3>
-        <ul>
-        <li>Confirm July 10 recording support availability if needed.</li>
-        <li>Support the WebEx recording session only as assigned.</li>
-        <li>No ongoing WebEx ownership unless reassigned by the director.</li>
-        </ul>
-      </div>
-    </article>
-    <article class="member-card" data-member="Eden" hidden>
-      <div class="member-card-head">
-        <h2>Eden</h2>
-        <p class="member-role">July 10 Recording Support Only</p>
-      </div>
-      <div class="member-card-body">
-        <h3>Action Items This Week</h3>
-        <ul>
-        <li>Confirm July 10 recording support availability if needed.</li>
-        <li>Support the WebEx recording session only as assigned.</li>
-        <li>No ongoing WebEx ownership unless reassigned by the director.</li>
-        </ul>
-      </div>
-    </article>
-    <article class="member-card" data-member="Eduard" hidden>
-      <div class="member-card-head">
-        <h2>Eduard</h2>
-        <p class="member-role">July 10 Recording Support Only</p>
-      </div>
-      <div class="member-card-body">
-        <h3>Action Items This Week</h3>
-        <ul>
-        <li>Confirm July 10 recording support availability if needed.</li>
-        <li>Support the WebEx recording session only as assigned.</li>
-        <li>No ongoing WebEx ownership unless reassigned by the director.</li>
-        </ul>
-      </div>
-    </article>
-  </section>
-
-  <section class="project-progress-card" aria-label="WebEx project progress status">
-    <div class="progress-header">
-      <div>
-        <h2>Project Progress</h2>
-        <p><strong>Current checkpoint:</strong> Scripts are finalized. Run-of-show, storyboard, demo map, and other pre-production materials are completed and up for review.</p>
-      </div>
-    </div>
-    <div class="progress-grid">
-      <article class="progress-panel">
-        <div class="progress-meta"><strong>Current Progress</strong><span class="progress-percent">20%</span></div>
-        <div class="progress-track" role="progressbar" aria-label="Current WebEx project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20"><div class="progress-fill" style="width: 20%;"></div></div>
-        <p>Scripts and pre-production materials are completed and ready for review before the visual proof test and recording work.</p>
-      </article>
-      <article class="progress-panel target-progress">
-        <div class="progress-meta"><strong>Target Progress</strong><span class="progress-percent">25%</span></div>
-        <div class="progress-track" role="progressbar" aria-label="Target WebEx project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="25"><div class="progress-fill" style="width: 25%;"></div></div>
-        <p>Target progress is slightly ahead of current progress, with review notes, proof-test preparation, and setup confirmation already underway.</p>
-      </article>
-    </div>
-  </section>
+<section class="header">
+<h1>WebEx Team Action Items</h1>
+</section>
+<nav class="nav"><a href="home.html">Home</a>
+<a class="active" href="action-items.html">Action Items</a>
+<a href="team-members.html">Team</a>
+<a href="priority-tasks.html">Priorities</a>
+<a href="deadline-reminder.html">Deliverables</a>
+<a href="note-section.html">Notes</a>
+<a href="resources.html">Resources</a></nav>
+<section class="empty-state" id="emptyState">Select a Name to view current WebEx production action items.</section>
+<section aria-label="Select a team member" class="action-filter-card">
+<div class="filter-row">
+<label for="memberSelect">Action Items for:</label>
+<select aria-label="Select a team member to view action items" class="member-select" id="memberSelect">
+<option selected="" value="">Select a Name</option>
+<option value="Justyn">Justyn</option>
+<option value="Julia">Julia</option>
+<option value="Dennis">Dennis</option>
+<option value="Frank">Frank</option>
+<option value="Angelino">Angelino</option>
+<option value="Jules T">Jules T</option>
+<option value="Janna">Janna</option>
+<option value="NJ">NJ</option>
+<option value="TJ">TJ</option>
+<option value="Jhules B">Jhules B</option>
+<option value="Boon">Boon</option>
+<option value="Eden">Eden</option>
+<option value="Eduard">Eduard</option>
+</select>
+</div>
+</section>
+<section aria-live="polite" class="action-list" id="actionList">
+<article class="member-card" data-member="Justyn" hidden="">
+<div class="member-card-head">
+<h2>Justyn</h2>
+<p class="member-role">Director</p>
+</div>
+<div class="member-card-body">
+<h3>Current Production Action Items</h3>
+<ul><li>Confirm technical interview setup on the TSV station.</li><li>Confirm the TSV station production studio setup and recording schedule for the next WebEx demo sessions.</li><li>Assign the next graphics package for next week, including labels, callouts, troubleshooting cards, Backup TSV PC visuals, and host/cohost workflow graphics.</li><li>Track which demo screen recordings are completed, still missing, or need pickup recording.</li></ul>
+</div>
+</article>
+<article class="member-card" data-member="Julia" hidden="">
+<div class="member-card-head">
+<h2>Julia</h2>
+<p class="member-role">Scriptwriter</p>
+</div>
+<div class="member-card-body">
+<h3>Current Production Action Items</h3>
+<ul><li>Prepare any small wording or pickup-line fixes needed for clarity without reopening major script changes.</li><li>Support Justyn, Dennis, Frank, Angelino, and Jules T with only necessary clarity updates during production.</li></ul>
+</div>
+</article>
+<article class="member-card" data-member="Dennis" hidden="">
+<div class="member-card-head">
+<h2>Dennis</h2>
+<p class="member-role">Main SME / Recording Support / Optional Music</p>
+</div>
+<div class="member-card-body">
+<h3>Current Production Action Items</h3>
+<ul><li>Review demo screen recordings for technical accuracy, readability, and proper WebEx workflow.</li><li>Validate host/cohost setup, Backup TSV PC workflow, Meeting Options, Sync Stage, Breakout Sessions, and audio/camera troubleshooting as recorded.</li><li>Help confirm TSV station recording quality standards: clear audio, readable screen captures, visible cursor, and hidden personal information.</li><li>Keep optional music/soundtrack very limited, if used at all, so spoken instruction and demo clarity stay first.</li></ul>
+</div>
+</article>
+<article class="member-card" data-member="Frank" hidden="">
+<div class="member-card-head">
+<h2>Frank</h2>
+<p class="member-role">Main SME / Director Helper</p>
+</div>
+<div class="member-card-body">
+<h3>Current Production Action Items</h3>
+<ul><li>Review the recorded WebEx workflow and troubleshooting steps for practical TSV accuracy.</li><li>Confirm the host/cohost process and Backup TSV PC takeover are correct in the screen recordings.</li><li>Review the demo sequence so the finished video remains clear, practical, and easy for TSV officers to follow.</li><li>Provide only necessary accuracy or clarity corrections now that pre-production is closed.</li></ul>
+</div>
+</article>
+<article class="member-card" data-member="Angelino" hidden="">
+<div class="member-card-head">
+<h2>Angelino</h2>
+<p class="member-role">Scriptwriter / SME Support Only</p>
+</div>
+<div class="member-card-body">
+<h3>Current Production Action Items</h3>
+<ul><li>Review technical clarity of WebEx explanations, especially where screen recordings need labels or callouts.</li><li>Help identify confusing demo wording without reopening major script or demo-flow changes.</li><li>Support SME review only; main WebEx SME review remains with Dennis and Frank.</li></ul>
+</div>
+</article>
+<article class="member-card" data-member="Jules T" hidden="">
+<div class="member-card-head">
+<h2>Jules T</h2>
+<p class="member-role">Script Support / Talent / Voiceover</p>
+</div>
+<div class="member-card-body">
+<h3>Current Production Action Items</h3>
+<ul><li>Review technical interview script flow and transition to be prepared for the weekend recording.</li><li>Confirm talent/voiceover readiness for any remaining recording or pickup lines.</li><li>Coordinate lower-third name/title details for anyone appearing on camera or voiceover.</li><li>Help keep the final delivery natural and concise while avoiding new major content additions.</li></ul>
+</div>
+</article>
+<article class="member-card" data-member="Janna" hidden="">
+<div class="member-card-head">
+<h2>Janna</h2>
+<p class="member-role">Talent / Voiceover</p>
+</div>
+<div class="member-card-body">
+<h3>Current Production Action Items</h3>
+<ul><li>Confirm availability for any remaining talent/voiceover recordings or pickup lines.</li><li>Review assigned speaking parts against the locked production flow.</li><li>Confirm lower-third name/title details for the graphics team.</li><li>Be ready for quick pickup recording if demo screen recordings require matching voiceover adjustments.</li></ul>
+</div>
+</article>
+<article class="member-card" data-member="NJ" hidden="">
+<div class="member-card-head">
+<h2>NJ</h2>
+<p class="member-role">Video Editor / Recording Support</p>
+</div>
+<div class="member-card-body">
+<h3>Current Production Action Items</h3>
+<ul><li>Prepare the WebEx editing timeline using the locked production order and completed demo screen recordings.</li><li>Organize screen recording files, audio sync plan, file naming, and backup copies from the TSV station setup.</li><li>Start assembling completed demo clips with placeholders for title card, lower thirds, callouts, and graphics.</li><li>Coordinate with TJ and Jhules B on graphics placement, captions, zoom-ins, and readable callout timing.</li></ul>
+</div>
+</article>
+<article class="member-card" data-member="TJ" hidden="">
+<div class="member-card-head">
+<h2>TJ</h2>
+<p class="member-role">Animator / Graphics</p>
+</div>
+<div class="member-card-body">
+<h3>Current Production Action Items</h3>
+<ul><li>Finish up title card and lower thirds.</li><li>Create WebEx labels, callout and agenda card, closing card, and summary card.</li><li>Create or refine demo support graphics so screen recordings remain readable and easy to follow.</li><li>Coordinate with NJ and Jhules B so graphics fit the edit and do not create new style changes.</li></ul>
+</div>
+</article>
+<article class="member-card" data-member="Jhules B" hidden="">
+<div class="member-card-head">
+<h2>Jhules B</h2>
+<p class="member-role">Video Editor / Animator Helper</p>
+</div>
+<div class="member-card-body">
+<h3>Current Production Action Items</h3>
+<ul><li>Help TJ and NJ polish callouts, captions, labels, and screen-recording visuals for readability.</li><li>Support the next graphics package assigned for next week, especially cleanup and animation support as needed.</li><li>Check that title card, lower thirds, captions, and callouts remain consistent with the approved style.</li><li>Assist NJ with visual polish and rough edit preparation without introducing new major creative sections.</li></ul>
+</div>
+</article>
+<article class="member-card" data-member="Boon" hidden="">
+<div class="member-card-head">
+<h2>Boon</h2>
+<p class="member-role">July 10 Recording Support Only</p>
+</div>
+<div class="member-card-body">
+<h3>Current Production Action Items</h3>
+<ul><li>Confirm recording support availability if additional WebEx demo or pickup recording is needed.</li><li>Support the WebEx recording session only as assigned by Justyn or Dennis.</li><li>Help keep the recording session focused on locked demos and necessary pickups only.</li></ul>
+</div>
+</article>
+<article class="member-card" data-member="Eden" hidden="">
+<div class="member-card-head">
+<h2>Eden</h2>
+<p class="member-role">July 10 Recording Support Only</p>
+</div>
+<div class="member-card-body">
+<h3>Current Production Action Items</h3>
+<ul><li>Confirm recording support availability if additional WebEx demo or pickup recording is needed.</li><li>Support the WebEx recording session only as assigned by Justyn or Dennis.</li><li>Help keep the recording session focused on locked demos and necessary pickups only.</li></ul>
+</div>
+</article>
+<article class="member-card" data-member="Eduard" hidden="">
+<div class="member-card-head">
+<h2>Eduard</h2>
+<p class="member-role">July 10 Recording Support Only</p>
+</div>
+<div class="member-card-body">
+<h3>Current Production Action Items</h3>
+<ul><li>Confirm recording support availability if additional WebEx demo or pickup recording is needed.</li><li>Support the WebEx recording session only as assigned by Justyn or Dennis.</li><li>Help keep the recording session focused on locked demos and necessary pickups only.</li></ul>
+</div>
+</article>
+</section>
+<section aria-label="WebEx project progress status" class="project-progress-card">
+<div class="progress-header">
+<div>
+<h2>Project Progress</h2>
+<p><strong>Current checkpoint:</strong> Pre-production is closed/locked with no more major changes. Production studio setup is in the TSV station, demo screen recording has started, and title card/lower-thirds work is underway with completion targeted by the end of the week. The next set of graphics will be assigned for next week.</p>
+</div>
+</div>
+<div class="progress-grid">
+<article class="progress-panel">
+<div class="progress-meta"><strong>Current Progress</strong><span class="progress-percent">38%</span></div>
+<div aria-label="Current WebEx project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="38" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 38%;"></div></div>
+<p>Pre-production is locked and the WebEx project is now in production: TSV station setup is active, demo screen recording has started, and title card/lower-thirds work is in progress.</p>
+</article>
+<article class="progress-panel target-progress">
+<div class="progress-meta"><strong>Target Progress</strong><span class="progress-percent">45%</span></div>
+<div aria-label="Target WebEx project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 45%;"></div></div>
+<p>Target progress is to complete the title card and lower thirds by the end of the week, capture and organize the first demo screen recording batch, and assign the next graphics package for next week.</p>
+</article>
+</div>
+</section>
 </main>
 <script>
 const select = document.getElementById('memberSelect');

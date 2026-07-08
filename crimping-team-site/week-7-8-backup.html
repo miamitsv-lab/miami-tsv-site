@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Crimping Week 7-8 Backup</title>
+<style>
+:root {
+  --navy:#17324D;
+  --blue:#2F6FAE;
+  --border:#C9D6E6;
+  --bg:#F6F9FD;
+  --text:#1C2733;
+  --muted:#51606F;
+  --gold:#FFF3DC;
+  --green:#EAF7EF;
+  --purple:#F2ECFF;
+  --red:#FFEAEA;
+  --light-blue:#EAF3FF;
+}
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  padding:24px;
+}
+.wrap { max-width:1280px; margin:0 auto; }
+.header {
+  background:linear-gradient(135deg, var(--navy), var(--blue));
+  color:white;
+  border-radius:20px;
+  padding:28px 32px;
+  margin-bottom:18px;
+  box-shadow:0 10px 24px rgba(23,50,77,.18);
+}
+h1 { margin:0; font-size:clamp(30px,4vw,48px); line-height:1.1; }
+.header p { margin:10px 0 0; font-size:18px; line-height:1.45; opacity:.95; }
+.backup-note {
+  background:white;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:16px 18px;
+  margin:0 0 20px;
+  color:var(--muted);
+  line-height:1.5;
+  box-shadow:0 6px 16px rgba(23,50,77,.08);
+}
+.section-title {
+  margin:28px 0 12px;
+  color:var(--navy);
+  font-size:clamp(24px,3vw,34px);
+  line-height:1.15;
+}
+.project-progress-card,
+.immediate,
+.timeline-card,
+.action-list-shell {
+  background:white;
+  border:1px solid var(--border);
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 8px 22px rgba(23,50,77,.10);
+}
+.project-progress-card {
+  width:66.666%;
+  margin:0 auto 24px;
+  padding:20px;
+}
+.progress-header { margin-bottom:16px; }
+.progress-header h2 {
+  margin:0 0 8px;
+  color:var(--navy);
+  font-size:clamp(24px,3vw,34px);
+  text-align:center;
+}
+.progress-header p,
+.progress-panel p,
+.progress-note,
+.timeline-intro {
+  margin:0;
+  line-height:1.5;
+  color:var(--text);
+  font-size:16px;
+}
+.progress-grid {
+  display:grid;
+  grid-template-columns:1fr;
+  gap:14px;
+  margin:16px 0;
+}
+.progress-panel {
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:16px;
+  background:var(--light-blue);
+}
+.progress-panel.target-progress { background:var(--gold); }
+.progress-meta {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:10px;
+  color:var(--navy);
+  font-size:18px;
+}
+.progress-percent { font-weight:900; font-size:22px; }
+.progress-track {
+  height:20px;
+  background:#E6EEF7;
+  border:1px solid var(--border);
+  border-radius:999px;
+  overflow:hidden;
+  margin-bottom:10px;
+}
+.progress-fill {
+  height:100%;
+  background:linear-gradient(90deg, var(--navy), var(--blue));
+  border-radius:999px;
+}
+.progress-note {
+  background:var(--green);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:14px 16px;
+}
+.immediate { margin-bottom:24px; padding:18px; }
+.immediate .section-title { margin-top:0; }
+.immediate-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.action-card {
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:20px;
+  min-height:175px;
+}
+.action-card:nth-child(1) { background:var(--light-blue); }
+.action-card:nth-child(2) { background:var(--green); }
+.action-card:nth-child(3) { background:var(--gold); }
+.action-card h2 { margin:0 0 10px; color:var(--navy); font-size:24px; }
+.action-card p { margin:0; line-height:1.5; font-size:17px; }
+.timeline-card { padding:18px; margin-bottom:24px; }
+.timeline-card .section-title { margin-top:0; }
+.table-card {
+  margin-top:14px;
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
+}
+table { width:100%; border-collapse:collapse; }
+thead { background:#255D91; color:white; }
+th, td {
+  text-align:left;
+  vertical-align:top;
+  padding:16px 18px;
+  border-bottom:1px solid var(--border);
+  line-height:1.45;
+}
+th { font-size:17px; letter-spacing:.02em; }
+td { font-size:16px; }
+tbody tr:nth-child(5n+1) { background:var(--light-blue); }
+tbody tr:nth-child(5n+2) { background:var(--gold); }
+tbody tr:nth-child(5n+3) { background:var(--green); }
+tbody tr:nth-child(5n+4) { background:var(--purple); }
+tbody tr:nth-child(5n+5) { background:var(--red); }
+tbody tr:last-child td { border-bottom:none; }
+td:first-child { color:var(--navy); font-size:18px; font-weight:800; width:180px; }
+.action-list-shell { padding:18px; }
+.action-list { display:grid; grid-template-columns:1fr; gap:18px; }
+.member-card {
+  border:1px solid var(--border);
+  border-radius:20px;
+  overflow:hidden;
+  background:white;
+  box-shadow:0 8px 22px rgba(23,50,77,.10);
+}
+.member-card:nth-child(5n+1) .member-card-head { background:var(--light-blue); }
+.member-card:nth-child(5n+2) .member-card-head { background:var(--gold); }
+.member-card:nth-child(5n+3) .member-card-head { background:var(--green); }
+.member-card:nth-child(5n+4) .member-card-head { background:var(--purple); }
+.member-card:nth-child(5n+5) .member-card-head { background:var(--red); }
+.member-card-head { padding:20px 22px; border-bottom:1px solid var(--border); }
+.member-kicker {
+  display:inline-block;
+  margin:0 0 10px;
+  color:#1D5F8F;
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.member-card h2 { margin:0; color:var(--navy); font-size:28px; }
+.member-role { margin:8px 0 0; color:#1D5F8F; font-weight:700; line-height:1.45; }
+.member-card-body { padding:20px 22px; }
+ul { margin:0; padding-left:22px; }
+li { margin:0 0 10px; line-height:1.5; font-size:17px; }
+li:last-child { margin-bottom:0; }
+.footer { margin-top:18px; color:var(--muted); font-size:14px; line-height:1.5; }
+@media (max-width:1024px) { .project-progress-card { width:80%; } }
+@media (max-width:900px) { .immediate-grid { grid-template-columns:1fr; } }
+@media (max-width:760px) {
+  body { padding:14px; }
+  .header { padding:22px; border-radius:16px; }
+  .project-progress-card { width:100%; }
+  .project-progress-card,
+  .immediate,
+  .timeline-card,
+  .action-list-shell { border-radius:16px; }
+  .progress-meta { align-items:flex-start; flex-direction:column; gap:4px; }
+  table, thead, tbody, th, td, tr { display:block; }
+  thead { display:none; }
+  tbody tr {
+    margin:14px;
+    border:1px solid var(--border);
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 4px 10px rgba(23,50,77,.08);
+  }
+  td {
+    width:100%!important;
+    border-bottom:1px solid rgba(201,214,230,.8);
+    padding:14px 16px 14px 130px;
+    position:relative;
+    min-height:54px;
+    font-size:16px;
+  }
+  td:last-child { border-bottom:none; }
+  td::before {
+    content:attr(data-label);
+    position:absolute;
+    left:16px;
+    top:14px;
+    width:100px;
+    color:var(--muted);
+    font-weight:700;
+    font-size:13px;
+    text-transform:uppercase;
+    letter-spacing:.04em;
+  }
+  td:first-child { font-size:18px; }
+  .member-card h2 { font-size:24px; }
+}
+@media print {
+  body { background:white; padding:0; }
+  .header,
+  .project-progress-card,
+  .immediate,
+  .timeline-card,
+  .action-list-shell,
+  .member-card { box-shadow:none; }
+  th, td, li { font-size:12px; }
+  .project-progress-card { width:100%; }
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <section class="header">
+    <h1>Crimping Week 7-8 Backup</h1>
+    <p>Crimping RJ45 Ethernet Cables: A Practical Guide for TSV</p>
+  </section>
+
+  <section class="backup-note" aria-label="Backup page note">
+    Static backup page for the Crimping project. This page intentionally removes navigation links and shows the project progress, immediate next-step tiles, date guardrails, and all member action items in one place.
+  </section>
+
+  <section class="project-progress-card" aria-label="Crimping project progress status">
+    <div class="progress-header">
+      <h2>Project Progress</h2>
+      <p>Current checkpoint: Scripts are finalized. Shot list, visual plan, tutorial flow, and other pre-production materials are completed and up for review.</p>
+    </div>
+    <div class="progress-grid">
+
+    <article class="progress-panel">
+      <div class="progress-meta"><strong>Current Progress</strong><span class="progress-percent">23%</span></div>
+      <div class="progress-track" role="progressbar" aria-label="Current Progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="23"><div class="progress-fill" style="width:23%;"></div></div>
+      <p>Scripts and pre-production materials are completed and ready for review before the close-up recording setup test and production work.</p>
+    </article>
+
+    <article class="progress-panel target-progress">
+      <div class="progress-meta"><strong>Target Progress</strong><span class="progress-percent">25%</span></div>
+      <div class="progress-track" role="progressbar" aria-label="Target Progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="25"><div class="progress-fill" style="width:25%;"></div></div>
+      <p>Target progress is slightly ahead of current progress, with review notes, visual proof-test preparation, tool setup, and T568B graphic confirmation already underway.</p>
+    </article>
+    </div>
+  </section>
+
+  <section class="immediate" aria-label="Immediate next steps">
+    <h2 class="section-title">Immediate Next Step</h2>
+    <div class="immediate-grid">
+
+    <article class="action-card"><h2>Needed Next Week</h2><p>Finish the Crimping shot list, visual plan, and tutorial flow. Prepare tools, cables, RJ45 connectors, cable tester, camera setup, demo table, and the T568B wire-order graphic.</p></article>
+
+    <article class="action-card"><h2>Goal by End of Week</h2><p>The team should know the exact tutorial order, what close-up shots are needed, what tools must be shown, what graphics/labels are needed, and who will record each part.</p></article>
+
+    <article class="action-card"><h2>Main Reminder</h2><p>Do not rush the main recording. First make sure the wire order, camera angle, lighting, and cable tester shot are clear. The most important thing is that viewers can see each step clearly.</p></article>
+    </div>
+  </section>
+
+  <section class="timeline-card" aria-label="Week 7 and 8 date guardrails">
+    <h2 class="section-title">Week 7-8 Date Guardrails</h2>
+    <p class="timeline-intro">Keep the Crimping work aligned to the production calendar: lock the pre-production plan, record clean close-ups, begin editing early, and protect break week from major new work.</p>
+    <div class="table-card">
+      <table>
+        <thead><tr><th>Date</th><th>Reminder</th></tr></thead>
+        <tbody>
+
+      <tr><td data-label="Date">July 9</td><td data-label="Reminder">Pre-production lock: freeze major style/format decisions; confirm script, roles, equipment, folders, SME notes, and recording schedule.</td></tr>
+
+      <tr><td data-label="Date">July 10</td><td data-label="Reminder">Record main crimping demo footage and Eden voiceover/talent parts.</td></tr>
+
+      <tr><td data-label="Date">July 14</td><td data-label="Reminder">Record retakes, missing close-ups, and backup shots.</td></tr>
+
+      <tr><td data-label="Date">July 10-19</td><td data-label="Reminder">Main recording/build week: close-up tutorial recording, early editing, production-ready graphics, and organized footage.</td></tr>
+
+      <tr><td data-label="Date">July 20-26</td><td data-label="Reminder">Anniversary Thanksgiving / break week: minimal work only - file organization, audio cleanup, missing-asset list, and light editing.</td></tr>
+
+      <tr><td data-label="Date">August 2</td><td data-label="Reminder">Full rough cut completed and viewable from beginning to end.</td></tr>
+
+      <tr><td data-label="Date">August 7</td><td data-label="Reminder">Polished edit with captions, labels, close-ups, callouts, transitions, and audio cleanup.</td></tr>
+
+      <tr><td data-label="Date">August 10</td><td data-label="Reminder">Internal review for crimping accuracy, T568B wire order, camera clarity, and timing.</td></tr>
+
+      <tr><td data-label="Date">August 14</td><td data-label="Reminder">Final export and backup copy.</td></tr>
+
+      <tr><td data-label="Date">August 17</td><td data-label="Reminder">Final submission deadline.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="action-list-shell" aria-label="All Crimping action items">
+    <h2 class="section-title">All Action Items</h2>
+    <div class="action-list">
+
+    <article class="member-card">
+      <div class="member-card-head">
+        <div class="member-kicker">Action Items This Week</div>
+        <h2>Boon</h2>
+        <p class="member-role">Director / SME Support / Recording Support</p>
+      </div>
+      <div class="member-card-body">
+        <ul>
+        <li>Lead the crimping production setup and tutorial demo flow.</li>
+        <li>Finish the shot list, visual plan, and tutorial flow with AJ.</li>
+        <li>Prepare tools, Ethernet cable, RJ45 connectors, cable tester, camera setup, and demo table.</li>
+        <li>Check that the tutorial steps are clear enough for close-up recording.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="member-card">
+      <div class="member-card-head">
+        <div class="member-kicker">Action Items This Week</div>
+        <h2>AJ</h2>
+        <p class="member-role">Scriptwriter</p>
+      </div>
+      <div class="member-card-body">
+        <ul>
+        <li>Finish the shot list, visual plan, and tutorial flow.</li>
+        <li>Make sure each tutorial step matches the script: tools, measure, cut, strip, T568B order, insert RJ45, crimp, repeat the other end, test cable, and closing.</li>
+        <li>Keep the wording beginner-friendly and easy for the narrator/talent to follow.</li>
+        <li>Confirm that the tutorial can stay close to the target time.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="member-card">
+      <div class="member-card-head">
+        <div class="member-kicker">Action Items This Week</div>
+        <h2>Dennis</h2>
+        <p class="member-role">Scriptwriter / SME Helper / Recording Support</p>
+      </div>
+      <div class="member-card-body">
+        <ul>
+        <li>Support script review, crimping accuracy, T568B order, recording setup, shot clarity, and tutorial flow.</li>
+        <li>Help ensure the demo is beginner-friendly and technically correct.</li>
+        <li>Check that close-up shots will clearly show wire order and RJ45 connector orientation.</li>
+        <li>Support/helper role only for script review, crimping accuracy, recording quality, and final review.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="member-card">
+      <div class="member-card-head">
+        <div class="member-kicker">Action Items This Week</div>
+        <h2>Eduard</h2>
+        <p class="member-role">Director Support / SME Helper / Recording Support</p>
+      </div>
+      <div class="member-card-body">
+        <ul>
+        <li>Help Boon verify tools, cable tester, RJ45 connector orientation, cable testing process, and demo table setup.</li>
+        <li>Check that the finished cable test can be shown clearly on camera.</li>
+        <li>Help prepare the recording area so the camera can capture steady close-up shots.</li>
+        <li>Support the technical review of the crimping procedure.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="member-card">
+      <div class="member-card-head">
+        <div class="member-kicker">Action Items This Week</div>
+        <h2>Austin</h2>
+        <p class="member-role">Main Video Editor</p>
+      </div>
+      <div class="member-card-body">
+        <ul>
+        <li>Prepare the editing folder and project structure.</li>
+        <li>Confirm file naming, footage organization, and placeholder edit timeline.</li>
+        <li>Prepare the edit plan for close-up shots, labels, captions, and step cards.</li>
+        <li>Coordinate with Aiden, Jhules B, Dianne, and Boon for graphics and footage needs.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="member-card">
+      <div class="member-card-head">
+        <div class="member-kicker">Action Items This Week</div>
+        <h2>Aiden</h2>
+        <p class="member-role">Animator / Graphics</p>
+      </div>
+      <div class="member-card-body">
+        <ul>
+        <li>Create the T568B wire-order graphic.</li>
+        <li>Create tool labels, step cards, arrows, and warning callouts.</li>
+        <li>Make sure graphics are readable on screen and match the team site color style.</li>
+        <li>Prepare visuals for the visual proof test.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="member-card">
+      <div class="member-card-head">
+        <div class="member-kicker">Action Items This Week</div>
+        <h2>Eden</h2>
+        <p class="member-role">Talent / Voiceover / Recording Support</p>
+      </div>
+      <div class="member-card-body">
+        <ul>
+        <li>Confirm talent/voiceover availability.</li>
+        <li>Practice narration timing against the tutorial flow.</li>
+        <li>Prepare to record clean voiceover or on-camera tutorial lines.</li>
+        <li>Review the tutorial steps so the delivery sounds natural and clear.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="member-card">
+      <div class="member-card-head">
+        <div class="member-kicker">Action Items This Week</div>
+        <h2>Jhules B</h2>
+        <p class="member-role">Video Editor / Animator Helper</p>
+      </div>
+      <div class="member-card-body">
+        <ul>
+        <li>Help Aiden and Austin with graphics cleanup, captions, callouts, and editing support.</li>
+        <li>Check that labels and captions are readable during close-up shots.</li>
+        <li>Support the visual proof preparation for step cards and wire-order graphics.</li>
+        <li>Help polish any graphics or edit placeholders before full recording week.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="member-card">
+      <div class="member-card-head">
+        <div class="member-kicker">Action Items This Week</div>
+        <h2>Dianne</h2>
+        <p class="member-role">Video Editor Support</p>
+      </div>
+      <div class="member-card-body">
+        <ul>
+        <li>Help Austin prepare the caption and editing support checklist.</li>
+        <li>Review text readability, step order, and cleanup needs.</li>
+        <li>Support editing organization and rough-cut preparation.</li>
+        <li>Help identify any missing captions or labels needed for the tutorial.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="member-card">
+      <div class="member-card-head">
+        <div class="member-kicker">Action Items This Week</div>
+        <h2>NJ</h2>
+        <p class="member-role">Recording Support</p>
+      </div>
+      <div class="member-card-body">
+        <ul>
+        <li>Help prepare the recording support plan.</li>
+        <li>Check camera angle, audio check, close-up framing, lighting, and backup shot list.</li>
+        <li>Help make sure wire colors and cable tester lights can be seen clearly.</li>
+        <li>Support the recording setup before main recording begins.</li>
+        </ul>
+      </div>
+    </article>
+    </div>
+  </section>
+
+  <p class="footer">Prepared as a read-only Week 7-8 backup page for the Crimping team. Color rotation follows the TSV project schema: light blue, light yellow, light green, lavender, light red, then repeat.</p>
+</main>
+</body>
+</html>
