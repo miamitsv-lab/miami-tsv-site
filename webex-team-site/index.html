@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>WebEx Team Group Site</title>
 <style>
 
@@ -444,181 +445,6 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
 
 
 
-/* SPA Next Meeting Notice Popup */
-.meeting-popup-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  background: rgba(23, 50, 77, 0.64);
-}
-.meeting-popup-overlay.is-visible {
-  display: flex;
-}
-body.meeting-popup-open {
-  overflow: hidden;
-}
-.meeting-popup {
-  position: relative;
-  width: min(640px, 100%);
-  max-height: min(92vh, 760px);
-  overflow: auto;
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  padding: 28px;
-  box-shadow: 0 24px 60px rgba(23, 50, 77, 0.34);
-  animation: meetingPopupRise .22s ease-out;
-}
-.meeting-popup-kicker {
-  display: inline-block;
-  margin: 0 0 10px 0;
-  color: var(--navy);
-  background: var(--gold);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 7px 12px;
-  font-size: 13px;
-  font-weight: 900;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-}
-.meeting-popup h2 {
-  margin: 0 44px 12px 0;
-  color: var(--navy);
-  font-size: clamp(27px, 4vw, 38px);
-  line-height: 1.12;
-}
-.meeting-popup-intro {
-  margin: 0 0 18px 0;
-  color: var(--text);
-  font-size: 18px;
-  line-height: 1.5;
-}
-.meeting-detail-grid {
-  display: grid;
-  grid-template-columns: 155px 1fr;
-  gap: 0;
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  overflow: hidden;
-  margin: 16px 0 18px 0;
-}
-.meeting-detail-label,
-.meeting-detail-value {
-  padding: 13px 15px;
-  border-bottom: 1px solid var(--border);
-  line-height: 1.45;
-  font-size: 16px;
-}
-.meeting-detail-label {
-  color: var(--navy);
-  background: var(--light-blue);
-  font-weight: 900;
-}
-.meeting-detail-value {
-  color: var(--text);
-  background: white;
-  word-break: break-word;
-}
-.meeting-detail-grid div:nth-last-child(-n+2) {
-  border-bottom: none;
-}
-.meeting-detail-value a {
-  color: var(--blue);
-  font-weight: 800;
-}
-.meeting-password {
-  display: inline-block;
-  color: var(--navy);
-  background: var(--gold);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 4px 7px;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 900;
-  letter-spacing: .02em;
-}
-.meeting-popup-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 20px;
-}
-.meeting-popup-primary,
-.meeting-popup-secondary,
-.meeting-popup-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  border-radius: 999px;
-  padding: 11px 16px;
-  font-weight: 900;
-  font-size: 16px;
-  text-decoration: none;
-  cursor: pointer;
-}
-.meeting-popup-primary {
-  color: white;
-  background: linear-gradient(135deg, var(--navy), var(--blue));
-  border: 1px solid var(--blue);
-}
-.meeting-popup-secondary,
-.meeting-popup-button {
-  color: var(--navy);
-  background: var(--light-blue);
-  border: 1px solid var(--border);
-}
-.meeting-popup-close-x {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  width: 42px;
-  height: 42px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: white;
-  color: var(--navy);
-  font-size: 28px;
-  line-height: 1;
-  cursor: pointer;
-}
-.meeting-popup-primary:hover,
-.meeting-popup-secondary:hover,
-.meeting-popup-button:hover,
-.meeting-popup-close-x:hover {
-  filter: brightness(.98);
-  transform: translateY(-1px);
-}
-.meeting-popup-primary:focus-visible,
-.meeting-popup-secondary:focus-visible,
-.meeting-popup-button:focus-visible,
-.meeting-popup-close-x:focus-visible {
-  outline: 3px solid var(--blue);
-  outline-offset: 3px;
-}
-@keyframes meetingPopupRise {
-  from { opacity: 0; transform: translateY(14px) scale(.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
-@media (max-width: 640px) {
-  .meeting-popup { padding: 24px 20px; }
-  .meeting-popup h2 { margin-right: 40px; }
-  .meeting-detail-grid { grid-template-columns: 1fr; }
-  .meeting-detail-label { border-bottom: none; padding-bottom: 4px; }
-  .meeting-detail-value { padding-top: 4px; }
-  .meeting-popup-actions { flex-direction: column; }
-  .meeting-popup-primary,
-  .meeting-popup-secondary,
-  .meeting-popup-button { width: 100%; }
-}
-
-
-
 /* WebEx Site Menu Hover Matching Project Progress */
 .card-grid .tile {
   cursor: pointer;
@@ -637,106 +463,197 @@ body.meeting-popup-open {
   outline-offset: 3px;
 }
 
+
+/* SPA Notice Popup */
+.site-popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(23, 50, 77, 0.62);
+}
+.site-popup-overlay.is-visible {
+  display: flex;
+}
+body.popup-open {
+  overflow: hidden;
+}
+.site-popup {
+  position: relative;
+  width: min(560px, 100%);
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 28px;
+  box-shadow: 0 24px 60px rgba(23, 50, 77, 0.32);
+  animation: popupRise .22s ease-out;
+}
+.site-popup-kicker {
+  display: inline-block;
+  margin: 0 0 10px 0;
+  color: var(--navy);
+  background: var(--gold);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.site-popup h2 {
+  margin: 0 0 12px 0;
+  color: var(--navy);
+  font-size: clamp(25px, 4vw, 34px);
+  line-height: 1.15;
+}
+.site-popup p {
+  margin: 0 0 14px 0;
+  color: var(--text);
+  font-size: 17px;
+  line-height: 1.55;
+}
+.site-popup-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+.site-popup-button,
+.site-popup-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  border-radius: 999px;
+  padding: 11px 16px;
+  font-weight: 800;
+  font-size: 16px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.site-popup-link {
+  color: white;
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  border: 1px solid var(--blue);
+}
+.site-popup-button {
+  color: var(--navy);
+  background: var(--light-blue);
+  border: 1px solid var(--border);
+}
+.site-popup-close-x {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: white;
+  color: var(--navy);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+.site-popup-button:hover,
+.site-popup-link:hover,
+.site-popup-close-x:hover {
+  filter: brightness(.98);
+  transform: translateY(-1px);
+}
+.site-popup-button:focus-visible,
+.site-popup-link:focus-visible,
+.site-popup-close-x:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+@keyframes popupRise {
+  from { opacity: 0; transform: translateY(14px) scale(.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@media (max-width: 560px) {
+  .site-popup { padding: 24px 20px; }
+  .site-popup-actions { flex-direction: column; }
+  .site-popup-button,
+  .site-popup-link { width: 100%; }
+}
+
 </style>
 </head>
 <body>
 
-
-<div class="meeting-popup-overlay" id="nextMeetingPopup" aria-hidden="true">
-  <section class="meeting-popup" role="dialog" aria-modal="true" aria-labelledby="nextMeetingTitle" aria-describedby="nextMeetingSummary">
-    <button class="meeting-popup-close-x" type="button" data-meeting-popup-close aria-label="Close meeting notice">&times;</button>
-    <p class="meeting-popup-kicker">Next Meeting Notice</p>
-    <h2 id="nextMeetingTitle">TSV Group 3 Meeting</h2>
-    <p class="meeting-popup-intro" id="nextMeetingSummary"><strong>Monday, July 6th</strong> at <strong>8:00 PM EDT / 7:00 PM AST</strong> via WebEx.</p>
-
-    <div class="meeting-detail-grid" aria-label="Meeting details">
-      <div class="meeting-detail-label">Meeting</div>
-      <div class="meeting-detail-value">(ONLINE) TSV Group 3 Meeting &bull; District of Florida and Caribbean</div>
-
-      <div class="meeting-detail-label">Date &amp; Time</div>
-      <div class="meeting-detail-value">Monday &bull; July 6th &bull; 8:00 PM EDT / 7:00 PM AST</div>
-
-      <div class="meeting-detail-label">Meeting Link</div>
-      <div class="meeting-detail-value"><a href="https://miami-tsv.com/webex-group3-meeting" target="_blank" rel="noopener">https://miami-tsv.com/webex-group3-meeting</a></div>
-
-      <div class="meeting-detail-label">Meeting Number</div>
-      <div class="meeting-detail-value">2870 380 1926</div>
-
-      <div class="meeting-detail-label">Password</div>
-      <div class="meeting-detail-value"><span class="meeting-password">MONDAYJULY6TH</span></div>
-
-      <div class="meeting-detail-label">Alternate Link</div>
-      <div class="meeting-detail-value"><a href="https://inc-maimi-tsv.my.webex.com/inc-maimi-tsv.my/j.php?MTID=m2b199f5e1aa5e1586ae3fb19674bb7bc" target="_blank" rel="noopener">https://inc-maimi-tsv.my.webex.com/inc-maimi-tsv.my/j.php?MTID=m2b199f5e1aa5e1586ae3fb19674bb7bc</a></div>
-    </div>
-
-    <div class="meeting-popup-actions">
-      <a class="meeting-popup-primary" href="webex_group3_next_meeting.ics" download>Add to Calendar</a>
-      <a class="meeting-popup-secondary" href="https://miami-tsv.com/webex-group3-meeting" target="_blank" rel="noopener">Open Meeting Link</a>
-      <button class="meeting-popup-button" type="button" data-meeting-popup-close>Close Notice</button>
+<div class="site-popup-overlay" id="siteNoticePopup" aria-hidden="true">
+  <section class="site-popup" role="dialog" aria-modal="true" aria-labelledby="sitePopupTitle" aria-describedby="sitePopupMessage">
+    <button class="site-popup-close-x" type="button" data-popup-close aria-label="Close popup">&times;</button>
+    <p class="site-popup-kicker">WebEx Team Notice</p>
+    <h2 id="sitePopupTitle">Important Project Reminder</h2>
+    <!-- Change the popup message below as needed. -->
+    <p id="sitePopupMessage">Please review the locked WebEx technical interview flow, TSV station setup, demo screen recording plan, title card, lower thirds, WebEx labels/callouts, and graphics assignment list before the weekend recording.</p>
+    <p>Make sure the WebEx demo meeting, host/cohost workflow, Backup TSV PC workflow, screen recording settings, cursor visibility, hidden personal information, clear audio, and readable menus are ready before recording.</p>
+    <div class="site-popup-actions">
+      <a class="site-popup-link" href="action-items.html">View Action Items</a>
+      <button class="site-popup-button" type="button" data-popup-close>Close Message</button>
     </div>
   </section>
 </div>
 
 <main class="wrap">
-  <section class="header">
-    <h1>WebEx Team Group Site</h1>
-  </section>
-  <nav class="nav"><a href="home.html" class="active">Home</a>
-    <a href="action-items.html">Action Items</a>
-    <a href="team-members.html">Team</a>
-    <a href="priority-tasks.html">Priorities</a>
-    <a href="deadline-reminder.html">Deliverables</a>
-    <a href="note-section.html">Notes</a>
-    <a href="resources.html">Resources</a></nav>
-
-  <section class="project-progress-card" aria-label="WebEx project progress status">
-    <div class="progress-header">
-      <div>
-        <h2>Project Progress</h2>
-        <p><strong>Current checkpoint:</strong> Scripts are finalized. Run-of-show, storyboard, demo map, and other pre-production materials are completed and up for review.</p>
-      </div>
-    </div>
-    <div class="progress-grid">
-      <a class="progress-panel progress-link" href="action-items.html" aria-label="Open Action Items for current progress">
-        <div class="progress-meta"><strong>Current Progress</strong><span class="progress-percent">20%</span></div>
-        <div class="progress-track" role="progressbar" aria-label="Current WebEx project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20"><div class="progress-fill" style="width: 20%;"></div></div>
-        <p>Scripts and pre-production materials are completed and ready for review before the visual proof test and recording work.</p>
-      </a>
-      <a class="progress-panel target-progress progress-link" href="deadline-reminder.html" aria-label="Open Deliverables for target progress">
-        <div class="progress-meta"><strong>Target Progress</strong><span class="progress-percent">25%</span></div>
-        <div class="progress-track" role="progressbar" aria-label="Target WebEx project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="25"><div class="progress-fill" style="width: 25%;"></div></div>
-        <p>Target progress is slightly ahead of current progress, with review notes, proof-test preparation, and setup confirmation already underway.</p>
-      </a>
-    </div>
-  </section>
-
-  
-
-
-  <section class="immediate">
-    <h2 class="section-title" style="margin-top: 0;">Immediate Next Step</h2>
-    <div class="immediate-grid">
-      <article class="action-card"><h2>Needed Next Week</h2><p>Finish the podcast run-of-show, storyboard, and WebEx demo map. Prepare the WebEx test meeting, host/cohost workflow, Backup TSV PC workflow, and screen recording checklist.</p></article><article class="action-card"><h2>Goal by End of Week</h2><p>The team should know the video order, what viewers will see, which WebEx screens to record, who will record each part, and what graphics are needed.</p></article><article class="action-card"><h2>Main Reminder</h2><p>Before any main recording, lock the run-of-show, storyboard, and WebEx demo map first. Use a clean test meeting with dummy participants, confirm Host/Cohost and Backup TSV PC takeover, hide personal information, and make sure every screen recording is readable with visible cursor, zoomed menus, and clear audio.</p></article>
-    </div>
-  </section>
-
-  <h2 class="section-title">WebEx Team Site Menu</h2>
-  <section class="card-grid">
-    <a class="tile" href="action-items.html"><h2>Action Items</h2><p>View action items assigned for this week's sprint.</p></a>
-    <a class="tile" href="team-members.html"><h2>Team</h2><p>Roles and assigned tasks for each WebEx team member.</p></a>
-    <a class="tile" href="priority-tasks.html"><h2>Priorities</h2><p>Main due dates, leads, and helpers for the WebEx project.</p></a>
-    <a class="tile" href="deadline-reminder.html"><h2>Deliverables</h2><p>Shared deliverables schedule from planning to final submission.</p></a>
-    <a class="tile" href="note-section.html"><h2>Notes</h2><p>Simple definitions for lower thirds, labels, callouts, run-of-show, storyboard, and demo map.</p></a>
-    <a class="tile" href="resources.html"><h2>Resources</h2><p>Quick access to team links, Google Drive folders, production materials, TSV graphics, and how-to decks.</p></a>
-  </section>
+<section class="header">
+<h1>WebEx Team Group Site</h1>
+</section>
+<nav class="nav"><a class="active" href="home.html">Home</a>
+<a href="action-items.html">Action Items</a>
+<a href="team-members.html">Team</a>
+<a href="priority-tasks.html">Priorities</a>
+<a href="deadline-reminder.html">Deliverables</a>
+<a href="note-section.html">Notes</a>
+<a href="resources.html">Resources</a></nav>
+<section aria-label="WebEx project progress status" class="project-progress-card">
+<div class="progress-header">
+<div>
+<h2>Project Progress</h2>
+<p><strong>Current checkpoint:</strong> Pre-production is closed/locked with no more major changes. Production studio setup is in the TSV station, demo screen recording has started, and title card/lower-thirds work is underway with completion targeted by the end of the week. The next set of graphics will be assigned for next week.</p>
+</div>
+</div>
+<div class="progress-grid">
+<a aria-label="Open Action Items for current progress" class="progress-panel progress-link" href="action-items.html">
+<div class="progress-meta"><strong>Current Progress</strong><span class="progress-percent">38%</span></div>
+<div aria-label="Current WebEx project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="38" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 38%;"></div></div>
+<p>Pre-production is locked and the WebEx project is now in production: TSV station setup is active, demo screen recording has started, and title card/lower-thirds work is in progress.</p>
+</a>
+<a aria-label="Open Deliverables for target progress" class="progress-panel target-progress progress-link" href="deadline-reminder.html">
+<div class="progress-meta"><strong>Target Progress</strong><span class="progress-percent">45%</span></div>
+<div aria-label="Target WebEx project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 45%;"></div></div>
+<p>Target progress is to complete the title card and lower thirds by the end of the week, capture and organize the first demo screen recording batch, and assign the next graphics package for next week.</p>
+</a>
+</div>
+</section>
+<section class="immediate">
+<h2 class="section-title" style="margin-top: 0;">Immediate Next Step</h2>
+<div class="immediate-grid">
+<article class="action-card"><h2>Needed Next Week</h2><p>Assign and begin the next graphics package for WebEx: demo labels, callouts, troubleshooting cards, Backup TSV PC visuals, host/cohost workflow graphics, and screen-recording support visuals. Continue demo screen recording from the TSV station setup and organize completed clips for editing.</p></article><article class="action-card"><h2>Goal by End of Week</h2><p>Complete the title card and lower thirds, finish the first usable demo screen-recording batch, confirm the TSV station recording setup, and prepare a clear graphics assignment list for next week.</p></article><article class="action-card"><h2>Main Reminder</h2><p>Pre-production is closed. Do not add major script, format, style, or demo-flow changes. Focus only on locked demo recordings, readable screen captures, clear cursor movement, hidden personal information, strong audio, and necessary accuracy fixes.</p></article>
+</div>
+</section>
+<h2 class="section-title">WebEx Team Site Menu</h2>
+<section class="card-grid">
+<a class="tile" href="action-items.html"><h2>Action Items</h2><p>View action items assigned for this week's sprint.</p></a>
+<a class="tile" href="team-members.html"><h2>Team</h2><p>Roles and assigned tasks for each WebEx team member.</p></a>
+<a class="tile" href="priority-tasks.html"><h2>Priorities</h2><p>Main due dates, leads, and helpers for the WebEx project.</p></a>
+<a class="tile" href="deadline-reminder.html"><h2>Deliverables</h2><p>Shared deliverables schedule from planning to final submission.</p></a>
+<a class="tile" href="note-section.html"><h2>Notes</h2><p>Simple definitions for lower thirds, labels, callouts, run-of-show, storyboard, and demo map.</p></a>
+<a class="tile" href="resources.html"><h2>Resources</h2><p>Quick access to team links, Google Drive folders, production materials, TSV graphics, and how-to decks.</p></a>
+</section>
 </main>
-
 <script>
 (function () {
-  var popup = document.getElementById('nextMeetingPopup');
+  var popup = document.getElementById('siteNoticePopup');
   if (!popup) return;
 
-  var closeButtons = popup.querySelectorAll('[data-meeting-popup-close]');
+  var closeButtons = popup.querySelectorAll('[data-popup-close]');
   var focusableSelector = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
   var previousFocus = null;
 
@@ -744,7 +661,7 @@ body.meeting-popup-open {
     previousFocus = document.activeElement;
     popup.classList.add('is-visible');
     popup.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('meeting-popup-open');
+    document.body.classList.add('popup-open');
 
     var firstFocusable = popup.querySelector(focusableSelector);
     if (firstFocusable) firstFocusable.focus();
@@ -753,7 +670,7 @@ body.meeting-popup-open {
   function closePopup() {
     popup.classList.remove('is-visible');
     popup.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('meeting-popup-open');
+    document.body.classList.remove('popup-open');
 
     if (previousFocus && typeof previousFocus.focus === 'function') {
       previousFocus.focus();

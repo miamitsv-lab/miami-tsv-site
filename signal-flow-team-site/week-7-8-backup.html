@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Signal Flow Week 7-8 Backup</title>
+<style>
+:root {
+  --navy: #17324D;
+  --blue: #2F6FAE;
+  --border: #C9D6E6;
+  --bg: #F6F9FD;
+  --text: #1C2733;
+  --muted: #51606F;
+  --gold: #FFF3DC;
+  --green: #EAF7EF;
+  --purple: #F2ECFF;
+  --red: #FFEAEA;
+  --light-blue: #EAF3FF;
+  --white: #FFFFFF;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  padding: 24px;
+}
+.wrap { max-width: 1280px; margin: 0 auto; }
+.header {
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  color: white;
+  border-radius: 20px;
+  padding: 28px 32px;
+  margin-bottom: 18px;
+  box-shadow: 0 10px 24px rgba(23, 50, 77, 0.18);
+}
+h1 {
+  margin: 0;
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.1;
+}
+.header-subtitle {
+  margin: 10px 0 0 0;
+  font-size: clamp(16px, 2vw, 20px);
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.92);
+}
+.project-progress-card,
+.immediate,
+.all-actions {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+}
+.section-title {
+  margin: 26px 0 12px 0;
+  color: var(--navy);
+  font-size: clamp(22px, 3vw, 30px);
+}
+.project-progress-card {
+  padding: 20px;
+  margin: 0 auto 24px auto;
+  width: 66.7%;
+}
+.progress-header {
+  margin-bottom: 16px;
+  text-align: center;
+}
+.progress-header h2 {
+  margin: 0 0 8px 0;
+  color: var(--navy);
+  font-size: clamp(24px, 3vw, 34px);
+  text-align: center;
+}
+.progress-header p,
+.progress-panel p,
+.section-note {
+  margin: 0;
+  line-height: 1.5;
+  color: var(--text);
+  font-size: 16px;
+}
+.progress-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin: 16px 0 0 0;
+}
+.progress-panel {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 16px;
+  background: var(--light-blue);
+  display: block;
+  color: var(--text);
+}
+.progress-panel.target-progress { background: var(--gold); }
+.progress-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  color: var(--navy);
+  font-size: 18px;
+}
+.progress-percent {
+  font-weight: 900;
+  font-size: 22px;
+}
+.progress-track {
+  height: 20px;
+  background: #E6EEF7;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--navy), var(--blue));
+  border-radius: 999px;
+}
+.immediate {
+  margin-bottom: 24px;
+  padding: 18px;
+}
+.immediate-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.action-card {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 20px;
+  min-height: 175px;
+}
+.action-card.ordered-1 { background: var(--light-blue); }
+.action-card.ordered-2 { background: var(--gold); }
+.action-card.ordered-3 { background: var(--green); }
+.action-card h2 {
+  margin: 0 0 10px 0;
+  color: var(--navy);
+  font-size: 24px;
+}
+.action-card p {
+  margin: 0;
+  line-height: 1.5;
+  font-size: 17px;
+}
+.all-actions { padding: 18px; }
+.section-heading-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+.action-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+.member-card {
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--white);
+  box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+}
+.member-card.color-1 .member-card-head { background: var(--light-blue); }
+.member-card.color-2 .member-card-head { background: var(--gold); }
+.member-card.color-3 .member-card-head { background: var(--green); }
+.member-card.color-4 .member-card-head { background: var(--purple); }
+.member-card.color-5 .member-card-head { background: var(--red); }
+.member-card-head {
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--border);
+}
+.member-card h2 {
+  margin: 0;
+  color: var(--navy);
+  font-size: 28px;
+}
+.member-role {
+  margin: 8px 0 0 0;
+  color: #1D5F8F;
+  font-weight: 700;
+  line-height: 1.45;
+}
+.member-card-body { padding: 20px 22px; }
+.member-card-body h3 {
+  margin: 0 0 12px 0;
+  color: var(--navy);
+  font-size: 21px;
+}
+.member-card-body ul {
+  margin: 0;
+  padding-left: 22px;
+}
+.member-card-body li {
+  margin: 0 0 10px 0;
+  line-height: 1.5;
+  font-size: 17px;
+}
+.member-card-body li:last-child { margin-bottom: 0; }
+.footer {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+@media (max-width: 900px) {
+  .immediate-grid { grid-template-columns: 1fr; }
+  .project-progress-card { width: 80%; }
+}
+@media (max-width: 760px) {
+  body { padding: 14px; }
+  .header { padding: 22px; border-radius: 16px; }
+  .project-progress-card,
+  .immediate,
+  .all-actions { border-radius: 16px; }
+  .project-progress-card { width: 100%; padding: 18px; }
+  .member-card h2 { font-size: 24px; }
+  .progress-meta { align-items: flex-start; }
+}
+@media print {
+  body { background: white; padding: 0; }
+  .header,
+  .project-progress-card,
+  .immediate,
+  .all-actions,
+  .member-card { box-shadow: none; }
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+<section class="header">
+<h1>Signal Flow Week 7-8 Backup</h1>
+<p class="header-subtitle">Project progress, immediate next steps, and all action items shown on one backup page.</p>
+</section>
+<section aria-label="Signal Flow project progress status" class="project-progress-card">
+<div class="progress-header">
+<h2>Project Progress</h2>
+<p><strong>Current checkpoint:</strong> Pre-production is closed/locked with no more major changes. Animation scenes are finalized, animation work has started, and the title card and lower thirds are now in production.</p>
+</div>
+<div class="progress-grid">
+<article class="progress-panel">
+<div class="progress-meta"><strong>Current Progress</strong><span class="progress-percent">35%</span></div>
+<div aria-label="Current Signal Flow project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="35" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 35%;"></div></div>
+<p>Pre-production is locked, the final animation scene list is being used for buildout, and title card/lower-third work has started alongside the first animation production pass.</p>
+</article>
+<article class="progress-panel target-progress">
+<div class="progress-meta"><strong>Target Progress</strong><span class="progress-percent">45%</span></div>
+<div aria-label="Target Signal Flow project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 45%;"></div></div>
+<p>Target progress is to complete the first production batch: usable animated scene blocks, approved title card/lower-third direction, organized graphics/diagram assets, and a clean handoff path for editing.</p>
+</article>
+</div>
+</section>
+<section aria-label="Immediate next step" class="immediate">
+<h2 class="section-title" style="margin-top: 0;">Immediate Next Step</h2>
+<div class="immediate-grid">
+<article class="action-card ordered-1"><h2>Needed Next Week</h2><p>Continue building from the finalized animation scenes. Finish the first-pass title card and lower thirds, organize the diagram/callout assets, and begin handing completed scene exports to editing.</p></article>
+<article class="action-card ordered-2"><h2>Goal by End of Week</h2><p>Have a clear first-pass production package: opening/title style, lower-third style, priority animation scene blocks, main signal-flow diagrams, and an early rough sequence ready for review.</p></article>
+<article class="action-card ordered-3"><h2>Main Reminder</h2><p>Pre-production is closed. No major script, format, style, or scene changes should be added now. Only allow accuracy fixes, readability fixes, missing assets, and light timing improvements.</p></article>
+</div>
+</section>
+<section aria-label="All Signal Flow action items" class="all-actions">
+<div class="section-heading-row">
+<div>
+<h2 class="section-title" style="margin-top: 0;">All Action Items</h2>
+<p class="section-note">All names are shown at once for backup use. No dropdown selection is needed.</p>
+</div>
+</div>
+<div class="action-list">
+<article class="member-card color-1">
+<div class="member-card-head"><h2>Jules T</h2><p class="member-role">Director / Script Support / Talent / Voiceover</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Protect the locked story flow and prevent new major scene or script changes unless approved as necessary.</li><li>Coordinate with Janna on the animation build order and which scenes need talent/voiceover timing support.</li><li>Review the opening, transitions, and closing for timing and clarity as animation blocks are produced.</li><li>Prepare any needed voiceover pickup lines early so production does not wait on late recordings.</li></ul></div>
+</article>
+<article class="member-card color-2">
+<div class="member-card-head"><h2>Janna</h2><p class="member-role">Scriptwriter / Animation Lead / Style Direction / Talent</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Lead animation production using the finalized animation scenes as the build map.</li><li>Continue the title card and lower-thirds work and keep the style consistent with the approved TSV color schema.</li><li>Hand off completed scene exports, working files, and missing-asset notes to Charles/NJ/Jhules B in an organized way.</li><li>Keep avatar movement simple so diagrams, labels, and audio clarity stay the priority.</li></ul></div>
+</article>
+<article class="member-card color-3">
+<div class="member-card-head"><h2>Jay</h2><p class="member-role">Main SME</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Review finished animation blocks for technical accuracy before they are locked into the rough cut.</li><li>Check microphone/input, mixer/processing, output, monitor, WebEx/streaming feed, and troubleshooting explanations.</li><li>Limit feedback to accuracy, clarity, and practical TSV usefulness now that pre-production is closed.</li><li>Flag any wording or visual label that could confuse TSV officers during the final review.</li></ul></div>
+</article>
+<article class="member-card color-4">
+<div class="member-card-head"><h2>Dennis</h2><p class="member-role">Support Role / Script Review / Recording Support / Final Review</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Support production coordination, file organization, recording-quality standards, and final review preparation.</li><li>Help enforce the pre-production lock: no new format, style, major script rewrite, or added scenes unless approved as necessary.</li><li>Review exported scene blocks for readability, timing, and consistency with the locked visual plan.</li><li>Help consolidate missing assets and review notes without taking over the main SME role.</li></ul></div>
+</article>
+<article class="member-card color-5">
+<div class="member-card-head"><h2>Frank</h2><p class="member-role">SME / Director Support</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Support Jay with technical and practical TSV review as animation blocks become available.</li><li>Check that explanations remain simple, worship-service focused, and useful for TSV officers.</li><li>Help identify only necessary clarity or accuracy fixes now that major changes are closed.</li><li>Confirm that troubleshooting visuals remain practical and not overly complicated.</li></ul></div>
+</article>
+<article class="member-card color-1">
+<div class="member-card-head"><h2>Jlyn</h2><p class="member-role">Animator / Graphics Support</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Build or clean up avatar movements for the finalized animation scenes.</li><li>Use only simple movements such as mouth movement, blinking, and small head nods.</li><li>Support animation cleanup so the final look stays consistent across scenes.</li><li>Coordinate with Janna, Aiden, NJ, and Jhules B on assets needed for each scene block.</li></ul></div>
+</article>
+<article class="member-card color-2">
+<div class="member-card-head"><h2>Aiden</h2><p class="member-role">Graphics / Diagram Support / Avatar Movement Support</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Create or refine signal-flow diagrams, labels, callouts, and support graphics for the finalized scenes.</li><li>Support title card and lower-third graphics as needed while keeping the approved style consistent.</li><li>Make sure labels are readable on screen and match the Signal Flow color/order style.</li><li>Provide finished assets in organized folders with clear names for editing handoff.</li></ul></div>
+</article>
+<article class="member-card color-3">
+<div class="member-card-head"><h2>Charles</h2><p class="member-role">Main Video Editor / Music-Soundtrack Support</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Prepare the editing timeline and start assembling completed animation scene exports as they arrive.</li><li>Build the early rough sequence using the finalized scene order, title card, lower thirds, diagrams, and voiceover timing.</li><li>Track missing assets, rough timing issues, and needed pickups in one review list.</li><li>Keep music/soundtrack very limited and optional so voiceover clarity stays first.</li></ul></div>
+</article>
+<article class="member-card color-4">
+<div class="member-card-head"><h2>NJ</h2><p class="member-role">Animation / Graphics / Editing Support</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Support animation cleanup, label readability checks, and early edit organization.</li><li>Help verify that captions, lower thirds, and callouts are readable on laptop/TV playback size.</li><li>Assist Charles and Janna with scene exports, asset naming, and rough-cut preparation.</li><li>Record missing-asset or readability issues in the shared review list instead of making late style changes.</li></ul></div>
+</article>
+<article class="member-card color-5">
+<div class="member-card-head"><h2>Jhules B</h2><p class="member-role">Video Editor / Animator Helper</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Support diagram cleanup, callouts, captions, transitions, and animation/editing support.</li><li>Check that exported graphics and labels remain readable and consistent with the approved style.</li><li>Assist with visual polish only after the core scene blocks are assembled.</li><li>Help prepare the project for the full rough cut target without introducing new creative sections.</li></ul></div>
+</article>
+</div>
+</section>
+<p class="footer">Backup page generated from the uploaded Signal Flow home page and action-item information. Static page only; no page navigation or progress links are included.</p>
+</main>
+</body>
+</html>

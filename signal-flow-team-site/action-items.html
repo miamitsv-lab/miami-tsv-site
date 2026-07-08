@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Signal Flow Team Action Items</title>
 <style>
 
@@ -403,103 +404,100 @@ a.progress-panel:hover {
 </head>
 <body>
 <main class="wrap">
-  <section class="header"><h1>Signal Flow Team Action Items</h1></section>
-  <nav class="nav">
-    <a href="home.html">Home</a>
-    <a href="action-items.html" class="active">Action Items</a>
-    <a href="team-members.html">Team</a>
-    <a href="priority-tasks.html">Priorities</a>
-    <a href="deadline-reminder.html">Deliverables</a>
-    <a href="note-section.html">Notes</a>
-    <a href="resources.html">Resources</a>
-  </nav>
-
-
-  <section id="emptyState" class="empty-state">Select a Name to view action items.</section>
-
-  <section class="action-filter-card" aria-label="Select a team member">
-    <div class="filter-row">
-      <label for="memberSelect">Action Items for:</label>
-      <select id="memberSelect" class="member-select" aria-label="Select a team member to view action items">
-        <option value="" selected>Select a Name</option>
-        <option value="Jules T">Jules T</option>
-        <option value="Janna">Janna</option>
-        <option value="Jay">Jay</option>
-        <option value="Dennis">Dennis</option>
-        <option value="Frank">Frank</option>
-        <option value="Jlyn">Jlyn</option>
-        <option value="Aiden">Aiden</option>
-        <option value="Charles">Charles</option>
-        <option value="NJ">NJ</option>
-        <option value="Jhules B">Jhules B</option>
-      </select>
-    </div>
-  </section>
-
-  <section id="actionList" class="action-list" aria-live="polite">
-    <article class="member-card" data-member="Jules T" hidden>
-      <div class="member-card-head"><h2>Jules T</h2><p class="member-role">Director / Script Support / Talent / Voiceover</p></div>
-      <div class="member-card-body"><h3>Action Items This Week</h3><ul><li>Finalize the Signal Flow run-of-show with Janna.</li><li>Confirm the host/guest flow, scene order, transitions, and closing.</li><li>Prepare the talent/voiceover plan for recording week.</li><li>Check that the story flow stays clear, practical, and not too long.</li></ul></div>
-    </article>
-    <article class="member-card" data-member="Janna" hidden>
-      <div class="member-card-head"><h2>Janna</h2><p class="member-role">Scriptwriter / Animation Lead / Style Direction / Talent</p></div>
-      <div class="member-card-body"><h3>Action Items This Week</h3><ul><li>Lead the run-of-show, storyboard, and animation scene list.</li><li>Prepare the simple visual style, avatar test, and diagram list.</li><li>Start the title card and lower-third style.</li><li>Keep avatar movement simple so diagrams and audio clarity stay the priority.</li></ul></div>
-    </article>
-    <article class="member-card" data-member="Jay" hidden>
-      <div class="member-card-head"><h2>Jay</h2><p class="member-role">Main SME</p></div>
-      <div class="member-card-body"><h3>Action Items This Week</h3><ul><li>Review technical accuracy before voiceover is recorded.</li><li>Check the signal path, cable types, microphone choices, gain structure, EQ/compression, mixer/DSP, control room monitors, and WebEx/streaming feed.</li><li>Mark any wording that is technically unclear or too advanced.</li><li>Approve the technical direction before full animation work continues.</li></ul></div>
-    </article>
-    <article class="member-card" data-member="Dennis" hidden>
-      <div class="member-card-head"><h2>Dennis</h2><p class="member-role">Support Role / Script Review / Recording Support / Final Review</p></div>
-      <div class="member-card-body"><h3>Action Items This Week</h3><ul><li>Support script review, production coordination, recording quality checklist, and final review preparation.</li><li>Help keep the animation simple, readable, and technically accurate.</li><li>Confirm that the team has clear file organization and recording-quality standards.</li><li>Support final review notes without taking over the main SME role.</li></ul></div>
-    </article>
-    <article class="member-card" data-member="Frank" hidden>
-      <div class="member-card-head"><h2>Frank</h2><p class="member-role">SME / Director Support</p></div>
-      <div class="member-card-body"><h3>Action Items This Week</h3><ul><li>Help Jay review the technical explanations.</li><li>Remove or simplify confusing audio wording.</li><li>Check troubleshooting points and production direction.</li><li>Help confirm the content is practical for TSV officers.</li></ul></div>
-    </article>
-    <article class="member-card" data-member="Jlyn" hidden>
-      <div class="member-card-head"><h2>Jlyn</h2><p class="member-role">Animator / Graphics Support</p></div>
-      <div class="member-card-body"><h3>Action Items This Week</h3><ul><li>Create a simple avatar movement test.</li><li>Use only basic movements such as mouth movement, blinking, and small head nods.</li><li>Help define the animation cleanup approach.</li><li>Support animation assets that match the chosen Signal Flow visual style.</li></ul></div>
-    </article>
-    <article class="member-card" data-member="Aiden" hidden>
-      <div class="member-card-head"><h2>Aiden</h2><p class="member-role">Graphics / Diagram Support / Avatar Movement Support</p></div>
-      <div class="member-card-body"><h3>Action Items This Week</h3><ul><li>Create simple diagrams, labels, callouts, and lower-third support graphics.</li><li>Help with signal path visuals and animation cleanup.</li><li>Make sure labels are readable and match the team style.</li><li>Support visual proof preparation.</li></ul></div>
-    </article>
-    <article class="member-card" data-member="Charles" hidden>
-      <div class="member-card-head"><h2>Charles</h2><p class="member-role">Main Video Editor / Music-Soundtrack Support</p></div>
-      <div class="member-card-body"><h3>Action Items This Week</h3><ul><li>Prepare the editing project and folder structure.</li><li>Plan rough-cut organization, diagram timing, voiceover sync, and transition placeholders.</li><li>Coordinate with Janna, Jlyn, Aiden, NJ, and Jhules B for animation and graphics needs.</li><li>Keep any music/soundtrack very limited and optional.</li></ul></div>
-    </article>
-    <article class="member-card" data-member="NJ" hidden>
-      <div class="member-card-head"><h2>NJ</h2><p class="member-role">Animation / Graphics / Editing Support</p></div>
-      <div class="member-card-body"><h3>Action Items This Week</h3><ul><li>Help with avatar test support, diagram setup, and animation cleanup.</li><li>Check that captions and labels are readable on screen.</li><li>Support early edit organization and review notes.</li><li>Help prepare visual proof materials.</li></ul></div>
-    </article>
-    <article class="member-card" data-member="Jhules B" hidden>
-      <div class="member-card-head"><h2>Jhules B</h2><p class="member-role">Video Editor / Animator Helper</p></div>
-      <div class="member-card-body"><h3>Action Items This Week</h3><ul><li>Help with diagram cleanup, callouts, captions, and animation support.</li><li>Check that captions and labels are readable on screen.</li><li>Support transitions and visual polish where needed.</li><li>Assist with the visual proof preparation for the Signal Flow animation/diagram test.</li></ul></div>
-    </article>
-  </section>
-
-
-  <section class="project-progress-card at-page-end" aria-label="Signal Flow project progress status">
-    <div class="progress-header">
-      <h2>Project Progress</h2>
-      <p><strong>Current checkpoint:</strong> Scripts are finalized. Run-of-show, storyboard, animation scene list, visual plan, and other pre-production materials are completed and up for review.</p>
-    </div>
-    <div class="progress-grid">
-      <article class="progress-panel">
-        <div class="progress-meta"><strong>Current Progress</strong><span class="progress-percent">18%</span></div>
-        <div class="progress-track" role="progressbar" aria-label="Current Signal Flow project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="18"><div class="progress-fill" style="width: 18%;"></div></div>
-        <p>Scripts and pre-production materials are completed and ready for review before the animation proof test and production build work.</p>
-      </article>
-      <article class="progress-panel target-progress">
-        <div class="progress-meta"><strong>Target Progress</strong><span class="progress-percent">25%</span></div>
-        <div class="progress-track" role="progressbar" aria-label="Target Signal Flow project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="25"><div class="progress-fill" style="width: 25%;"></div></div>
-        <p>Target progress is slightly ahead of current progress, with review notes, visual proof-test preparation, avatar testing, and diagram setup confirmation already underway.</p>
-      </article>
-    </div>
-  </section>
-
-  
+<section class="header"><h1>Signal Flow Team Action Items</h1></section>
+<nav class="nav">
+<a href="home.html">Home</a>
+<a class="active" href="action-items.html">Action Items</a>
+<a href="team-members.html">Team</a>
+<a href="priority-tasks.html">Priorities</a>
+<a href="deadline-reminder.html">Deliverables</a>
+<a href="note-section.html">Notes</a>
+<a href="resources.html">Resources</a>
+</nav>
+<section class="empty-state" id="emptyState">Select a Name to view updated production action items.</section>
+<section aria-label="Select a team member" class="action-filter-card">
+<div class="filter-row">
+<label for="memberSelect">Action Items for:</label>
+<select aria-label="Select a team member to view action items" class="member-select" id="memberSelect">
+<option selected="" value="">Select a Name</option>
+<option value="Jules T">Jules T</option>
+<option value="Janna">Janna</option>
+<option value="Jay">Jay</option>
+<option value="Dennis">Dennis</option>
+<option value="Frank">Frank</option>
+<option value="Geo">Geo</option>
+<option value="Jlyn">Jlyn</option>
+<option value="Aiden">Aiden</option>
+<option value="Charles">Charles</option>
+<option value="NJ">NJ</option>
+<option value="Jhules B">Jhules B</option>
+</select>
+</div>
+</section>
+<section aria-live="polite" class="action-list" id="actionList">
+<article class="member-card" data-member="Jules T" hidden="">
+<div class="member-card-head"><h2>Jules T</h2><p class="member-role">Director / Script Support / Talent / Voiceover</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Protect the locked story flow and prevent new major scene or script changes unless approved as necessary.</li><li>Coordinate with Janna on the animation build order and which scenes need talent/voiceover timing support.</li><li>Review the opening, transitions, and closing for timing and clarity as animation blocks are produced.</li><li>Prepare any needed voiceover pickup lines early so production does not wait on late recordings.</li></ul></div>
+</article>
+<article class="member-card" data-member="Janna" hidden="">
+<div class="member-card-head"><h2>Janna</h2><p class="member-role">Scriptwriter / Animation Lead / Style Direction / Talent</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Lead animation production using the finalized animation scenes as the build map.</li><li>Build or clean up avatar movements for the finalized animation scenes.</li><li>Hand off completed scene exports, working files, and missing-asset notes to Charles/NJ/Jhules B in an organized way.</li><li>Keep avatar movement simple so diagrams, labels, and audio clarity stay the priority.</li></ul></div>
+</article>
+<article class="member-card" data-member="Jay" hidden="">
+<div class="member-card-head"><h2>Jay</h2><p class="member-role">Main SME</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Review finished animation blocks for technical accuracy before they are locked into the rough cut.</li><li>Check microphone/input, mixer/processing, output, monitor, WebEx/streaming feed, and troubleshooting explanations.</li><li>Limit feedback to accuracy, clarity, and practical TSV usefulness now that pre-production is closed.</li><li>Flag any wording or visual label that could confuse TSV officers during the final review.</li></ul></div>
+</article>
+<article class="member-card" data-member="Dennis" hidden="">
+<div class="member-card-head"><h2>Dennis</h2><p class="member-role">Support Role / Script Review / Recording Support / Final Review</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Support production coordination, file organization, recording-quality standards, and final review preparation.</li><li>Help enforce the pre-production lock: no new format, style, major script rewrite, or added scenes unless approved as necessary.</li><li>Review exported scene blocks for readability, timing, and consistency with the locked visual plan.</li><li>Help consolidate missing assets and review notes without taking over the main SME role.</li></ul></div>
+</article>
+<article class="member-card" data-member="Frank" hidden="">
+<div class="member-card-head"><h2>Frank</h2><p class="member-role">SME / Director Support</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Support Jay with technical and practical TSV review as animation blocks become available.</li><li>Check that explanations remain simple, worship-service focused, and useful for TSV officers.</li><li>Help identify only necessary clarity or accuracy fixes now that major changes are closed.</li><li>Confirm that troubleshooting visuals remain practical and not overly complicated.</li></ul></div>
+</article>
+<article class="member-card" data-member="Geo" hidden="">
+<div class="member-card-head"><h2>Geo</h2><p class="member-role">Team Support / SME Support / Secondary Graphics &amp; Animation</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Support the whole Signal Flow team with SME review, especially technical accuracy for signal path, mixer/processing, monitoring, WebEx/streaming feed, and troubleshooting visuals.</li><li>Review animation scene blocks and diagrams for accuracy and clarity before rough-cut lock.</li><li>Provide secondary graphics and animation support when Janna, Jlyn, Aiden, NJ, or Jhules B need help with diagrams, labels, callouts, or scene cleanup.</li><li>Keep feedback focused on practical TSV clarity and avoid adding major new scene or style changes now that pre-production is closed.</li></ul></div>
+</article>
+<article class="member-card" data-member="Jlyn" hidden="">
+<div class="member-card-head"><h2>Jlyn</h2><p class="member-role">Title Card / Lower Thirds / Animation Support</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Continue the title card and lower-thirds work and keep the style consistent with the approved TSV color schema.</li><li>Work with Janna on animation for the finalized scenes.</li><li>Use only simple movements such as mouth movement, blinking, and small head nods.</li><li>Support animation cleanup so the final look stays consistent across scenes.</li><li>Coordinate with Janna, Aiden, NJ, and Jhules B on assets needed for each scene block.</li></ul></div>
+</article>
+<article class="member-card" data-member="Aiden" hidden="">
+<div class="member-card-head"><h2>Aiden</h2><p class="member-role">Graphics / Diagram Support / Avatar Movement Support</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Create or refine signal-flow diagrams, labels, callouts, and support graphics for the finalized scenes.</li><li>Support title card and lower-third graphics as needed while keeping the approved style consistent.</li><li>Make sure labels are readable on screen and match the Signal Flow color/order style.</li><li>Provide finished assets in organized folders with clear names for editing handoff.</li></ul></div>
+</article>
+<article class="member-card" data-member="Charles" hidden="">
+<div class="member-card-head"><h2>Charles</h2><p class="member-role">Main Video Editor / Music-Soundtrack Support</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Prepare the editing timeline and start assembling completed animation scene exports as they arrive.</li><li>Build the early rough sequence using the finalized scene order, title card, lower thirds, diagrams, and voiceover timing.</li><li>Track missing assets, rough timing issues, and needed pickups in one review list.</li><li>Keep music/soundtrack very limited and optional so voiceover clarity stays first.</li></ul></div>
+</article>
+<article class="member-card" data-member="NJ" hidden="">
+<div class="member-card-head"><h2>NJ</h2><p class="member-role">Animation / Graphics / Editing Support</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Support animation cleanup, label readability checks, and early edit organization.</li><li>Help verify that captions, lower thirds, and callouts are readable on laptop/TV playback size.</li><li>Assist Charles and Janna with scene exports, asset naming, and rough-cut preparation.</li><li>Record missing-asset or readability issues in the shared review list instead of making late style changes.</li></ul></div>
+</article>
+<article class="member-card" data-member="Jhules B" hidden="">
+<div class="member-card-head"><h2>Jhules B</h2><p class="member-role">Video Editor / Animator Helper / Diagram Illustrator</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Illustrate the diagram image that shows the water pipe analogy and clearly connects water source, valve control, and sprinkler output to the audio signal-flow concept.</li><li>Support diagram cleanup, callouts, captions, transitions, and animation/editing support.</li><li>Check that exported graphics and labels remain readable and consistent with the approved style.</li><li>Assist with visual polish only after the core scene blocks are assembled.</li><li>Help prepare the project for the full rough cut target without introducing new creative sections.</li></ul></div>
+</article>
+</section>
+<section aria-label="Signal Flow project progress status" class="project-progress-card at-page-end">
+<div class="progress-header">
+<h2>Project Progress</h2>
+<p><strong>Current checkpoint:</strong> Pre-production is closed/locked with no more major changes. Animation scenes are finalized, animation work has started, and the title card and lower thirds are now in production.</p>
+</div>
+<div class="progress-grid">
+<article class="progress-panel">
+<div class="progress-meta"><strong>Current Progress</strong><span class="progress-percent">35%</span></div>
+<div aria-label="Current Signal Flow project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="35" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 35%;"></div></div>
+<p>Pre-production is locked, the final animation scene list is being used for buildout, and title card/lower-third work has started alongside the first animation production pass.</p>
+</article>
+<article class="progress-panel target-progress">
+<div class="progress-meta"><strong>Target Progress</strong><span class="progress-percent">45%</span></div>
+<div aria-label="Target Signal Flow project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 45%;"></div></div>
+<p>Target progress is to complete the first production batch: usable animated scene blocks, approved title card/lower-third direction, organized graphics/diagram assets, and a clean handoff path for editing.</p>
+</article>
+</div>
+</section>
 </main>
 <script>
 const select = document.getElementById('memberSelect');
