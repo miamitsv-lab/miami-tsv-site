@@ -77,7 +77,6 @@
       color: #d6a534;
       line-height: 0.95;
       font-variant-numeric: tabular-nums;
-      letter-spacing: -0.02em;
       text-shadow: 0 3px 5px rgba(0, 0, 0, 0.45);
     }
 
@@ -191,7 +190,7 @@
         </div>
 
         <div class="time-card">
-          <span id="seconds">00.0</span>
+          <span id="seconds">00</span>
           <label>Seconds</label>
         </div>
       </div>
@@ -210,7 +209,7 @@
         document.getElementById("days").innerText = "000";
         document.getElementById("hours").innerText = "00";
         document.getElementById("minutes").innerText = "00";
-        document.getElementById("seconds").innerText = "00.0";
+        document.getElementById("seconds").innerText = "00";
         return;
       }
 
@@ -221,16 +220,18 @@
       const minutes = Math.floor(
         (distance % (1000 * 60 * 60)) / (1000 * 60)
       );
-      const secondsWithTenths = (Math.floor((distance % (1000 * 60)) / 100) / 10).toFixed(1);
+      const seconds = Math.floor(
+        (distance % (1000 * 60)) / 1000
+      );
 
       document.getElementById("days").innerText = String(days).padStart(3, "0");
       document.getElementById("hours").innerText = String(hours).padStart(2, "0");
       document.getElementById("minutes").innerText = String(minutes).padStart(2, "0");
-      document.getElementById("seconds").innerText = secondsWithTenths.padStart(4, "0");
+      document.getElementById("seconds").innerText = String(seconds).padStart(2, "0");
     }
 
     updateCountdown();
-    setInterval(updateCountdown, 100);
+    setInterval(updateCountdown, 1000);
   </script>
 </body>
 </html>

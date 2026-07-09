@@ -361,6 +361,73 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
   .project-progress-card { width: 100%; }
 }
 
+
+/* Fat Footer Breadcrumb */
+.fat-breadcrumb-footer {
+  margin-top: 30px;
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  color: white;
+  border-radius: 20px;
+  padding: 22px 26px;
+  box-shadow: 0 10px 24px rgba(23, 50, 77, 0.18);
+}
+.fat-breadcrumb-footer .breadcrumb-trail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-size: clamp(16px, 2vw, 21px);
+  font-weight: 800;
+  line-height: 1.35;
+}
+.fat-breadcrumb-footer a {
+  color: white;
+  background: rgba(255, 255, 255, 0.13);
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 8px 13px;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+.fat-breadcrumb-footer a:hover,
+.fat-breadcrumb-footer a:focus {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.72);
+  transform: translateY(-1px);
+  outline: none;
+}
+.fat-breadcrumb-footer a:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+.fat-breadcrumb-footer .breadcrumb-current {
+  color: var(--navy);
+  background: var(--gold);
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 999px;
+  padding: 8px 13px;
+}
+.fat-breadcrumb-footer .breadcrumb-separator {
+  color: var(--gold);
+  font-weight: 900;
+  opacity: 0.95;
+}
+@media (max-width: 760px) {
+  .fat-breadcrumb-footer {
+    border-radius: 16px;
+    padding: 18px;
+  }
+  .fat-breadcrumb-footer .breadcrumb-trail {
+    gap: 8px;
+    font-size: 16px;
+  }
+}
+@media print {
+  .fat-breadcrumb-footer {
+    box-shadow: none;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -381,6 +448,16 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
 <tbody><tr><td data-label="Term">Lower third</td><td data-label="Meaning / Note">A small graphic banner placed near the bottom third of the video screen. It shows a speaker’s name, role/title, topic label, or feature label.</td></tr><tr><td data-label="Term">Labels</td><td data-label="Meaning / Note">Short text overlays that identify the WebEx screen or feature being shown, such as Audio Settings, Video Settings, Layout Options, or Breakout Sessions.</td></tr><tr><td data-label="Term">Callouts</td><td data-label="Meaning / Note">Simple arrows, boxes, circles, or short notes that point to what to click or check on the screen.</td></tr><tr><td data-label="Term">Run-of-show</td><td data-label="Meaning / Note">The production order or timeline that shows what happens from the beginning to the end of the video.</td></tr><tr><td data-label="Term">Storyboard</td><td data-label="Meaning / Note">A visual plan that shows what the viewer sees in each section of the video. For this WebEx project, it can be a simple table instead of drawings.</td></tr><tr><td data-label="Term">Script</td><td data-label="Meaning / Note">What the host and interviewee say.</td></tr><tr><td data-label="Term">Shot list</td><td data-label="Meaning / Note">The specific video clips or screen recordings that need to be captured.</td></tr><tr><td data-label="Term">Demo map</td><td data-label="Meaning / Note">The list of WebEx screens or features that need to be shown.</td></tr><tr><td data-label="Term">Simple production rule</td><td data-label="Meaning / Note">Keep it clear: use screen recordings, simple title cards, readable text, basic lower thirds, and simple arrows or boxes only when needed.</td></tr><tr><td data-label="Term">Pre-production lock</td><td data-label="Meaning / Note">The WebEx project is closed for major pre-production changes. Do not add new format, new visual style, major script rewrite, or new demo section unless approved as necessary.</td></tr><tr><td data-label="Term">TSV station production setup</td><td data-label="Meaning / Note">The production studio setup is now at the TSV station. Use this setup for controlled WebEx demo recordings, podcast/interview footage, and pickup recording.</td></tr><tr><td data-label="Term">Demo screen recording</td><td data-label="Meaning / Note">The WebEx app demonstration capture. Use dummy participants when possible, hide personal information, keep cursor movement visible, and make menus readable.</td></tr><tr><td data-label="Term">Title card and lower thirds production</td><td data-label="Meaning / Note">The opening title card and speaker/section lower thirds are actively being completed by the end of the week.</td></tr><tr><td data-label="Term">New graphics assignment list</td><td data-label="Meaning / Note">The next set of WebEx graphics to assign for next week, such as demo labels, callouts, troubleshooting cards, Backup TSV PC visuals, and host/cohost workflow graphics.</td></tr><tr><td data-label="Term">Post-lock change rule</td><td data-label="Meaning / Note">After pre-production lock, only allow accuracy fixes, readability fixes, missing visuals, pickup recordings, and small timing improvements.</td></tr><tr><td data-label="Term">Screen recording quality rule</td><td data-label="Meaning / Note">Every screen recording should be readable on laptop/TV playback, have clear audio if narration is included, show intentional cursor movement, and avoid private information.</td></tr></tbody>
 </table>
 </section>
+
+  <footer class="fat-breadcrumb-footer" aria-label="Site breadcrumb">
+    <div class="breadcrumb-trail">
+      <a href="../index.html">District of Florida and Caribbean</a>
+      <span class="breadcrumb-separator" aria-hidden="true">/</span>
+      <a href="home.html">WebEx Team</a>
+      <span class="breadcrumb-separator" aria-hidden="true">/</span>
+      <span class="breadcrumb-current">Notes</span>
+    </div>
+  </footer>
 </main>
 </body>
 </html>

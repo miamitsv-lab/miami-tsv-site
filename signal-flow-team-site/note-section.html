@@ -400,6 +400,74 @@ a.progress-panel:hover {
   th, td { font-size: 12px; padding: 9px 10px; }
 }
 
+
+
+/* Fat Footer Breadcrumb */
+.fat-breadcrumb-footer {
+  margin-top: 30px;
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  color: white;
+  border-radius: 20px;
+  padding: 22px 26px;
+  box-shadow: 0 10px 24px rgba(23, 50, 77, 0.18);
+}
+.fat-breadcrumb-footer .breadcrumb-trail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-size: clamp(16px, 2vw, 21px);
+  font-weight: 800;
+  line-height: 1.35;
+}
+.fat-breadcrumb-footer a {
+  color: white;
+  background: rgba(255, 255, 255, 0.13);
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 8px 13px;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+.fat-breadcrumb-footer a:hover,
+.fat-breadcrumb-footer a:focus {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.72);
+  transform: translateY(-1px);
+  outline: none;
+}
+.fat-breadcrumb-footer a:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+.fat-breadcrumb-footer .breadcrumb-current {
+  color: var(--navy);
+  background: var(--gold);
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 999px;
+  padding: 8px 13px;
+}
+.fat-breadcrumb-footer .breadcrumb-separator {
+  color: var(--gold);
+  font-weight: 900;
+  opacity: 0.95;
+}
+@media (max-width: 760px) {
+  .fat-breadcrumb-footer {
+    border-radius: 16px;
+    padding: 18px;
+  }
+  .fat-breadcrumb-footer .breadcrumb-trail {
+    gap: 8px;
+    font-size: 16px;
+  }
+}
+@media print {
+  .fat-breadcrumb-footer {
+    box-shadow: none;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -415,6 +483,15 @@ a.progress-panel:hover {
 <a href="resources.html">Resources</a>
 </nav>
 <section class="table-card"><table><thead><tr><th>Term</th><th>Meaning / Note</th></tr></thead><tbody><tr><td data-label="Term">Run-of-show</td><td data-label="Meaning / Note">The full order of the video from opening to closing.</td></tr><tr><td data-label="Term">Storyboard</td><td data-label="Meaning / Note">A scene-by-scene guide showing visuals, graphics, avatar scenes, transitions, and timing.</td></tr><tr><td data-label="Term">Animation scene list</td><td data-label="Meaning / Note">A checklist of every animated scene, diagram, label, avatar movement, and transition needed.</td></tr><tr><td data-label="Term">Avatar movement</td><td data-label="Meaning / Note">Simple host/guest movement such as mouth movement, blinking, and small head nods.</td></tr><tr><td data-label="Term">Signal flow path</td><td data-label="Meaning / Note">The audio path from microphone/input through mixer/processing and out to speakers/WebEx/streaming.</td></tr><tr><td data-label="Term">Diagram labels</td><td data-label="Meaning / Note">Short text used to identify microphones, mixers, cables, outputs, speakers, and WebEx feed.</td></tr><tr><td data-label="Term">Callouts</td><td data-label="Meaning / Note">Arrows, boxes, or short notes pointing to important signal flow details.</td></tr><tr><td data-label="Term">Visual proof test</td><td data-label="Meaning / Note">A short test to confirm the diagram style, avatar movement, labels, and readability before full production.</td></tr><tr><td data-label="Term">Simple production rule</td><td data-label="Meaning / Note">Keep diagrams readable and use simple movement. Clarity is more important than complex animation.</td></tr><tr><td data-label="Term">Current project status</td><td data-label="Meaning / Note">Pre-production is closed/locked. Animation work has started, title card and lower-thirds work has started, and the animation scenes are finalized.</td></tr><tr><td data-label="Term">Pre-production lock</td><td data-label="Meaning / Note">After the lock, do not add a new format, new visual style, major script rewrite, or added scenes unless approved as necessary.</td></tr><tr><td data-label="Term">Allowed after lock</td><td data-label="Meaning / Note">Accuracy fixes, readability fixes, missing assets, light timing improvements, and minor clarity improvements.</td></tr><tr><td data-label="Term">Animation production pass</td><td data-label="Meaning / Note">The active build stage where finalized scenes are animated, exported, reviewed, and handed off for editing.</td></tr><tr><td data-label="Term">Final animation scene list</td><td data-label="Meaning / Note">The approved scene checklist. Use it as the build map so the team stays on schedule and avoids late creative changes.</td></tr><tr><td data-label="Term">Title card</td><td data-label="Meaning / Note">The opening visual card for the Signal Flow video. It should match the TSV color schema, logo treatment, and approved visual style.</td></tr><tr><td data-label="Term">Lower thirds</td><td data-label="Meaning / Note">Name/role or section-label graphics placed near the lower part of the screen. They should be readable and consistent across scenes.</td></tr><tr><td data-label="Term">Missing-asset list</td><td data-label="Meaning / Note">A single list of remaining graphics, labels, exports, pickups, or review items needed before the rough cut.</td></tr></tbody></table></section>
+<footer class="fat-breadcrumb-footer" aria-label="Site breadcrumb">
+  <div class="breadcrumb-trail">
+    <a href="../index.html">District of Florida and Caribbean</a>
+    <span class="breadcrumb-separator" aria-hidden="true">/</span>
+    <a href="home.html">Signal Flow Team</a>
+    <span class="breadcrumb-separator" aria-hidden="true">/</span>
+    <span class="breadcrumb-current">Notes</span>
+  </div>
+</footer>
 </main>
 </body>
 </html>

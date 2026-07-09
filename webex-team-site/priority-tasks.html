@@ -360,6 +360,73 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
   .project-progress-card { width: 100%; }
 }
 
+
+/* Fat Footer Breadcrumb */
+.fat-breadcrumb-footer {
+  margin-top: 30px;
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  color: white;
+  border-radius: 20px;
+  padding: 22px 26px;
+  box-shadow: 0 10px 24px rgba(23, 50, 77, 0.18);
+}
+.fat-breadcrumb-footer .breadcrumb-trail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-size: clamp(16px, 2vw, 21px);
+  font-weight: 800;
+  line-height: 1.35;
+}
+.fat-breadcrumb-footer a {
+  color: white;
+  background: rgba(255, 255, 255, 0.13);
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 8px 13px;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+.fat-breadcrumb-footer a:hover,
+.fat-breadcrumb-footer a:focus {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.72);
+  transform: translateY(-1px);
+  outline: none;
+}
+.fat-breadcrumb-footer a:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+.fat-breadcrumb-footer .breadcrumb-current {
+  color: var(--navy);
+  background: var(--gold);
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 999px;
+  padding: 8px 13px;
+}
+.fat-breadcrumb-footer .breadcrumb-separator {
+  color: var(--gold);
+  font-weight: 900;
+  opacity: 0.95;
+}
+@media (max-width: 760px) {
+  .fat-breadcrumb-footer {
+    border-radius: 16px;
+    padding: 18px;
+  }
+  .fat-breadcrumb-footer .breadcrumb-trail {
+    gap: 8px;
+    font-size: 16px;
+  }
+}
+@media print {
+  .fat-breadcrumb-footer {
+    box-shadow: none;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -380,6 +447,16 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
       <tbody><tr><td data-label="Due Date">June 30</td><td data-label="Task">Finish podcast run-of-show, storyboard, and WebEx demo map</td><td data-label="Lead">Julia, Justyn</td><td data-label="Helpers">Dennis, Frank, Angelino, Jules T</td></tr><tr><td data-label="Due Date">July 3</td><td data-label="Task">Prepare WebEx test meeting, host/cohost accounts, Backup TSV PC workflow, and screen recording checklist</td><td data-label="Lead">Justyn</td><td data-label="Helpers">Dennis, Frank, Angelino</td></tr><tr><td data-label="Due Date">July 6</td><td data-label="Task">Finish lower thirds, WebEx labels, callout style, and troubleshooting cards</td><td data-label="Lead">TJ</td><td data-label="Helpers">Jhules B</td></tr><tr><td data-label="Due Date">July 10</td><td data-label="Task">Record podcast/interview, talent/voiceover parts, and main screen demos</td><td data-label="Lead">Justyn, Dennis</td><td data-label="Helpers">NJ, Boon, Eden, Eduard, Jules T, Janna</td></tr><tr><td data-label="Due Date">July 14</td><td data-label="Task">Record missing demos, pickup lines, and backup screenshots</td><td data-label="Lead">Justyn, NJ</td><td data-label="Helpers">Dennis, Frank, Angelino, Jhules B</td></tr><tr><td data-label="Due Date">July 10–19</td><td data-label="Task">Start early editing: sync audio/video, trim pauses, insert demo clips, and place graphics placeholders</td><td data-label="Lead">NJ</td><td data-label="Helpers">Jhules B, TJ</td></tr><tr><td data-label="Due Date">August 2</td><td data-label="Task">Complete full rough cut</td><td data-label="Lead">NJ</td><td data-label="Helpers">Jhules B</td></tr><tr><td data-label="Due Date">August 7</td><td data-label="Task">Complete polished edit with zoom-ins, captions, callouts, graphics, audio cleanup, and optional limited music/soundtrack if any</td><td data-label="Lead">NJ, TJ</td><td data-label="Helpers">Jhules B, Dennis</td></tr><tr><td data-label="Due Date">August 10</td><td data-label="Task">Internal review for WebEx accuracy, screen readability, troubleshooting flow, storyboard alignment, and timing</td><td data-label="Lead">Justyn, Dennis, Frank</td><td data-label="Helpers">Angelino, Jules T</td></tr><tr><td data-label="Due Date">August 14</td><td data-label="Task">Final export and backup copy</td><td data-label="Lead">NJ</td><td data-label="Helpers">Justyn, Jhules B</td></tr></tbody>
     </table>
   </section>
+
+  <footer class="fat-breadcrumb-footer" aria-label="Site breadcrumb">
+    <div class="breadcrumb-trail">
+      <a href="../index.html">District of Florida and Caribbean</a>
+      <span class="breadcrumb-separator" aria-hidden="true">/</span>
+      <a href="home.html">WebEx Team</a>
+      <span class="breadcrumb-separator" aria-hidden="true">/</span>
+      <span class="breadcrumb-current">Priorities</span>
+    </div>
+  </footer>
 </main>
 </body>
 </html>
