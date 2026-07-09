@@ -360,6 +360,73 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
   .project-progress-card { width: 100%; }
 }
 
+
+/* Fat Footer Breadcrumb */
+.fat-breadcrumb-footer {
+  margin-top: 30px;
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  color: white;
+  border-radius: 20px;
+  padding: 22px 26px;
+  box-shadow: 0 10px 24px rgba(23, 50, 77, 0.18);
+}
+.fat-breadcrumb-footer .breadcrumb-trail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-size: clamp(16px, 2vw, 21px);
+  font-weight: 800;
+  line-height: 1.35;
+}
+.fat-breadcrumb-footer a {
+  color: white;
+  background: rgba(255, 255, 255, 0.13);
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 8px 13px;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+.fat-breadcrumb-footer a:hover,
+.fat-breadcrumb-footer a:focus {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.72);
+  transform: translateY(-1px);
+  outline: none;
+}
+.fat-breadcrumb-footer a:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+.fat-breadcrumb-footer .breadcrumb-current {
+  color: var(--navy);
+  background: var(--gold);
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 999px;
+  padding: 8px 13px;
+}
+.fat-breadcrumb-footer .breadcrumb-separator {
+  color: var(--gold);
+  font-weight: 900;
+  opacity: 0.95;
+}
+@media (max-width: 760px) {
+  .fat-breadcrumb-footer {
+    border-radius: 16px;
+    padding: 18px;
+  }
+  .fat-breadcrumb-footer .breadcrumb-trail {
+    gap: 8px;
+    font-size: 16px;
+  }
+}
+@media print {
+  .fat-breadcrumb-footer {
+    box-shadow: none;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -380,6 +447,16 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
       <tbody><tr><td data-label="Date">June 14</td><td data-label="Key Project Junctures">Team groups, project topics, and video categories finalized.</td></tr><tr><td data-label="Date">June 21</td><td data-label="Key Project Junctures">Initial scripts drafted and prepared for team review.</td></tr><tr><td data-label="Date">June 25</td><td data-label="Key Project Junctures">Group entry forms and scripts prepared for submission.</td></tr><tr><td data-label="Date">June 30</td><td data-label="Key Project Junctures">Visual plan, podcast run-of-show, storyboard, WebEx demo map, shot list, and shared animation learning started</td></tr><tr><td data-label="Date">July 3</td><td data-label="Key Project Junctures">WebEx meeting testing setup. Demo scenes and dialogues finalized. Set dates for scenes and demo recordings.</td></tr><tr><td data-label="Date">July 6</td><td data-label="Key Project Junctures">Graphics style, shared animation learning sprint, recording setup test, demo setup test, labels, and callout style completed</td></tr><tr><td data-label="Date">July 9</td><td data-label="Key Project Junctures">Pre-production lock freeze for major style/format decisions. No new format, new visual style, major script rewrite, or added scenes unless approved as necessary.</td></tr><tr><td data-label="Date">July 10–19</td><td data-label="Key Project Junctures">Main podcast recording, voiceover recording, screen recording, early editing, and production-ready graphics</td></tr><tr><td data-label="Date">July 20–26</td><td data-label="Key Project Junctures">&quot;Anniversary Thanksgiving&quot;. Break week, minimal work if any - a little file organization, audio cleanup, brief review of missing visuals or light editing only.</td></tr><tr><td data-label="Date">August 2</td><td data-label="Key Project Junctures">Full rough cut completed. Rough cut freeze - after this point no more rebuilding the video from scratch.</td></tr><tr><td data-label="Date">August 3–7</td><td data-label="Key Project Junctures">Polished edit: captions, callouts, graphics, transitions, audio cleanup, and optional very limited music/soundtrack if any</td></tr><tr><td data-label="Date">August 8–10</td><td data-label="Key Project Junctures">Internal team review for demo accuracy, timing, screen readability, and final fix list. SME review approval. Check playback on laptop/TV.</td></tr><tr><td data-label="Date">August 11–13</td><td data-label="Key Project Junctures">Final fixes only. Production freeze — no new creative ideas, major length changes, or new technical sections.</td></tr><tr><td data-label="Date">August 14</td><td data-label="Key Project Junctures">Final export and backup copy</td></tr><tr><td data-label="Date">August 15–16</td><td data-label="Key Project Junctures">Final District TSV / District Office review</td></tr><tr><td data-label="Date">August 17</td><td data-label="Key Project Junctures">Final submission deadline</td></tr></tbody>
     </table>
   </section>
+
+  <footer class="fat-breadcrumb-footer" aria-label="Site breadcrumb">
+    <div class="breadcrumb-trail">
+      <a href="../index.html">District of Florida and Caribbean</a>
+      <span class="breadcrumb-separator" aria-hidden="true">/</span>
+      <a href="home.html">WebEx Team</a>
+      <span class="breadcrumb-separator" aria-hidden="true">/</span>
+      <span class="breadcrumb-current">Deliverables</span>
+    </div>
+  </footer>
 </main>
 </body>
 </html>

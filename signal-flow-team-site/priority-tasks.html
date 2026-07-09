@@ -399,6 +399,74 @@ a.progress-panel:hover {
   th, td { font-size: 12px; padding: 9px 10px; }
 }
 
+
+
+/* Fat Footer Breadcrumb */
+.fat-breadcrumb-footer {
+  margin-top: 30px;
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  color: white;
+  border-radius: 20px;
+  padding: 22px 26px;
+  box-shadow: 0 10px 24px rgba(23, 50, 77, 0.18);
+}
+.fat-breadcrumb-footer .breadcrumb-trail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-size: clamp(16px, 2vw, 21px);
+  font-weight: 800;
+  line-height: 1.35;
+}
+.fat-breadcrumb-footer a {
+  color: white;
+  background: rgba(255, 255, 255, 0.13);
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 8px 13px;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+.fat-breadcrumb-footer a:hover,
+.fat-breadcrumb-footer a:focus {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.72);
+  transform: translateY(-1px);
+  outline: none;
+}
+.fat-breadcrumb-footer a:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+.fat-breadcrumb-footer .breadcrumb-current {
+  color: var(--navy);
+  background: var(--gold);
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 999px;
+  padding: 8px 13px;
+}
+.fat-breadcrumb-footer .breadcrumb-separator {
+  color: var(--gold);
+  font-weight: 900;
+  opacity: 0.95;
+}
+@media (max-width: 760px) {
+  .fat-breadcrumb-footer {
+    border-radius: 16px;
+    padding: 18px;
+  }
+  .fat-breadcrumb-footer .breadcrumb-trail {
+    gap: 8px;
+    font-size: 16px;
+  }
+}
+@media print {
+  .fat-breadcrumb-footer {
+    box-shadow: none;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -414,7 +482,15 @@ a.progress-panel:hover {
     <a href="resources.html">Resources</a>
   </nav>
 <section class="table-card"><table><thead><tr><th>Due Date</th><th>Task</th><th>Lead</th><th>Helpers</th></tr></thead><tbody><tr><td data-label="Due Date">June 30</td><td data-label="Task">Finish Signal Flow run-of-show, storyboard, and animation scene list</td><td data-label="Lead">Jules T, Janna</td><td data-label="Helpers">Jay, Dennis, Frank</td></tr><tr><td data-label="Due Date">July 3</td><td data-label="Task">Prepare simple visual style, avatar test, and signal flow diagram list</td><td data-label="Lead">Janna</td><td data-label="Helpers">Jlyn, Aiden, NJ, Jhules B</td></tr><tr><td data-label="Due Date">July 6</td><td data-label="Task">Finish basic animation test, title cards, lower thirds, labels, and diagram style</td><td data-label="Lead">Janna</td><td data-label="Helpers">Jlyn, Aiden, NJ, Jhules B</td></tr><tr><td data-label="Due Date">July 10</td><td data-label="Task">Record voiceover/talent parts and any needed reference video</td><td data-label="Lead">Jules T, Janna</td><td data-label="Helpers">Dennis</td></tr><tr><td data-label="Due Date">July 10–19</td><td data-label="Task">Build main animation scenes and start early editing</td><td data-label="Lead">Janna, Charles</td><td data-label="Helpers">Jlyn, Aiden, NJ, Jhules B</td></tr><tr><td data-label="Due Date">August 2</td><td data-label="Task">Complete full rough cut</td><td data-label="Lead">Charles</td><td data-label="Helpers">NJ, Jhules B, Janna</td></tr><tr><td data-label="Due Date">August 7</td><td data-label="Task">Complete polished edit with captions, callouts, diagrams, transitions, audio cleanup, and optional very limited music/soundtrack if any</td><td data-label="Lead">Charles, Janna</td><td data-label="Helpers">Dennis, NJ, Jhules B</td></tr><tr><td data-label="Due Date">August 10</td><td data-label="Task">Internal review for audio accuracy, animation clarity, timing, and readability</td><td data-label="Lead">Jay, Jules T</td><td data-label="Helpers">Frank, Dennis, Janna</td></tr><tr><td data-label="Due Date">August 14</td><td data-label="Task">Final export and backup copy</td><td data-label="Lead">Charles</td><td data-label="Helpers">Jules T, Janna, Dennis, NJ</td></tr></tbody></table></section>
-  
+<footer class="fat-breadcrumb-footer" aria-label="Site breadcrumb">
+  <div class="breadcrumb-trail">
+    <a href="../index.html">District of Florida and Caribbean</a>
+    <span class="breadcrumb-separator" aria-hidden="true">/</span>
+    <a href="home.html">Signal Flow Team</a>
+    <span class="breadcrumb-separator" aria-hidden="true">/</span>
+    <span class="breadcrumb-current">Priorities</span>
+  </div>
+</footer>
 </main>
 </body>
 </html>

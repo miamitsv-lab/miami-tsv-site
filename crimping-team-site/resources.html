@@ -21,6 +21,73 @@
 .resource-table {
   margin-bottom: 22px;
 }
+
+
+/* Fat Footer Breadcrumb */
+.fat-breadcrumb-footer {
+  margin-top: 30px;
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  color: white;
+  border-radius: 20px;
+  padding: 22px 26px;
+  box-shadow: 0 10px 24px rgba(23, 50, 77, 0.18);
+}
+.fat-breadcrumb-footer .breadcrumb-trail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-size: clamp(16px, 2vw, 21px);
+  font-weight: 800;
+  line-height: 1.35;
+}
+.fat-breadcrumb-footer a {
+  color: white;
+  background: rgba(255, 255, 255, 0.13);
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 8px 13px;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+.fat-breadcrumb-footer a:hover,
+.fat-breadcrumb-footer a:focus {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.72);
+  transform: translateY(-1px);
+  outline: none;
+}
+.fat-breadcrumb-footer a:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+.fat-breadcrumb-footer .breadcrumb-current {
+  color: var(--navy);
+  background: var(--gold);
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 999px;
+  padding: 8px 13px;
+}
+.fat-breadcrumb-footer .breadcrumb-separator {
+  color: var(--gold);
+  font-weight: 900;
+  opacity: 0.95;
+}
+@media (max-width: 760px) {
+  .fat-breadcrumb-footer {
+    border-radius: 16px;
+    padding: 18px;
+  }
+  .fat-breadcrumb-footer .breadcrumb-trail {
+    gap: 8px;
+    font-size: 16px;
+  }
+}
+@media print {
+  .fat-breadcrumb-footer {
+    box-shadow: none;
+  }
+}
 </style>
 </head>
 <body>
@@ -40,8 +107,8 @@
 <table>
 <thead><tr><th>Resource</th><th>Link</th></tr></thead>
 <tbody>
-<tr><td data-label="Resource">Team Portal</td><td data-label="Link"><a href="https://miami-tsv.com/crimping-team-site" rel="noopener noreferrer" target="_blank">https://miami-tsv.com/crimping-team-site</a></td></tr>
-<tr><td data-label="Resource">Telegram Messenger</td><td data-label="Link"><a class="resource-link" href="https://miami-tsv.com/crimping-team-telegram" rel="noopener" target="_blank">https://miami-tsv.com/crimping-team-telegram</a></td></tr>
+<tr><td data-label="Resource">Team Portal</td><td data-label="Link"><a href="https://miami-tsv.com/crimping-team-site" rel="noopener noreferrer" target="_blank">miami-tsv.com/crimping-team-site</a></td></tr><tr><td data-label="Resource">Weekly Meeting</td><td data-label="Link"><a class="resource-link" href="https://miami-tsv.com/signal-flow-team-meeting" rel="noopener noreferrer" target="_blank">miami-tsv.com/signal-flow-team-meeting</a></td></tr>
+<tr><td data-label="Resource">Telegram Messenger</td><td data-label="Link"><a class="resource-link" href="https://miami-tsv.com/crimping-team-telegram" rel="noopener" target="_blank">miami-tsv.com/crimping-team-telegram</a></td></tr>
 </tbody>
 </table>
 </section>
@@ -50,9 +117,9 @@
 <table>
 <thead><tr><th>Resource</th><th>Link</th></tr></thead>
 <tbody>
-<tr><td data-label="Resource">Folder Structure</td><td data-label="Link"><a href="https://miami-tsv.com/production-storage-doc" rel="noopener noreferrer" target="_blank">https://miami-tsv.com/production-storage-doc</a></td></tr>
-<tr><td data-label="Resource">Team Folder</td><td data-label="Link"><a href="https://miami-tsv.com/crimping-team-folder" rel="noopener noreferrer" target="_blank">https://miami-tsv.com/crimping-team-folder</a></td></tr>
-<tr><td data-label="Resource">Shared Common Folder</td><td data-label="Link"><a href="https://miami-tsv.com/production-shared-common" rel="noopener noreferrer" target="_blank">https://miami-tsv.com/production-shared-common</a></td></tr>
+<tr><td data-label="Resource">Folder Structure</td><td data-label="Link"><a href="https://miami-tsv.com/production-storage-doc" rel="noopener noreferrer" target="_blank">miami-tsv.com/production-storage-doc</a></td></tr>
+<tr><td data-label="Resource">Team Folder</td><td data-label="Link"><a href="https://miami-tsv.com/crimping-team-folder" rel="noopener noreferrer" target="_blank">miami-tsv.com/crimping-team-folder</a></td></tr>
+<tr><td data-label="Resource">Shared Common Folder</td><td data-label="Link"><a href="https://miami-tsv.com/production-shared-common" rel="noopener noreferrer" target="_blank">miami-tsv.com/production-shared-common</a></td></tr>
 </tbody>
 </table>
 </section>
@@ -61,9 +128,9 @@
 <table>
 <thead><tr><th>Resource</th><th>Link</th></tr></thead>
 <tbody>
-<tr><td data-label="Resource">Scripts</td><td data-label="Link"><a href="https://miami-tsv.com/crimping-script" rel="noopener noreferrer" target="_blank">https://miami-tsv.com/crimping-script</a></td></tr>
-<tr><td data-label="Resource">Story / Show Flow</td><td data-label="Link"><a href="https://miami-tsv.com/crimping-preprod" rel="noopener noreferrer" target="_blank">https://miami-tsv.com/crimping-preprod</a></td></tr>
-<tr><td data-label="Resource">Locked Tutorial Setup Checklist</td><td data-label="Link"><a href="https://miami-tsv.com/crimping-setup-checklist" rel="noopener noreferrer" target="_blank">https://miami-tsv.com/crimping-setup-checklist</a></td></tr><tr><td data-label="Resource">Recording Shot Checklist</td><td data-label="Link"><a href="https://miami-tsv.com/crimping-recording-checklist" rel="noopener noreferrer" target="_blank">https://miami-tsv.com/crimping-recording-checklist</a></td></tr></tbody>
+<tr><td data-label="Resource">Scripts</td><td data-label="Link"><a href="https://miami-tsv.com/crimping-script" rel="noopener noreferrer" target="_blank">miami-tsv.com/crimping-script</a></td></tr>
+<tr><td data-label="Resource">Story / Show Flow</td><td data-label="Link"><a href="https://miami-tsv.com/crimping-preprod" rel="noopener noreferrer" target="_blank">miami-tsv.com/crimping-preprod</a></td></tr>
+</tbody>
 </table>
 </section>
 <h2 class="section-title">TSV Graphics</h2>
@@ -71,10 +138,10 @@
 <table>
 <thead><tr><th>Resource</th><th>Link</th></tr></thead>
 <tbody>
-<tr><td data-label="Resource">Visual Guidelines</td><td data-label="Link"><a href="https://miami-tsv.com/production-visual-guide" rel="noopener noreferrer" target="_blank">https://miami-tsv.com/production-visual-guide</a></td></tr>
-<tr><td data-label="Resource">TSV Logo</td><td data-label="Link"><a href="https://drive.google.com/file/d/1RMi8joH0SKQJAi4ZAAmgia4G6BLud_Iz" rel="noopener noreferrer" target="_blank">https://drive.google.com/file/d/1RMi8joH0SKQJAi4ZAAmgia4G6BLud_Iz</a></td></tr>
-<tr><td data-label="Resource">INC TSV Logo</td><td data-label="Link"><a href="https://drive.google.com/file/d/1lK3mMjFbzm7p2_PzsiLvZFAagBlXIn5U" rel="noopener noreferrer" target="_blank">https://drive.google.com/file/d/1lK3mMjFbzm7p2_PzsiLvZFAagBlXIn5U</a></td></tr>
-<tr><td data-label="Resource">Title Card and Lower Thirds</td><td data-label="Link"><a href="https://miami-tsv.com/crimping-title-lower-thirds" rel="noopener noreferrer" target="_blank">https://miami-tsv.com/crimping-title-lower-thirds</a></td></tr><tr><td data-label="Resource">Crimping Labels and Callouts</td><td data-label="Link"><a href="https://miami-tsv.com/crimping-labels-callouts" rel="noopener noreferrer" target="_blank">https://miami-tsv.com/crimping-labels-callouts</a></td></tr></tbody>
+<tr><td data-label="Resource">Visual Guidelines</td><td data-label="Link"><a href="https://miami-tsv.com/production-visual-guide" rel="noopener noreferrer" target="_blank">miami-tsv.com/production-visual-guide</a></td></tr>
+<tr><td data-label="Resource">TSV Logo</td><td data-label="Link"><a href="https://drive.google.com/file/d/1RMi8joH0SKQJAi4ZAAmgia4G6BLud_Iz" rel="noopener noreferrer" target="_blank">drive.google.com/file/d/1RMi8joH0SKQJAi4ZAAmgia4G6BLud_Iz</a></td></tr>
+<tr><td data-label="Resource">INC TSV Logo</td><td data-label="Link"><a href="https://drive.google.com/file/d/1lK3mMjFbzm7p2_PzsiLvZFAagBlXIn5U" rel="noopener noreferrer" target="_blank">drive.google.com/file/d/1lK3mMjFbzm7p2_PzsiLvZFAagBlXIn5U</a></td></tr>
+</tbody>
 </table>
 </section>
 <h2 class="section-title">How-To-Decks</h2>
@@ -82,11 +149,20 @@
 <table>
 <thead><tr><th>Resource</th><th>Link</th></tr></thead>
 <tbody>
-<tr><td data-label="Resource">Picture to Chibi</td><td data-label="Link"><a href="https://drive.google.com/file/d/1HM5JG_i8qfLF1vzm2_Pij7eelmiApAct" rel="noopener noreferrer" target="_blank">https://drive.google.com/file/d/1HM5JG_i8qfLF1vzm2_Pij7eelmiApAct</a></td></tr>
-<tr><td data-label="Resource">Picture / Video to Cartoon</td><td data-label="Link"><a href="https://drive.google.com/file/d/1_ykgrNHOqkIZH81yRB0VUn3swENAZRp5" rel="noopener noreferrer" target="_blank">https://drive.google.com/file/d/1_ykgrNHOqkIZH81yRB0VUn3swENAZRp5</a></td></tr>
+<tr><td data-label="Resource">Picture to Chibi</td><td data-label="Link"><a href="https://drive.google.com/file/d/1HM5JG_i8qfLF1vzm2_Pij7eelmiApAct" rel="noopener noreferrer" target="_blank">drive.google.com/file/d/1HM5JG_i8qfLF1vzm2_Pij7eelmiApAct</a></td></tr>
+<tr><td data-label="Resource">Picture / Video to Cartoon</td><td data-label="Link"><a href="https://drive.google.com/file/d/1_ykgrNHOqkIZH81yRB0VUn3swENAZRp5" rel="noopener noreferrer" target="_blank">drive.google.com/file/d/1_ykgrNHOqkIZH81yRB0VUn3swENAZRp5</a></td></tr>
 </tbody>
 </table>
 </section>
+<footer aria-label="Site breadcrumb" class="fat-breadcrumb-footer">
+<div class="breadcrumb-trail">
+<a href="../index.html">District of Florida and Caribbean</a>
+<span aria-hidden="true" class="breadcrumb-separator">/</span>
+<a href="home.html">Crimping Team</a>
+<span aria-hidden="true" class="breadcrumb-separator">/</span>
+<span class="breadcrumb-current">Resources</span>
+</div>
+</footer>
 </main>
 </body>
 </html>

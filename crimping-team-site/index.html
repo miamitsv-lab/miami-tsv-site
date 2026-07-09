@@ -244,8 +244,9 @@
 
 
 
-/* SPA Next Meeting Notice Popup */
-.meeting-popup-overlay {
+
+/* SPA Important Project Reminder Popup */
+.project-popup-overlay {
   position: fixed;
   inset: 0;
   z-index: 9999;
@@ -255,15 +256,15 @@
   padding: 20px;
   background: rgba(23, 50, 77, 0.64);
 }
-.meeting-popup-overlay.is-visible {
+.project-popup-overlay.is-visible {
   display: flex;
 }
-body.meeting-popup-open {
+body.project-popup-open {
   overflow: hidden;
 }
-.meeting-popup {
+.project-popup {
   position: relative;
-  width: min(640px, 100%);
+  width: min(680px, 100%);
   max-height: min(92vh, 760px);
   overflow: auto;
   background: white;
@@ -271,9 +272,9 @@ body.meeting-popup-open {
   border-radius: 22px;
   padding: 28px;
   box-shadow: 0 24px 60px rgba(23, 50, 77, 0.34);
-  animation: meetingPopupRise .22s ease-out;
+  animation: projectPopupRise .22s ease-out;
 }
-.meeting-popup-kicker {
+.project-popup-kicker {
   display: inline-block;
   margin: 0 0 10px 0;
   color: var(--navy);
@@ -286,63 +287,47 @@ body.meeting-popup-open {
   letter-spacing: .04em;
   text-transform: uppercase;
 }
-.meeting-popup h2 {
+.project-popup h2 {
   margin: 0 44px 12px 0;
   color: var(--navy);
   font-size: clamp(27px, 4vw, 38px);
   line-height: 1.12;
 }
-.meeting-popup-intro {
+.project-popup-intro {
   margin: 0 0 18px 0;
   color: var(--text);
   font-size: 18px;
   line-height: 1.5;
 }
-.meeting-detail-grid {
+.project-detail-grid {
   display: grid;
-  grid-template-columns: 155px 1fr;
+  grid-template-columns: 165px 1fr;
   gap: 0;
   border: 1px solid var(--border);
   border-radius: 18px;
   overflow: hidden;
   margin: 16px 0 18px 0;
 }
-.meeting-detail-label,
-.meeting-detail-value {
+.project-detail-label,
+.project-detail-value {
   padding: 13px 15px;
   border-bottom: 1px solid var(--border);
   line-height: 1.45;
   font-size: 16px;
 }
-.meeting-detail-label {
+.project-detail-label {
   color: var(--navy);
   background: var(--light-blue);
   font-weight: 900;
 }
-.meeting-detail-value {
+.project-detail-value {
   color: var(--text);
   background: white;
-  word-break: break-word;
 }
-.meeting-detail-grid div:nth-last-child(-n+2) {
+.project-detail-grid div:nth-last-child(-n+2) {
   border-bottom: none;
 }
-.meeting-detail-value a {
-  color: var(--blue);
-  font-weight: 800;
-}
-.meeting-password {
-  display: inline-block;
-  color: var(--navy);
-  background: var(--gold);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 4px 7px;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 900;
-  letter-spacing: .02em;
-}
-.meeting-popup-note {
+.project-popup-note {
   margin: 14px 0 0 0;
   padding: 14px 16px;
   background: var(--green);
@@ -352,15 +337,14 @@ body.meeting-popup-open {
   line-height: 1.5;
   font-size: 16px;
 }
-.meeting-popup-actions {
+.project-popup-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 20px;
 }
-.meeting-popup-primary,
-.meeting-popup-secondary,
-.meeting-popup-button {
+.project-popup-primary,
+.project-popup-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -372,18 +356,17 @@ body.meeting-popup-open {
   text-decoration: none;
   cursor: pointer;
 }
-.meeting-popup-primary {
+.project-popup-primary {
   color: white;
   background: linear-gradient(135deg, var(--navy), var(--blue));
   border: 1px solid var(--blue);
 }
-.meeting-popup-secondary,
-.meeting-popup-button {
+.project-popup-button {
   color: var(--navy);
   background: var(--light-blue);
   border: 1px solid var(--border);
 }
-.meeting-popup-close-x {
+.project-popup-close-x {
   position: absolute;
   top: 14px;
   right: 14px;
@@ -397,36 +380,32 @@ body.meeting-popup-open {
   line-height: 1;
   cursor: pointer;
 }
-.meeting-popup-primary:hover,
-.meeting-popup-secondary:hover,
-.meeting-popup-button:hover,
-.meeting-popup-close-x:hover {
+.project-popup-primary:hover,
+.project-popup-button:hover,
+.project-popup-close-x:hover {
   filter: brightness(.98);
   transform: translateY(-1px);
 }
-.meeting-popup-primary:focus-visible,
-.meeting-popup-secondary:focus-visible,
-.meeting-popup-button:focus-visible,
-.meeting-popup-close-x:focus-visible {
+.project-popup-primary:focus-visible,
+.project-popup-button:focus-visible,
+.project-popup-close-x:focus-visible {
   outline: 3px solid var(--blue);
   outline-offset: 3px;
 }
-@keyframes meetingPopupRise {
+@keyframes projectPopupRise {
   from { opacity: 0; transform: translateY(14px) scale(.98); }
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
 @media (max-width: 640px) {
-  .meeting-popup { padding: 24px 20px; }
-  .meeting-popup h2 { margin-right: 40px; }
-  .meeting-detail-grid { grid-template-columns: 1fr; }
-  .meeting-detail-label { border-bottom: none; padding-bottom: 4px; }
-  .meeting-detail-value { padding-top: 4px; }
-  .meeting-popup-actions { flex-direction: column; }
-  .meeting-popup-primary,
-  .meeting-popup-secondary,
-  .meeting-popup-button { width: 100%; }
+  .project-popup { padding: 24px 20px; }
+  .project-popup h2 { margin-right: 40px; }
+  .project-detail-grid { grid-template-columns: 1fr; }
+  .project-detail-label { border-bottom: none; padding-bottom: 4px; }
+  .project-detail-value { padding-top: 4px; }
+  .project-popup-actions { flex-direction: column; }
+  .project-popup-primary,
+  .project-popup-button { width: 100%; }
 }
-
 
 
 /* Site Menu tile hover - matches Project Progress hover behavior */
@@ -455,33 +434,95 @@ body.meeting-popup-open {
   }
 }
 
+
+/* Fat Footer Breadcrumb */
+.fat-breadcrumb-footer {
+  margin-top: 30px;
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  color: white;
+  border-radius: 20px;
+  padding: 22px 26px;
+  box-shadow: 0 10px 24px rgba(23, 50, 77, 0.18);
+}
+.fat-breadcrumb-footer .breadcrumb-trail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-size: clamp(16px, 2vw, 21px);
+  font-weight: 800;
+  line-height: 1.35;
+}
+.fat-breadcrumb-footer a {
+  color: white;
+  background: rgba(255, 255, 255, 0.13);
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 8px 13px;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+.fat-breadcrumb-footer a:hover,
+.fat-breadcrumb-footer a:focus {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.72);
+  transform: translateY(-1px);
+  outline: none;
+}
+.fat-breadcrumb-footer a:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+.fat-breadcrumb-footer .breadcrumb-current {
+  color: var(--navy);
+  background: var(--gold);
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 999px;
+  padding: 8px 13px;
+}
+.fat-breadcrumb-footer .breadcrumb-separator {
+  color: var(--gold);
+  font-weight: 900;
+  opacity: 0.95;
+}
+@media (max-width: 760px) {
+  .fat-breadcrumb-footer {
+    border-radius: 16px;
+    padding: 18px;
+  }
+  .fat-breadcrumb-footer .breadcrumb-trail {
+    gap: 8px;
+    font-size: 16px;
+  }
+}
+@media print {
+  .fat-breadcrumb-footer {
+    box-shadow: none;
+  }
+}
 </style>
 </head>
 <body>
-<div aria-hidden="true" class="meeting-popup-overlay" id="nextMeetingPopup">
-<section aria-describedby="nextMeetingSummary" aria-labelledby="nextMeetingTitle" aria-modal="true" class="meeting-popup" role="dialog">
-<button aria-label="Close meeting notice" class="meeting-popup-close-x" data-meeting-popup-close="" type="button">×</button>
-<p class="meeting-popup-kicker">Next Meeting Notice</p>
-<h2 id="nextMeetingTitle">TSV Group 1 Meeting</h2>
-<p class="meeting-popup-intro" id="nextMeetingSummary"><strong>Wednesday, July 8th</strong> at <strong>8:00 PM EDT / 9:00 PM AST</strong> via WebEx.</p>
-<div aria-label="Meeting details" class="meeting-detail-grid">
-<div class="meeting-detail-label">Meeting</div>
-<div class="meeting-detail-value">(ONLINE) TSV Group 1 Meeting • District of Florida and Caribbean</div>
-<div class="meeting-detail-label">Date &amp; Time</div>
-<div class="meeting-detail-value">Wednesday • July 8th • 8:00 PM EDT / 9:00 PM AST</div>
-<div class="meeting-detail-label">Meeting Link</div>
-<div class="meeting-detail-value"><a href="https://miami-tsv.com/crimping-group1-meeting" rel="noopener" target="_blank">https://miami-tsv.com/crimping-group1-meeting</a></div>
-<div class="meeting-detail-label">Meeting Number</div>
-<div class="meeting-detail-value">2866 470 5833</div>
-<div class="meeting-detail-label">Password</div>
-<div class="meeting-detail-value"><span class="meeting-password">WEDNESDAYJULY8TH</span></div>
-<div class="meeting-detail-label">Alternate Link</div>
-<div class="meeting-detail-value"><a href="https://inc-maimi-tsv.my.webex.com/inc-maimi-tsv.my/j.php?MTID=m99151327373d4fc2473195c295355c46" rel="noopener" target="_blank">https://inc-maimi-tsv.my.webex.com/inc-maimi-tsv.my/j.php?MTID=m99151327373d4fc2473195c295355c46</a></div>
+<div aria-hidden="true" class="project-popup-overlay" id="projectReminderPopup">
+<section aria-describedby="projectReminderSummary" aria-labelledby="projectReminderTitle" aria-modal="true" class="project-popup" role="dialog">
+<button aria-label="Close project reminder" class="project-popup-close-x" data-project-popup-close="" type="button">×</button>
+<p class="project-popup-kicker">Crimping Team Reminder</p>
+<h2 id="projectReminderTitle">Important Project Reminder</h2>
+<p class="project-popup-intro" id="projectReminderSummary"><strong>Tutorial recording is scheduled for this Saturday.</strong> Pre-production is closed, and the tools, materials, and tutorial setup have already been tested.</p>
+<div aria-label="Project reminder details" class="project-detail-grid">
+<div class="project-detail-label">This Week</div>
+<div class="project-detail-value">Complete the Saturday tutorial recording and keep the team focused on the locked tutorial flow.</div>
+<div class="project-detail-label">Weekend Target</div>
+<div class="project-detail-value">Finish the title card and lower thirds, then prepare the recorded files for editing/build.</div>
+<div class="project-detail-label">Must Capture</div>
+<div class="project-detail-value">Clear close-ups of the T568B wire order, RJ45 insertion, crimping action, second-end repeat, and cable tester proof.</div>
+<div class="project-detail-label">After Recording</div>
+<div class="project-detail-value">Organize footage immediately, confirm readability, and list pickup shots only if needed for accuracy or clarity.</div>
 </div>
-<div class="meeting-popup-actions">
-<a class="meeting-popup-primary" download="" href="crimping_group1_next_meeting.ics">Add to Calendar</a>
-<a class="meeting-popup-secondary" href="https://miami-tsv.com/crimping-group1-meeting" rel="noopener" target="_blank">Open Meeting Link</a>
-<button class="meeting-popup-button" data-meeting-popup-close="" type="button">Close Notice</button>
+<p class="project-popup-note"><strong>Reminder:</strong> No new major creative changes. Stay with the locked plan and only make accuracy, clarity, or necessary pickup-shot fixes.</p>
+<div class="project-popup-actions">
+<a class="project-popup-primary" href="action-items.html">View Action Items</a>
+<button class="project-popup-button" data-project-popup-close="" type="button">Close Reminder</button>
 </div>
 </section>
 </div>
@@ -533,13 +574,21 @@ body.meeting-popup-open {
 <a class="tile" href="note-section.html"><h2>Notes</h2><p>Simple definitions for shot list, close-up shots, T568B, labels, callouts, and retakes.</p></a>
 <a class="tile" href="resources.html"><h2>Resources</h2><p>Quick links for the team site, Google Drive folders, production materials, and TSV graphics.</p></a>
 </section>
+
+  <footer class="fat-breadcrumb-footer" aria-label="Site breadcrumb">
+    <div class="breadcrumb-trail">
+      <a href="../index.html">District of Florida and Caribbean</a>
+      <span class="breadcrumb-separator" aria-hidden="true">/</span>
+      <span class="breadcrumb-current">Crimping Team</span>
+    </div>
+  </footer>
 </main>
 <script>
 (function () {
-  var popup = document.getElementById('nextMeetingPopup');
+  var popup = document.getElementById('projectReminderPopup');
   if (!popup) return;
 
-  var closeButtons = popup.querySelectorAll('[data-meeting-popup-close]');
+  var closeButtons = popup.querySelectorAll('[data-project-popup-close]');
   var focusableSelector = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
   var previousFocus = null;
 
@@ -547,7 +596,7 @@ body.meeting-popup-open {
     previousFocus = document.activeElement;
     popup.classList.add('is-visible');
     popup.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('meeting-popup-open');
+    document.body.classList.add('project-popup-open');
 
     var firstFocusable = popup.querySelector(focusableSelector);
     if (firstFocusable) firstFocusable.focus();
@@ -556,7 +605,7 @@ body.meeting-popup-open {
   function closePopup() {
     popup.classList.remove('is-visible');
     popup.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('meeting-popup-open');
+    document.body.classList.remove('project-popup-open');
 
     if (previousFocus && typeof previousFocus.focus === 'function') {
       previousFocus.focus();
