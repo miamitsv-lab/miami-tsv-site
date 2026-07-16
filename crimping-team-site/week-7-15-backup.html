@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Crimping Project — Week 7-15 Backup</title>
+  <style>
+    :root {
+      --navy: #17324D;
+      --blue: #2F6FAE;
+      --deep-blue: #255D91;
+      --border: #C9D6E6;
+      --bg: #F6F9FD;
+      --text: #1C2733;
+      --muted: #51606F;
+      --light-blue: #EAF3FF;
+      --gold: #FFF3DC;
+      --green: #EAF7EF;
+      --purple: #F2ECFF;
+      --red: #FFEAEA;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 24px;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+    }
+
+    .wrap {
+      width: min(1280px, 100%);
+      margin: 0 auto;
+    }
+
+    .header {
+      overflow: hidden;
+      margin-bottom: 20px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      border-radius: 20px;
+      box-shadow: 0 10px 24px rgba(23, 50, 77, 0.18);
+    }
+
+    .header-content { padding: 28px 32px 24px; }
+
+    .header h1 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.1;
+    }
+
+    .header p {
+      max-width: 900px;
+      margin: 10px 0 0;
+      font-size: 17px;
+      line-height: 1.55;
+    }
+
+    .snapshot-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid rgba(255, 255, 255, 0.28);
+    }
+
+    .snapshot-strip div {
+      padding: 14px 20px;
+      background: rgba(255, 255, 255, 0.08);
+      border-right: 1px solid rgba(255, 255, 255, 0.22);
+    }
+
+    .snapshot-strip div:last-child { border-right: 0; }
+    .snapshot-strip strong { display: block; margin-bottom: 3px; }
+
+    .section-title {
+      margin: 28px 0 12px;
+      color: var(--navy);
+      font-size: clamp(23px, 3vw, 31px);
+    }
+
+    .project-progress-card,
+    .immediate,
+    .member-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+    }
+
+    .project-progress-card { padding: 22px; }
+
+    .progress-header h2 {
+      margin: 0 0 8px;
+      color: var(--navy);
+      font-size: 28px;
+    }
+
+    .progress-header p {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.55;
+    }
+
+    .progress-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .progress-panel {
+      min-height: 210px;
+      padding: 20px;
+      background: var(--light-blue);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+    }
+
+    .progress-panel:nth-child(2) { background: var(--gold); }
+
+    .progress-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      color: var(--navy);
+      font-size: 21px;
+    }
+
+    .progress-percent {
+      font-size: 30px;
+      font-weight: 800;
+    }
+
+    .progress-track {
+      height: 15px;
+      margin: 15px 0;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--navy), var(--blue));
+      border-radius: inherit;
+    }
+
+    .progress-panel:nth-child(2) .progress-fill {
+      background: linear-gradient(90deg, #B77800, #E4A11B);
+    }
+
+    .progress-panel p {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.55;
+    }
+
+    .immediate { padding: 18px; }
+
+    .immediate-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .action-card {
+      min-height: 205px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+    }
+
+    /* Required color order: light blue, light yellow, light green. */
+    .action-card:nth-child(1) { background: var(--light-blue); }
+    .action-card:nth-child(2) { background: var(--gold); }
+    .action-card:nth-child(3) { background: var(--green); }
+
+    .action-card h3 {
+      margin: 0 0 10px;
+      color: var(--navy);
+      font-size: 24px;
+    }
+
+    .action-card p {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.55;
+    }
+
+    .action-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .member-card { overflow: hidden; }
+
+    /* Repeating project color order: light blue, light yellow, light green, lavender, light red. */
+    .member-card:nth-child(5n + 1) .member-head { background: var(--light-blue); }
+    .member-card:nth-child(5n + 2) .member-head { background: var(--gold); }
+    .member-card:nth-child(5n + 3) .member-head { background: var(--green); }
+    .member-card:nth-child(5n + 4) .member-head { background: var(--purple); }
+    .member-card:nth-child(5n + 5) .member-head { background: var(--red); }
+
+    .member-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 22px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .member-head h3 {
+      margin: 0;
+      color: var(--navy);
+      font-size: 28px;
+    }
+
+    .member-role {
+      margin: 7px 0 0;
+      color: #1D5F8F;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .item-count {
+      flex: 0 0 auto;
+      padding: 7px 11px;
+      color: #fff;
+      background: var(--deep-blue);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .member-body { padding: 20px 22px; }
+
+    .member-body h4 {
+      margin: 0 0 12px;
+      color: var(--navy);
+      font-size: 20px;
+    }
+
+    .member-body ul {
+      margin: 0;
+      padding-left: 23px;
+    }
+
+    .member-body li {
+      margin: 0 0 10px;
+      font-size: 17px;
+      line-height: 1.55;
+    }
+
+    .member-body li:last-child { margin-bottom: 0; }
+
+    .footer-note {
+      margin: 22px 0 0;
+      padding: 14px 18px;
+      color: var(--muted);
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      font-size: 14px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .snapshot-strip,
+      .progress-grid,
+      .immediate-grid { grid-template-columns: 1fr; }
+
+      .snapshot-strip div {
+        border-right: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+      }
+
+      .snapshot-strip div:last-child { border-bottom: 0; }
+    }
+
+    @media (max-width: 620px) {
+      body { padding: 14px; }
+      .header,
+      .project-progress-card,
+      .immediate,
+      .member-card { border-radius: 16px; }
+      .header-content { padding: 22px; }
+      .member-head { display: block; }
+      .item-count { display: inline-block; margin-top: 12px; }
+      .progress-meta { align-items: flex-start; }
+    }
+
+    @media print {
+      body { padding: 0; background: #fff; }
+      .header,
+      .project-progress-card,
+      .immediate,
+      .member-card { box-shadow: none; }
+      .member-card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="header">
+      <div class="header-content">
+        <h1>Crimping Project — Week 7-15 Backup</h1>
+        <p>Static project snapshot containing the current project progress, immediate next steps, and every team member's action items. Navigation links and name-selection controls are intentionally excluded.</p>
+      </div>
+      <div class="snapshot-strip" aria-label="Snapshot date context">
+        <div><strong>Snapshot Date</strong>Wednesday, July 15, 2026</div>
+        <div><strong>This Saturday</strong>July 18, 2026</div>
+        <div><strong>Next Week</strong>July 20–26 break week; light work only</div>
+      </div>
+    </header>
+
+    <section class="project-progress-card" aria-label="Crimping project progress status">
+      <div class="progress-header">
+        <h2>Project Progress</h2>
+        <p><strong>Current checkpoint:</strong> Pre-production is closed with no major changes. Tutorial setup and tools/materials have been tested. Tutorial recording is scheduled for Saturday, July 18, with the title card and lower thirds still targeted for completion by the July 18–19 weekend.</p>
+      </div>
+
+      <div class="progress-grid">
+        <article class="progress-panel">
+          <div class="progress-meta"><strong>Current Progress</strong><span class="progress-percent">40%</span></div>
+          <div class="progress-track" role="progressbar" aria-label="Current Crimping project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="40">
+            <div class="progress-fill" style="width: 40%;"></div>
+          </div>
+          <p>Pre-production is locked, the tutorial setup has been tested, and the tools/materials have been tested. The project is ready for the July 18 tutorial recording and immediate footage handoff to editing.</p>
+        </article>
+
+        <article class="progress-panel">
+          <div class="progress-meta"><strong>Target Progress</strong><span class="progress-percent">45%</span></div>
+          <div class="progress-track" role="progressbar" aria-label="Target Crimping project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="45">
+            <div class="progress-fill" style="width: 45%;"></div>
+          </div>
+          <p>The target is to reach the next progress mark by the end of the July 18–19 weekend by completing the tutorial recording, finishing the title card and lower thirds, confirming cable tester proof footage, and preparing captured files for editing.</p>
+        </article>
+      </div>
+    </section>
+
+    <h2 class="section-title">Immediate Next Steps</h2>
+    <section class="immediate" aria-label="Immediate next steps">
+      <div class="immediate-grid">
+        <article class="action-card">
+          <h3>Needed Next Week</h3>
+          <p>During the July 20–26 break week, keep work light: organize the July 18 footage, verify the T568B order, RJ45 insertion, crimping action, second-end repeat, and cable tester proof, and prepare a short missing-shot or pickup list for rough-cut assembly.</p>
+        </article>
+        <article class="action-card">
+          <h3>Goal by End of Week</h3>
+          <p>Complete the title card and lower thirds by the July 18–19 weekend and finish the Saturday tutorial recording using the already-tested setup, tools, and materials. Confirm the footage is clear and complete enough for editing.</p>
+        </article>
+        <article class="action-card">
+          <h3>Main Reminder</h3>
+          <p>Recording is the priority. Stay with the locked tutorial plan and limit changes to technical accuracy, clarity, recording quality, or necessary pickup shots. Do not introduce a new format, visual style, major script rewrite, or unapproved added scene.</p>
+        </article>
+      </div>
+    </section>
+
+    <h2 class="section-title">All Crimping Team Action Items</h2>
+    <section class="action-list" aria-label="All Crimping team action items">
+      <article class="member-card">
+        <div class="member-head">
+          <div><h3>Boon</h3><p class="member-role">Director / SME Support / Recording Support</p></div>
+          <span class="item-count">4 items</span>
+        </div>
+        <div class="member-body">
+          <h4>Action Items This Week</h4>
+          <ul>
+            <li>Use the tested tutorial setup for Saturday recording; keep the table, tools, cable tester, and camera layout consistent.</li>
+            <li>Coordinate Saturday's close-up recording flow for T568B wire order, RJ45 insertion, crimping, second-end repeat, and cable tester proof.</li>
+            <li>Review the title card and lower thirds once prepared so they match the crimping tutorial focus and TSV style.</li>
+            <li>Keep changes limited to clarity or technical accuracy only now that pre-production is closed.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="member-card">
+        <div class="member-head">
+          <div><h3>AJ</h3><p class="member-role">Scriptwriter</p></div>
+          <span class="item-count">4 items</span>
+        </div>
+        <div class="member-body">
+          <h4>Action Items This Week</h4>
+          <ul>
+            <li>Use the locked pre-production flow as the source of truth; no major script or tutorial structure changes unless needed for accuracy.</li>
+            <li>Confirm the step order still matches the tested tutorial setup: tools, measure, cut, strip, T568B order, insert RJ45, crimp, repeat, test, and closing.</li>
+            <li>Review title card and lower-third wording for clear, beginner-friendly language.</li>
+            <li>Prepare only minor pickup wording if the recording team needs clearer transitions.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="member-card">
+        <div class="member-head">
+          <div><h3>Dennis</h3><p class="member-role">Scriptwriter / SME Helper / Recording Support</p></div>
+          <span class="item-count">4 items</span>
+        </div>
+        <div class="member-body">
+          <h4>Action Items This Week</h4>
+          <ul>
+            <li>Provide SME support for technical accuracy only: T568B order, connector orientation, crimping procedure, and cable tester proof.</li>
+            <li>Check that Saturday's recording shows wire colors, RJ45 insertion depth, and tester lights clearly on camera.</li>
+            <li>Review title card/lower-third wording for accuracy and consistency with the crimping tutorial.</li>
+            <li>Support final review of recording quality while avoiding new major creative changes after pre-production lock.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="member-card">
+        <div class="member-head">
+          <div><h3>Eduard</h3><p class="member-role">Director Support / SME Helper / Recording Support</p></div>
+          <span class="item-count">4 items</span>
+        </div>
+        <div class="member-body">
+          <h4>Action Items This Week</h4>
+          <ul>
+            <li>Support Saturday recording using the tested setup and verified tools/materials.</li>
+            <li>Help confirm tools, RJ45 connector orientation, crimper use, and cable tester workflow are technically correct.</li>
+            <li>Confirm the tested tutorial setup remains stable for repeatable close-up shots during Saturday recording.</li>
+            <li>Keep any recommendations limited to accuracy, clarity, and recording quality.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="member-card">
+        <div class="member-head">
+          <div><h3>Austin</h3><p class="member-role">Main Video Editor</p></div>
+          <span class="item-count">4 items</span>
+        </div>
+        <div class="member-body">
+          <h4>Action Items This Week</h4>
+          <ul>
+            <li>Prepare the edit timeline using the locked tutorial flow and tested setup details.</li>
+            <li>Reserve placeholders for the title card, lower thirds, T568B graphic, step cards, captions, and callouts.</li>
+            <li>Be ready to organize incoming footage immediately after Saturday's tutorial recording.</li>
+            <li>Coordinate with Aiden, Jhules B, Dianne, and Boon on graphics delivery and missing edit assets.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="member-card">
+        <div class="member-head">
+          <div><h3>Aiden</h3><p class="member-role">Animator / Graphics</p></div>
+          <span class="item-count">5 items</span>
+        </div>
+        <div class="member-body">
+          <h4>Action Items This Week</h4>
+          <ul>
+            <li>Complete the title card and lower thirds by this weekend using the same TSV color schema and readable text style.</li>
+            <li>Create labels for the tools and materials used for crimping.</li>
+            <li>Finalize the T568B wire-order graphic, step cards, arrows, and warning callouts for the recording/edit build.</li>
+            <li>Export reusable graphics in edit-ready formats and keep naming clear for Austin and Jhules B.</li>
+            <li>Avoid introducing a new visual style now that pre-production is closed.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="member-card">
+        <div class="member-head">
+          <div><h3>Eden</h3><p class="member-role">Talent / Voiceover / Recording Support</p></div>
+          <span class="item-count">4 items</span>
+        </div>
+        <div class="member-body">
+          <h4>Action Items This Week</h4>
+          <ul>
+            <li>Confirm availability for voiceover, talent delivery, or recording support for Saturday's tutorial recording and the immediate build push after it.</li>
+            <li>Practice narration or on-camera timing using the locked tutorial flow before Saturday's recording.</li>
+            <li>Prepare for pickup lines if any close-up step needs clearer explanation.</li>
+            <li>Keep delivery calm, clear, and beginner-friendly; no new script direction unless approved for accuracy.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="member-card">
+        <div class="member-head">
+          <div><h3>Jhules B</h3><p class="member-role">Video Editor / Animator Helper</p></div>
+          <span class="item-count">4 items</span>
+        </div>
+        <div class="member-body">
+          <h4>Action Items This Week</h4>
+          <ul>
+            <li>Support polish and readability checks for the title card and lower thirds so they are ready for the Saturday recording/edit handoff.</li>
+            <li>Help Aiden and Austin prepare edit-ready graphics, captions, callouts, and step-card assets.</li>
+            <li>Check that graphic text remains readable over close-up footage.</li>
+            <li>Help identify missing visual assets before Saturday recording and the first edit build.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="member-card">
+        <div class="member-head">
+          <div><h3>Dianne</h3><p class="member-role">Video Editor Support</p></div>
+          <span class="item-count">3 items</span>
+        </div>
+        <div class="member-body">
+          <h4>Action Items This Week</h4>
+          <ul>
+            <li>Help Austin prepare the editing support checklist for Saturday's tutorial footage handoff.</li>
+            <li>Review the title card/lower-third text for clarity and correct spelling before they are finalized for the weekend recording/edit handoff.</li>
+            <li>Help track any missing captions, labels, or minor pickup needs after Saturday recording.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="member-card">
+        <div class="member-head">
+          <div><h3>NJ</h3><p class="member-role">Recording Support</p></div>
+          <span class="item-count">4 items</span>
+        </div>
+        <div class="member-body">
+          <h4>Action Items This Week</h4>
+          <ul>
+            <li>Support Saturday recording setup checks: camera angle, audio, lighting, close-up framing, and backup shot list.</li>
+            <li>Confirm wire colors, RJ45 connector orientation, and cable tester lights can be seen clearly during Saturday recording.</li>
+            <li>Help execute the footage handoff plan so files can move quickly to editing after Saturday recording.</li>
+            <li>Keep setup support focused on the locked plan and avoid late major changes.</li>
+          </ul>
+        </div>
+      </article>
+    </section>
+
+    <p class="footer-note">Static backup created for the July 15, 2026 project checkpoint. The member cards follow the required repeating color order: light blue, light yellow, light green, lavender, and light red.</p>
+  </main>
+</body>
+</html>
