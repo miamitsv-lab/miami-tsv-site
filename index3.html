@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TSV Technical Video Competition | District of Florida and Caribbean</title>
+  <title>TSV Technical Video Competition | District of Florida and Caribbean Entry</title>
   <style>
     :root {
       --navy: #17324D;
@@ -111,73 +111,6 @@
       line-height: 1.5;
     }
 
-    .countdown-card {
-      background: var(--red);
-      border: 1px solid #F4BFC2;
-      border-radius: 20px;
-      padding: 24px;
-      margin: 0 0 20px;
-      box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
-      text-align: center;
-    }
-
-    .countdown-kicker {
-      margin: 0 0 6px;
-      color: var(--blue);
-      font-size: 13px;
-      font-weight: 900;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .countdown-card h2 {
-      margin: 0;
-      color: var(--navy);
-      font-size: clamp(25px, 3vw, 36px);
-    }
-
-    .countdown-display {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-      max-width: 760px;
-      margin: 18px auto 12px;
-    }
-
-    .countdown-unit {
-      padding: 15px 10px 13px;
-      background: linear-gradient(180deg, #FFFFFF, #F2F7FD);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      box-shadow: inset 0 -3px 0 rgba(47, 111, 174, 0.08);
-    }
-
-    .countdown-value {
-      display: block;
-      color: var(--navy);
-      font-size: clamp(27px, 4vw, 44px);
-      font-weight: 900;
-      line-height: 1;
-      font-variant-numeric: tabular-nums;
-    }
-
-    .countdown-label {
-      display: block;
-      margin-top: 7px;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .countdown-date {
-      margin: 0;
-      color: var(--muted);
-      font-size: 15px;
-      font-weight: 700;
-    }
-
     .intro-card {
       background: white;
       border: 1px solid var(--border);
@@ -209,9 +142,8 @@
     }
 
     .portal-card {
-      display: flex;
-      flex-direction: column;
-      min-height: 430px;
+      display: block;
+      min-height: 260px;
       color: var(--text);
       text-decoration: none;
       border: 1px solid var(--border);
@@ -343,54 +275,6 @@
       line-height: 1.5;
     }
 
-    .tile-progress {
-      position: relative;
-      z-index: 1;
-      margin: 0 0 20px;
-      padding: 14px;
-      background: rgba(255, 255, 255, 0.78);
-      border: 1px solid rgba(201, 214, 230, 0.9);
-      border-radius: 15px;
-    }
-
-    .tile-progress-row + .tile-progress-row {
-      margin-top: 12px;
-    }
-
-    .tile-progress-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 6px;
-      color: var(--navy);
-      font-size: 13px;
-      font-weight: 900;
-    }
-
-    .tile-progress-percent {
-      font-variant-numeric: tabular-nums;
-    }
-
-    .tile-progress-track {
-      width: 100%;
-      height: 10px;
-      overflow: hidden;
-      background: #E2EAF3;
-      border: 1px solid rgba(23, 50, 77, 0.10);
-      border-radius: 999px;
-    }
-
-    .tile-progress-fill {
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, var(--navy), var(--blue));
-    }
-
-    .tile-progress-row.target .tile-progress-fill {
-      background: linear-gradient(90deg, #9A6500, #E4A51A);
-    }
-
     .portal-link-text {
       position: relative;
       z-index: 1;
@@ -405,8 +289,6 @@
       padding: 11px 16px;
       font-size: 16px;
       font-weight: 900;
-      align-self: flex-start;
-      margin-top: auto;
     }
 
     .footer {
@@ -437,14 +319,9 @@
         padding: 28px 20px;
       }
 
-      .countdown-card,
       .intro-card,
       .portal-card {
         border-radius: 18px;
-      }
-
-      .countdown-display {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
@@ -455,7 +332,6 @@
       }
 
       .header,
-      .countdown-card,
       .intro-card,
       .portal-card {
         box-shadow: none;
@@ -465,43 +341,21 @@
 </head>
 <body>
   <main class="wrap">
-    <section class="header" aria-label="TSV Technical Video Competition Header">
-      <p class="kicker">District of Florida and Caribbean</p>
+    <section class="header" aria-label="TSV Technical Video Competition Entry Header">
+      <p class="kicker">District of Florida and Caribbean Entry</p>
       <h1>TSV Technical Video Competition</h1>
-      <p class="subtitle">Select a team group portal below to view its project site.</p>
+      <p class="subtitle">Select a team group portal below to view its project site, action items, production materials, schedules, and supporting resources.</p>
     </section>
 
-    <section class="countdown-card" aria-labelledby="submissionCountdownTitle">
-      <p class="countdown-kicker">Final Submission Deadline</p>
-      <h2 id="submissionCountdownTitle">Countdown to August 17</h2>
-      <div class="countdown-display" id="submissionCountdown" role="timer" aria-label="Time remaining until the August 17, 2026 submission deadline">
-        <div class="countdown-unit"><span class="countdown-value" id="countdownDays">00</span><span class="countdown-label">Days</span></div>
-        <div class="countdown-unit"><span class="countdown-value" id="countdownHours">00</span><span class="countdown-label">Hours</span></div>
-        <div class="countdown-unit"><span class="countdown-value" id="countdownMinutes">00</span><span class="countdown-label">Minutes</span></div>
-        <div class="countdown-unit"><span class="countdown-value" id="countdownSeconds">00.0</span><span class="countdown-label">Seconds</span></div>
-      </div>
-      <p class="countdown-date" id="countdownDeadlineText">August 17, 2026 at 12:00 AM EDT</p>
-    </section>
-
-    <section class="intro-card" aria-label="Portal overview">
+    <section class="intro-card" aria-label="Entry portal overview">
       <h2>Production Team Portals</h2>
     </section>
 
-    <section class="portal-grid" aria-label="TSV group portal links">
+    <section class="portal-grid" aria-label="TSV group entry portal links">
       <a class="portal-card" href="crimping-team-site/index.html">
         <div class="portal-icon crimp-icon" aria-hidden="true">⌁</div>
         <h2>Crimping Team Group</h2>
         <p>Open the Crimping team site for cable preparation, RJ45 crimping tutorial planning, action items, resources, and deliverables.</p>
-        <div class="tile-progress" aria-label="Crimping project progress">
-          <div class="tile-progress-row">
-            <div class="tile-progress-meta"><span>Current Progress</span><span class="tile-progress-percent">58%</span></div>
-            <div class="tile-progress-track" role="progressbar" aria-label="Current Crimping project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="58"><div class="tile-progress-fill" style="width: 58%;"></div></div>
-          </div>
-          <div class="tile-progress-row target">
-            <div class="tile-progress-meta"><span>Target Progress</span><span class="tile-progress-percent">65%</span></div>
-            <div class="tile-progress-track" role="progressbar" aria-label="Target Crimping project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="65"><div class="tile-progress-fill" style="width: 65%;"></div></div>
-          </div>
-        </div>
         <span class="portal-link-text">Open Portal →</span>
       </a>
 
@@ -516,16 +370,6 @@
         </div>
         <h2>Signal Team Group</h2>
         <p>Open the Signal Flow team site for audio signal path planning, visual script materials, graphics, production notes, and team resources.</p>
-        <div class="tile-progress" aria-label="Signal Flow project progress">
-          <div class="tile-progress-row">
-            <div class="tile-progress-meta"><span>Current Progress</span><span class="tile-progress-percent">48%</span></div>
-            <div class="tile-progress-track" role="progressbar" aria-label="Current Signal Flow project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="48"><div class="tile-progress-fill" style="width: 48%;"></div></div>
-          </div>
-          <div class="tile-progress-row target">
-            <div class="tile-progress-meta"><span>Target Progress</span><span class="tile-progress-percent">65%</span></div>
-            <div class="tile-progress-track" role="progressbar" aria-label="Target Signal Flow project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="65"><div class="tile-progress-fill" style="width: 65%;"></div></div>
-          </div>
-        </div>
         <span class="portal-link-text">Open Portal →</span>
       </a>
 
@@ -538,59 +382,11 @@
         </div>
         <h2>WebEx Team Group</h2>
         <p>Open the WebEx team site for hosting workflow, screen-recording demos, troubleshooting sections, action items, and deliverables.</p>
-        <div class="tile-progress" aria-label="WebEx project progress">
-          <div class="tile-progress-row">
-            <div class="tile-progress-meta"><span>Current Progress</span><span class="tile-progress-percent">53%</span></div>
-            <div class="tile-progress-track" role="progressbar" aria-label="Current WebEx project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="53"><div class="tile-progress-fill" style="width: 53%;"></div></div>
-          </div>
-          <div class="tile-progress-row target">
-            <div class="tile-progress-meta"><span>Target Progress</span><span class="tile-progress-percent">65%</span></div>
-            <div class="tile-progress-track" role="progressbar" aria-label="Target WebEx project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="65"><div class="tile-progress-fill" style="width: 65%;"></div></div>
-          </div>
-        </div>
         <span class="portal-link-text">Open Portal →</span>
       </a>
     </section>
 
     <p class="footer">TSV Technical Video Competition • District of Florida and Caribbean</p>
   </main>
-
-  <script>
-    (function () {
-      // Countdown target: the start of August 17, 2026 in Eastern Daylight Time.
-      const deadline = new Date("2026-08-17T00:00:00-04:00").getTime();
-      const daysEl = document.getElementById("countdownDays");
-      const hoursEl = document.getElementById("countdownHours");
-      const minutesEl = document.getElementById("countdownMinutes");
-      const secondsEl = document.getElementById("countdownSeconds");
-      const titleEl = document.getElementById("submissionCountdownTitle");
-      const deadlineTextEl = document.getElementById("countdownDeadlineText");
-
-      function pad(value) {
-        return String(value).padStart(2, "0");
-      }
-
-      function updateCountdown() {
-        const remaining = Math.max(0, deadline - Date.now());
-        const days = Math.floor(remaining / 86400000);
-        const hours = Math.floor((remaining % 86400000) / 3600000);
-        const minutes = Math.floor((remaining % 3600000) / 60000);
-        const seconds = Math.floor((remaining % 60000) / 100) / 10;
-
-        daysEl.textContent = pad(days);
-        hoursEl.textContent = pad(hours);
-        minutesEl.textContent = pad(minutes);
-        secondsEl.textContent = seconds.toFixed(1).padStart(4, "0");
-
-        if (remaining === 0) {
-          titleEl.textContent = "August 17 Submission Date Reached";
-          deadlineTextEl.textContent = "Final submission date: August 17, 2026";
-        }
-      }
-
-      updateCountdown();
-      window.setInterval(updateCountdown, 100);
-    }());
-  </script>
 </body>
 </html>

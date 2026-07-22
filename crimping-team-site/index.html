@@ -500,12 +500,153 @@ body.project-popup-open {
     box-shadow: none;
   }
 }
+
+
+/* Two-panel timed team notices */
+.notice-launcher {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 9997;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 11px 17px;
+  border: 1px solid var(--blue);
+  border-radius: 999px;
+  color: white;
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  box-shadow: 0 10px 24px rgba(23, 50, 77, .25);
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+}
+.notice-launcher:hover,
+.notice-launcher:focus { transform: translateY(-1px); }
+.notice-launcher:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.notice-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 0 52px 18px 0;
+}
+.notice-tab {
+  min-height: 43px;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--navy);
+  background: var(--light-blue);
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+}
+.notice-tab[aria-selected="true"] {
+  color: white;
+  border-color: var(--blue);
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+}
+.notice-panel[hidden] { display: none !important; }
+.notice-timer {
+  margin: -2px 0 16px 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: var(--muted);
+  background: transparent;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+}
+.notice-meeting-title { margin-right: 0 !important; }
+.notice-meeting-link {
+  color: #1D5F8F;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+.notice-code {
+  display: inline-block;
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #F7F9FC;
+  color: var(--navy);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-weight: 800;
+  letter-spacing: .02em;
+}
+.notice-nav-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 14px;
+}
+.notice-nav-group { display: flex; flex-wrap: wrap; gap: 10px; }
+.notice-dot-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 15px;
+}
+.notice-dot {
+  width: 11px;
+  height: 11px;
+  padding: 0;
+  border: 1px solid var(--blue);
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+}
+.notice-dot[aria-current="true"] { background: var(--blue); }
+@media (max-width: 620px) {
+  .notice-tabs { grid-template-columns: 1fr; margin-right: 44px; }
+  .notice-launcher { right: 12px; bottom: 12px; }
+  .project-popup { padding: 22px; }
+  .project-detail-grid { grid-template-columns: 1fr; }
+  .project-detail-label,
+  .project-detail-value { border-bottom: 1px solid var(--border) !important; }
+  .project-detail-grid div:last-child { border-bottom: none !important; }
+}
+@media print { .notice-launcher, .project-popup-overlay { display: none !important; } }
+
 </style>
 </head>
 <body>
 <div aria-hidden="true" class="project-popup-overlay" id="projectReminderPopup">
-<section aria-describedby="projectReminderSummary" aria-labelledby="projectReminderTitle" aria-modal="true" class="project-popup" role="dialog">
-<button aria-label="Close project reminder" class="project-popup-close-x" data-project-popup-close="" type="button">×</button>
+<section aria-describedby="noticeStatus" aria-labelledby="activeNoticeTitle" aria-modal="true" class="project-popup" role="dialog">
+<button aria-label="Close team notices" class="project-popup-close-x" data-project-popup-close type="button">×</button>
+<div aria-label="Choose a team notice" class="notice-tabs" role="tablist">
+<button aria-controls="meetingNoticePanel" aria-selected="true" class="notice-tab" data-notice-target="meeting" id="meetingNoticeTab" role="tab" type="button">Panata Meeting</button>
+<button aria-controls="reminderNoticePanel" aria-selected="false" class="notice-tab" data-notice-target="reminder" id="reminderNoticeTab" role="tab" type="button">Project Reminder</button>
+</div>
+<p aria-live="polite" class="notice-timer" id="noticeStatus">Automatically switching to next notification in <span id="noticeCountdown">20</span> seconds.</p>
+
+<div aria-labelledby="meetingNoticeTab" class="notice-panel" data-notice-panel="meeting" id="meetingNoticePanel" role="tabpanel">
+<p class="project-popup-kicker">Next Crimping Team Panata</p>
+<h2 class="notice-meeting-title" id="activeNoticeTitle">Weekly Panata Meeting</h2>
+<p class="project-popup-intro"><strong>(ONLINE) Crimping TSV Team Weekly Panata Meeting</strong><br>Monday, July 27, 2026 • 7 PM EDT / 6 PM AST<br>District of Florida and Caribbean</p>
+<div aria-label="Panata meeting details" class="project-detail-grid">
+<div class="project-detail-label">Meeting Link</div>
+<div class="project-detail-value"><a class="notice-meeting-link" href="https://miami-tsv.com/crimping-team-meeting" rel="noopener noreferrer" target="_blank">miami-tsv.com/crimping-team-meeting</a></div>
+<div class="project-detail-label">Meeting Number</div>
+<div class="project-detail-value"><span class="notice-code">2864 886 6772</span></div>
+<div class="project-detail-label">Password</div>
+<div class="project-detail-value"><span class="notice-code">JULY27TH</span></div>
+<div class="project-detail-label">Alternate Link</div>
+<div class="project-detail-value"><a class="notice-meeting-link" href="https://inc-maimi-tsv.my.webex.com/inc-maimi-tsv.my/j.php?MTID=maccf0e76496e6cb8e2771f9196d960dc" rel="noopener noreferrer" target="_blank">Open alternate WebEx link</a></div>
+</div>
+<p class="project-popup-note"><strong>Meeting reminder:</strong> Join a few minutes early so audio, video, and the planned Crimping production updates can be checked before the Panata begins.</p>
+<div class="project-popup-actions">
+<a class="project-popup-primary" href="https://miami-tsv.com/crimping-team-meeting" rel="noopener noreferrer" target="_blank">Join Panata Meeting</a>
+<a class="project-popup-button" download href="crimping-panata-july-27-2026.ics">Save to Calendar</a>
+<a class="project-popup-button" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%28ONLINE%29%20Crimping%20TSV%20Team%20Weekly%20Panata%20Meeting&dates=20260727T230000Z/20260728T000000Z&details=District%20of%20Florida%20and%20Caribbean%0A%0AMeeting%20link%3A%20https%3A//miami-tsv.com/crimping-team-meeting%0AMeeting%20number%3A%202864%20886%206772%0AMeeting%20password%3A%20JULY27TH%0AAlternate%20link%3A%20https%3A//inc-maimi-tsv.my.webex.com/inc-maimi-tsv.my/j.php%3FMTID%3Dmaccf0e76496e6cb8e2771f9196d960dc%0A%0AMeeting%20time%3A%207%20PM%20EDT%20/%206%20PM%20AST.&location=WebEx%20-%20https%3A//miami-tsv.com/crimping-team-meeting&ctz=America/New_York" rel="noopener noreferrer" target="_blank">Add to Google Calendar</a>
+<button class="project-popup-button" data-notice-target="reminder" type="button">View Project Reminder</button>
+<button class="project-popup-button" data-project-popup-close type="button">Close Notices</button>
+</div>
+</div>
+
+<div aria-labelledby="reminderNoticeTab" class="notice-panel" data-notice-panel="reminder" hidden id="reminderNoticePanel" role="tabpanel">
 <p class="project-popup-kicker">Crimping Team Reminder</p>
 <h2 id="projectReminderTitle">Important Project Reminder</h2>
 <p class="project-popup-intro" id="projectReminderSummary"><strong>Recording is complete and the project has moved into post-production.</strong> The title card is uploaded, lower-third and section-card templates are complete, demo-screen visuals need refinement, and voice-over begins this weekend.</p>
@@ -522,10 +663,18 @@ body.project-popup-open {
 <p class="project-popup-note"><strong>Reminder:</strong> Avoid unnecessary reshoots and new style changes. Use pickups only when the existing footage cannot show an essential step clearly or accurately.</p>
 <div class="project-popup-actions">
 <a class="project-popup-primary" href="action-items.html">View Action Items</a>
-<button class="project-popup-button" data-project-popup-close="" type="button">Close Reminder</button>
+<button class="project-popup-button" data-notice-target="meeting" type="button">View Panata Meeting</button>
+<button class="project-popup-button" data-project-popup-close type="button">Close Notices</button>
+</div>
+</div>
+
+<div aria-label="Notice position" class="notice-dot-row">
+<button aria-current="true" aria-label="Show Panata meeting notice" class="notice-dot" data-notice-target="meeting" type="button"></button>
+<button aria-current="false" aria-label="Show project reminder" class="notice-dot" data-notice-target="reminder" type="button"></button>
 </div>
 </section>
 </div>
+<button aria-haspopup="dialog" class="notice-launcher" id="noticeLauncher" type="button">Team Notices</button>
 <main class="wrap">
 <section class="header"><h1>Crimping Team Group Site</h1></section>
 <nav class="nav">
@@ -585,61 +734,137 @@ body.project-popup-open {
 <script>
 (function () {
   var popup = document.getElementById('projectReminderPopup');
-  if (!popup) return;
+  var launcher = document.getElementById('noticeLauncher');
+  if (!popup || !launcher) return;
 
   var closeButtons = popup.querySelectorAll('[data-project-popup-close]');
+  var targetButtons = popup.querySelectorAll('[data-notice-target]');
+  var panels = popup.querySelectorAll('[data-notice-panel]');
+  var tabs = popup.querySelectorAll('[role="tab"]');
+  var dots = popup.querySelectorAll('.notice-dot');
+  var status = document.getElementById('noticeStatus');
   var focusableSelector = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
   var previousFocus = null;
+  var activeNotice = 'meeting';
+  var countdownTimer = null;
+  var secondsRemaining = 20;
+
+  function clearTimer() {
+    if (countdownTimer) window.clearInterval(countdownTimer);
+    countdownTimer = null;
+  }
+
+  function updateCountdown() {
+    if (!status) return;
+    status.hidden = false;
+    status.innerHTML = 'Automatically switching to next notification in <span id="noticeCountdown">' + secondsRemaining + '</span> seconds.';
+  }
+
+  function resetCountdown() {
+    secondsRemaining = 20;
+    updateCountdown();
+  }
+
+  function showNotice(name, options) {
+    options = options || {};
+    activeNotice = name === 'reminder' ? 'reminder' : 'meeting';
+
+    panels.forEach(function (panel) {
+      panel.hidden = panel.getAttribute('data-notice-panel') !== activeNotice;
+    });
+    tabs.forEach(function (tab) {
+      var selected = tab.getAttribute('data-notice-target') === activeNotice;
+      tab.setAttribute('aria-selected', selected ? 'true' : 'false');
+      tab.setAttribute('tabindex', selected ? '0' : '-1');
+    });
+    dots.forEach(function (dot) {
+      dot.setAttribute('aria-current', dot.getAttribute('data-notice-target') === activeNotice ? 'true' : 'false');
+    });
+
+    if (options.focusTab) {
+      var activeTab = popup.querySelector('[role="tab"][data-notice-target="' + activeNotice + '"]');
+      if (activeTab) activeTab.focus();
+    }
+
+    if (options.resetCountdown) resetCountdown();
+  }
+
+  function startAutomaticSwitching() {
+    clearTimer();
+    showNotice('meeting');
+    resetCountdown();
+
+    countdownTimer = window.setInterval(function () {
+      if (!popup.classList.contains('is-visible')) return;
+
+      secondsRemaining -= 1;
+      if (secondsRemaining <= 0) {
+        showNotice(activeNotice === 'meeting' ? 'reminder' : 'meeting');
+        secondsRemaining = 20;
+      }
+      updateCountdown();
+    }, 1000);
+  }
 
   function openPopup() {
     previousFocus = document.activeElement;
     popup.classList.add('is-visible');
     popup.setAttribute('aria-hidden', 'false');
     document.body.classList.add('project-popup-open');
+    startAutomaticSwitching();
 
-    var firstFocusable = popup.querySelector(focusableSelector);
-    if (firstFocusable) firstFocusable.focus();
+    var activeTab = popup.querySelector('[role="tab"][aria-selected="true"]');
+    if (activeTab) activeTab.focus();
   }
 
   function closePopup() {
+    clearTimer();
     popup.classList.remove('is-visible');
     popup.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('project-popup-open');
-
-    if (previousFocus && typeof previousFocus.focus === 'function') {
-      previousFocus.focus();
-    }
+    if (previousFocus && typeof previousFocus.focus === 'function') previousFocus.focus();
   }
 
-  closeButtons.forEach(function (button) {
-    button.addEventListener('click', closePopup);
+  targetButtons.forEach(function (button) {
+    button.addEventListener('click', function () {
+      showNotice(button.getAttribute('data-notice-target'), {
+        focusTab: button.getAttribute('role') === 'tab',
+        resetCountdown: true
+      });
+    });
   });
 
-  popup.addEventListener('click', function (event) {
-    if (event.target === popup) closePopup();
+  tabs.forEach(function (tab, index) {
+    tab.addEventListener('keydown', function (event) {
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+      event.preventDefault();
+      var direction = event.key === 'ArrowRight' ? 1 : -1;
+      var nextIndex = (index + direction + tabs.length) % tabs.length;
+      showNotice(tabs[nextIndex].getAttribute('data-notice-target'), {
+        focusTab: true,
+        resetCountdown: true
+      });
+    });
   });
+
+  closeButtons.forEach(function (button) { button.addEventListener('click', closePopup); });
+  launcher.addEventListener('click', openPopup);
+  popup.addEventListener('click', function (event) { if (event.target === popup) closePopup(); });
 
   document.addEventListener('keydown', function (event) {
     if (!popup.classList.contains('is-visible')) return;
-
-    if (event.key === 'Escape') {
-      closePopup();
-      return;
-    }
-
+    if (event.key === 'Escape') { closePopup(); return; }
     if (event.key === 'Tab') {
-      var focusable = Array.prototype.slice.call(popup.querySelectorAll(focusableSelector));
+      var focusable = Array.prototype.slice.call(popup.querySelectorAll(focusableSelector)).filter(function (element) {
+        return !element.closest('[hidden]');
+      });
       if (!focusable.length) return;
-
       var first = focusable[0];
       var last = focusable[focusable.length - 1];
-
       if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
+        event.preventDefault(); last.focus();
       } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
+        event.preventDefault(); first.focus();
       }
     }
   });

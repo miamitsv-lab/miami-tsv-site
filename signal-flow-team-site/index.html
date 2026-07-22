@@ -426,8 +426,8 @@ a.progress-panel:hover {
 }
 
 
-/* SPA Notice Popup */
-.site-popup-overlay {
+/* SPA Important Project Reminder Popup */
+.project-popup-overlay {
   position: fixed;
   inset: 0;
   z-index: 9999;
@@ -435,25 +435,23 @@ a.progress-panel:hover {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background: rgba(23, 50, 77, 0.62);
+  background: rgba(23, 50, 77, 0.64);
 }
-.site-popup-overlay.is-visible {
-  display: flex;
-}
-body.popup-open {
-  overflow: hidden;
-}
-.site-popup {
+.project-popup-overlay.is-visible { display: flex; }
+body.project-popup-open { overflow: hidden; }
+.project-popup {
   position: relative;
-  width: min(560px, 100%);
+  width: min(680px, 100%);
+  max-height: min(92vh, 760px);
+  overflow: auto;
   background: white;
   border: 1px solid var(--border);
   border-radius: 22px;
   padding: 28px;
-  box-shadow: 0 24px 60px rgba(23, 50, 77, 0.32);
-  animation: popupRise .22s ease-out;
+  box-shadow: 0 24px 60px rgba(23, 50, 77, 0.34);
+  animation: projectPopupRise .22s ease-out;
 }
-.site-popup-kicker {
+.project-popup-kicker {
   display: inline-block;
   margin: 0 0 10px 0;
   color: var(--navy);
@@ -466,48 +464,81 @@ body.popup-open {
   letter-spacing: .04em;
   text-transform: uppercase;
 }
-.site-popup h2 {
-  margin: 0 0 12px 0;
+.project-popup h2 {
+  margin: 0 44px 12px 0;
   color: var(--navy);
-  font-size: clamp(25px, 4vw, 34px);
-  line-height: 1.15;
+  font-size: clamp(27px, 4vw, 38px);
+  line-height: 1.12;
 }
-.site-popup p {
-  margin: 0 0 14px 0;
+.project-popup-intro {
+  margin: 0 0 18px 0;
   color: var(--text);
-  font-size: 17px;
-  line-height: 1.55;
+  font-size: 18px;
+  line-height: 1.5;
 }
-.site-popup-actions {
+.project-detail-grid {
+  display: grid;
+  grid-template-columns: 165px 1fr;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  margin: 16px 0 18px 0;
+}
+.project-detail-label,
+.project-detail-value {
+  padding: 13px 15px;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.45;
+  font-size: 16px;
+}
+.project-detail-label {
+  color: var(--navy);
+  background: var(--light-blue);
+  font-weight: 900;
+}
+.project-detail-value { color: var(--text); background: white; }
+.project-detail-grid div:nth-last-child(-n+2) { border-bottom: none; }
+.project-popup-note {
+  margin: 14px 0 0 0;
+  padding: 14px 16px;
+  background: var(--green);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  color: var(--text);
+  line-height: 1.5;
+  font-size: 16px;
+}
+.project-popup-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 20px;
 }
-.site-popup-button,
-.site-popup-link {
+.project-popup-primary,
+.project-popup-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 44px;
   border-radius: 999px;
   padding: 11px 16px;
-  font-weight: 800;
+  font-weight: 900;
   font-size: 16px;
   text-decoration: none;
   cursor: pointer;
 }
-.site-popup-link {
+.project-popup-primary {
   color: white;
   background: linear-gradient(135deg, var(--navy), var(--blue));
   border: 1px solid var(--blue);
 }
-.site-popup-button {
+.project-popup-button {
   color: var(--navy);
   background: var(--light-blue);
   border: 1px solid var(--border);
 }
-.site-popup-close-x {
+.project-popup-close-x {
   position: absolute;
   top: 14px;
   right: 14px;
@@ -521,30 +552,124 @@ body.popup-open {
   line-height: 1;
   cursor: pointer;
 }
-.site-popup-button:hover,
-.site-popup-link:hover,
-.site-popup-close-x:hover {
-  filter: brightness(.98);
-  transform: translateY(-1px);
-}
-.site-popup-button:focus-visible,
-.site-popup-link:focus-visible,
-.site-popup-close-x:focus-visible {
-  outline: 3px solid var(--blue);
-  outline-offset: 3px;
-}
-@keyframes popupRise {
+.project-popup-primary:hover,
+.project-popup-button:hover,
+.project-popup-close-x:hover { filter: brightness(.98); transform: translateY(-1px); }
+.project-popup-primary:focus-visible,
+.project-popup-button:focus-visible,
+.project-popup-close-x:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+@keyframes projectPopupRise {
   from { opacity: 0; transform: translateY(14px) scale(.98); }
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
-@media (max-width: 560px) {
-  .site-popup { padding: 24px 20px; }
-  .site-popup-actions { flex-direction: column; }
-  .site-popup-button,
-  .site-popup-link { width: 100%; }
+
+/* Two-panel timed team notices */
+.notice-launcher {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 9997;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 11px 17px;
+  border: 1px solid var(--blue);
+  border-radius: 999px;
+  color: white;
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  box-shadow: 0 10px 24px rgba(23, 50, 77, .25);
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
 }
-
-
+.notice-launcher:hover,
+.notice-launcher:focus { transform: translateY(-1px); }
+.notice-launcher:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.notice-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 0 52px 18px 0;
+}
+.notice-tab {
+  min-height: 43px;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--navy);
+  background: var(--light-blue);
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+}
+.notice-tab[aria-selected="true"] {
+  color: white;
+  border-color: var(--blue);
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+}
+.notice-panel[hidden] { display: none !important; }
+.notice-timer {
+  margin: -2px 0 16px 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: var(--muted);
+  background: transparent;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+}
+.notice-meeting-title { margin-right: 0 !important; }
+.notice-meeting-link {
+  color: #1D5F8F;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+.notice-code {
+  display: inline-block;
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #F7F9FC;
+  color: var(--navy);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-weight: 800;
+  letter-spacing: .02em;
+}
+.notice-dot-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 15px;
+}
+.notice-dot {
+  width: 11px;
+  height: 11px;
+  padding: 0;
+  border: 1px solid var(--blue);
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+}
+.notice-dot[aria-current="true"] { background: var(--blue); }
+@media (max-width: 640px) {
+  .project-popup { padding: 24px 20px; }
+  .project-popup h2 { margin-right: 40px; }
+  .project-detail-grid { grid-template-columns: 1fr; }
+  .project-detail-label { border-bottom: none; padding-bottom: 4px; }
+  .project-detail-value { padding-top: 4px; }
+  .project-popup-actions { flex-direction: column; }
+  .project-popup-primary,
+  .project-popup-button { width: 100%; }
+  .notice-tabs { grid-template-columns: 1fr; margin-right: 44px; }
+  .notice-launcher { right: 12px; bottom: 12px; }
+  .project-detail-label,
+  .project-detail-value { border-bottom: 1px solid var(--border) !important; }
+  .project-detail-grid div:last-child { border-bottom: none !important; }
+}
+@media print { .notice-launcher, .project-popup-overlay { display: none !important; } }
 
 /* Fat Footer Breadcrumb */
 .fat-breadcrumb-footer {
@@ -684,62 +809,137 @@ body.popup-open {
 </main>
 <script>
 (function () {
-  var popup = document.getElementById('siteNoticePopup');
-  if (!popup) return;
+  var popup = document.getElementById('projectReminderPopup');
+  var launcher = document.getElementById('noticeLauncher');
+  if (!popup || !launcher) return;
 
-  var closeButtons = popup.querySelectorAll('[data-popup-close]');
+  var closeButtons = popup.querySelectorAll('[data-project-popup-close]');
+  var targetButtons = popup.querySelectorAll('[data-notice-target]');
+  var panels = popup.querySelectorAll('[data-notice-panel]');
+  var tabs = popup.querySelectorAll('[role="tab"]');
+  var dots = popup.querySelectorAll('.notice-dot');
+  var status = document.getElementById('noticeStatus');
   var focusableSelector = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
   var previousFocus = null;
+  var activeNotice = 'meeting';
+  var countdownTimer = null;
+  var secondsRemaining = 20;
+
+  function clearTimer() {
+    if (countdownTimer) window.clearInterval(countdownTimer);
+    countdownTimer = null;
+  }
+
+  function updateCountdown() {
+    if (!status) return;
+    status.hidden = false;
+    status.innerHTML = 'Automatically switching to next notification in <span id="noticeCountdown">' + secondsRemaining + '</span> seconds.';
+  }
+
+  function resetCountdown() {
+    secondsRemaining = 20;
+    updateCountdown();
+  }
+
+  function showNotice(name, options) {
+    options = options || {};
+    activeNotice = name === 'reminder' ? 'reminder' : 'meeting';
+
+    panels.forEach(function (panel) {
+      panel.hidden = panel.getAttribute('data-notice-panel') !== activeNotice;
+    });
+    tabs.forEach(function (tab) {
+      var selected = tab.getAttribute('data-notice-target') === activeNotice;
+      tab.setAttribute('aria-selected', selected ? 'true' : 'false');
+      tab.setAttribute('tabindex', selected ? '0' : '-1');
+    });
+    dots.forEach(function (dot) {
+      dot.setAttribute('aria-current', dot.getAttribute('data-notice-target') === activeNotice ? 'true' : 'false');
+    });
+
+    if (options.focusTab) {
+      var activeTab = popup.querySelector('[role="tab"][data-notice-target="' + activeNotice + '"]');
+      if (activeTab) activeTab.focus();
+    }
+
+    if (options.resetCountdown) resetCountdown();
+  }
+
+  function startAutomaticSwitching() {
+    clearTimer();
+    showNotice('meeting');
+    resetCountdown();
+
+    countdownTimer = window.setInterval(function () {
+      if (!popup.classList.contains('is-visible')) return;
+      secondsRemaining -= 1;
+      if (secondsRemaining <= 0) {
+        showNotice(activeNotice === 'meeting' ? 'reminder' : 'meeting');
+        secondsRemaining = 20;
+      }
+      updateCountdown();
+    }, 1000);
+  }
 
   function openPopup() {
     previousFocus = document.activeElement;
     popup.classList.add('is-visible');
     popup.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('popup-open');
+    document.body.classList.add('project-popup-open');
+    startAutomaticSwitching();
 
-    var firstFocusable = popup.querySelector(focusableSelector);
-    if (firstFocusable) firstFocusable.focus();
+    var activeTab = popup.querySelector('[role="tab"][aria-selected="true"]');
+    if (activeTab) activeTab.focus();
   }
 
   function closePopup() {
+    clearTimer();
     popup.classList.remove('is-visible');
     popup.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('popup-open');
-
-    if (previousFocus && typeof previousFocus.focus === 'function') {
-      previousFocus.focus();
-    }
+    document.body.classList.remove('project-popup-open');
+    if (previousFocus && typeof previousFocus.focus === 'function') previousFocus.focus();
   }
 
-  closeButtons.forEach(function (button) {
-    button.addEventListener('click', closePopup);
+  targetButtons.forEach(function (button) {
+    button.addEventListener('click', function () {
+      showNotice(button.getAttribute('data-notice-target'), {
+        focusTab: button.getAttribute('role') === 'tab',
+        resetCountdown: true
+      });
+    });
   });
 
-  popup.addEventListener('click', function (event) {
-    if (event.target === popup) closePopup();
+  tabs.forEach(function (tab, index) {
+    tab.addEventListener('keydown', function (event) {
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+      event.preventDefault();
+      var direction = event.key === 'ArrowRight' ? 1 : -1;
+      var nextIndex = (index + direction + tabs.length) % tabs.length;
+      showNotice(tabs[nextIndex].getAttribute('data-notice-target'), {
+        focusTab: true,
+        resetCountdown: true
+      });
+    });
   });
+
+  closeButtons.forEach(function (button) { button.addEventListener('click', closePopup); });
+  launcher.addEventListener('click', openPopup);
+  popup.addEventListener('click', function (event) { if (event.target === popup) closePopup(); });
 
   document.addEventListener('keydown', function (event) {
     if (!popup.classList.contains('is-visible')) return;
-
-    if (event.key === 'Escape') {
-      closePopup();
-      return;
-    }
-
+    if (event.key === 'Escape') { closePopup(); return; }
     if (event.key === 'Tab') {
-      var focusable = Array.prototype.slice.call(popup.querySelectorAll(focusableSelector));
+      var focusable = Array.prototype.slice.call(popup.querySelectorAll(focusableSelector)).filter(function (element) {
+        return !element.closest('[hidden]');
+      });
       if (!focusable.length) return;
-
       var first = focusable[0];
       var last = focusable[focusable.length - 1];
-
       if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
+        event.preventDefault(); last.focus();
       } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
+        event.preventDefault(); first.focus();
       }
     }
   });
