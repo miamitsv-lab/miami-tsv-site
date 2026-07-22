@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//District of Florida and Caribbean TSV//Signal Flow Panata//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:signal-flow-panata-20260727@miami-tsv.com
+DTSTAMP:20260722T200000Z
+DTSTART;TZID=America/New_York:20260727T210000
+DTEND;TZID=America/New_York:20260727T220000
+SUMMARY:(ONLINE) Signal Flow TSV Team Weekly Panata Meeting
+LOCATION:WebEx - https://miami-tsv.com/signal-flow-team-meeting
+DESCRIPTION:District of Florida and Caribbean\n\nMeeting link: https://miami-tsv.com/signal-flow-team-meeting\nMeeting number: 2867 408 6132\nMeeting password: JULY27TH\nAlternate link: https://inc-maimi-tsv.my.webex.com/inc-maimi-tsv.my/j.php?MTID=m9ea53696c81b7e06e69101fc18dd9e6a\n\nMeeting time: 9 PM EDT / 8 PM AST.
+URL:https://miami-tsv.com/signal-flow-team-meeting
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Signal Flow TSV Team Panata begins in 30 minutes.
+END:VALARM
+END:VEVENT
+END:VCALENDAR

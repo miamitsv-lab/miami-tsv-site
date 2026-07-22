@@ -244,6 +244,170 @@
 
 
 
+
+/* SPA Important Project Reminder Popup */
+.project-popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(23, 50, 77, 0.64);
+}
+.project-popup-overlay.is-visible {
+  display: flex;
+}
+body.project-popup-open {
+  overflow: hidden;
+}
+.project-popup {
+  position: relative;
+  width: min(680px, 100%);
+  max-height: min(92vh, 760px);
+  overflow: auto;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 28px;
+  box-shadow: 0 24px 60px rgba(23, 50, 77, 0.34);
+  animation: projectPopupRise .22s ease-out;
+}
+.project-popup-kicker {
+  display: inline-block;
+  margin: 0 0 10px 0;
+  color: var(--navy);
+  background: var(--gold);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.project-popup h2 {
+  margin: 0 44px 12px 0;
+  color: var(--navy);
+  font-size: clamp(27px, 4vw, 38px);
+  line-height: 1.12;
+}
+.project-popup-intro {
+  margin: 0 0 18px 0;
+  color: var(--text);
+  font-size: 18px;
+  line-height: 1.5;
+}
+.project-detail-grid {
+  display: grid;
+  grid-template-columns: 165px 1fr;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  margin: 16px 0 18px 0;
+}
+.project-detail-label,
+.project-detail-value {
+  padding: 13px 15px;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.45;
+  font-size: 16px;
+}
+.project-detail-label {
+  color: var(--navy);
+  background: var(--light-blue);
+  font-weight: 900;
+}
+.project-detail-value {
+  color: var(--text);
+  background: white;
+}
+.project-detail-grid div:nth-last-child(-n+2) {
+  border-bottom: none;
+}
+.project-popup-note {
+  margin: 14px 0 0 0;
+  padding: 14px 16px;
+  background: var(--green);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  color: var(--text);
+  line-height: 1.5;
+  font-size: 16px;
+}
+.project-popup-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+.project-popup-primary,
+.project-popup-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  border-radius: 999px;
+  padding: 11px 16px;
+  font-weight: 900;
+  font-size: 16px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.project-popup-primary {
+  color: white;
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  border: 1px solid var(--blue);
+}
+.project-popup-button {
+  color: var(--navy);
+  background: var(--light-blue);
+  border: 1px solid var(--border);
+}
+.project-popup-close-x {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: white;
+  color: var(--navy);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+.project-popup-primary:hover,
+.project-popup-button:hover,
+.project-popup-close-x:hover {
+  filter: brightness(.98);
+  transform: translateY(-1px);
+}
+.project-popup-primary:focus-visible,
+.project-popup-button:focus-visible,
+.project-popup-close-x:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+@keyframes projectPopupRise {
+  from { opacity: 0; transform: translateY(14px) scale(.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@media (max-width: 640px) {
+  .project-popup { padding: 24px 20px; }
+  .project-popup h2 { margin-right: 40px; }
+  .project-detail-grid { grid-template-columns: 1fr; }
+  .project-detail-label { border-bottom: none; padding-bottom: 4px; }
+  .project-detail-value { padding-top: 4px; }
+  .project-popup-actions { flex-direction: column; }
+  .project-popup-primary,
+  .project-popup-button { width: 100%; }
+}
+
+
 /* Site Menu tile hover - matches Project Progress hover behavior */
 .card-grid .tile {
   cursor: pointer;
@@ -339,6 +503,29 @@
 </style>
 </head>
 <body>
+<div aria-hidden="true" class="project-popup-overlay" id="projectReminderPopup">
+<section aria-describedby="projectReminderSummary" aria-labelledby="projectReminderTitle" aria-modal="true" class="project-popup" role="dialog">
+<button aria-label="Close project reminder" class="project-popup-close-x" data-project-popup-close="" type="button">×</button>
+<p class="project-popup-kicker">Crimping Team Reminder</p>
+<h2 id="projectReminderTitle">Important Project Reminder</h2>
+<p class="project-popup-intro" id="projectReminderSummary"><strong>Recording is complete and the project has moved into post-production.</strong> The title card is uploaded, lower-third and section-card templates are complete, demo-screen visuals need refinement, and voice-over begins this weekend.</p>
+<div aria-label="Project reminder details" class="project-detail-grid">
+<div class="project-detail-label">Current Stage</div>
+<div class="project-detail-value">Organize the completed recording, make scene-fitting cuts, and prepare the edit for voice-over syncing.</div>
+<div class="project-detail-label">Weekend Target</div>
+<div class="project-detail-value">Start voice-over, refine the demo-screen visuals, continue the closing card, and complete a first pass of scene cuts.</div>
+<div class="project-detail-label">Next Week</div>
+<div class="project-detail-value">Use the July 20–26 light-work / break week for file organization, audio cleanup, light editing, and missing-asset tracking only.</div>
+<div class="project-detail-label">Protect</div>
+<div class="project-detail-value">Keep the T568B order, RJ45 insertion, crimping action, second-end repeat, and cable tester proof clear in the final edit.</div>
+</div>
+<p class="project-popup-note"><strong>Reminder:</strong> Avoid unnecessary reshoots and new style changes. Use pickups only when the existing footage cannot show an essential step clearly or accurately.</p>
+<div class="project-popup-actions">
+<a class="project-popup-primary" href="action-items.html">View Action Items</a>
+<button class="project-popup-button" data-project-popup-close="" type="button">Close Reminder</button>
+</div>
+</section>
+</div>
 <main class="wrap">
 <section class="header"><h1>Crimping Team Group Site</h1></section>
 <nav class="nav">
@@ -354,28 +541,28 @@
 <div class="progress-header">
 <div>
 <h2>Project Progress</h2>
-<p><strong>Current checkpoint:</strong> The title card and closing card are complete, and the recorded tutorial clips have been uploaded to the Crimping Google Drive folder. Lower-third and section-card templates remain complete. The next weekend milestone is to finish the voice-over, verify the uploaded footage and audio files, and prepare the project for rough-cut assembly.</p>
+<p><strong>Current checkpoint:</strong> Video recording is complete. The title card has been completed and uploaded to the Google Drive folder; lower-third and section-card templates are complete; the closing card is in progress; demo-screen visuals are mostly complete and need refinement; recorded footage now needs scene-fitting cuts; and voice-over begins this weekend.</p>
 </div>
 </div>
 <div class="progress-grid">
 <a aria-label="Go to Action Items page for current progress details" class="progress-panel progress-link" href="action-items.html">
-<div class="progress-meta"><strong>Current Progress</strong><span class="progress-percent">55%</span></div>
-<div aria-label="Current Crimping project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="55" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 55%;"></div></div>
-<p>The project has completed the main recording, core opening and closing graphics, and the footage handoff. Work now centers on voice-over completion, clip review and organization, scene-fitting cuts, remaining visual refinements, and the first rough-cut build.</p>
+<div class="progress-meta"><strong>Current Progress</strong><span class="progress-percent">48%</span></div>
+<div aria-label="Current Crimping project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="48" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 48%;"></div></div>
+<p>Production has moved into post-production. Core recording is complete, the title card is uploaded, lower-third and section-card templates are ready, and the demo-screen visuals are largely built. Remaining work centers on voice-over, scene-fitting cuts, closing-card completion, and visual refinement.</p>
 </a>
 <a aria-label="Go to Deliverables page for target progress details" class="progress-panel target-progress progress-link" href="deadline-reminder.html">
-<div class="progress-meta"><strong>Target Progress</strong><span class="progress-percent">65%</span></div>
-<div aria-label="Target Crimping project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="65" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 65%;"></div></div>
-<p>Target is to reach 65% by the end of the weekend by completing and uploading the voice-over, syncing narration to the uploaded clips, confirming that the critical close-up shots are usable, and starting an edit sequence with the title card, section cards, lower thirds, and closing card in place.</p>
+<div class="progress-meta"><strong>Target Progress</strong><span class="progress-percent">55%</span></div>
+<div aria-label="Target Crimping project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="55" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 55%;"></div></div>
+<p>Target is to reach 55% by the end of the weekend by starting the voice-over, completing a first pass of scene-fitting cuts, refining the demo-screen visuals, advancing the closing card, and confirming that all completed graphics are organized and edit-ready.</p>
 </a>
 </div>
 </section>
 <section class="immediate">
 <h2 class="section-title" style="margin-top: 0;">Immediate Next Step</h2>
 <div class="immediate-grid">
-<article class="action-card"><h2>Needed Next Week</h2><p>Build toward the August 2 full rough-cut deadline: sync the completed voice-over, trim the uploaded clips into the planned scene order, insert the completed title card, section cards, lower thirds, and closing card, place the T568B graphic and required labels or callouts, and maintain one short list of only the missing assets or pickups still needed.</p></article>
-<article class="action-card"><h2>Goal by End of Week</h2><p>Complete and upload the clean voice-over this weekend, organize the final takes by scene or section name, verify that all recorded clips open correctly and have backup copies, and begin the first edit sequence so rough-cut assembly can continue without waiting on audio or core graphics.</p></article>
-<article class="action-card"><h2>Main Reminder</h2><p>Protect technical clarity in every cut: the T568B wire order, RJ45 insertion depth and orientation, crimping action, second-end repeat, and cable tester proof must remain easy to see. Do not add a reshoot, new scene, or new visual style unless the existing material cannot show an essential step clearly and accurately.</p></article>
+<article class="action-card"><h2>Needed Next Week</h2><p>During the July 20–26 light-work / break week, keep the workload focused and organized: back up and label all footage, sync the first voice-over takes, continue light scene-cut refinement, confirm the closing-card and demo-screen asset list, and document only the pickup shots or missing graphics that are truly required before rough-cut assembly resumes.</p></article>
+<article class="action-card"><h2>Goal by End of Week</h2><p>Start the voice-over this weekend, complete the first pass of cuts so the recorded footage fits the planned scenes, refine the mostly finished demo-screen visuals, and continue the closing card. Confirm the completed title card, lower thirds, and section-card templates are uploaded, clearly named, and ready for the editor.</p></article>
+<article class="action-card"><h2>Main Reminder</h2><p>Recording is complete, so avoid unnecessary reshoots or new creative changes. Protect the critical technical views—T568B wire order, RJ45 insertion, crimping action, second-end repeat, and cable tester proof—and schedule a pickup only when the existing footage cannot show the step clearly or accurately.</p></article>
 </div>
 </section>
 <h2 class="section-title">Crimping Team Site Menu</h2>
@@ -395,5 +582,72 @@
 </div>
 </footer>
 </main>
+<script>
+(function () {
+  var popup = document.getElementById('projectReminderPopup');
+  if (!popup) return;
+
+  var closeButtons = popup.querySelectorAll('[data-project-popup-close]');
+  var focusableSelector = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+  var previousFocus = null;
+
+  function openPopup() {
+    previousFocus = document.activeElement;
+    popup.classList.add('is-visible');
+    popup.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('project-popup-open');
+
+    var firstFocusable = popup.querySelector(focusableSelector);
+    if (firstFocusable) firstFocusable.focus();
+  }
+
+  function closePopup() {
+    popup.classList.remove('is-visible');
+    popup.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('project-popup-open');
+
+    if (previousFocus && typeof previousFocus.focus === 'function') {
+      previousFocus.focus();
+    }
+  }
+
+  closeButtons.forEach(function (button) {
+    button.addEventListener('click', closePopup);
+  });
+
+  popup.addEventListener('click', function (event) {
+    if (event.target === popup) closePopup();
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (!popup.classList.contains('is-visible')) return;
+
+    if (event.key === 'Escape') {
+      closePopup();
+      return;
+    }
+
+    if (event.key === 'Tab') {
+      var focusable = Array.prototype.slice.call(popup.querySelectorAll(focusableSelector));
+      if (!focusable.length) return;
+
+      var first = focusable[0];
+      var last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+  });
+
+  window.addEventListener('DOMContentLoaded', function () {
+    window.setTimeout(openPopup, 350);
+  });
+})();
+</script>
 </body>
 </html>

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Signal Flow Week 7-22 Backup</title>
+<style>
+:root {
+  --navy: #17324D;
+  --blue: #2F6FAE;
+  --border: #C9D6E6;
+  --bg: #F6F9FD;
+  --text: #1C2733;
+  --muted: #51606F;
+  --gold: #FFF3DC;
+  --green: #EAF7EF;
+  --purple: #F2ECFF;
+  --red: #FFEAEA;
+  --light-blue: #EAF3FF;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  padding: 24px;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+.wrap { max-width: 1280px; margin: 0 auto; }
+.header {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  color: white;
+  border-radius: 20px;
+  padding: 30px 32px;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 24px rgba(23, 50, 77, .18);
+}
+.header::after {
+  content: "";
+  position: absolute;
+  right: -50px;
+  bottom: -70px;
+  width: 210px;
+  height: 210px;
+  border-radius: 50%;
+  border: 28px solid rgba(255, 255, 255, .08);
+}
+.eyebrow {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  opacity: .88;
+}
+h1 {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-size: clamp(32px, 4vw, 50px);
+  line-height: 1.08;
+}
+.header-subtitle {
+  position: relative;
+  z-index: 1;
+  margin: 10px 0 0;
+  max-width: 820px;
+  line-height: 1.5;
+  font-size: 17px;
+  color: rgba(255, 255, 255, .92);
+}
+.section-heading {
+  margin: 30px 0 14px;
+  color: var(--navy);
+  font-size: clamp(26px, 3vw, 36px);
+}
+
+/* Project Progress - source order: light blue, then gold */
+.project-progress-card {
+  width: 72%;
+  margin: 0 auto 24px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 8px 22px rgba(23, 50, 77, .10);
+}
+.progress-header { margin-bottom: 16px; }
+.progress-header h2 {
+  margin: 0 0 8px;
+  text-align: center;
+  color: var(--navy);
+  font-size: clamp(26px, 3vw, 36px);
+}
+.progress-header p,
+.progress-panel p {
+  margin: 0;
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.55;
+}
+.progress-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-top: 16px;
+}
+.progress-panel {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 17px;
+  background: var(--light-blue);
+}
+.progress-panel.target-progress { background: var(--gold); }
+.progress-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  color: var(--navy);
+  font-size: 18px;
+}
+.progress-percent { font-size: 23px; font-weight: 900; }
+.progress-track {
+  height: 20px;
+  margin-bottom: 11px;
+  overflow: hidden;
+  background: #E6EEF7;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--navy), var(--blue));
+  border-radius: 999px;
+}
+
+/* Immediate Next Step - source order: light blue, green, gold */
+.immediate {
+  margin-bottom: 28px;
+  padding: 18px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 8px 22px rgba(23, 50, 77, .10);
+}
+.section-title {
+  margin: 0 0 14px !important;
+  color: var(--navy);
+  font-size: clamp(26px, 3vw, 36px);
+}
+.immediate-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.action-card {
+  min-height: 195px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+}
+.action-card:nth-child(1) { background: var(--light-blue); }
+.action-card:nth-child(2) { background: var(--green); }
+.action-card:nth-child(3) { background: var(--gold); }
+.action-card h2 {
+  margin: 0 0 10px;
+  color: var(--navy);
+  font-size: 24px;
+}
+.action-card p {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+/* All Action Items - repeating source order: light blue, gold, green, purple, red */
+.action-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+.member-card {
+  overflow: hidden;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 8px 22px rgba(23, 50, 77, .10);
+  break-inside: avoid;
+}
+.member-card:nth-child(5n+1) .member-card-head { background: var(--light-blue); }
+.member-card:nth-child(5n+2) .member-card-head { background: var(--gold); }
+.member-card:nth-child(5n+3) .member-card-head { background: var(--green); }
+.member-card:nth-child(5n+4) .member-card-head { background: var(--purple); }
+.member-card:nth-child(5n+5) .member-card-head { background: var(--red); }
+.member-card-head {
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--border);
+}
+.member-card h2 {
+  margin: 0;
+  color: var(--navy);
+  font-size: 28px;
+}
+.member-role {
+  margin: 8px 0 0;
+  color: #1D5F8F;
+  font-weight: 700;
+  line-height: 1.45;
+}
+.member-card-body { padding: 20px 22px; }
+.member-card-body h3 {
+  margin: 0 0 12px;
+  color: var(--navy);
+  font-size: 21px;
+}
+.member-card-body ul { margin: 0; padding-left: 23px; }
+.member-card-body li {
+  margin: 0 0 10px;
+  font-size: 17px;
+  line-height: 1.55;
+}
+.member-card-body li:last-child { margin-bottom: 0; }
+.footer {
+  margin-top: 30px;
+  padding: 20px 24px;
+  text-align: center;
+  color: white;
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  border-radius: 20px;
+  box-shadow: 0 10px 24px rgba(23, 50, 77, .18);
+}
+.footer strong { display: block; margin-bottom: 4px; font-size: 18px; }
+.footer span { opacity: .9; }
+a { color: inherit; }
+
+@media (max-width: 1000px) {
+  .project-progress-card { width: 86%; }
+  .immediate-grid { grid-template-columns: 1fr; }
+  .action-card { min-height: auto; }
+}
+@media (max-width: 760px) {
+  body { padding: 14px; }
+  .header, .project-progress-card, .immediate, .member-card, .footer { border-radius: 16px; }
+  .header { padding: 24px 22px; }
+  .project-progress-card { width: 100%; }
+  .member-card h2 { font-size: 24px; }
+  .member-card-head, .member-card-body { padding: 18px; }
+}
+@media print {
+  body { padding: 0; background: white; }
+  .header, .project-progress-card, .immediate, .member-card, .footer { box-shadow: none; }
+  .header, .footer { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .project-progress-card { width: 100%; }
+  .member-card-body li, .action-card p, .progress-panel p { font-size: 12px; }
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="header">
+    <p class="eyebrow">TSV Technical Video Competition</p>
+    <h1>Signal Flow Project - Week 7-22 Backup</h1>
+    <p class="header-subtitle">Static project snapshot dated July 22, 2026. This page contains the current Home-page progress, all three immediate-next-step tiles, and every team member's action items without links or selection controls.</p>
+  </header>
+
+  <section class="project-progress-card" aria-label="Signal Flow project progress status">
+    <div class="progress-header">
+      <div>
+        <h2>Project Progress</h2>
+        <p><strong>Current checkpoint:</strong> Pre-production remains closed/locked. The title card is complete, and the lower-thirds and section-card templates are complete. Roblox is the approved animation production method; the characters, rooms, and working environment have been set up. The team is collaborating on the plan to complete the Roblox animation, while the water-pipe analogy illustration remains an immediate priority.</p>
+      </div>
+    </div>
+    <div class="progress-grid">
+
+      <article class="progress-panel progress-link">
+        <div class="progress-meta">
+          <strong>Current Progress</strong>
+          <span class="progress-percent">42%</span>
+        </div>
+        <div class="progress-track" role="progressbar" aria-label="Current Signal Flow project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="42">
+          <div class="progress-fill" style="width: 42%;"></div>
+        </div>
+        <p>The core visual templates are complete, and the Roblox production foundation is ready with the characters, rooms, and environment already set up. The project is moving from setup and planning into scene animation, coordinated scene ownership, and completion of the water-pipe analogy illustration.</p>
+      </article>
+
+      <article class="progress-panel progress-link target-progress">
+        <div class="progress-meta">
+          <strong>Target Progress</strong>
+          <span class="progress-percent">55%</span>
+        </div>
+        <div class="progress-track" role="progressbar" aria-label="Target Signal Flow project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="55">
+          <div class="progress-fill" style="width: 55%;"></div>
+        </div>
+        <p>Reach the next progress mark by finishing the water-pipe analogy illustration, locking the Roblox scene build order and assignments, completing a first reviewable batch of priority Roblox scenes, and organizing the exports for early editing.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="immediate">
+    <h2 class="section-title" style="margin-top: 0;">Immediate Next Step</h2>
+    <div class="immediate-grid">
+      <article class="action-card">
+        <h2>Needed Next Week</h2>
+        <p>Move fully from Roblox setup into animation production. Confirm scene owners, build the priority scenes from the finalized animation list, capture and export review versions, organize the files for editing, and close the remaining water-pipe analogy work.</p>
+      </article>
+      <article class="action-card">
+        <h2>Goal by End of Week</h2>
+        <p>Finish the water-pipe analogy illustration and complete the first reviewable Roblox animation batch. Confirm that the approved characters, rooms, camera views, title card, lower thirds, and section-card templates work consistently together.</p>
+      </article>
+      <article class="action-card">
+        <h2>Main Reminder</h2>
+        <p>The Roblox characters, rooms, and environment are already established. Do not restart the visual direction or add major new scenes. Follow the locked script and finalized scene list, keep movement simple, protect technical accuracy, and use organized exports.</p>
+      </article>
+    </div>
+  </section>
+
+  <h2 class="section-heading">All Action Items</h2>
+  <section class="action-list" id="actionList" aria-label="All Signal Flow team action items for the July 22 weekly backup" aria-live="polite">
+    <article class="member-card">
+      <div class="member-card-head">
+        <h2>Jules T</h2>
+        <p class="member-role">Director / Script Support / Talent / Voiceover</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+          <li>Coordinate the team plan for completing the Roblox animation, including scene order, ownership, review timing, and handoff expectations.</li>
+          <li>Protect the locked story flow and make sure each Roblox scene follows the approved script, host/guest flow, transitions, and closing.</li>
+          <li>Review the opening, transitions, and closing with the completed title card, lower thirds, and section-card templates.</li>
+          <li>Identify any talent, voiceover, or reference-timing needs early so Roblox scene production is not delayed.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="member-card">
+      <div class="member-card-head">
+        <h2>Janna</h2>
+        <p class="member-role">Scriptwriter / Animation Lead / Style Direction / Talent</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+          <li>Lead Roblox animation production using the finalized animation scene list as the build map.</li>
+          <li>Maintain consistency across the approved Roblox characters, rooms, environment, camera views, and simple avatar movements.</li>
+          <li>Coordinate with the team on scene assignments and review the first Roblox scene builds before they are exported.</li>
+          <li>Hand off completed scene exports, working files, and missing-asset notes to Charles, NJ, and Jhules B using clear file names.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="member-card">
+      <div class="member-card-head">
+        <h2>Jay</h2>
+        <p class="member-role">Main SME</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+          <li>Review the water-pipe analogy illustration for technical accuracy and confirm that it clearly supports the audio signal-flow explanation.</li>
+          <li>Review completed Roblox animation blocks for microphone/input, mixer/processing, output, monitor, WebEx/streaming feed, and troubleshooting accuracy.</li>
+          <li>Check that labels, diagrams, room staging, and character actions do not create a misleading technical explanation.</li>
+          <li>Keep feedback limited to accuracy, clarity, and practical TSV usefulness now that the script, format, and visual direction are locked.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="member-card">
+      <div class="member-card-head">
+        <h2>Dennis</h2>
+        <p class="member-role">Support Role / Script Review / Recording Support / Final Review</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+          <li>Support coordination of the Roblox animation completion plan, file organization, scene-status tracking, and final-review preparation.</li>
+          <li>Review early Roblox scene exports for readability, timing, continuity, and consistency with the locked script and visual plan.</li>
+          <li>Help consolidate the remaining asset list, including the water-pipe analogy illustration, scene exports, labels, and review notes.</li>
+          <li>Help enforce the production lock: no new format, major style changes, major script rewrites, or unapproved added scenes.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="member-card">
+      <div class="member-card-head">
+        <h2>Frank</h2>
+        <p class="member-role">SME / Director Support</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+          <li>Support Jay with practical and technical review of the Roblox scenes and water-pipe analogy illustration.</li>
+          <li>Check that the Roblox room setup, character placement, and visual staging keep attention on the signal-flow lesson.</li>
+          <li>Confirm that troubleshooting explanations remain simple, worship-service focused, and useful for TSV officers.</li>
+          <li>Recommend only necessary accuracy, clarity, or readability corrections during the animation build.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="member-card">
+      <div class="member-card-head">
+        <h2>Geo</h2>
+        <p class="member-role">Team Support / SME Support / Secondary Graphics &amp; Animation</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+          <li>Support the Signal Flow team with SME review of the Roblox scene plan, signal path, mixer/processing, monitoring, WebEx/streaming feed, and troubleshooting visuals.</li>
+          <li>Provide secondary Roblox animation or graphics support when scene owners need help with room details, diagrams, labels, callouts, or cleanup.</li>
+          <li>Help review or refine the water-pipe analogy illustration so the visual connection to audio signal flow is clear.</li>
+          <li>Flag missing assets or technical issues early without introducing new major scenes or a new visual style.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="member-card">
+      <div class="member-card-head">
+        <h2>Jlyn</h2>
+        <p class="member-role">Title Card / Lower Thirds / Animation Support</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+          <li>Start looking into the water-pipe analogy illustration showing the source, valve/control, and sprinkler output and its connection to microphone, mixer/processors, and speaker output.</li>
+          <li>Package the completed title card, lower-thirds templates, and section-card templates in clearly named, edit-ready formats.</li>
+          <li>Work with Janna on Roblox animation for the finalized scenes and follow the agreed scene assignments and build order.</li>
+          <li>Help keep character appearance, room setup, camera framing, and simple avatar movement consistent across scenes.</li>
+          <li>Coordinate with Janna, Aiden, NJ, and Jhules B on the graphics and exports needed for each Roblox scene block.</li>
+          <li>Do not redesign the completed templates unless a readability or accuracy correction is approved.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="member-card">
+      <div class="member-card-head">
+        <h2>Aiden</h2>
+        <p class="member-role">Graphics / Diagram Support / Avatar Movement Support</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+          <li>Create or refine the signal-flow diagrams, labels, callouts, and support graphics needed inside the Roblox scenes.</li>
+          <li>Support the Roblox environment with any approved visual assets needed for rooms, displays, or scene explanations.</li>
+          <li>Provide finished graphics in organized folders with clear names and edit-ready exports for the animation and editing teams.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="member-card">
+      <div class="member-card-head">
+        <h2>Charles</h2>
+        <p class="member-role">Main Video Editor / Music-Soundtrack Support</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+          <li>Prepare the editing timeline and scene placeholders for the incoming Roblox animation exports.</li>
+          <li>Begin assembling the first reviewable Roblox scene batch using the finalized scene order and the completed title card, lower thirds, and section-card templates.</li>
+          <li>Track missing scene exports, continuity issues, timing problems, labels, and remaining illustration needs in one review list.</li>
+          <li>Keep music/soundtrack optional and very limited so the signal-flow explanation and voiceover remain clear.</li>
+          <li>Provide music/soundtrack support by identifying and preparing an appropriate low-volume option after the scene timing and voiceover are stable.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="member-card">
+      <div class="member-card-head">
+        <h2>NJ</h2>
+        <p class="member-role">Animation / Graphics / Editing Support</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+          <li>Support Roblox scene capture, export checks, animation cleanup, label readability, and early edit organization.</li>
+          <li>Verify that lower thirds, section cards, diagrams, and callouts remain readable at laptop and television playback size.</li>
+          <li>Assist Janna and Charles with scene exports, file naming, version control, and rough-cut preparation.</li>
+          <li>Record missing assets, continuity issues, or readability problems in the shared review list instead of making unapproved style changes.</li>
+        </ul>
+      </div>
+    </article>
+    <article class="member-card">
+      <div class="member-card-head">
+        <h2>Jhules B</h2>
+        <p class="member-role">Video Editor / Animator Helper / Diagram Illustrator</p>
+      </div>
+      <div class="member-card-body">
+        <h3>Action Items This Week</h3>
+        <ul>
+          <li>Support Jlyn on the water-pipe analogy illustration and show what is done so far.</li>
+          <li>Support Roblox animation and editing with scene cleanup, callouts, captions, transitions, camera-view checks, and export preparation.</li>
+          <li>Quality-check exported Roblox scenes and graphics for readability, continuity, and consistency with the approved style.</li>
+          <li>Assist with visual polish only after the priority scene blocks and core technical diagrams are complete.</li>
+          <li>Help prepare the first reviewable animation batch and full rough-cut path without adding new creative sections.</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <footer class="footer">District of Florida and Caribbean Signal Flow Team - Weekly Backup Snapshot - July 22, 2026</footer>
+</main>
+</body>
+</html>

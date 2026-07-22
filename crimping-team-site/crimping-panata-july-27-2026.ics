@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//District of Florida and Caribbean//Crimping TSV Team//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:crimping-panata-20260727@miami-tsv.com
+DTSTAMP:20260722T190000Z
+DTSTART;TZID=America/New_York:20260727T190000
+DTEND;TZID=America/New_York:20260727T200000
+SUMMARY:(ONLINE) Crimping TSV Team Weekly Panata Meeting
+LOCATION:WebEx - https://miami-tsv.com/crimping-team-meeting
+DESCRIPTION:District of Florida and Caribbean\n\nMeeting link: https://miami-tsv.com/crimping-team-meeting\nMeeting number: 2864 886 6772\nMeeting password: JULY27TH\nAlternate link: https://inc-maimi-tsv.my.webex.com/inc-maimi-tsv.my/j.php?MTID=maccf0e76496e6cb8e2771f9196d960dc\n\nMeeting time: 7 PM EDT / 6 PM AST.
+URL:https://miami-tsv.com/crimping-team-meeting
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:Crimping TSV Team Panata begins in 30 minutes.
+END:VALARM
+END:VEVENT
+END:VCALENDAR

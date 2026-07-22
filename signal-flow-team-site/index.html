@@ -426,8 +426,8 @@ a.progress-panel:hover {
 }
 
 
-/* SPA Notice Popup */
-.site-popup-overlay {
+/* SPA Important Project Reminder Popup */
+.project-popup-overlay {
   position: fixed;
   inset: 0;
   z-index: 9999;
@@ -435,25 +435,23 @@ a.progress-panel:hover {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background: rgba(23, 50, 77, 0.62);
+  background: rgba(23, 50, 77, 0.64);
 }
-.site-popup-overlay.is-visible {
-  display: flex;
-}
-body.popup-open {
-  overflow: hidden;
-}
-.site-popup {
+.project-popup-overlay.is-visible { display: flex; }
+body.project-popup-open { overflow: hidden; }
+.project-popup {
   position: relative;
-  width: min(560px, 100%);
+  width: min(680px, 100%);
+  max-height: min(92vh, 760px);
+  overflow: auto;
   background: white;
   border: 1px solid var(--border);
   border-radius: 22px;
   padding: 28px;
-  box-shadow: 0 24px 60px rgba(23, 50, 77, 0.32);
-  animation: popupRise .22s ease-out;
+  box-shadow: 0 24px 60px rgba(23, 50, 77, 0.34);
+  animation: projectPopupRise .22s ease-out;
 }
-.site-popup-kicker {
+.project-popup-kicker {
   display: inline-block;
   margin: 0 0 10px 0;
   color: var(--navy);
@@ -466,48 +464,81 @@ body.popup-open {
   letter-spacing: .04em;
   text-transform: uppercase;
 }
-.site-popup h2 {
-  margin: 0 0 12px 0;
+.project-popup h2 {
+  margin: 0 44px 12px 0;
   color: var(--navy);
-  font-size: clamp(25px, 4vw, 34px);
-  line-height: 1.15;
+  font-size: clamp(27px, 4vw, 38px);
+  line-height: 1.12;
 }
-.site-popup p {
-  margin: 0 0 14px 0;
+.project-popup-intro {
+  margin: 0 0 18px 0;
   color: var(--text);
-  font-size: 17px;
-  line-height: 1.55;
+  font-size: 18px;
+  line-height: 1.5;
 }
-.site-popup-actions {
+.project-detail-grid {
+  display: grid;
+  grid-template-columns: 165px 1fr;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  margin: 16px 0 18px 0;
+}
+.project-detail-label,
+.project-detail-value {
+  padding: 13px 15px;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.45;
+  font-size: 16px;
+}
+.project-detail-label {
+  color: var(--navy);
+  background: var(--light-blue);
+  font-weight: 900;
+}
+.project-detail-value { color: var(--text); background: white; }
+.project-detail-grid div:nth-last-child(-n+2) { border-bottom: none; }
+.project-popup-note {
+  margin: 14px 0 0 0;
+  padding: 14px 16px;
+  background: var(--green);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  color: var(--text);
+  line-height: 1.5;
+  font-size: 16px;
+}
+.project-popup-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 20px;
 }
-.site-popup-button,
-.site-popup-link {
+.project-popup-primary,
+.project-popup-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 44px;
   border-radius: 999px;
   padding: 11px 16px;
-  font-weight: 800;
+  font-weight: 900;
   font-size: 16px;
   text-decoration: none;
   cursor: pointer;
 }
-.site-popup-link {
+.project-popup-primary {
   color: white;
   background: linear-gradient(135deg, var(--navy), var(--blue));
   border: 1px solid var(--blue);
 }
-.site-popup-button {
+.project-popup-button {
   color: var(--navy);
   background: var(--light-blue);
   border: 1px solid var(--border);
 }
-.site-popup-close-x {
+.project-popup-close-x {
   position: absolute;
   top: 14px;
   right: 14px;
@@ -521,30 +552,124 @@ body.popup-open {
   line-height: 1;
   cursor: pointer;
 }
-.site-popup-button:hover,
-.site-popup-link:hover,
-.site-popup-close-x:hover {
-  filter: brightness(.98);
-  transform: translateY(-1px);
-}
-.site-popup-button:focus-visible,
-.site-popup-link:focus-visible,
-.site-popup-close-x:focus-visible {
-  outline: 3px solid var(--blue);
-  outline-offset: 3px;
-}
-@keyframes popupRise {
+.project-popup-primary:hover,
+.project-popup-button:hover,
+.project-popup-close-x:hover { filter: brightness(.98); transform: translateY(-1px); }
+.project-popup-primary:focus-visible,
+.project-popup-button:focus-visible,
+.project-popup-close-x:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+@keyframes projectPopupRise {
   from { opacity: 0; transform: translateY(14px) scale(.98); }
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
-@media (max-width: 560px) {
-  .site-popup { padding: 24px 20px; }
-  .site-popup-actions { flex-direction: column; }
-  .site-popup-button,
-  .site-popup-link { width: 100%; }
+
+/* Two-panel timed team notices */
+.notice-launcher {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 9997;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 11px 17px;
+  border: 1px solid var(--blue);
+  border-radius: 999px;
+  color: white;
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  box-shadow: 0 10px 24px rgba(23, 50, 77, .25);
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
 }
-
-
+.notice-launcher:hover,
+.notice-launcher:focus { transform: translateY(-1px); }
+.notice-launcher:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.notice-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 0 52px 18px 0;
+}
+.notice-tab {
+  min-height: 43px;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--navy);
+  background: var(--light-blue);
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+}
+.notice-tab[aria-selected="true"] {
+  color: white;
+  border-color: var(--blue);
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+}
+.notice-panel[hidden] { display: none !important; }
+.notice-timer {
+  margin: -2px 0 16px 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: var(--muted);
+  background: transparent;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+}
+.notice-meeting-title { margin-right: 0 !important; }
+.notice-meeting-link {
+  color: #1D5F8F;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+.notice-code {
+  display: inline-block;
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #F7F9FC;
+  color: var(--navy);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-weight: 800;
+  letter-spacing: .02em;
+}
+.notice-dot-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 15px;
+}
+.notice-dot {
+  width: 11px;
+  height: 11px;
+  padding: 0;
+  border: 1px solid var(--blue);
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+}
+.notice-dot[aria-current="true"] { background: var(--blue); }
+@media (max-width: 640px) {
+  .project-popup { padding: 24px 20px; }
+  .project-popup h2 { margin-right: 40px; }
+  .project-detail-grid { grid-template-columns: 1fr; }
+  .project-detail-label { border-bottom: none; padding-bottom: 4px; }
+  .project-detail-value { padding-top: 4px; }
+  .project-popup-actions { flex-direction: column; }
+  .project-popup-primary,
+  .project-popup-button { width: 100%; }
+  .notice-tabs { grid-template-columns: 1fr; margin-right: 44px; }
+  .notice-launcher { right: 12px; bottom: 12px; }
+  .project-detail-label,
+  .project-detail-value { border-bottom: 1px solid var(--border) !important; }
+  .project-detail-grid div:last-child { border-bottom: none !important; }
+}
+@media print { .notice-launcher, .project-popup-overlay { display: none !important; } }
 
 /* Fat Footer Breadcrumb */
 .fat-breadcrumb-footer {
@@ -615,21 +740,68 @@ body.popup-open {
 </style>
 </head>
 <body>
+<div aria-hidden="true" class="project-popup-overlay" id="projectReminderPopup">
+<section aria-describedby="noticeStatus" aria-labelledby="activeNoticeTitle" aria-modal="true" class="project-popup" role="dialog">
+<button aria-label="Close team notices" class="project-popup-close-x" data-project-popup-close type="button">×</button>
+<div aria-label="Choose a team notice" class="notice-tabs" role="tablist">
+<button aria-controls="meetingNoticePanel" aria-selected="true" class="notice-tab" data-notice-target="meeting" id="meetingNoticeTab" role="tab" type="button">Panata Meeting</button>
+<button aria-controls="reminderNoticePanel" aria-selected="false" class="notice-tab" data-notice-target="reminder" id="reminderNoticeTab" role="tab" type="button">Project Reminder</button>
+</div>
+<p aria-live="polite" class="notice-timer" id="noticeStatus">Automatically switching to next notification in <span id="noticeCountdown">20</span> seconds.</p>
 
-<div class="site-popup-overlay" id="siteNoticePopup" aria-hidden="true">
-  <section class="site-popup" role="dialog" aria-modal="true" aria-labelledby="sitePopupTitle" aria-describedby="sitePopupMessage">
-    <button class="site-popup-close-x" type="button" data-popup-close aria-label="Close popup">&times;</button>
-    <p class="site-popup-kicker">Signal Flow Team Notice</p>
-    <h2 id="sitePopupTitle">Important Project Reminder</h2>
-    <p id="sitePopupMessage">Pre-production is now closed and major changes are locked. Continue building only from the finalized animation scenes unless an accuracy fix or necessary team-approved correction is required.</p>
-    <p>Focus this week on animation production, title card and lower-thirds work, the water pipe analogy diagram, organized scene exports, and current action-item handoffs.</p>
-    <div class="site-popup-actions">
-      <a class="site-popup-link" href="action-items.html">View Action Items</a>
-      <button class="site-popup-button" type="button" data-popup-close>Close Message</button>
-    </div>
-  </section>
+<div aria-labelledby="meetingNoticeTab" class="notice-panel" data-notice-panel="meeting" id="meetingNoticePanel" role="tabpanel">
+<p class="project-popup-kicker">Next Signal Flow Team Panata</p>
+<h2 class="notice-meeting-title" id="activeNoticeTitle">Monday Panata Meeting</h2>
+<p class="project-popup-intro"><strong>(ONLINE) Signal Flow TSV Team Weekly Panata Meeting</strong><br>Monday, July 27, 2026 • 9 PM EDT / 8 PM AST<br>District of Florida and Caribbean</p>
+<div aria-label="Panata meeting details" class="project-detail-grid">
+<div class="project-detail-label">Meeting Link</div>
+<div class="project-detail-value"><a class="notice-meeting-link" href="https://miami-tsv.com/signal-flow-team-meeting" rel="noopener noreferrer" target="_blank">miami-tsv.com/signal-flow-team-meeting</a></div>
+<div class="project-detail-label">Meeting Number</div>
+<div class="project-detail-value"><span class="notice-code">2867 408 6132</span></div>
+<div class="project-detail-label">Password</div>
+<div class="project-detail-value"><span class="notice-code">JULY27TH</span></div>
+<div class="project-detail-label">Alternate Link</div>
+<div class="project-detail-value"><a class="notice-meeting-link" href="https://inc-maimi-tsv.my.webex.com/inc-maimi-tsv.my/j.php?MTID=m9ea53696c81b7e06e69101fc18dd9e6a" rel="noopener noreferrer" target="_blank">Open alternate WebEx link</a></div>
+</div>
+<p class="project-popup-note"><strong>Meeting reminder:</strong> Join a few minutes early so audio, video, the water-pipe analogy update, and the planned Roblox animation work can be reviewed before the Panata begins.</p>
+<div class="project-popup-actions">
+<a class="project-popup-primary" href="https://miami-tsv.com/signal-flow-team-meeting" rel="noopener noreferrer" target="_blank">Join Panata Meeting</a>
+<a class="project-popup-button" download href="signal-flow-panata-july-27-2026.ics">Save to Calendar</a>
+<a class="project-popup-button" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%28ONLINE%29%20Signal%20Flow%20TSV%20Team%20Weekly%20Panata%20Meeting&dates=20260728T010000Z/20260728T020000Z&details=District%20of%20Florida%20and%20Caribbean%0A%0AMeeting%20link%3A%20https%3A%2F%2Fmiami-tsv.com%2Fsignal-flow-team-meeting%0AMeeting%20number%3A%202867%20408%206132%0AMeeting%20password%3A%20JULY27TH%0AAlternate%20link%3A%20https%3A%2F%2Finc-maimi-tsv.my.webex.com%2Finc-maimi-tsv.my%2Fj.php%3FMTID%3Dm9ea53696c81b7e06e69101fc18dd9e6a%0A%0AMeeting%20time%3A%209%20PM%20EDT%20%2F%208%20PM%20AST.&location=WebEx%20-%20https%3A%2F%2Fmiami-tsv.com%2Fsignal-flow-team-meeting&ctz=America/New_York" rel="noopener noreferrer" target="_blank">Add to Google Calendar</a>
+<button class="project-popup-button" data-notice-target="reminder" type="button">View Project Reminder</button>
+<button class="project-popup-button" data-project-popup-close type="button">Close Notices</button>
+</div>
 </div>
 
+<div aria-labelledby="reminderNoticeTab" class="notice-panel" data-notice-panel="reminder" hidden id="reminderNoticePanel" role="tabpanel">
+<p class="project-popup-kicker">Signal Flow Team Reminder</p>
+<h2>Important Project Reminder</h2>
+<p class="project-popup-intro"><strong>The title card and closing card are complete, and the device graphic assets have been uploaded.</strong> The immediate milestone is to complete the Signal Flow water-pipe analogy and begin Roblox animation this weekend.</p>
+<div aria-label="Project reminder details" class="project-detail-grid">
+<div class="project-detail-label">Current Stage</div>
+<div class="project-detail-value">Finish the water-pipe analogy, confirm the first Roblox scene assignments, and organize the uploaded device graphics for animation and editing.</div>
+<div class="project-detail-label">Weekend Target</div>
+<div class="project-detail-value">Complete the analogy and begin the first priority Roblox scenes using the approved characters, rooms, camera views, and production environment.</div>
+<div class="project-detail-label">Next Week</div>
+<div class="project-detail-value">Expand the first reviewable animation batch, export scenes for editing, and maintain one controlled list of missing assets toward the August 2 rough-cut deadline.</div>
+<div class="project-detail-label">Protect</div>
+<div class="project-detail-value">Keep the microphone-to-mixer/processors-to-speaker path technically clear, use simple purposeful movement, and do not reopen the locked visual direction.</div>
+</div>
+<p class="project-popup-note"><strong>Reminder:</strong> Do not add major new scenes or restart the Roblox environment. Follow the locked script and finalized animation scene list, and prioritize technical accuracy, readability, and organized exports.</p>
+<div class="project-popup-actions">
+<a class="project-popup-primary" href="action-items.html">View Action Items</a>
+<button class="project-popup-button" data-notice-target="meeting" type="button">View Panata Meeting</button>
+<button class="project-popup-button" data-project-popup-close type="button">Close Notices</button>
+</div>
+</div>
+
+<div aria-label="Notice position" class="notice-dot-row">
+<button aria-current="true" aria-label="Show Panata meeting notice" class="notice-dot" data-notice-target="meeting" type="button"></button>
+<button aria-current="false" aria-label="Show project reminder" class="notice-dot" data-notice-target="reminder" type="button"></button>
+</div>
+</section>
+</div>
+<button aria-haspopup="dialog" class="notice-launcher" id="noticeLauncher" type="button">Team Notices</button>
 <main class="wrap">
 <section class="header"><h1>Signal Flow Team Group Site</h1></section>
 <nav class="nav">
@@ -644,27 +816,27 @@ body.popup-open {
 <section aria-label="Signal Flow project progress status" class="project-progress-card">
 <div class="progress-header">
 <h2>Project Progress</h2>
-<p><strong>Current checkpoint:</strong> Pre-production is closed/locked with no more major changes. Animation scenes are finalized, animation work has started, and the title card and lower thirds are now in production.</p>
+<p><strong>Current checkpoint:</strong> Pre-production remains closed/locked. The title card and closing card are complete, and the device graphic assets have been uploaded. The immediate weekend focus is to complete the Signal Flow water-pipe analogy and begin the first Roblox animation scenes using the approved characters, rooms, and production environment.</p>
 </div>
 <div class="progress-grid">
 <a aria-label="Open Action Items for current progress" class="progress-panel" href="action-items.html">
-<div class="progress-meta"><strong>Current Progress</strong><span class="progress-percent">35%</span></div>
-<div aria-label="Current Signal Flow project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="35" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 35%;"></div></div>
-<p>Pre-production is locked, the final animation scene list is being used for buildout, and title card/lower-third work has started alongside the first animation production pass.</p>
+<div class="progress-meta"><strong>Current Progress</strong><span class="progress-percent">48%</span></div>
+<div aria-label="Current Signal Flow project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="48" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 48%;"></div></div>
+<p>The visual foundation is ready: the title and closing cards are complete, device graphics are uploaded, and the Roblox production environment is established. Work now centers on completing the water-pipe analogy and moving into coordinated scene animation.</p>
 </a>
 <a aria-label="Open Deliverables for target progress" class="progress-panel target-progress" href="deadline-reminder.html">
-<div class="progress-meta"><strong>Target Progress</strong><span class="progress-percent">45%</span></div>
-<div aria-label="Target Signal Flow project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 45%;"></div></div>
-<p>Target progress is to complete the first production batch: usable animated scene blocks, approved title card/lower-third direction, organized graphics/diagram assets, and a clean handoff path for editing.</p>
+<div class="progress-meta"><strong>Target Progress</strong><span class="progress-percent">65%</span></div>
+<div aria-label="Target Signal Flow project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="65" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 65%;"></div></div>
+<p>Reach 65% by completing the water-pipe analogy, starting the first priority Roblox animation scenes, exporting an initial review batch, and organizing scene files for early editing toward the August 2 rough-cut deadline.</p>
 </a>
 </div>
 </section>
 <section class="immediate">
 <h2 class="section-title" style="margin-top: 0;">Immediate Next Step</h2>
 <div class="immediate-grid">
-<article class="action-card"><h2>Needed Next Week</h2><p>Continue building from the finalized animation scenes. Finish the first-pass title card and lower thirds, organize the diagram/callout assets, and begin handing completed scene exports to editing.</p></article>
-<article class="action-card"><h2>Goal by End of Week</h2><p>Have a clear first-pass production package: opening/title style, lower-third style, priority animation scene blocks, main signal-flow diagrams, and an early rough sequence ready for review.</p></article>
-<article class="action-card"><h2>Main Reminder</h2><p>Pre-production is closed. No major script, format, style, or scene changes should be added now. Only allow accuracy fixes, readability fixes, missing assets, and light timing improvements.</p></article>
+<article class="action-card"><h2>Needed Next Week</h2><p>Move fully from Roblox setup into animation production. Confirm scene owners, build the priority scenes from the finalized animation list, capture and export review versions, organize the files for editing, and close the remaining water-pipe analogy work.</p></article>
+<article class="action-card"><h2>Goal by End of Week</h2><p>Finish the water-pipe analogy illustration and complete the first reviewable Roblox animation batch. Confirm that the approved characters, rooms, camera views, title card, lower thirds, and section-card templates work consistently together.</p></article>
+<article class="action-card"><h2>Main Reminder</h2><p>The Roblox characters, rooms, and environment are already established. Do not restart the visual direction or add major new scenes. Follow the locked script and finalized scene list, keep movement simple, protect technical accuracy, and use organized exports.</p></article>
 </div>
 </section>
 <h2 class="section-title">Signal Flow Site Menu</h2>
@@ -676,72 +848,147 @@ body.popup-open {
 <a class="tile" href="note-section.html"><h2>Notes</h2><p>Simple definitions for run-of-show, storyboard, animation scene list, avatar movement, labels, and callouts.</p></a>
 <a class="tile" href="resources.html"><h2>Resources</h2><p>Quick access to team site links, Google Drive folders, production materials, TSV graphics, and how-to decks.</p></a>
 </section>
-<footer class="fat-breadcrumb-footer" aria-label="Site breadcrumb">
-  <div class="breadcrumb-trail">
-    <a href="../index.html">District of Florida and Caribbean</a>
-    <span class="breadcrumb-separator" aria-hidden="true">/</span>
-    <span class="breadcrumb-current">Signal Flow Team</span>
-  </div>
+<footer aria-label="Site breadcrumb" class="fat-breadcrumb-footer">
+<div class="breadcrumb-trail">
+<a href="../index.html">District of Florida and Caribbean</a>
+<span aria-hidden="true" class="breadcrumb-separator">/</span>
+<span class="breadcrumb-current">Signal Flow Team</span>
+</div>
 </footer>
 </main>
 <script>
 (function () {
-  var popup = document.getElementById('siteNoticePopup');
-  if (!popup) return;
+  var popup = document.getElementById('projectReminderPopup');
+  var launcher = document.getElementById('noticeLauncher');
+  if (!popup || !launcher) return;
 
-  var closeButtons = popup.querySelectorAll('[data-popup-close]');
+  var closeButtons = popup.querySelectorAll('[data-project-popup-close]');
+  var targetButtons = popup.querySelectorAll('[data-notice-target]');
+  var panels = popup.querySelectorAll('[data-notice-panel]');
+  var tabs = popup.querySelectorAll('[role="tab"]');
+  var dots = popup.querySelectorAll('.notice-dot');
+  var status = document.getElementById('noticeStatus');
   var focusableSelector = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
   var previousFocus = null;
+  var activeNotice = 'meeting';
+  var countdownTimer = null;
+  var secondsRemaining = 20;
+
+  function clearTimer() {
+    if (countdownTimer) window.clearInterval(countdownTimer);
+    countdownTimer = null;
+  }
+
+  function updateCountdown() {
+    if (!status) return;
+    status.hidden = false;
+    status.innerHTML = 'Automatically switching to next notification in <span id="noticeCountdown">' + secondsRemaining + '</span> seconds.';
+  }
+
+  function resetCountdown() {
+    secondsRemaining = 20;
+    updateCountdown();
+  }
+
+  function showNotice(name, options) {
+    options = options || {};
+    activeNotice = name === 'reminder' ? 'reminder' : 'meeting';
+
+    panels.forEach(function (panel) {
+      panel.hidden = panel.getAttribute('data-notice-panel') !== activeNotice;
+    });
+    tabs.forEach(function (tab) {
+      var selected = tab.getAttribute('data-notice-target') === activeNotice;
+      tab.setAttribute('aria-selected', selected ? 'true' : 'false');
+      tab.setAttribute('tabindex', selected ? '0' : '-1');
+    });
+    dots.forEach(function (dot) {
+      dot.setAttribute('aria-current', dot.getAttribute('data-notice-target') === activeNotice ? 'true' : 'false');
+    });
+
+    if (options.focusTab) {
+      var activeTab = popup.querySelector('[role="tab"][data-notice-target="' + activeNotice + '"]');
+      if (activeTab) activeTab.focus();
+    }
+
+    if (options.resetCountdown) resetCountdown();
+  }
+
+  function startAutomaticSwitching() {
+    clearTimer();
+    showNotice('meeting');
+    resetCountdown();
+
+    countdownTimer = window.setInterval(function () {
+      if (!popup.classList.contains('is-visible')) return;
+      secondsRemaining -= 1;
+      if (secondsRemaining <= 0) {
+        showNotice(activeNotice === 'meeting' ? 'reminder' : 'meeting');
+        secondsRemaining = 20;
+      }
+      updateCountdown();
+    }, 1000);
+  }
 
   function openPopup() {
     previousFocus = document.activeElement;
     popup.classList.add('is-visible');
     popup.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('popup-open');
+    document.body.classList.add('project-popup-open');
+    startAutomaticSwitching();
 
-    var firstFocusable = popup.querySelector(focusableSelector);
-    if (firstFocusable) firstFocusable.focus();
+    var activeTab = popup.querySelector('[role="tab"][aria-selected="true"]');
+    if (activeTab) activeTab.focus();
   }
 
   function closePopup() {
+    clearTimer();
     popup.classList.remove('is-visible');
     popup.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('popup-open');
-
-    if (previousFocus && typeof previousFocus.focus === 'function') {
-      previousFocus.focus();
-    }
+    document.body.classList.remove('project-popup-open');
+    if (previousFocus && typeof previousFocus.focus === 'function') previousFocus.focus();
   }
 
-  closeButtons.forEach(function (button) {
-    button.addEventListener('click', closePopup);
+  targetButtons.forEach(function (button) {
+    button.addEventListener('click', function () {
+      showNotice(button.getAttribute('data-notice-target'), {
+        focusTab: button.getAttribute('role') === 'tab',
+        resetCountdown: true
+      });
+    });
   });
 
-  popup.addEventListener('click', function (event) {
-    if (event.target === popup) closePopup();
+  tabs.forEach(function (tab, index) {
+    tab.addEventListener('keydown', function (event) {
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+      event.preventDefault();
+      var direction = event.key === 'ArrowRight' ? 1 : -1;
+      var nextIndex = (index + direction + tabs.length) % tabs.length;
+      showNotice(tabs[nextIndex].getAttribute('data-notice-target'), {
+        focusTab: true,
+        resetCountdown: true
+      });
+    });
   });
+
+  closeButtons.forEach(function (button) { button.addEventListener('click', closePopup); });
+  launcher.addEventListener('click', openPopup);
+  popup.addEventListener('click', function (event) { if (event.target === popup) closePopup(); });
 
   document.addEventListener('keydown', function (event) {
     if (!popup.classList.contains('is-visible')) return;
-
-    if (event.key === 'Escape') {
-      closePopup();
-      return;
-    }
-
+    if (event.key === 'Escape') { closePopup(); return; }
     if (event.key === 'Tab') {
-      var focusable = Array.prototype.slice.call(popup.querySelectorAll(focusableSelector));
+      var focusable = Array.prototype.slice.call(popup.querySelectorAll(focusableSelector)).filter(function (element) {
+        return !element.closest('[hidden]');
+      });
       if (!focusable.length) return;
-
       var first = focusable[0];
       var last = focusable[focusable.length - 1];
-
       if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
+        event.preventDefault(); last.focus();
       } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
+        event.preventDefault(); first.focus();
       }
     }
   });
@@ -751,6 +998,5 @@ body.popup-open {
   });
 })();
 </script>
-
 </body>
 </html>
