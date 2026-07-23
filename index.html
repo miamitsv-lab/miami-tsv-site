@@ -121,19 +121,6 @@
       text-align: center;
     }
 
-    .weekend-message {
-      display: inline-block;
-      margin: 0 0 12px;
-      padding: 8px 15px;
-      color: #8A1C23;
-      background: rgba(255, 255, 255, 0.72);
-      border: 1px solid #E8A8AD;
-      border-radius: 999px;
-      font-size: clamp(16px, 2vw, 20px);
-      font-weight: 900;
-      line-height: 1.2;
-    }
-
     .countdown-kicker {
       margin: 0 0 6px;
       color: var(--blue);
@@ -184,44 +171,12 @@
       text-transform: uppercase;
     }
 
-    @keyframes deadlineBlink {
-      0%, 45% {
-        opacity: 1;
-        text-shadow: 0 0 8px rgba(255, 255, 0, 0.95), 0 0 16px rgba(255, 255, 0, 0.7);
-      }
-      50%, 95% {
-        opacity: 0.2;
-        text-shadow: none;
-      }
-      100% {
-        opacity: 1;
-        text-shadow: 0 0 8px rgba(255, 255, 0, 0.95), 0 0 16px rgba(255, 255, 0, 0.7);
-      }
+    .countdown-date {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 700;
     }
-
-    .countdown-display.deadline-reached .countdown-unit {
-      background: #FF0000;
-      border-color: #B80000;
-      box-shadow:
-        0 0 0 3px rgba(255, 0, 0, 0.22),
-        0 0 18px rgba(255, 0, 0, 0.72),
-        inset 0 -3px 0 rgba(120, 0, 0, 0.35);
-    }
-
-    .countdown-display.deadline-reached .countdown-value,
-    .countdown-display.deadline-reached .countdown-label {
-      color: #FFFF00;
-      animation: deadlineBlink 0.9s steps(1, end) infinite;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .countdown-display.deadline-reached .countdown-value,
-      .countdown-display.deadline-reached .countdown-label {
-        animation: none;
-        opacity: 1;
-      }
-    }
-
 
     .intro-card {
       background: white;
@@ -328,7 +283,6 @@
       font-weight: 900;
       line-height: 1;
       -webkit-text-stroke: 1.2px currentColor;
-      text-stroke: 1.2px currentColor;
       text-shadow:
         1.1px 0 currentColor,
         -1.1px 0 currentColor,
@@ -517,7 +471,6 @@
     </section>
 
     <section class="countdown-card" aria-labelledby="submissionCountdownTitle">
-      <p class="weekend-message" id="weekendMessage" aria-live="polite">Four More Weekends</p>
       <p class="countdown-kicker">Final Submission Deadline</p>
       <h2 id="submissionCountdownTitle">Countdown to August 17</h2>
       <div class="countdown-display" id="submissionCountdown" role="timer" aria-label="Time remaining until the August 17, 2026 submission deadline">
@@ -526,6 +479,7 @@
         <div class="countdown-unit"><span class="countdown-value" id="countdownMinutes">00</span><span class="countdown-label">Minutes</span></div>
         <div class="countdown-unit"><span class="countdown-value" id="countdownSeconds">00.0</span><span class="countdown-label">Seconds</span></div>
       </div>
+      <p class="countdown-date" id="countdownDeadlineText">August 17, 2026 at 12:00 AM EDT</p>
     </section>
 
     <section class="intro-card" aria-label="Portal overview">
@@ -602,125 +556,34 @@
 
   <script>
     (function () {
-      // Final submission deadline: the start of August 17, 2026 in Eastern Daylight Time.
+      // Countdown target: the start of August 17, 2026 in Eastern Daylight Time.
       const deadline = new Date("2026-08-17T00:00:00-04:00").getTime();
-      const deadlineDate = { year: 2026, month: 8, day: 17 };
-      const finalWeekendStart = { year: 2026, month: 8, day: 15 };
-      const finalWeekendEnd = { year: 2026, month: 8, day: 16 };
-      const easternDateFormatter = new Intl.DateTimeFormat("en-US", {
-        timeZone: "America/New_York",
-        year: "numeric",
-        month: "numeric",
-        day: "numeric",
-        weekday: "short"
-      });
-
       const daysEl = document.getElementById("countdownDays");
       const hoursEl = document.getElementById("countdownHours");
       const minutesEl = document.getElementById("countdownMinutes");
       const secondsEl = document.getElementById("countdownSeconds");
       const titleEl = document.getElementById("submissionCountdownTitle");
-      const weekendMessageEl = document.getElementById("weekendMessage");
-      const countdownDisplayEl = document.getElementById("submissionCountdown");
-
-      const numberWords = {
-        1: "One",
-        2: "Two",
-        3: "Three",
-        4: "Four"
-      };
+      const deadlineTextEl = document.getElementById("countdownDeadlineText");
 
       function pad(value) {
         return String(value).padStart(2, "0");
       }
 
-      function easternDateParts(date) {
-        const parts = easternDateFormatter.formatToParts(date);
-        const values = {};
-
-        parts.forEach(function (part) {
-          if (part.type !== "literal") {
-            values[part.type] = part.value;
-          }
-        });
-
-        return {
-          year: Number(values.year),
-          month: Number(values.month),
-          day: Number(values.day),
-          weekday: values.weekday
-        };
-      }
-
-      function dateKey(dateParts) {
-        return (dateParts.year * 10000) + (dateParts.month * 100) + dateParts.day;
-      }
-
-      function utcDateFromParts(dateParts) {
-        return new Date(Date.UTC(dateParts.year, dateParts.month - 1, dateParts.day));
-      }
-
-      function getWeekendMessage(now) {
-        const today = easternDateParts(now);
-        const todayKey = dateKey(today);
-        const deadlineKey = dateKey(deadlineDate);
-        const finalWeekendStartKey = dateKey(finalWeekendStart);
-        const finalWeekendEndKey = dateKey(finalWeekendEnd);
-
-        if (todayKey >= deadlineKey) {
-          return "Video Entries Are Due Now";
-        }
-
-        if (todayKey >= finalWeekendStartKey && todayKey <= finalWeekendEndKey) {
-          return "Last Weekend";
-        }
-
-        const todayUtc = utcDateFromParts(today);
-        const weekdayNumber = todayUtc.getUTCDay();
-        let daysUntilSaturday = (6 - weekdayNumber + 7) % 7;
-
-        // Once Saturday or Sunday has started, count only weekends still ahead.
-        if (weekdayNumber === 6) {
-          daysUntilSaturday = 7;
-        } else if (weekdayNumber === 0) {
-          daysUntilSaturday = 6;
-        }
-
-        const firstUpcomingSaturday = new Date(todayUtc);
-        firstUpcomingSaturday.setUTCDate(firstUpcomingSaturday.getUTCDate() + daysUntilSaturday);
-        const finalSaturday = utcDateFromParts(finalWeekendStart);
-        const millisecondsPerWeek = 7 * 24 * 60 * 60 * 1000;
-        const weekendsRemaining = Math.max(
-          1,
-          Math.floor((finalSaturday - firstUpcomingSaturday) / millisecondsPerWeek) + 1
-        );
-        const displayedCount = Math.min(4, weekendsRemaining);
-        const weekendLabel = displayedCount === 1 ? "Weekend" : "Weekends";
-
-        return numberWords[displayedCount] + " More " + weekendLabel;
-      }
-
       function updateCountdown() {
-        const now = new Date();
-        const remaining = Math.max(0, deadline - now.getTime());
+        const remaining = Math.max(0, deadline - Date.now());
         const days = Math.floor(remaining / 86400000);
         const hours = Math.floor((remaining % 86400000) / 3600000);
         const minutes = Math.floor((remaining % 3600000) / 60000);
         const seconds = Math.floor((remaining % 60000) / 100) / 10;
-        const easternToday = easternDateParts(now);
-        const deadlineReached = dateKey(easternToday) >= dateKey(deadlineDate);
 
         daysEl.textContent = pad(days);
         hoursEl.textContent = pad(hours);
         minutesEl.textContent = pad(minutes);
         secondsEl.textContent = seconds.toFixed(1).padStart(4, "0");
-        weekendMessageEl.textContent = getWeekendMessage(now);
-        countdownDisplayEl.classList.toggle("deadline-reached", remaining === 0);
 
-        if (deadlineReached) {
-          titleEl.textContent = "August 17";
-        } else {
-          titleEl.textContent = "Countdown to August 17";
+        if (remaining === 0) {
+          titleEl.textContent = "August 17 Submission Date Reached";
+          deadlineTextEl.textContent = "Final submission date: August 17, 2026";
         }
       }
 
