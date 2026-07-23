@@ -740,19 +740,68 @@ body.project-popup-open { overflow: hidden; }
 </style>
 </head>
 <body>
-<div aria-hidden="true" class="site-popup-overlay" id="siteNoticePopup">
-<section aria-describedby="sitePopupMessage" aria-labelledby="sitePopupTitle" aria-modal="true" class="site-popup" role="dialog">
-<button aria-label="Close popup" class="site-popup-close-x" data-popup-close="" type="button">×</button>
-<p class="site-popup-kicker">Signal Flow Team Notice</p>
-<h2 id="sitePopupTitle">Important Project Reminder</h2>
-<p id="sitePopupMessage">The approved Signal Flow animation method is now Roblox. The characters, rooms, and production environment are set up, so the project must move into coordinated scene animation without reopening the locked visual direction.</p>
-<p>Focus on scene ownership, the first reviewable Roblox animation batch, the water-pipe analogy illustration, consistent use of the completed templates, and organized exports for editing.</p>
-<div class="site-popup-actions">
-<a class="site-popup-link" href="action-items.html">View Action Items</a>
-<button class="site-popup-button" data-popup-close="" type="button">Close Message</button>
+<div aria-hidden="true" class="project-popup-overlay" id="projectReminderPopup">
+<section aria-describedby="noticeStatus" aria-labelledby="activeNoticeTitle" aria-modal="true" class="project-popup" role="dialog">
+<button aria-label="Close team notices" class="project-popup-close-x" data-project-popup-close type="button">×</button>
+<div aria-label="Choose a team notice" class="notice-tabs" role="tablist">
+<button aria-controls="meetingNoticePanel" aria-selected="true" class="notice-tab" data-notice-target="meeting" id="meetingNoticeTab" role="tab" type="button">Panata Meeting</button>
+<button aria-controls="reminderNoticePanel" aria-selected="false" class="notice-tab" data-notice-target="reminder" id="reminderNoticeTab" role="tab" type="button">Project Reminder</button>
+</div>
+<p aria-live="polite" class="notice-timer" id="noticeStatus">Automatically switching to next notification in <span id="noticeCountdown">20</span> seconds.</p>
+
+<div aria-labelledby="meetingNoticeTab" class="notice-panel" data-notice-panel="meeting" id="meetingNoticePanel" role="tabpanel">
+<p class="project-popup-kicker">Next Signal Flow Team Panata</p>
+<h2 class="notice-meeting-title" id="activeNoticeTitle">Monday Panata Meeting</h2>
+<p class="project-popup-intro"><strong>(ONLINE) Signal Flow TSV Team Weekly Panata Meeting</strong><br>Monday, July 27, 2026 • 9 PM EDT / 8 PM AST<br>District of Florida and Caribbean</p>
+<div aria-label="Panata meeting details" class="project-detail-grid">
+<div class="project-detail-label">Meeting Link</div>
+<div class="project-detail-value"><a class="notice-meeting-link" href="https://miami-tsv.com/signal-flow-team-meeting" rel="noopener noreferrer" target="_blank">miami-tsv.com/signal-flow-team-meeting</a></div>
+<div class="project-detail-label">Meeting Number</div>
+<div class="project-detail-value"><span class="notice-code">2867 408 6132</span></div>
+<div class="project-detail-label">Password</div>
+<div class="project-detail-value"><span class="notice-code">JULY27TH</span></div>
+<div class="project-detail-label">Alternate Link</div>
+<div class="project-detail-value"><a class="notice-meeting-link" href="https://inc-maimi-tsv.my.webex.com/inc-maimi-tsv.my/j.php?MTID=m9ea53696c81b7e06e69101fc18dd9e6a" rel="noopener noreferrer" target="_blank">Open alternate WebEx link</a></div>
+</div>
+<p class="project-popup-note"><strong>Meeting reminder:</strong> Join a few minutes early so audio, video, the water-pipe analogy update, and the planned Roblox animation work can be reviewed before the Panata begins.</p>
+<div class="project-popup-actions">
+<a class="project-popup-primary" href="https://miami-tsv.com/signal-flow-team-meeting" rel="noopener noreferrer" target="_blank">Join Panata Meeting</a>
+<a class="project-popup-button" download href="signal-flow-panata-july-27-2026.ics">Save to Calendar</a>
+<a class="project-popup-button" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%28ONLINE%29%20Signal%20Flow%20TSV%20Team%20Weekly%20Panata%20Meeting&dates=20260728T010000Z/20260728T020000Z&details=District%20of%20Florida%20and%20Caribbean%0A%0AMeeting%20link%3A%20https%3A%2F%2Fmiami-tsv.com%2Fsignal-flow-team-meeting%0AMeeting%20number%3A%202867%20408%206132%0AMeeting%20password%3A%20JULY27TH%0AAlternate%20link%3A%20https%3A%2F%2Finc-maimi-tsv.my.webex.com%2Finc-maimi-tsv.my%2Fj.php%3FMTID%3Dm9ea53696c81b7e06e69101fc18dd9e6a%0A%0AMeeting%20time%3A%209%20PM%20EDT%20%2F%208%20PM%20AST.&location=WebEx%20-%20https%3A%2F%2Fmiami-tsv.com%2Fsignal-flow-team-meeting&ctz=America/New_York" rel="noopener noreferrer" target="_blank">Add to Google Calendar</a>
+<button class="project-popup-button" data-notice-target="reminder" type="button">View Project Reminder</button>
+<button class="project-popup-button" data-project-popup-close type="button">Close Notices</button>
+</div>
+</div>
+
+<div aria-labelledby="reminderNoticeTab" class="notice-panel" data-notice-panel="reminder" hidden id="reminderNoticePanel" role="tabpanel">
+<p class="project-popup-kicker">Signal Flow Team Reminder</p>
+<h2>Important Project Reminder</h2>
+<p class="project-popup-intro"><strong>The title card and closing card are complete, and the device graphic assets have been uploaded.</strong> The immediate milestone is to complete the Signal Flow water-pipe analogy and begin Roblox animation this weekend.</p>
+<div aria-label="Project reminder details" class="project-detail-grid">
+<div class="project-detail-label">Current Stage</div>
+<div class="project-detail-value">Finish the water-pipe analogy, confirm the first Roblox scene assignments, and organize the uploaded device graphics for animation and editing.</div>
+<div class="project-detail-label">Weekend Target</div>
+<div class="project-detail-value">Complete the analogy and begin the first priority Roblox scenes using the approved characters, rooms, camera views, and production environment.</div>
+<div class="project-detail-label">Next Week</div>
+<div class="project-detail-value">Expand the first reviewable animation batch, export scenes for editing, and maintain one controlled list of missing assets toward the August 2 rough-cut deadline.</div>
+<div class="project-detail-label">Protect</div>
+<div class="project-detail-value">Keep the microphone-to-mixer/processors-to-speaker path technically clear, use simple purposeful movement, and do not reopen the locked visual direction.</div>
+</div>
+<p class="project-popup-note"><strong>Reminder:</strong> Do not add major new scenes or restart the Roblox environment. Follow the locked script and finalized animation scene list, and prioritize technical accuracy, readability, and organized exports.</p>
+<div class="project-popup-actions">
+<a class="project-popup-primary" href="action-items.html">View Action Items</a>
+<button class="project-popup-button" data-notice-target="meeting" type="button">View Panata Meeting</button>
+<button class="project-popup-button" data-project-popup-close type="button">Close Notices</button>
+</div>
+</div>
+
+<div aria-label="Notice position" class="notice-dot-row">
+<button aria-current="true" aria-label="Show Panata meeting notice" class="notice-dot" data-notice-target="meeting" type="button"></button>
+<button aria-current="false" aria-label="Show project reminder" class="notice-dot" data-notice-target="reminder" type="button"></button>
 </div>
 </section>
 </div>
+<button aria-haspopup="dialog" class="notice-launcher" id="noticeLauncher" type="button">Team Notices</button>
 <main class="wrap">
 <section class="header"><h1>Signal Flow Team Group Site</h1></section>
 <nav class="nav">
@@ -767,18 +816,18 @@ body.project-popup-open { overflow: hidden; }
 <section aria-label="Signal Flow project progress status" class="project-progress-card">
 <div class="progress-header">
 <h2>Project Progress</h2>
-<p><strong>Current checkpoint:</strong> Pre-production remains closed/locked. The title card is complete, and the lower-thirds and section-card templates are complete. Roblox is the approved animation production method; the characters, rooms, and working environment have been set up. The team is collaborating on the plan to complete the Roblox animation, while the water-pipe analogy illustration remains an immediate priority.</p>
+<p><strong>Current checkpoint:</strong> Pre-production remains closed/locked. The title card and closing card are complete, and the device graphic assets have been uploaded. The immediate weekend focus is to complete the Signal Flow water-pipe analogy and begin the first Roblox animation scenes using the approved characters, rooms, and production environment.</p>
 </div>
 <div class="progress-grid">
 <a aria-label="Open Action Items for current progress" class="progress-panel" href="action-items.html">
-<div class="progress-meta"><strong>Current Progress</strong><span class="progress-percent">42%</span></div>
-<div aria-label="Current Signal Flow project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="42" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 42%;"></div></div>
-<p>The core visual templates are complete, and the Roblox production foundation is ready with the characters, rooms, and environment already set up. The project is moving from setup and planning into scene animation, coordinated scene ownership, and completion of the water-pipe analogy illustration.</p>
+<div class="progress-meta"><strong>Current Progress</strong><span class="progress-percent">48%</span></div>
+<div aria-label="Current Signal Flow project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="48" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 48%;"></div></div>
+<p>The visual foundation is ready: the title and closing cards are complete, device graphics are uploaded, and the Roblox production environment is established. Work now centers on completing the water-pipe analogy and moving into coordinated scene animation.</p>
 </a>
 <a aria-label="Open Deliverables for target progress" class="progress-panel target-progress" href="deadline-reminder.html">
-<div class="progress-meta"><strong>Target Progress</strong><span class="progress-percent">55%</span></div>
-<div aria-label="Target Signal Flow project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="55" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 55%;"></div></div>
-<p>Reach the next progress mark by finishing the water-pipe analogy illustration, locking the Roblox scene build order and assignments, completing a first reviewable batch of priority Roblox scenes, and organizing the exports for early editing.</p>
+<div class="progress-meta"><strong>Target Progress</strong><span class="progress-percent">65%</span></div>
+<div aria-label="Target Signal Flow project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="65" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 65%;"></div></div>
+<p>Reach 65% by completing the water-pipe analogy, starting the first priority Roblox animation scenes, exporting an initial review batch, and organizing scene files for early editing toward the August 2 rough-cut deadline.</p>
 </a>
 </div>
 </section>
