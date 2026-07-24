@@ -1,0 +1,205 @@
+:root {
+  --inc-green: #025e1a;
+  --inc-red: #d6021a;
+  --inc-gold: #feba02;
+  --deep-green: #021f18;
+  --glass: rgba(0, 28, 20, 0.58);
+  --glass-border: rgba(254, 186, 2, 0.42);
+  --white: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  background: #021711;
+  color: var(--white);
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  overflow: hidden;
+  background-image: url("assets/miami-desktop.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: clamp(16px, 2vw, 28px);
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(to top, rgba(0, 0, 0, 0.26), rgba(0, 0, 0, 0) 38%),
+    radial-gradient(circle at center bottom, rgba(254, 186, 2, 0.10), transparent 42%);
+}
+
+.countdown-card {
+  position: relative;
+  z-index: 2;
+  width: min(920px, 94vw);
+  padding: clamp(12px, 1.45vw, 20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  background: var(--glass);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.42), inset 0 0 28px rgba(254, 186, 2, 0.08);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  text-align: center;
+}
+
+.countdown-card::before {
+  content: "";
+  display: block;
+  height: 3px;
+  width: min(440px, 72%);
+  margin: 0 auto 10px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--inc-green) 0 33%, var(--white) 33% 66%, var(--inc-red) 66% 100%);
+  box-shadow: 0 0 14px rgba(255,255,255,.18);
+}
+
+.countdown-title {
+  margin-bottom: 10px;
+  color: var(--inc-gold);
+  font-size: clamp(14px, 1.5vw, 20px);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+}
+
+.countdown-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(8px, 1.2vw, 14px);
+}
+
+.time-box {
+  min-width: 0;
+  padding: clamp(8px, 1vw, 14px) 8px;
+  border: 1px solid rgba(254, 186, 2, 0.38);
+  border-radius: 15px;
+  background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(0,0,0,.22));
+  box-shadow: inset 0 0 20px rgba(0,0,0,.22);
+}
+
+.time-box span {
+  display: block;
+  color: var(--inc-gold);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(28px, 5vw, 62px);
+  font-weight: 700;
+  line-height: 1;
+  text-shadow: 0 2px 8px rgba(0,0,0,.86);
+  font-variant-numeric: tabular-nums;
+}
+
+.seconds-box span {
+  letter-spacing: 0.02em;
+}
+
+.time-box small {
+  display: block;
+  margin-top: 6px;
+  color: rgba(255,255,255,.92);
+  font-size: clamp(10px, 1.1vw, 13px);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+
+.is-complete .countdown-card {
+  background: rgba(214, 2, 26, .72);
+  border-color: rgba(254, 186, 2, .78);
+}
+
+@media (min-width: 701px) and (max-width: 1024px) {
+  .hero {
+    background-image: url("assets/miami-tablet.png");
+    background-position: center center;
+    padding-bottom: max(18px, env(safe-area-inset-bottom));
+  }
+
+  .countdown-card {
+    width: min(820px, 94vw);
+  }
+}
+
+@media (max-width: 700px) {
+  .hero {
+    background-image: url("assets/miami-mobile.png");
+    background-position: center center;
+    padding: 12px 10px max(14px, env(safe-area-inset-bottom));
+  }
+
+  .countdown-card {
+    width: 96vw;
+    border-radius: 16px;
+    padding: 10px;
+  }
+
+  .countdown-title {
+    margin-bottom: 8px;
+    font-size: clamp(11px, 3.1vw, 14px);
+    letter-spacing: .08em;
+  }
+
+  .countdown-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  .time-box {
+    border-radius: 12px;
+    padding: 8px 4px;
+  }
+
+  .time-box span {
+    font-size: clamp(23px, 7.2vw, 34px);
+  }
+
+  .time-box small {
+    font-size: 8px;
+    letter-spacing: .08em;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 520px) {
+  .hero { align-items: flex-end; padding: 8px; }
+  .countdown-card { padding: 8px 10px; }
+  .countdown-title { display: none; }
+  .countdown-card::before { margin-bottom: 6px; }
+  .time-box span { font-size: clamp(22px, 5vw, 38px); }
+  .time-box small { font-size: 8px; }
+}
+
+/* Space reserved for the parent carousel's two bottom navigation dots. */
+.hero {
+  padding-bottom: max(68px, calc(env(safe-area-inset-bottom) + 58px));
+}
+
+@media (min-width: 701px) and (max-width: 1024px) {
+  .hero {
+    padding-bottom: max(66px, calc(env(safe-area-inset-bottom) + 56px));
+  }
+}
+
+@media (max-width: 700px) {
+  .hero {
+    padding-bottom: max(60px, calc(env(safe-area-inset-bottom) + 52px));
+  }
+}
+
+@media (orientation: landscape) and (max-height: 520px) {
+  .hero {
+    padding-bottom: max(48px, calc(env(safe-area-inset-bottom) + 42px));
+  }
+}
