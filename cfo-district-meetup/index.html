@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#000000" />
+  <title>District Meetup</title>
+
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+      background: #000;
+    }
+
+    body {
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      overflow-x: hidden;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .poster {
+      width: 100%;
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      background: #000;
+    }
+
+    .poster picture {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .poster img {
+      display: block;
+      width: 100%;
+      height: 100svh;
+      object-fit: contain;
+      object-position: center;
+      background: #000;
+    }
+
+    /* Desktop and large laptop screens */
+    @media (min-width: 1024px) {
+      .poster img {
+        max-height: 100svh;
+      }
+    }
+
+    /* Tablet screens */
+    @media (min-width: 600px) and (max-width: 1023px) {
+      .poster img {
+        width: 100%;
+        height: 100svh;
+        object-fit: contain;
+      }
+    }
+
+    /* Mobile screens */
+    @media (max-width: 599px) {
+      .poster img {
+        width: 100%;
+        height: 100svh;
+        object-fit: contain;
+      }
+    }
+
+    /* Landscape phones use the tablet artwork for better use of space. */
+    @media (max-width: 932px) and (orientation: landscape) {
+      .poster img {
+        height: 100svh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="poster" aria-label="District Meetup — July 26, 7PM at Miami Chapel">
+    <picture>
+      <!-- Mobile portrait -->
+      <source
+        media="(max-width: 599px) and (orientation: portrait)"
+        srcset="images/district-meetup-mobile.png"
+      />
+
+      <!-- Tablet and landscape phone -->
+      <source
+        media="(max-width: 1023px)"
+        srcset="images/district-meetup-tablet.png"
+      />
+
+      <!-- Desktop fallback -->
+      <img
+        src="images/district-meetup-desktop.png"
+        alt="District Meetup, July 26 at 7PM, Miami Chapel"
+        width="1672"
+        height="941"
+        decoding="async"
+        fetchpriority="high"
+      />
+    </picture>
+  </main>
+</body>
+</html>
