@@ -1,72 +1,496 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#021711">
-  <meta name="color-scheme" content="light only">
-  <title>Anniversary Celebration Carousel</title>
+  <meta charset="UTF-8">
+
   <meta
-    name="description"
-    content="Responsive carousel featuring the 112th Anniversary Thanksgiving and Miami 40th Anniversary countdown."
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
   >
-  <link rel="stylesheet" href="carousel.css">
-  <script src="carousel.js" defer></script>
+
+  <meta name="theme-color" content="#000000">
+  <title>Anniversary Carousel</title>
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --background: #000000;
+      --dot: rgba(255, 255, 255, 0.48);
+      --dot-border: rgba(0, 0, 0, 0.45);
+      --dot-active: #ffffff;
+      --transition-duration: 700ms;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: var(--background);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    button,
+    iframe {
+      font: inherit;
+    }
+
+    .carousel {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--background);
+      isolation: isolate;
+    }
+
+    .slides {
+      position: absolute;
+      inset: 0;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: scale(1.008);
+      transition:
+        opacity var(--transition-duration) ease,
+        transform var(--transition-duration) ease,
+        visibility 0s linear var(--transition-duration);
+      background: #000000;
+    }
+
+    .slide.is-active {
+      z-index: 1;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: scale(1);
+      transition:
+        opacity var(--transition-duration) ease,
+        transform var(--transition-duration) ease,
+        visibility 0s;
+    }
+
+    .slide iframe {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border: 0;
+      background: #000000;
+    }
+
+
+    @media (prefers-reduced-motion: reduce) {
+      .slide,
+      .dot {
+        transition: none;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <main class="carousel" aria-label="Anniversary celebration carousel">
-    <section
-      class="carousel__slide is-active"
-      data-slide="0"
-      aria-label="112th Anniversary Thanksgiving"
-      aria-hidden="false"
-    >
-      <iframe
-        class="carousel__frame"
-        src="../112-inc-anniversary/index.html"
-        title="112th Anniversary Thanksgiving"
-        loading="eager"
-        tabindex="0"
-      ></iframe>
+  <main
+    id="carousel"
+    class="carousel"
+    aria-label="Anniversary information carousel"
+  >
+    <section class="slides">
+      <!--
+        Slide 1:
+        112th Anniversary responsive HTML page
+        Display time: 5 seconds
+      -->
+        <!--
+      <article
+        class="slide is-active"
+        data-slide-index="0"
+        data-duration="5000"
+        aria-hidden="false"
+      >
+        <iframe
+          src="../112-inc-anniversary/index.html"
+          title="112th Anniversary Thanksgiving"
+          allow="autoplay; fullscreen"
+          loading="eager"
+        ></iframe>
+      </article>
+-->
+      <!--
+        Slide 2:
+        112th Anniversary photo upload qr page
+        Display time: the complete 10-second
+      -->
+      <article
+        class="slide"
+        data-slide-index="1"
+        data-duration="10000"
+        data-video-slide="true"
+        aria-hidden="true"
+      >
+        <iframe
+          src="../inc-anniversary-photo-upload-qr/index.html"
+          title="Photo Uploads"
+          allow="autoplay; fullscreen"
+          loading="eager"
+        ></iframe>
+      </article>
+
+      <!--
+        Slide 3:
+        112th Anniversary Google Album slideshow
+        Display time: the complete 50-second
+      -->
+
+      <article
+        class="slide"
+        data-slide-index="2"
+        data-duration="50000"
+        data-video-slide="true"
+        aria-hidden="true"
+      >
+        <iframe
+          src="https://script.google.com/macros/s/AKfycbxxlOoww9dwAmdjMT_g9c32O_A_zQmeINbsdcHRjyGNmK1GpEccIcy8c0tOGKBXAj0Y_w/exec"
+          title="Google Album Slideshow"
+          allow="autoplay; fullscreen"
+          loading="eager"
+        ></iframe>
+      </article>
+
+      <!--
+        Slide 4:
+        Happy 112th Anniversary page
+        Display time: the complete 5-second
+      -->
+<!--
+      <article
+        class="slide"
+        data-slide-index="3"
+        data-duration="5000"
+        data-video-slide="true"
+        aria-hidden="true"
+      >
+        <iframe
+          src="../happy-112-anniversary/index.html"
+          title="Happy 112 Years Anniversary"
+          allow="autoplay; fullscreen"
+          loading="eager"
+        ></iframe>
+      </article>
+-->
+      <!--
+        Slide 5:
+        112th Anniversary looping video page
+        Display time: the complete 49.834-second video
+      -->
+      <article
+        class="slide"
+        data-slide-index="4"
+        data-duration="49835"
+        data-video-slide="true"
+        aria-hidden="true"
+      >
+        <iframe
+          src="../inc-112-video-programs/index.html"
+          title="112th INC Anniversary Video programs"
+          allow="autoplay; fullscreen"
+          loading="eager"
+        ></iframe>
+      </article>
+
+      <!--
+        District wide CFO Meet Up
+        Display time: 10 seconds
+      -->
+        
+      <article
+        class="slide"
+        data-slide-index="5"
+        data-duration="8000"
+        aria-hidden="true"
+      >
+        <iframe
+          src="../cfo-district-meetup/index.html"
+          title="District-wide CFO Meetup"
+          allow="autoplay; fullscreen"
+          loading="eager"
+        ></iframe>
+      </article>
+
+      <!--
+        Guarding Videoke Night
+        Display time: 10 seconds
+      -->
+        
+      <article
+        class="slide"
+        data-slide-index="6"
+        data-duration="8000"
+        aria-hidden="true"
+      >
+        <iframe
+          src="../cfo-videoke-guarding/index.html"
+          title="District-wide CFO Meetup"
+          allow="autoplay; fullscreen"
+          loading="eager"
+        ></iframe>
+      </article>
+
+      <!--
+        Slide 7:
+        Miami 40th Anniversary countdown
+        Display time: 15 seconds
+      -->
+      <article
+        class="slide"
+        data-slide-index="7"
+        data-duration="12000"
+        aria-hidden="true"
+      >
+        <iframe
+          src="../40th-countdown/miami/index.html"
+          title="Miami 40th Anniversary countdown"
+          allow="autoplay; fullscreen"
+          loading="eager"
+        ></iframe>
+      </article>
     </section>
+</main>
 
-    <section
-      class="carousel__slide"
-      data-slide="1"
-      aria-label="Miami 40th Anniversary countdown"
-      aria-hidden="true"
-    >
-      <iframe
-        class="carousel__frame"
-        src="../40th-countdown/miami/index.html"
-        title="Miami 40th Anniversary countdown"
-        loading="eager"
-        tabindex="-1"
-      ></iframe>
-    </section>
+  <script>
+    (() => {
+      "use strict";
 
-    <nav class="carousel__dots" aria-label="Choose anniversary page">
-      <button
-        class="carousel__dot is-active"
-        type="button"
-        data-slide-target="0"
-        aria-label="Show 112th Anniversary Thanksgiving"
-        aria-current="true"
-      ></button>
-      <button
-        class="carousel__dot"
-        type="button"
-        data-slide-target="1"
-        aria-label="Show Miami 40th Anniversary countdown"
-        aria-current="false"
-      ></button>
-    </nav>
+      const carousel = document.getElementById("carousel");
+      const slides = Array.from(carousel.querySelectorAll(".slide"));
 
-    <noscript>
-      <p class="carousel__noscript">
-        JavaScript is required for automatic slide switching. Open either page using the dots after enabling JavaScript.
-      </p>
-    </noscript>
-  </main>
+      let currentIndex = 0;
+      let timerId = null;
+      let remainingTime = getSlideDuration(currentIndex);
+      let timerStartedAt = 0;
+      let isPaused = false;
+
+      function getSlideDuration(index) {
+        const duration = Number(slides[index].dataset.duration);
+        return Number.isFinite(duration) && duration > 0
+          ? duration
+          : 15000;
+      }
+
+      function getVideoIframe(slide) {
+        if (!slide || slide.dataset.videoSlide !== "true") {
+          return null;
+        }
+
+        return slide.querySelector("iframe");
+      }
+
+      function sendVideoCommand(slide, action) {
+        const iframe = getVideoIframe(slide);
+
+        if (!iframe || !iframe.contentWindow) {
+          return;
+        }
+
+        iframe.contentWindow.postMessage(
+          {
+            type: "video-slide",
+            action
+          },
+          "*"
+        );
+      }
+
+      function stopTimer() {
+        if (timerId !== null) {
+          window.clearTimeout(timerId);
+          timerId = null;
+        }
+      }
+
+      function scheduleNextSlide(customDelay) {
+        stopTimer();
+
+        if (isPaused || document.hidden) {
+          return;
+        }
+
+        remainingTime =
+          typeof customDelay === "number"
+            ? customDelay
+            : getSlideDuration(currentIndex);
+
+        timerStartedAt = performance.now();
+
+        timerId = window.setTimeout(() => {
+          showSlide((currentIndex + 1) % slides.length, {
+            restartTimer: true,
+            restartVideo: true
+          });
+        }, remainingTime);
+      }
+
+      function updateActiveStates(nextIndex) {
+        slides.forEach((slide, index) => {
+          const active = index === nextIndex;
+
+          slide.classList.toggle("is-active", active);
+          slide.setAttribute("aria-hidden", String(!active));
+        });
+      }
+
+      function showSlide(nextIndex, options = {}) {
+        const normalizedIndex =
+          ((nextIndex % slides.length) + slides.length) % slides.length;
+
+        const previousSlide = slides[currentIndex];
+        const nextSlide = slides[normalizedIndex];
+
+        /*
+          Pause the video whenever its slide is left.
+        */
+        if (previousSlide !== nextSlide) {
+          sendVideoCommand(previousSlide, "pause");
+        }
+
+        currentIndex = normalizedIndex;
+        updateActiveStates(currentIndex);
+
+        /*
+          Restart the video from the beginning whenever its slide appears.
+          The video page itself still has continuous looping enabled.
+        */
+        if (nextSlide.dataset.videoSlide === "true") {
+          sendVideoCommand(
+            nextSlide,
+            options.restartVideo === false ? "play" : "restart"
+          );
+        }
+
+        remainingTime = getSlideDuration(currentIndex);
+
+        if (options.restartTimer !== false) {
+          scheduleNextSlide();
+        }
+      }
+
+      function pauseCarousel() {
+        if (isPaused) {
+          return;
+        }
+
+        isPaused = true;
+
+        if (timerId !== null) {
+          const elapsed = performance.now() - timerStartedAt;
+          remainingTime = Math.max(0, remainingTime - elapsed);
+        }
+
+        stopTimer();
+        sendVideoCommand(slides[currentIndex], "pause");
+      }
+
+      function resumeCarousel() {
+        if (!isPaused) {
+          return;
+        }
+
+        isPaused = false;
+        sendVideoCommand(slides[currentIndex], "play");
+
+        scheduleNextSlide(
+          remainingTime > 0
+            ? remainingTime
+            : getSlideDuration(currentIndex)
+        );
+      }
+
+      /*
+        Keyboard navigation remains available without adding visible arrows.
+      */
+      window.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowRight") {
+          showSlide(currentIndex + 1, {
+            restartTimer: true,
+            restartVideo: true
+          });
+        }
+
+        if (event.key === "ArrowLeft") {
+          showSlide(currentIndex - 1, {
+            restartTimer: true,
+            restartVideo: true
+          });
+        }
+      });
+
+      /*
+        Pause timing when the browser tab is hidden.
+      */
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          pauseCarousel();
+        } else {
+          resumeCarousel();
+        }
+      });
+
+      /*
+        Optional public controls for other scripts:
+        window.anniversaryCarousel.next()
+        window.anniversaryCarousel.previous()
+        window.anniversaryCarousel.goTo(2)
+        window.anniversaryCarousel.pause()
+        window.anniversaryCarousel.play()
+      */
+      window.anniversaryCarousel = {
+        next() {
+          showSlide(currentIndex + 1, {
+            restartTimer: true,
+            restartVideo: true
+          });
+        },
+
+        previous() {
+          showSlide(currentIndex - 1, {
+            restartTimer: true,
+            restartVideo: true
+          });
+        },
+
+        goTo(index) {
+          showSlide(Number(index), {
+            restartTimer: true,
+            restartVideo: true
+          });
+        },
+
+        pause: pauseCarousel,
+        play: resumeCarousel,
+
+        getCurrentIndex() {
+          return currentIndex;
+        }
+      };
+
+      /*
+        Start with the first slide.
+      */
+      updateActiveStates(currentIndex);
+      scheduleNextSlide();
+    })();
+  </script>
 </body>
 </html>

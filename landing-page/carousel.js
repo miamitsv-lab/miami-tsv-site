@@ -3,10 +3,11 @@
 /*
   DISPLAY TIMES
   -------------
-  Slide 1: 112th Anniversary Thanksgiving = 60 seconds
+  Slide 1: 112th Anniversary Thanksgiving = 20 seconds
   Slide 2: Miami 40th Anniversary countdown = 15 seconds
+  Slide 2: Miami 40th Anniversary countdown = 75 seconds
 */
-const SLIDE_DURATIONS = [20_000, 15_000];
+const SLIDE_DURATIONS = [20_000, 15_000, 75_000];
 
 const slides = Array.from(document.querySelectorAll('.carousel__slide'));
 const dots = Array.from(document.querySelectorAll('.carousel__dot'));
