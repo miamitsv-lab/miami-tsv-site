@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base target="_top">
+
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
+  <title>Random Photo Slideshow</title>
+
+  <style>
+    :root {
+      --slide-time: 3000ms;
+      --fade-time: 800ms;
+      --background-blur: 42px;
+      --foreground-padding: clamp(10px, 2.2vw, 30px);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: #000;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    .slideshow {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 100svh;
+      overflow: hidden;
+      isolation: isolate;
+      background: #000;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      visibility: hidden;
+      transition:
+        opacity var(--fade-time) ease,
+        visibility 0s linear var(--fade-time);
+    }
+
+    .slide.is-active {
+      opacity: 1;
+      visibility: visible;
+      transition:
+        opacity var(--fade-time) ease,
+        visibility 0s linear 0s;
+    }
+
+    .slide__background {
+      position: absolute;
+      inset: -70px;
+      width: calc(100% + 140px);
+      height: calc(100% + 140px);
+      object-fit: cover;
+      transform: scale(1.08);
+      filter:
+        blur(var(--background-blur))
+        brightness(0.60)
+        saturate(1.08);
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .slide__shade {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(0, 0, 0, 0.02) 0%,
+          rgba(0, 0, 0, 0.10) 52%,
+          rgba(0, 0, 0, 0.42) 100%
+        );
+      pointer-events: none;
+    }
+
+    .slide__foreground-area {
+      position: absolute;
+      inset: var(--foreground-padding);
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .slide__foreground {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: clamp(4px, 0.65vw, 10px);
+      box-shadow:
+        0 14px 48px rgba(0, 0, 0, 0.52),
+        0 0 0 1px rgba(255, 255, 255, 0.10);
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .loading,
+    .message {
+      position: absolute;
+      inset: 0;
+      z-index: 20;
+      display: grid;
+      place-items: center;
+      padding: 30px;
+      color: #fff;
+      background:
+        radial-gradient(circle at center, #222 0%, #080808 100%);
+      text-align: center;
+    }
+
+    .loading.is-hidden,
+    .message {
+      display: none;
+    }
+
+    .message.is-visible {
+      display: grid;
+    }
+
+    .loading__content,
+    .message__content {
+      max-width: 680px;
+    }
+
+    .loading__spinner {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 18px;
+      border: 4px solid rgba(255, 255, 255, 0.18);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 850ms linear infinite;
+    }
+
+    .loading__text,
+    .message__title {
+      margin: 0;
+      font-size: clamp(18px, 2.3vw, 28px);
+      line-height: 1.3;
+    }
+
+    .message__details {
+      margin: 12px 0 0;
+      color: rgba(255, 255, 255, 0.76);
+      font-size: clamp(14px, 1.5vw, 17px);
+      line-height: 1.55;
+    }
+
+    .counter {
+      position: absolute;
+      right: max(12px, env(safe-area-inset-right));
+      bottom: max(12px, env(safe-area-inset-bottom));
+      z-index: 10;
+      padding: 7px 11px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      color: rgba(255, 255, 255, 0.88);
+      background: rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      opacity: 0;
+      transition: opacity 250ms ease;
+    }
+
+    .slideshow:hover .counter,
+    .counter.is-visible {
+      opacity: 1;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (max-width: 600px) {
+      :root {
+        --background-blur: 30px;
+        --foreground-padding: 8px;
+      }
+
+      .slide__foreground {
+        border-radius: 4px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .slide {
+        transition-duration: 180ms;
+      }
+
+      .loading__spinner {
+        animation-duration: 1500ms;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main
+    class="slideshow"
+    id="slideshow"
+    aria-label="Random Google Drive photo slideshow"
+  >
+    <section class="slide is-active" id="slideA">
+      <img class="slide__background" alt="" aria-hidden="true">
+
+      <div class="slide__shade"></div>
+
+      <div class="slide__foreground-area">
+        <img class="slide__foreground" alt="Slideshow photo">
+      </div>
+    </section>
+
+    <section class="slide" id="slideB">
+      <img class="slide__background" alt="" aria-hidden="true">
+
+      <div class="slide__shade"></div>
+
+      <div class="slide__foreground-area">
+        <img class="slide__foreground" alt="Slideshow photo">
+      </div>
+    </section>
+
+    <div class="counter" id="counter" aria-live="polite"></div>
+
+    <section class="loading" id="loading" aria-live="polite">
+      <div class="loading__content">
+        <div class="loading__spinner" aria-hidden="true"></div>
+        <p class="loading__text">Loading photos…</p>
+      </div>
+    </section>
+
+    <section class="message" id="message" role="alert">
+      <div class="message__content">
+        <h1 class="message__title" id="messageTitle">
+          No photos available
+        </h1>
+
+        <p class="message__details" id="messageDetails">
+          Add image files to the selected Google Drive folder and refresh this
+          page.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    'use strict';
+
+    const DISPLAY_TIME_MS = 3000;
+
+    const slides = [
+      document.getElementById('slideA'),
+      document.getElementById('slideB')
+    ];
+
+    const loadingElement = document.getElementById('loading');
+    const messageElement = document.getElementById('message');
+    const messageTitleElement = document.getElementById('messageTitle');
+    const messageDetailsElement = document.getElementById('messageDetails');
+    const counterElement = document.getElementById('counter');
+
+    let selectedPhotos = [];
+    let currentPhotoIndex = 0;
+    let activeSlideIndex = 0;
+    let slideshowTimer = null;
+
+    /**
+     * Randomizes a copy of an array using Fisher-Yates shuffle.
+     */
+    function shuffle(items) {
+      const shuffled = [...items];
+
+      for (let index = shuffled.length - 1; index > 0; index -= 1) {
+        const randomIndex = Math.floor(Math.random() * (index + 1));
+
+        [shuffled[index], shuffled[randomIndex]] =
+          [shuffled[randomIndex], shuffled[index]];
+      }
+
+      return shuffled;
+    }
+
+    /**
+     * Removes duplicate Drive files and randomizes all available photos.
+     */
+    function chooseRandomPhotos(photos) {
+      const uniquePhotos = [];
+      const seenIds = new Set();
+
+      photos.forEach(function(photo) {
+        if (!photo || !photo.id || !photo.url || seenIds.has(photo.id)) {
+          return;
+        }
+
+        seenIds.add(photo.id);
+        uniquePhotos.push(photo);
+      });
+
+      return shuffle(uniquePhotos).slice(0, 15);
+    }
+
+    /**
+     * Preloads an image before displaying it.
+     */
+    function preloadPhoto(photo) {
+      return new Promise(function(resolve, reject) {
+        const image = new Image();
+
+        image.onload = function() {
+          resolve(photo);
+        };
+
+        image.onerror = function() {
+          reject(new Error('Unable to load ' + photo.name));
+        };
+
+        image.src = photo.url;
+      });
+    }
+
+    /**
+     * Keeps only images the browser can successfully display.
+     */
+    async function removeUnavailablePhotos(photos) {
+      const results = await Promise.allSettled(
+        photos.map(function(photo) {
+          return preloadPhoto(photo);
+        })
+      );
+
+      return results
+        .filter(function(result) {
+          return result.status === 'fulfilled';
+        })
+        .map(function(result) {
+          return result.value;
+        });
+    }
+
+    /**
+     * Places one image into both the clear foreground and blurred background.
+     */
+    function setSlidePhoto(slide, photo, displayNumber) {
+      const background = slide.querySelector('.slide__background');
+      const foreground = slide.querySelector('.slide__foreground');
+
+      background.src = photo.url;
+      foreground.src = photo.url;
+      foreground.alt =
+        photo.name ||
+        'Slideshow photo ' + displayNumber + ' of ' + selectedPhotos.length;
+    }
+
+    function updateCounter() {
+      counterElement.textContent =
+        String(currentPhotoIndex + 1) +
+        ' / ' +
+        String(selectedPhotos.length);
+    }
+
+    function showMessage(title, details) {
+      loadingElement.classList.add('is-hidden');
+      messageTitleElement.textContent = title;
+      messageDetailsElement.textContent = details;
+      messageElement.classList.add('is-visible');
+    }
+
+    /**
+     * Crossfades to the next image every three seconds.
+     */
+    function showNextPhoto() {
+      if (selectedPhotos.length < 2) {
+        return;
+      }
+
+      currentPhotoIndex =
+        (currentPhotoIndex + 1) % selectedPhotos.length;
+
+      /*
+       * After every available image has been displayed, reshuffle the order.
+       */
+      if (currentPhotoIndex === 0) {
+        selectedPhotos = shuffle(selectedPhotos);
+      }
+
+      const incomingSlideIndex = activeSlideIndex === 0 ? 1 : 0;
+      const incomingSlide = slides[incomingSlideIndex];
+      const outgoingSlide = slides[activeSlideIndex];
+      const incomingPhoto = selectedPhotos[currentPhotoIndex];
+
+      setSlidePhoto(
+        incomingSlide,
+        incomingPhoto,
+        currentPhotoIndex + 1
+      );
+
+      incomingSlide.classList.add('is-active');
+      outgoingSlide.classList.remove('is-active');
+
+      activeSlideIndex = incomingSlideIndex;
+      updateCounter();
+    }
+
+    function startSlideshowTimer() {
+      clearInterval(slideshowTimer);
+
+      if (selectedPhotos.length > 1) {
+        slideshowTimer = setInterval(
+          showNextPhoto,
+          DISPLAY_TIME_MS
+        );
+      }
+    }
+
+    /**
+     * Starts the slideshow after Code.gs returns the Drive image list.
+     */
+    async function initializeSlideshow(photos) {
+      const randomPhotos = chooseRandomPhotos(
+        Array.isArray(photos) ? photos : []
+      );
+
+      if (randomPhotos.length === 0) {
+        showMessage(
+          'No photos found',
+          'Add image files to the selected Google Drive folder, then refresh the slideshow.'
+        );
+        return;
+      }
+
+      selectedPhotos = await removeUnavailablePhotos(randomPhotos);
+
+      if (selectedPhotos.length === 0) {
+        showMessage(
+          'Photos could not be displayed',
+          'Check the sharing permissions for the Google Drive folder and image files.'
+        );
+        return;
+      }
+
+      currentPhotoIndex = 0;
+      activeSlideIndex = 0;
+
+      setSlidePhoto(slides[0], selectedPhotos[0], 1);
+      updateCounter();
+
+      loadingElement.classList.add('is-hidden');
+
+      counterElement.classList.add('is-visible');
+
+      window.setTimeout(function() {
+        counterElement.classList.remove('is-visible');
+      }, 2200);
+
+      startSlideshowTimer();
+    }
+
+    function handleLoadError(error) {
+      const details =
+        error && error.message
+          ? error.message
+          : 'An unknown Google Apps Script error occurred.';
+
+      showMessage('Unable to load photos', details);
+    }
+
+    /**
+     * Pause the timer while this browser tab is hidden.
+     */
+    document.addEventListener('visibilitychange', function() {
+      if (document.hidden) {
+        clearInterval(slideshowTimer);
+        return;
+      }
+
+      startSlideshowTimer();
+    });
+
+    /**
+     * Requests the dynamically generated file list from Code.gs.
+     */
+    google.script.run
+      .withSuccessHandler(initializeSlideshow)
+      .withFailureHandler(handleLoadError)
+      .getPhotoFiles();
+  </script>
+</body>
+</html>
