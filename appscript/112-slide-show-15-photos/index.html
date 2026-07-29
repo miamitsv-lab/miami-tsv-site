@@ -283,6 +283,9 @@
 
     const DISPLAY_TIME_MS = 3000;
 
+    // Reload the Google Drive photo list every 1 hour.
+    const PHOTO_REFRESH_TIME_MS = 60 * 60 * 1000;
+
     const slides = [
       document.getElementById('slideA'),
       document.getElementById('slideB')
@@ -298,6 +301,9 @@
     let currentPhotoIndex = 0;
     let activeSlideIndex = 0;
     let slideshowTimer = null;
+    let photoRefreshTimer = null;
+    let lastPhotoReloadTime = 0;
+    let photoReloadInProgress = false;
 
     /**
      * Randomizes a copy of an array using Fisher-Yates shuffle.
@@ -331,7 +337,15 @@
         uniquePhotos.push(photo);
       });
 
-      return shuffle(uniquePhotos).slice(0, 15);
+      const photoCount = Math.min(15, uniquePhotos.length);
+      const maxStartIndex = uniquePhotos.length - photoCount;
+      const startIndex = Math.floor(Math.random() * (maxStartIndex + 1));
+      const shuffledPhotos = shuffle(uniquePhotos);
+
+      return shuffledPhotos.slice(
+        startIndex,
+        startIndex + photoCount
+      );
     }
 
     /**
@@ -448,59 +462,133 @@
     }
 
     /**
-     * Starts the slideshow after Code.gs returns the Drive image list.
+     * Applies a newly fetched Drive photo list to the slideshow.
+     *
+     * On the first load, errors are shown on screen. During an hourly refresh,
+     * the current slideshow remains running if the new list cannot be loaded.
      */
-    async function initializeSlideshow(photos) {
-      const randomPhotos = chooseRandomPhotos(
-        Array.isArray(photos) ? photos : []
-      );
-
-      if (randomPhotos.length === 0) {
-        showMessage(
-          'No photos found',
-          'Add image files to the selected Google Drive folder, then refresh the slideshow.'
+    async function applyDrivePhotos(photos, isInitialLoad) {
+      try {
+        const randomPhotos = chooseRandomPhotos(
+          Array.isArray(photos) ? photos : []
         );
-        return;
+
+        if (randomPhotos.length === 0) {
+          if (isInitialLoad) {
+            showMessage(
+              'No photos found',
+              'Add image files to the selected Google Drive folder and refresh the slideshow.'
+            );
+          } else {
+            console.warn(
+              'Hourly photo refresh found no photos. Keeping the current slideshow.'
+            );
+          }
+
+          return;
+        }
+
+        const availablePhotos = await removeUnavailablePhotos(randomPhotos);
+
+        if (availablePhotos.length === 0) {
+          if (isInitialLoad) {
+            showMessage(
+              'Photos could not be displayed',
+              'Check the sharing permissions for the Google Drive folder and image files.'
+            );
+          } else {
+            console.warn(
+              'Hourly photo refresh could not display the new list. Keeping the current slideshow.'
+            );
+          }
+
+          return;
+        }
+
+        selectedPhotos = availablePhotos;
+        currentPhotoIndex = 0;
+        activeSlideIndex = 0;
+
+        /*
+         * Reset the two crossfade layers so the refreshed list always begins
+         * on the first active layer, regardless of which layer was previously active.
+         */
+        slides[0].classList.add('is-active');
+        slides[1].classList.remove('is-active');
+
+        setSlidePhoto(slides[0], selectedPhotos[0], 1);
+        updateCounter();
+
+        loadingElement.classList.add('is-hidden');
+        messageElement.classList.remove('is-visible');
+
+        counterElement.classList.add('is-visible');
+
+        window.setTimeout(function() {
+          counterElement.classList.remove('is-visible');
+        }, 2200);
+
+        startSlideshowTimer();
+      } finally {
+        lastPhotoReloadTime = Date.now();
+        photoReloadInProgress = false;
       }
-
-      selectedPhotos = await removeUnavailablePhotos(randomPhotos);
-
-      if (selectedPhotos.length === 0) {
-        showMessage(
-          'Photos could not be displayed',
-          'Check the sharing permissions for the Google Drive folder and image files.'
-        );
-        return;
-      }
-
-      currentPhotoIndex = 0;
-      activeSlideIndex = 0;
-
-      setSlidePhoto(slides[0], selectedPhotos[0], 1);
-      updateCounter();
-
-      loadingElement.classList.add('is-hidden');
-
-      counterElement.classList.add('is-visible');
-
-      window.setTimeout(function() {
-        counterElement.classList.remove('is-visible');
-      }, 2200);
-
-      startSlideshowTimer();
     }
 
-    function handleLoadError(error) {
+    function handleLoadError(error, isInitialLoad) {
       const details =
         error && error.message
           ? error.message
           : 'An unknown Google Apps Script error occurred.';
 
-      showMessage('Unable to load photos', details);
+      lastPhotoReloadTime = Date.now();
+      photoReloadInProgress = false;
+
+      if (isInitialLoad) {
+        showMessage('Unable to load photos', details);
+      } else {
+        console.error(
+          'Hourly Google Drive photo refresh failed. Keeping the current slideshow.',
+          details
+        );
+      }
     }
 
     /**
-     * Pause the timer while this browser tab is hidden.
+     * Calls Code.gs and requests a fresh list of files from Google Drive.
+     */
+    function reloadPhotosFromDrive(isInitialLoad) {
+      if (photoReloadInProgress) {
+        return;
+      }
+
+      photoReloadInProgress = true;
+
+      google.script.run
+        .withSuccessHandler(function(photos) {
+          applyDrivePhotos(photos, isInitialLoad);
+        })
+        .withFailureHandler(function(error) {
+          handleLoadError(error, isInitialLoad);
+        })
+        .getPhotoFiles();
+    }
+
+    /**
+     * Starts the recurring one-hour Google Drive refresh.
+     */
+    function startPhotoRefreshTimer() {
+      clearInterval(photoRefreshTimer);
+
+      photoRefreshTimer = window.setInterval(function() {
+        reloadPhotosFromDrive(false);
+      }, PHOTO_REFRESH_TIME_MS);
+    }
+
+    /**
+     * Pause only the 3-second slide timer while the browser tab is hidden.
+     * When the tab becomes visible again, immediately refresh from Drive if
+     * at least one hour has passed since the last Drive scan.
      */
     document.addEventListener('visibilitychange', function() {
       if (document.hidden) {
@@ -509,15 +597,15 @@
       }
 
       startSlideshowTimer();
+
+      if (Date.now() - lastPhotoReloadTime >= PHOTO_REFRESH_TIME_MS) {
+        reloadPhotosFromDrive(false);
+      }
     });
 
-    /**
-     * Requests the dynamically generated file list from Code.gs.
-     */
-    google.script.run
-      .withSuccessHandler(initializeSlideshow)
-      .withFailureHandler(handleLoadError)
-      .getPhotoFiles();
+    /* Initial Drive scan, followed by automatic hourly scans. */
+    reloadPhotosFromDrive(true);
+    startPhotoRefreshTimer();
   </script>
 </body>
 </html>
