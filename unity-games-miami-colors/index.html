@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#050505">
+
+  <title>Unity Games — District of Florida & Caribbean</title>
+  <meta name="description"
+        content="Unity Games promotional page for the District of Florida & Caribbean.">
+
+  <!-- Preload only the image appropriate for the current screen size. -->
+  <link rel="preload"
+        as="image"
+        href="images/unity-games-mobile.png"
+        media="(max-width: 599px)">
+  <link rel="preload"
+        as="image"
+        href="images/unity-games-tablet.png"
+        media="(min-width: 600px) and (max-width: 1199px)">
+  <link rel="preload"
+        as="image"
+        href="images/unity-games-desktop.png"
+        media="(min-width: 1200px)">
+
+  <style>
+    :root {
+      color-scheme: dark;
+      background: #050505;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: #050505;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100svh;
+      min-height: 100dvh;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .unity-page {
+      position: fixed;
+      inset: 0;
+      min-width: 100%;
+      min-height: 100%;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      background: #050505;
+      isolation: isolate;
+    }
+
+    /* A softly blurred copy fills any unused space without cropping
+       the clear promotional artwork in front. */
+    .visual {
+      position: absolute;
+      inset: 0;
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .visual img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .visual--background {
+      z-index: -2;
+      inset: -4%;
+      width: 108%;
+      height: 108%;
+      filter: blur(30px) brightness(0.48) saturate(1.05);
+      transform: scale(1.06);
+      opacity: 0.9;
+    }
+
+    .visual--background img {
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .unity-page::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.08),
+          rgba(0, 0, 0, 0.02) 45%,
+          rgba(0, 0, 0, 0.14)
+        );
+    }
+
+    .visual--foreground {
+      z-index: 1;
+      padding:
+        env(safe-area-inset-top)
+        env(safe-area-inset-right)
+        env(safe-area-inset-bottom)
+        env(safe-area-inset-left);
+    }
+
+    .visual--foreground img {
+      object-fit: contain;
+      object-position: center;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .visual--foreground {
+        animation: reveal 500ms ease-out both;
+      }
+
+      @keyframes reveal {
+        from {
+          opacity: 0;
+          transform: scale(1.008);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+    }
+
+    /* Keep the full image visible when printing or saving as PDF. */
+    @media print {
+      html,
+      body {
+        overflow: visible;
+        background: #fff;
+      }
+
+      .unity-page {
+        position: relative;
+        min-height: 100vh;
+      }
+
+      .visual--background,
+      .unity-page::after {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="unity-page"
+        aria-label="Unity Games promotional announcement">
+
+    <picture class="visual visual--background" aria-hidden="true">
+      <source media="(max-width: 599px)"
+              srcset="images/unity-games-mobile.png">
+      <source media="(min-width: 600px) and (max-width: 1199px)"
+              srcset="images/unity-games-tablet.png">
+      <img src="images/unity-games-desktop.png" alt="">
+    </picture>
+
+    <picture class="visual visual--foreground">
+      <source media="(max-width: 599px)"
+              srcset="images/unity-games-mobile.png">
+      <source media="(min-width: 600px) and (max-width: 1199px)"
+              srcset="images/unity-games-tablet.png">
+      <img
+        src="images/unity-games-desktop.png"
+        alt="Unity Games, District of Florida and Caribbean. Coming Soon! Join Us! Go for the Win! Miami!"
+        width="1586"
+        height="992"
+        decoding="async"
+        fetchpriority="high">
+    </picture>
+
+  </main>
+</body>
+</html>
