@@ -897,64 +897,22 @@ body.project-popup-open { overflow: hidden; }
 </head>
 <body>
 <div aria-hidden="true" class="project-popup-overlay" id="projectReminderPopup">
-<section aria-describedby="noticeStatus" aria-label="WebEx team notices" aria-modal="true" class="project-popup" role="dialog">
-<button aria-label="Close team notices" class="project-popup-close-x" data-project-popup-close="" type="button">×</button>
-<div aria-label="Choose a team notice" class="notice-tabs" role="tablist">
-<button aria-controls="meetingNoticePanel" aria-selected="true" class="notice-tab" data-notice-target="meeting" id="meetingNoticeTab" role="tab" type="button">Panata Meeting</button>
-<button aria-controls="reminderNoticePanel" aria-selected="false" class="notice-tab" data-notice-target="reminder" id="reminderNoticeTab" role="tab" tabindex="-1" type="button">Project Reminder</button>
+<section aria-labelledby="projectReminderTitle" aria-modal="true" class="project-popup" role="dialog">
+<div class="project-popup-head">
+<div><p class="project-popup-kicker">Current WebEx Production Reminder</p><h2 id="projectReminderTitle">Screen Demos and Voiceover</h2></div>
+<button aria-label="Close project reminder" class="project-popup-close-x" data-project-popup-close="" type="button">×</button>
 </div>
-<p aria-live="polite" class="notice-timer" id="noticeStatus">Automatically switching to next notification in <span id="noticeCountdown">20</span> seconds.</p>
-<div aria-labelledby="meetingNoticeTab" class="notice-panel" data-notice-panel="meeting" id="meetingNoticePanel" role="tabpanel">
-<p class="project-popup-kicker">Next WebEx Team Panata</p>
-<h2 class="notice-meeting-title">Weekly Panata Meeting</h2>
-<p class="project-popup-intro"><strong>(ONLINE) WebEx TSV Team Weekly Panata Meeting</strong><br/>Monday, July 27, 2026 • 8 PM EDT / 7 PM AST<br/>District of Florida and Caribbean</p>
-<div aria-label="Panata meeting details" class="project-detail-grid">
-<div class="project-detail-label">Meeting Link</div>
-<div class="project-detail-value"><a class="notice-meeting-link" href="https://miami-tsv.com/webex-team-meeting" rel="noopener noreferrer" target="_blank">miami-tsv.com/webex-team-meeting</a></div>
-<div class="project-detail-label">Meeting Number</div>
-<div class="project-detail-value"><span class="notice-code">2633 960 1003</span></div>
-<div class="project-detail-label">Password</div>
-<div class="project-detail-value"><span class="notice-code">JULY27TH</span></div>
-<div class="project-detail-label">Alternate Link</div>
-<div class="project-detail-value"><a class="notice-meeting-link" href="https://inc-maimi-tsv.my.webex.com/inc-maimi-tsv.my/j.php?MTID=m4363d49f9633715455b416d7fd12efb7" rel="noopener noreferrer" target="_blank">Open alternate WebEx link</a></div>
+<p class="project-popup-intro">The main WebEx video recording is complete. This week's production gate is to finish every screen-demo upload, complete the matching voiceover, and organize the material for the August 2 full rough cut.</p>
+<div aria-label="Current WebEx project reminder details" class="project-detail-grid">
+<div class="project-detail-label">Current Progress</div><div class="project-detail-value"><strong>60%</strong> - main video recording complete; screen-demo uploads and voiceover are the active work.</div>
+<div class="project-detail-label">End-of-Week Target</div><div class="project-detail-value"><strong>75%</strong> - all screen demos and voiceovers complete, verified, named, and placed into the edit sequence.</div>
+<div class="project-detail-label">Next Week</div><div class="project-detail-value">Polish the full rough cut with captions, callouts, zoom-ins, audio balancing, technical review, and one controlled correction list.</div>
+<div class="project-detail-label">Protect</div><div class="project-detail-value">Readable WebEx menus, intentional cursor movement, hidden personal information, exact voiceover-to-screen timing, and accurate host/cohost and Backup TSV PC procedures.</div>
 </div>
-<p class="project-popup-note"><strong>Meeting reminder:</strong> Join a few minutes early so audio, video, the WebEx meeting connection, and the planned production updates can be checked before the Panata begins.</p>
-<div class="project-popup-actions">
-<a class="project-popup-primary" href="https://miami-tsv.com/webex-team-meeting" rel="noopener noreferrer" target="_blank">Join Panata Meeting</a>
-<a class="project-popup-button" download="" href="webex-panata-july-27-2026.ics">Save to Calendar</a>
-<a class="project-popup-button" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%28ONLINE%29%20WebEx%20TSV%20Team%20Weekly%20Panata%20Meeting&amp;dates=20260728T000000Z%2F20260728T010000Z&amp;details=District%20of%20Florida%20and%20Caribbean%0A%0AMeeting%20link%3A%20https%3A%2F%2Fmiami-tsv.com%2Fwebex-team-meeting%0AMeeting%20number%3A%202633%20960%201003%0AMeeting%20password%3A%20JULY27TH%0AAlternate%20link%3A%20https%3A%2F%2Finc-maimi-tsv.my.webex.com%2Finc-maimi-tsv.my%2Fj.php%3FMTID%3Dm4363d49f9633715455b416d7fd12efb7%0A%0AMeeting%20time%3A%208%20PM%20EDT%20%2F%207%20PM%20AST.&amp;location=WebEx%20-%20https%3A%2F%2Fmiami-tsv.com%2Fwebex-team-meeting&amp;ctz=America%2FNew_York" rel="noopener noreferrer" target="_blank">Add to Google Calendar</a>
-<button class="project-popup-button" data-notice-target="reminder" type="button">View Project Reminder</button>
-<button class="project-popup-button" data-project-popup-close="" type="button">Close Notices</button>
-</div>
-</div>
-<div aria-labelledby="reminderNoticeTab" class="notice-panel" data-notice-panel="reminder" hidden="" id="reminderNoticePanel" role="tabpanel">
-<p class="project-popup-kicker">WebEx Team Reminder</p>
-<h2>Important Project Reminder</h2>
-<p class="project-popup-intro"><strong>The title card and closing card are complete, and the recorded WebEx video clips have been uploaded.</strong> The immediate milestone is to upload all screen-share recordings, edit and review the demo recordings, and complete the three priority graphics this weekend.</p>
-<div aria-label="Project reminder details" class="project-detail-grid">
-<div class="project-detail-label">Current Stage</div>
-<div class="project-detail-value">Upload and organize every screen-share recording, then begin the first editing and technical-review pass for the WebEx demonstration scenes.</div>
-<div class="project-detail-label">Weekend Target</div>
-<div class="project-detail-value">Complete and upload the Meeting Options callout, Backup TSV PC callout, and intro agenda card, and confirm that all demo recordings are available for review.</div>
-<div class="project-detail-label">Next Week</div>
-<div class="project-detail-value">Build toward the August 2 full rough cut by matching the uploaded interview clips to the reviewed screen-share demonstrations and placing the completed graphics.</div>
-<div class="project-detail-label">Protect</div>
-<div class="project-detail-value">Keep WebEx menus readable, cursor movement intentional, personal information hidden, audio clear, and the host/cohost and Backup TSV PC procedures technically accurate.</div>
-</div>
-<p class="project-popup-note"><strong>Reminder:</strong> Keep the locked interview and demo flow. Make only the scene-level edits, callouts, corrections, or pickups required for clarity and technical accuracy.</p>
-<div class="project-popup-actions">
-<a class="project-popup-primary" href="action-items.html">View Action Items</a>
-<button class="project-popup-button" data-notice-target="meeting" type="button">View Panata Meeting</button>
-<button class="project-popup-button" data-project-popup-close="" type="button">Close Notices</button>
-</div>
-</div>
-<div aria-label="Notice position" class="notice-dot-row">
-<button aria-current="true" aria-label="Show Panata meeting notice" class="notice-dot" data-notice-target="meeting" type="button"></button>
-<button aria-current="false" aria-label="Show project reminder" class="notice-dot" data-notice-target="reminder" type="button"></button>
-</div>
-</section>
-</div>
-<button aria-haspopup="dialog" class="notice-launcher" id="noticeLauncher" type="button">Team Notices</button>
+<p class="project-popup-note"><strong>Reminder:</strong> Do not reopen the completed interview recording unless an approved pickup is required for clarity or technical accuracy.</p>
+<div class="project-popup-actions"><a class="project-popup-primary" href="action-items.html">View Action Items</a><button class="project-popup-button" data-project-popup-close="" type="button">Close Reminder</button></div>
+</section></div>
+<button aria-haspopup="dialog" class="notice-launcher" id="noticeLauncher" type="button">Project Reminder</button>
 <main class="wrap">
 <section class="header">
 <h1>WebEx Team Group Site</h1>
@@ -970,26 +928,26 @@ body.project-popup-open { overflow: hidden; }
 <div class="progress-header">
 <div>
 <h2>Project Progress</h2>
-<p><strong>Current checkpoint:</strong> Pre-production remains closed/locked. The title card and closing card are complete, and the recorded WebEx video clips have been uploaded. The immediate production focus is to upload all screen-share recordings, edit and review the demo recordings, and complete the Meeting Options callout, Backup TSV PC callout, and intro agenda card this weekend.</p>
+<p><strong>Current checkpoint:</strong> Pre-production remains closed/locked. The main WebEx interview/video recording is complete. The current production focus is to finish and upload every screen-demo recording this week, complete the matching voiceover, organize the interview/demo/audio assets, and begin the interview-to-demo assembly for the August 2 full rough cut.</p>
 </div>
 </div>
 <div class="progress-grid">
 <a aria-label="Open Action Items for current progress" class="progress-panel progress-link" href="action-items.html">
-<div class="progress-meta"><strong>Current Progress</strong><span class="progress-percent">53%</span></div>
-<div aria-label="Current WebEx project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="53" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 53%;"></div></div>
-<p>The project has completed its title and closing graphics and the main recorded-video upload. Work now centers on uploading the screen-share recordings, editing and reviewing the WebEx demonstrations, completing the three priority callout and agenda graphics, and preparing an organized first editing package.</p>
+<div class="progress-meta"><strong>Current Progress</strong><span class="progress-percent">60%</span></div>
+<div aria-label="Current WebEx project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="60" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 60%;"></div></div>
+<p>The main WebEx video recording is complete, and the title card, closing card, and core interview assets are ready for post-production. Remaining work centers on completing and verifying the screen-demo uploads, recording and cleaning the screen-demo voiceover, finishing only the necessary callouts, and synchronizing the interview and demonstrations in the editing timeline.</p>
 </a>
 <a aria-label="Open Deliverables for target progress" class="progress-panel target-progress progress-link" href="deadline-reminder.html">
-<div class="progress-meta"><strong>Target Progress</strong><span class="progress-percent">65%</span></div>
-<div aria-label="Target WebEx project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="65" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 65%;"></div></div>
-<p>Reach 65% by uploading all screen-share recordings, completing the first editing and technical-review pass for the demo recordings, finishing and uploading the Meeting Options callout, Backup TSV PC callout, and intro agenda card, and organizing the material for rough-cut assembly.</p>
+<div class="progress-meta"><strong>Target Progress</strong><span class="progress-percent">75%</span></div>
+<div aria-label="Target WebEx project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 75%;"></div></div>
+<p>Reach 75% by completing and verifying every screen-demo upload, completing voiceover for all screen-recording segments, synchronizing the narration with the exact on-screen steps, and assembling a complete beginning-to-end rough cut with placeholders only for limited corrections.</p>
 </a>
 </div>
 </section>
 <section class="immediate">
 <h2 class="section-title" style="margin-top: 0;">Immediate Next Step</h2>
 <div class="immediate-grid">
-<article class="action-card"><h2>Needed Next Week</h2><p>Build toward the August 2 full rough cut by placing the uploaded interview clips and reviewed screen-share demonstrations into the planned sequence, inserting the completed title and closing cards, adding the priority callouts and agenda card, and maintaining one controlled list of only the remaining corrections or pickups.</p></article><article class="action-card"><h2>Goal by End of Week</h2><p>Upload all screen-share recordings, complete the first edit and review pass for the demo scenes, and finish and upload the Meeting Options callout, Backup TSV PC callout, and intro agenda card so the editing package is ready for assembly.</p></article><article class="action-card"><h2>Main Reminder</h2><p>Keep the locked interview and demo flow. Protect readable WebEx screens, intentional cursor movement, hidden personal information, clear audio, and accurate host/cohost and Backup TSV PC procedures. Make only scene-level fixes needed for clarity or technical accuracy.</p></article>
+<article class="action-card"><h2>Needed Next Week</h2><p>Use the completed screen-demo uploads and voiceover to polish the August 2 rough cut: tighten pacing, add captions, callouts, and zoom-ins, balance interview and narration audio, verify every host/cohost and Backup TSV PC procedure, and prepare one controlled correction list for the August 3-7 polished-edit period.</p></article><article class="action-card"><h2>Goal by End of Week</h2><p>Complete and verify all screen-demo uploads; record, label, clean, and upload the matching voiceover; organize the interview, demo, audio, and graphics assets; and place them into a full sequence that is ready for rough-cut review.</p></article><article class="action-card"><h2>Main Reminder</h2><p>The main WebEx video recording is complete. Do not reopen or re-record the interview unless a necessary pickup is approved. Voiceover must match the exact screen actions, WebEx menus must remain readable, private information must stay hidden, and technical accuracy takes priority over effects.</p></article>
 </div>
 </section>
 <h2 class="section-title">WebEx Team Site Menu</h2>
@@ -1009,146 +967,45 @@ body.project-popup-open { overflow: hidden; }
 </div>
 </footer>
 </main>
+
 <script>
 (function () {
   var popup = document.getElementById('projectReminderPopup');
   var launcher = document.getElementById('noticeLauncher');
   if (!popup || !launcher) return;
-
   var closeButtons = popup.querySelectorAll('[data-project-popup-close]');
-  var targetButtons = popup.querySelectorAll('[data-notice-target]');
-  var panels = popup.querySelectorAll('[data-notice-panel]');
-  var tabs = popup.querySelectorAll('[role="tab"]');
-  var dots = popup.querySelectorAll('.notice-dot');
-  var status = document.getElementById('noticeStatus');
-  var focusableSelector = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
   var previousFocus = null;
-  var activeNotice = 'meeting';
-  var countdownTimer = null;
-  var secondsRemaining = 20;
-
-  function clearTimer() {
-    if (countdownTimer) window.clearInterval(countdownTimer);
-    countdownTimer = null;
-  }
-
-  function updateCountdown() {
-    if (!status) return;
-    status.innerHTML = 'Automatically switching to next notification in <span id="noticeCountdown">' + secondsRemaining + '</span> seconds.';
-  }
-
-  function resetCountdown() {
-    secondsRemaining = 20;
-    updateCountdown();
-  }
-
-  function showNotice(name, options) {
-    options = options || {};
-    activeNotice = name === 'reminder' ? 'reminder' : 'meeting';
-
-    panels.forEach(function (panel) {
-      panel.hidden = panel.getAttribute('data-notice-panel') !== activeNotice;
-    });
-    tabs.forEach(function (tab) {
-      var selected = tab.getAttribute('data-notice-target') === activeNotice;
-      tab.setAttribute('aria-selected', selected ? 'true' : 'false');
-      tab.setAttribute('tabindex', selected ? '0' : '-1');
-    });
-    dots.forEach(function (dot) {
-      dot.setAttribute('aria-current', dot.getAttribute('data-notice-target') === activeNotice ? 'true' : 'false');
-    });
-
-    if (options.focusTab) {
-      var activeTab = popup.querySelector('[role="tab"][data-notice-target="' + activeNotice + '"]');
-      if (activeTab) activeTab.focus();
-    }
-    if (options.resetCountdown) resetCountdown();
-  }
-
-  function startAutomaticSwitching() {
-    clearTimer();
-    showNotice('meeting');
-    resetCountdown();
-
-    countdownTimer = window.setInterval(function () {
-      if (!popup.classList.contains('is-visible')) return;
-      secondsRemaining -= 1;
-      if (secondsRemaining <= 0) {
-        showNotice(activeNotice === 'meeting' ? 'reminder' : 'meeting');
-        secondsRemaining = 20;
-      }
-      updateCountdown();
-    }, 1000);
-  }
+  var focusableSelector = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
 
   function openPopup() {
     previousFocus = document.activeElement;
     popup.classList.add('is-visible');
     popup.setAttribute('aria-hidden', 'false');
     document.body.classList.add('project-popup-open');
-    startAutomaticSwitching();
-    var activeTab = popup.querySelector('[role="tab"][aria-selected="true"]');
-    if (activeTab) activeTab.focus();
+    var first = popup.querySelector(focusableSelector);
+    if (first) first.focus();
   }
 
   function closePopup() {
-    clearTimer();
     popup.classList.remove('is-visible');
     popup.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('project-popup-open');
-    if (previousFocus && typeof previousFocus.focus === 'function') previousFocus.focus();
+    if (previousFocus && previousFocus.focus) previousFocus.focus();
   }
 
-  targetButtons.forEach(function (button) {
-    button.addEventListener('click', function () {
-      showNotice(button.getAttribute('data-notice-target'), {
-        focusTab: button.getAttribute('role') === 'tab',
-        resetCountdown: true
-      });
-    });
-  });
-
-  tabs.forEach(function (tab, index) {
-    tab.addEventListener('keydown', function (event) {
-      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
-      event.preventDefault();
-      var direction = event.key === 'ArrowRight' ? 1 : -1;
-      var nextIndex = (index + direction + tabs.length) % tabs.length;
-      showNotice(tabs[nextIndex].getAttribute('data-notice-target'), {
-        focusTab: true,
-        resetCountdown: true
-      });
-    });
-  });
-
-  closeButtons.forEach(function (button) { button.addEventListener('click', closePopup); });
   launcher.addEventListener('click', openPopup);
+  closeButtons.forEach(function (button) { button.addEventListener('click', closePopup); });
   popup.addEventListener('click', function (event) { if (event.target === popup) closePopup(); });
-
-  document.addEventListener('keydown', function (event) {
-    if (!popup.classList.contains('is-visible')) return;
+  popup.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') { closePopup(); return; }
-    if (event.key === 'Tab') {
-      var focusable = Array.prototype.slice.call(popup.querySelectorAll(focusableSelector)).filter(function (element) {
-        return !element.closest('[hidden]');
-      });
-      if (!focusable.length) return;
-      var first = focusable[0];
-      var last = focusable[focusable.length - 1];
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    }
+    if (event.key !== 'Tab') return;
+    var focusable = Array.prototype.slice.call(popup.querySelectorAll(focusableSelector));
+    if (!focusable.length) return;
+    var first = focusable[0], last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
   });
-
-  window.addEventListener('DOMContentLoaded', function () {
-    window.setTimeout(openPopup, 350);
-  });
+  window.setTimeout(openPopup, 250);
 })();
-</script>
-</body>
+</script></body>
 </html>

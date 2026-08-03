@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Signal Flow Team Action Items</title>
+<style>
+
+:root {
+  --navy: #17324D;
+  --blue: #2F6FAE;
+  --border: #C9D6E6;
+  --bg: #F6F9FD;
+  --text: #1C2733;
+  --muted: #51606F;
+  --gold: #FFF3DC;
+  --green: #EAF7EF;
+  --purple: #F2ECFF;
+  --red: #FFEAEA;
+  --light-blue: #EAF3FF;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  padding: 24px;
+}
+.wrap { max-width: 1280px; margin: 0 auto; }
+.header {
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  color: white;
+  border-radius: 20px;
+  padding: 28px 32px;
+  margin-bottom: 18px;
+  box-shadow: 0 10px 24px rgba(23, 50, 77, 0.18);
+}
+h1 {
+  margin: 0;
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.1;
+}
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 20px 0;
+}
+.nav a {
+  color: var(--navy);
+  background: white;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+.nav a:hover,
+.nav a.active {
+  background: var(--light-blue);
+  border-color: var(--blue);
+}
+.table-card,
+.card-grid,
+.immediate {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+}
+.section-title {
+  margin: 26px 0 12px 0;
+  color: var(--navy);
+  font-size: clamp(22px, 3vw, 30px);
+}
+.immediate {
+  margin-bottom: 24px;
+  padding: 18px;
+}
+.immediate-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.action-card {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 20px;
+  min-height: 175px;
+}
+.action-card:nth-child(1) { background: var(--light-blue); }
+.action-card:nth-child(2) { background: var(--green); }
+.action-card:nth-child(3) { background: var(--gold); }
+.action-card h2 {
+  margin: 0 0 10px 0;
+  color: var(--navy);
+  font-size: 24px;
+}
+.action-card p {
+  margin: 0;
+  line-height: 1.5;
+  font-size: 17px;
+}
+table { width: 100%; border-collapse: collapse; }
+thead { background: #255D91; color: white; }
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.45;
+}
+th { font-size: 18px; letter-spacing: 0.02em; }
+td { font-size: 17px; }
+tbody tr:nth-child(5n+1) { background: var(--light-blue); }
+tbody tr:nth-child(5n+2) { background: var(--gold); }
+tbody tr:nth-child(5n+3) { background: var(--green); }
+tbody tr:nth-child(5n+4) { background: var(--purple); }
+tbody tr:nth-child(5n+5) { background: var(--red); }
+tbody tr:last-child td { border-bottom: none; }
+td:first-child { color: var(--navy); font-size: 19px; font-weight: 700; }
+td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0;
+  padding: 14px;
+}
+.tile {
+  margin: 10px;
+  padding: 22px;
+  min-height: 150px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: var(--light-blue);
+  text-decoration: none;
+  color: var(--text);
+  display: block;
+}
+.tile:nth-child(2) { background: var(--gold); }
+.tile:nth-child(3) { background: var(--green); }
+.tile:nth-child(4) { background: var(--purple); }
+.tile h2 {
+  margin: 0 0 12px 0;
+  color: var(--navy);
+  font-size: 24px;
+}
+.tile p {
+  margin: 0;
+  line-height: 1.45;
+}
+.footer {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.action-filter-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+  padding: 22px;
+  margin-bottom: 22px;
+}
+.filter-row {
+  display: grid;
+  grid-template-columns: minmax(180px, 260px) minmax(220px, 1fr);
+  gap: 14px;
+  align-items: center;
+}
+.filter-row label {
+  color: var(--navy);
+  font-weight: 800;
+  font-size: 19px;
+}
+.member-select {
+  width: 100%;
+  color: var(--text);
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 13px 14px;
+  font-size: 17px;
+  font-weight: 700;
+}
+.select-note {
+  color: var(--muted);
+  margin: 12px 0 0 0;
+  line-height: 1.5;
+}
+.empty-state {
+  background: var(--light-blue);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 28px;
+  color: var(--navy);
+  font-size: 20px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 22px;
+}
+.action-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+.member-card {
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+}
+.member-card:nth-child(5n+1) .member-card-head { background: var(--light-blue); }
+.member-card:nth-child(5n+2) .member-card-head { background: var(--gold); }
+.member-card:nth-child(5n+3) .member-card-head { background: var(--green); }
+.member-card:nth-child(5n+4) .member-card-head { background: var(--purple); }
+.member-card:nth-child(5n+5) .member-card-head { background: var(--red); }
+.member-card-head {
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--border);
+}
+.member-card h2 {
+  margin: 0;
+  color: var(--navy);
+  font-size: 28px;
+}
+.member-role {
+  margin: 8px 0 0 0;
+  color: #1D5F8F;
+  font-weight: 700;
+  line-height: 1.45;
+}
+.member-card-body {
+  padding: 20px 22px;
+}
+.member-card-body h3 {
+  margin: 0 0 12px 0;
+  color: var(--navy);
+  font-size: 21px;
+}
+.member-card-body ul {
+  margin: 0;
+  padding-left: 22px;
+}
+.member-card-body li {
+  margin: 0 0 10px 0;
+  line-height: 1.5;
+  font-size: 17px;
+}
+.member-card-body li:last-child { margin-bottom: 0; }
+.home-action-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  padding: 14px;
+  margin-bottom: 24px;
+}
+.tile.action-items-tile {
+  grid-column: 1 / -1;
+  background: var(--light-blue);
+  min-height: 120px;
+}
+.tile.action-items-tile h2 {
+  font-size: clamp(26px, 3vw, 34px);
+}
+/* Signal Flow Project Progress */
+.project-progress-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 20px;
+  margin: 0 auto 24px auto;
+  width: 66.7%;
+  box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+}
+.project-progress-card.at-page-end { margin-top: 26px; margin-bottom: 0; }
+.progress-header {
+  margin-bottom: 16px;
+  text-align: center;
+}
+.progress-header h2 {
+  margin: 0 0 8px 0;
+  color: var(--navy);
+  font-size: clamp(24px, 3vw, 34px);
+  text-align: center;
+}
+.progress-header p,
+.progress-panel p,
+.progress-note {
+  margin: 0;
+  line-height: 1.5;
+  color: var(--text);
+  font-size: 16px;
+}
+.progress-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin: 16px 0 0 0;
+}
+.progress-panel {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 16px;
+  background: var(--light-blue);
+  display: block;
+  color: var(--text);
+  text-decoration: none;
+}
+a.progress-panel:hover {
+  border-color: var(--blue);
+  box-shadow: 0 6px 16px rgba(23, 50, 77, 0.14);
+  transform: translateY(-1px);
+}
+.progress-panel.target-progress {
+  background: var(--gold);
+}
+.progress-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  color: var(--navy);
+  font-size: 18px;
+}
+.progress-percent {
+  font-weight: 900;
+  font-size: 22px;
+}
+.progress-track {
+  height: 20px;
+  background: #E6EEF7;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--navy), var(--blue));
+  border-radius: 999px;
+}
+.progress-note {
+  background: var(--green);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 14px 16px;
+}
+@media (max-width: 900px) {
+  .immediate-grid { grid-template-columns: 1fr; }
+  .project-progress-card { width: 80%; }
+}
+@media (max-width: 760px) {
+  body { padding: 14px; }
+  .header { padding: 22px; border-radius: 16px; }
+  .table-card, .immediate { border-radius: 16px; }
+  .filter-row { grid-template-columns: 1fr; }
+  .member-card h2 { font-size: 24px; }
+  .project-progress-card { width: 100%; padding: 18px; border-radius: 16px; }
+  table, thead, tbody, th, td, tr { display: block; }
+  thead { display: none; }
+  tbody tr {
+    margin: 14px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(23, 50, 77, 0.08);
+  }
+  td {
+    width: 100% !important;
+    border-bottom: 1px solid rgba(201, 214, 230, 0.8);
+    padding: 14px 16px 14px 140px;
+    position: relative;
+    min-height: 54px;
+    font-size: 16px;
+  }
+  td:last-child { border-bottom: none; }
+  td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 16px;
+    top: 14px;
+    width: 110px;
+    color: var(--muted);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  td:first-child { font-size: 18px; }
+}
+@media print {
+  body { background: white; padding: 0; }
+  .header, .table-card, .card-grid, .immediate, .project-progress-card, .member-card { box-shadow: none; }
+  th, td { font-size: 12px; padding: 9px 10px; }
+}
+
+
+
+/* Fat Footer Breadcrumb */
+.fat-breadcrumb-footer {
+  margin-top: 30px;
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  color: white;
+  border-radius: 20px;
+  padding: 22px 26px;
+  box-shadow: 0 10px 24px rgba(23, 50, 77, 0.18);
+}
+.fat-breadcrumb-footer .breadcrumb-trail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-size: clamp(16px, 2vw, 21px);
+  font-weight: 800;
+  line-height: 1.35;
+}
+.fat-breadcrumb-footer a {
+  color: white;
+  background: rgba(255, 255, 255, 0.13);
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 8px 13px;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+.fat-breadcrumb-footer a:hover,
+.fat-breadcrumb-footer a:focus {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.72);
+  transform: translateY(-1px);
+  outline: none;
+}
+.fat-breadcrumb-footer a:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+.fat-breadcrumb-footer .breadcrumb-current {
+  color: var(--navy);
+  background: var(--gold);
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 999px;
+  padding: 8px 13px;
+}
+.fat-breadcrumb-footer .breadcrumb-separator {
+  color: var(--gold);
+  font-weight: 900;
+  opacity: 0.95;
+}
+@media (max-width: 760px) {
+  .fat-breadcrumb-footer {
+    border-radius: 16px;
+    padding: 18px;
+  }
+  .fat-breadcrumb-footer .breadcrumb-trail {
+    gap: 8px;
+    font-size: 16px;
+  }
+}
+@media print {
+  .fat-breadcrumb-footer {
+    box-shadow: none;
+  }
+}
+
+</style>
+</head>
+<body>
+<main class="wrap">
+<section class="header"><h1>Signal Flow Team Action Items</h1></section>
+<nav class="nav">
+<a href="home.html">Home</a>
+<a class="active" href="action-items.html">Action Items</a>
+<a href="team-members.html">Team</a>
+<a href="priority-tasks.html">Priorities</a>
+<a href="deadline-reminder.html">Deliverables</a>
+<a href="note-section.html">Notes</a>
+<a href="resources.html">Resources</a>
+</nav>
+<section class="empty-state" id="emptyState">Select a Name to view updated production action items.</section>
+<section aria-label="Select a team member" class="action-filter-card">
+<div class="filter-row">
+<label for="memberSelect">Action Items for:</label>
+<select aria-label="Select a team member to view action items" class="member-select" id="memberSelect">
+<option selected="" value="">Select a Name</option>
+<option value="Jules T">Jules T</option>
+<option value="Janna">Janna</option>
+<option value="Jay">Jay</option>
+<option value="Dennis">Dennis</option>
+<option value="Frank">Frank</option>
+<option value="Geo">Geo</option>
+<option value="Jlyn">Jlyn</option>
+<option value="Aiden">Aiden</option>
+<option value="Charles">Charles</option>
+<option value="NJ">NJ</option>
+<option value="Jhules B">Jhules B</option>
+</select>
+</div>
+</section>
+<section aria-live="polite" class="action-list" id="actionList">
+<article class="member-card" data-member="Jules T" hidden="">
+<div class="member-card-head"><h2>Jules T</h2><p class="member-role">Director / Script Support / Talent / Voiceover</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Coordinate the weekend launch of Roblox animation and confirm the priority scene order, owners, and review checkpoints.</li><li>Review the completed title and closing cards with the locked script flow and confirm where they enter the edit.</li><li>Confirm any voiceover or timing references needed before the first Roblox scene exports are produced.</li></ul></div>
+</article>
+<article class="member-card" data-member="Janna" hidden="">
+<div class="member-card-head"><h2>Janna</h2><p class="member-role">Scriptwriter / Animation Lead / Style Direction / Talent</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Lead the start of Roblox animation this weekend using the finalized animation scene list.</li><li>Assign the first priority scenes and keep characters, rooms, camera views, and avatar movement consistent.</li><li>Review the first exported scenes before handoff to Charles, NJ, and Jhules B.</li></ul></div>
+</article>
+<article class="member-card" data-member="Jay" hidden="">
+<div class="member-card-head"><h2>Jay</h2><p class="member-role">Main SME</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Review and approve the completed water-pipe analogy for technical accuracy and clarity.</li><li>Review the uploaded device graphics and first Roblox scenes for correct signal-flow representation.</li><li>Limit feedback to necessary accuracy, clarity, and practical TSV usefulness.</li></ul></div>
+</article>
+<article class="member-card" data-member="Dennis" hidden="">
+<div class="member-card-head"><h2>Dennis</h2><p class="member-role">Support Role / Script Review / Recording Support / Final Review</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Track completion of the water-pipe analogy and the weekend start of Roblox animation.</li><li>Review early scene exports for readability, timing, continuity, and consistency with the locked script.</li><li>Maintain one missing-asset and review list for the team.</li></ul></div>
+</article>
+<article class="member-card" data-member="Frank" hidden="">
+<div class="member-card-head"><h2>Frank</h2><p class="member-role">SME / Director Support</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Support technical review of the water-pipe analogy, device graphics, and first Roblox scenes.</li><li>Confirm the animation keeps the microphone-to-mixer-to-output explanation simple and worship-service focused.</li><li>Recommend only necessary accuracy or readability corrections.</li></ul></div>
+</article>
+<article class="member-card" data-member="Geo" hidden="">
+<div class="member-card-head"><h2>Geo</h2><p class="member-role">Team Support / SME Support / Secondary Graphics &amp; Animation</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Provide SME and secondary graphics support for the water-pipe analogy and Roblox scene launch.</li><li>Help refine labels, callouts, device graphics, and room details needed by assigned scene owners.</li><li>Flag missing assets or technical issues early without adding new major scenes.</li></ul></div>
+</article>
+<article class="member-card" data-member="Jlyn" hidden="">
+<div class="member-card-head"><h2>Jlyn</h2><p class="member-role">Title Card / Lower Thirds / Animation Support</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Confirm the completed title card and closing card are packaged in edit-ready formats.</li><li>Finish the water-pipe analogy with the team and prepare the approved final export.</li><li>Support Janna with assigned Roblox scenes while preserving the approved style.</li></ul></div>
+</article>
+<article class="member-card" data-member="Aiden" hidden="">
+<div class="member-card-head"><h2>Aiden</h2><p class="member-role">Graphics / Diagram Support / Avatar Movement Support</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Complete or refine the device graphics, labels, callouts, and diagram assets needed in the first Roblox scenes.</li><li>Support the water-pipe analogy finalization and prepare edit-ready exports.</li><li>Keep all graphics organized with clear names and versions.</li></ul></div>
+</article>
+<article class="member-card" data-member="Charles" hidden="">
+<div class="member-card-head"><h2>Charles</h2><p class="member-role">Main Video Editor / Music-Soundtrack Support</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Prepare the editing timeline and placeholders for incoming Roblox exports.</li><li>Begin assembling the first reviewable animation batch with the completed title and closing cards and uploaded device graphics.</li><li>Track missing scenes, timing issues, labels, and continuity problems in one review list.</li></ul></div>
+</article>
+<article class="member-card" data-member="NJ" hidden="">
+<div class="member-card-head"><h2>NJ</h2><p class="member-role">Animation / Graphics / Editing Support</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Support Roblox scene capture, export checks, animation cleanup, and file organization.</li><li>Verify device graphics, labels, title card, and closing card remain readable on laptop and television playback.</li><li>Assist with version control and rough-cut preparation.</li></ul></div>
+</article>
+<article class="member-card" data-member="Jhules B" hidden="">
+<div class="member-card-head"><h2>Jhules B</h2><p class="member-role">Video Editor / Animator Helper / Diagram Illustrator</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Help complete and polish the water-pipe analogy for weekend approval.</li><li>Support the first Roblox animation scenes with cleanup, callouts, captions, transitions, and export preparation.</li><li>Quality-check the first reviewable batch without adding new creative sections.</li></ul></div>
+</article>
+</section>
+<section aria-label="Signal Flow project progress status" class="project-progress-card at-page-end">
+<div class="progress-header">
+<h2>Project Progress</h2>
+<p><strong>Current checkpoint:</strong> Pre-production remains closed/locked. The title card and closing card are complete, and the device graphic assets have been uploaded. The water-pipe analogy is being completed this weekend, and Roblox animation production is scheduled to begin this weekend using the approved characters, rooms, environment, and finalized scene list.</p>
+</div>
+<div class="progress-grid">
+<article class="progress-panel">
+<div class="progress-meta"><strong>Current Progress</strong><span class="progress-percent">48%</span></div>
+<div aria-label="Current Signal Flow project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="48" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 48%;"></div></div>
+<p>The completed title and closing cards, uploaded device graphics, approved Roblox environment, and finalized animation plan place the project at 48%. The next production work is completion of the water-pipe analogy and the start of reviewable Roblox animation scenes.</p>
+</article>
+<article class="progress-panel target-progress">
+<div class="progress-meta"><strong>Target Progress</strong><span class="progress-percent">65%</span></div>
+<div aria-label="Target Signal Flow project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="65" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 65%;"></div></div>
+<p>Reach 65% by completing and approving the water-pipe analogy, starting the priority Roblox scenes, exporting the first reviewable animation batch, and organizing the scene files, graphics, and editor handoff for rough-cut assembly.</p>
+</article>
+</div>
+</section>
+<footer aria-label="Site breadcrumb" class="fat-breadcrumb-footer">
+<div class="breadcrumb-trail">
+<a href="../index.html">District of Florida and Caribbean</a>
+<span aria-hidden="true" class="breadcrumb-separator">/</span>
+<a href="home.html">Signal Flow Team</a>
+<span aria-hidden="true" class="breadcrumb-separator">/</span>
+<span class="breadcrumb-current">Action Items</span>
+</div>
+</footer>
+</main>
+<script>
+const select = document.getElementById('memberSelect');
+const cards = Array.from(document.querySelectorAll('.member-card'));
+const emptyState = document.getElementById('emptyState');
+function updateActionItems() {
+  const selectedName = select.value;
+  let shown = false;
+  cards.forEach(card => {
+    const shouldShow = selectedName !== '' && card.dataset.member === selectedName;
+    card.hidden = !shouldShow;
+    if (shouldShow) shown = true;
+  });
+  emptyState.hidden = shown;
+}
+select.addEventListener('change', updateActionItems);
+updateActionItems();
+</script>
+</body>
+</html>
