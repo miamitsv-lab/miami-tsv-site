@@ -6,126 +6,299 @@
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>Crimping Team Group Site</title>
 <style>
-
-:root{--navy:#17324D;--blue:#2F6FAE;--border:#C9D6E6;--bg:#F6F9FD;--text:#1C2733;--muted:#51606F;--gold:#FFF3DC;--green:#EAF7EF;--purple:#F2ECFF;--red:#FFEAEA;--light-blue:#EAF3FF}
-*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);padding:24px}.wrap{max-width:1280px;margin:0 auto}.header{background:linear-gradient(135deg,var(--navy),var(--blue));color:white;border-radius:20px;padding:28px 32px;margin-bottom:18px;box-shadow:0 10px 24px rgba(23,50,77,.18)}h1{margin:0;font-size:clamp(30px,4vw,48px);line-height:1.1}.nav{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 20px}.nav a{color:var(--navy);background:white;border:1px solid var(--border);text-decoration:none;padding:10px 14px;border-radius:999px;font-weight:700}.nav a:hover,.nav a.active{background:var(--light-blue);border-color:var(--blue)}.table-card,.card-grid,.immediate{background:white;border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:0 8px 22px rgba(23,50,77,.10)}.section-title{margin:26px 0 12px;color:var(--navy);font-size:clamp(22px,3vw,30px)}.immediate{margin-bottom:24px;padding:18px}.immediate-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.action-card{border:1px solid var(--border);border-radius:18px;padding:20px;min-height:175px}.action-card:nth-child(1){background:var(--light-blue)}.action-card:nth-child(2){background:var(--green)}.action-card:nth-child(3){background:var(--gold)}.action-card h2{margin:0 0 10px;color:var(--navy);font-size:24px}.action-card p{margin:0;line-height:1.5;font-size:17px}table{width:100%;border-collapse:collapse}thead{background:#255D91;color:white}th,td{text-align:left;vertical-align:top;padding:18px 20px;border-bottom:1px solid var(--border);line-height:1.45}th{font-size:18px;letter-spacing:.02em}td{font-size:17px}tbody tr:nth-child(5n+1){background:var(--light-blue)}tbody tr:nth-child(5n+2){background:var(--gold)}tbody tr:nth-child(5n+3){background:var(--green)}tbody tr:nth-child(5n+4){background:var(--purple)}tbody tr:nth-child(5n+5){background:var(--red)}tbody tr:last-child td{border-bottom:none}td:first-child{color:var(--navy);font-size:19px;font-weight:700}td:nth-child(2){color:#1D5F8F;font-weight:600}.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0;padding:14px}.tile{margin:10px;padding:22px;min-height:150px;border-radius:18px;border:1px solid var(--border);background:var(--light-blue);text-decoration:none;color:var(--text);display:block}.tile:nth-child(2){background:var(--gold)}.tile:nth-child(3){background:var(--green)}.tile:nth-child(4){background:var(--purple)}.tile h2{margin:0 0 12px;color:var(--navy);font-size:24px}.tile p{margin:0;line-height:1.45}.footer{margin-top:18px;color:var(--muted);font-size:14px}@media(max-width:900px){.immediate-grid{grid-template-columns:1fr}}@media(max-width:760px){body{padding:14px}.header{padding:22px;border-radius:16px}.table-card,.immediate{border-radius:16px}table,thead,tbody,th,td,tr{display:block}thead{display:none}tbody tr{margin:14px;border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 4px 10px rgba(23,50,77,.08)}td{width:100%!important;border-bottom:1px solid rgba(201,214,230,.8);padding:14px 16px 14px 140px;position:relative;min-height:54px;font-size:16px}td:last-child{border-bottom:none}td::before{content:attr(data-label);position:absolute;left:16px;top:14px;width:110px;color:var(--muted);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.04em}td:first-child{font-size:18px}}@media print{body{background:white;padding:0}.header,.table-card,.card-grid,.immediate{box-shadow:none}th,td{font-size:12px;padding:9px 10px}}
-
-
-.action-filter-card {
+:root {
+  --navy: #17324D;
+  --blue: #2F6FAE;
+  --border: #C9D6E6;
+  --bg: #F6F9FD;
+  --text: #1C2733;
+  --muted: #51606F;
+  --gold: #FFF3DC;
+  --green: #EAF7EF;
+  --purple: #F2ECFF;
+  --red: #FFEAEA;
+  --light-blue: #EAF3FF;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  padding: 24px;
+}
+button, select { font: inherit; }
+.wrap { max-width: 1280px; margin: 0 auto; }
+.header {
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  color: white;
+  border-radius: 20px;
+  padding: 28px 32px;
+  margin-bottom: 18px;
+  box-shadow: 0 10px 24px rgba(23,50,77,.18);
+}
+.header p {
+  margin: 10px 0 0;
+  max-width: 900px;
+  line-height: 1.55;
+  font-size: 17px;
+}
+h1 {
+  margin: 0;
+  font-size: clamp(30px,4vw,48px);
+  line-height: 1.1;
+}
+h2.section-title {
+  margin: 26px 0 12px;
+  color: var(--navy);
+  font-size: clamp(22px,3vw,30px);
+}
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 20px;
+}
+.nav a {
+  color: var(--navy);
+  background: white;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+.nav a:hover,
+.nav a:focus,
+.nav a.active {
+  background: var(--light-blue);
+  border-color: var(--blue);
+}
+.card,
+.table-card,
+.immediate,
+.action-filter-card,
+.member-card,
+.status-card {
   background: white;
   border: 1px solid var(--border);
   border-radius: 20px;
-  box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+  box-shadow: 0 8px 22px rgba(23,50,77,.10);
+}
+.status-card {
   padding: 22px;
   margin-bottom: 22px;
 }
-.filter-row {
+.status-grid {
   display: grid;
-  grid-template-columns: minmax(180px, 260px) minmax(220px, 1fr);
-  gap: 14px;
-  align-items: center;
-}
-.filter-row label {
-  color: var(--navy);
-  font-weight: 800;
-  font-size: 19px;
-}
-.member-select {
-  width: 100%;
-  color: var(--text);
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 13px 14px;
-  font-size: 17px;
-  font-weight: 700;
-}
-.select-note {
-  color: var(--muted);
-  margin: 12px 0 0 0;
-  line-height: 1.5;
-}
-.empty-state {
-  background: var(--light-blue);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 28px;
-  color: var(--navy);
-  font-size: 20px;
-  font-weight: 800;
-  text-align: center;
-}
-.action-list {
-  display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(240px,1fr) minmax(240px,1fr);
   gap: 18px;
+  align-items: stretch;
 }
-.member-card {
+.progress-panel {
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: 18px;
+  padding: 20px;
+  background: var(--light-blue);
+}
+.progress-panel:nth-child(2) { background: var(--green); }
+.progress-label {
+  color: var(--muted);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  font-size: 13px;
+}
+.progress-number {
+  margin: 8px 0 10px;
+  color: var(--navy);
+  font-size: clamp(42px,6vw,72px);
+  font-weight: 900;
+  line-height: 1;
+}
+.progress-bar {
+  height: 14px;
+  border-radius: 999px;
   overflow: hidden;
-  background: white;
-  box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+  background: rgba(23,50,77,.14);
 }
-.member-card:nth-child(5n+1) .member-card-head { background: var(--light-blue); }
-.member-card:nth-child(5n+2) .member-card-head { background: var(--gold); }
-.member-card:nth-child(5n+3) .member-card-head { background: var(--green); }
-.member-card:nth-child(5n+4) .member-card-head { background: var(--purple); }
-.member-card:nth-child(5n+5) .member-card-head { background: var(--red); }
-.member-card-head {
-  padding: 20px 22px;
-  border-bottom: 1px solid var(--border);
+.progress-bar span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg,var(--blue),var(--navy));
 }
-.member-card h2 {
-  margin: 0;
-  color: var(--navy);
-  font-size: 28px;
+.progress-panel p,
+.status-summary p {
+  margin: 12px 0 0;
+  line-height: 1.55;
 }
-.member-role {
-  margin: 8px 0 0 0;
-  color: #1D5F8F;
-  font-weight: 700;
-  line-height: 1.45;
+.status-summary {
+  margin-top: 18px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 20px;
+  background: var(--gold);
 }
-.member-card-body {
-  padding: 20px 22px;
-}
-.member-card-body h3 {
-  margin: 0 0 12px 0;
-  color: var(--navy);
-  font-size: 21px;
-}
-.member-card-body ul {
-  margin: 0;
-  padding-left: 22px;
-}
-.member-card-body li {
-  margin: 0 0 10px 0;
-  line-height: 1.5;
-  font-size: 17px;
-}
-.member-card-body li:last-child { margin-bottom: 0; }
-.home-action-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0;
-  padding: 14px;
+.immediate {
+  padding: 18px;
   margin-bottom: 24px;
 }
-.tile.action-items-tile {
-  grid-column: 1 / -1;
-  background: var(--light-blue);
-  min-height: 120px;
+.immediate-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 14px;
 }
-.tile.action-items-tile h2 {
-  font-size: clamp(26px, 3vw, 34px);
+.action-card {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 20px;
+  min-height: 190px;
+}
+.action-card:nth-child(1) { background: var(--light-blue); }
+.action-card:nth-child(2) { background: var(--green); }
+.action-card:nth-child(3) { background: var(--gold); }
+.action-card h2 {
+  margin: 0 0 10px;
+  color: var(--navy);
+  font-size: 24px;
+}
+.action-card p {
+  margin: 0;
+  line-height: 1.55;
+  font-size: 17px;
+}
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+  gap: 16px;
+}
+.menu-tile {
+  display: block;
+  text-decoration: none;
+  color: var(--text);
+  padding: 22px;
+  min-height: 155px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: white;
+  box-shadow: 0 8px 22px rgba(23,50,77,.08);
+}
+.menu-tile:nth-child(6n+1) { background: var(--light-blue); }
+.menu-tile:nth-child(6n+2) { background: var(--gold); }
+.menu-tile:nth-child(6n+3) { background: var(--green); }
+.menu-tile:nth-child(6n+4) { background: var(--purple); }
+.menu-tile:nth-child(6n+5) { background: var(--red); }
+.menu-tile h2 {
+  margin: 0 0 10px;
+  color: var(--navy);
+  font-size: 24px;
+}
+.menu-tile p { margin: 0; line-height: 1.5; }
+table { width: 100%; border-collapse: collapse; }
+.table-card { overflow: hidden; }
+thead { background: #255D91; color: white; }
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.45;
+}
+th { font-size: 18px; letter-spacing: .02em; }
+td { font-size: 17px; }
+tbody tr:nth-child(5n+1) { background: var(--light-blue); }
+tbody tr:nth-child(5n+2) { background: var(--gold); }
+tbody tr:nth-child(5n+3) { background: var(--green); }
+tbody tr:nth-child(5n+4) { background: var(--purple); }
+tbody tr:nth-child(5n+5) { background: var(--red); }
+tbody tr:last-child td { border-bottom: none; }
+td:first-child { color: var(--navy); font-size: 19px; font-weight: 700; }
+td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
+.resource-link {
+  color: var(--navy);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.fat-breadcrumb-footer {
+  margin-top: 30px;
+  background: linear-gradient(135deg,var(--navy),var(--blue));
+  color: white;
+  border-radius: 20px;
+  padding: 22px 26px;
+  box-shadow: 0 10px 24px rgba(23,50,77,.18);
+}
+.breadcrumb-trail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-size: clamp(16px,2vw,21px);
+  font-weight: 800;
+}
+.fat-breadcrumb-footer a {
+  color: white;
+  background: rgba(255,255,255,.13);
+  border: 1px solid rgba(255,255,255,.34);
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 8px 13px;
+}
+.breadcrumb-current {
+  color: var(--navy);
+  background: var(--gold);
+  border-radius: 999px;
+  padding: 8px 13px;
+}
+.breadcrumb-separator { color: var(--gold); font-weight: 900; }
+@media (max-width: 900px) {
+  .immediate-grid,
+  .status-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 760px) {
-  .filter-row { grid-template-columns: 1fr; }
-  .member-card h2 { font-size: 24px; }
+  body { padding: 14px; }
+  .header { padding: 22px; border-radius: 16px; }
+  .card,.table-card,.immediate,.action-filter-card,.member-card,.status-card,.fat-breadcrumb-footer {
+    border-radius: 16px;
+  }
+  table, thead, tbody, th, td, tr { display: block; }
+  thead { display: none; }
+  tbody tr {
+    margin: 14px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(23,50,77,.08);
+  }
+  td {
+    width: 100% !important;
+    border-bottom: 1px solid rgba(201,214,230,.8);
+    padding: 14px 16px 14px 140px;
+    position: relative;
+    min-height: 54px;
+    font-size: 16px;
+  }
+  td:last-child { border-bottom: none; }
+  td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 16px;
+    top: 14px;
+    width: 110px;
+    color: var(--muted);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+  td:first-child { font-size: 18px; }
 }
-
-
+@media print {
+  body { background: white; padding: 0; }
+  .header,.card,.table-card,.immediate,.action-filter-card,.member-card,.status-card,.fat-breadcrumb-footer {
+    box-shadow: none;
+  }
+}
 
 /* Crimping Project Progress */
 .project-progress-card {
@@ -241,157 +414,78 @@
   outline: 3px solid var(--blue);
   outline-offset: 3px;
 }
-
-
-
-/* Site Menu tile hover - matches Project Progress hover behavior */
-.card-grid .tile {
-  cursor: pointer;
-  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-}
-.card-grid .tile:hover,
-.card-grid .tile:focus {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 18px rgba(23, 50, 77, 0.14);
-  border-color: var(--blue);
-  outline: none;
-}
-.card-grid .tile:focus-visible {
-  outline: 3px solid var(--blue);
-  outline-offset: 3px;
-}
-@media (prefers-reduced-motion: reduce) {
-  .card-grid .tile {
-    transition: none;
-  }
-  .card-grid .tile:hover,
-  .card-grid .tile:focus {
-    transform: none;
-  }
-}
-
-
-/* Fat Footer Breadcrumb */
-.fat-breadcrumb-footer {
-  margin-top: 30px;
-  background: linear-gradient(135deg, var(--navy), var(--blue));
-  color: white;
-  border-radius: 20px;
-  padding: 22px 26px;
-  box-shadow: 0 10px 24px rgba(23, 50, 77, 0.18);
-}
-.fat-breadcrumb-footer .breadcrumb-trail {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
-  font-size: clamp(16px, 2vw, 21px);
-  font-weight: 800;
-  line-height: 1.35;
-}
-.fat-breadcrumb-footer a {
-  color: white;
-  background: rgba(255, 255, 255, 0.13);
-  border: 1px solid rgba(255, 255, 255, 0.34);
-  text-decoration: none;
-  border-radius: 999px;
-  padding: 8px 13px;
-  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
-}
-.fat-breadcrumb-footer a:hover,
-.fat-breadcrumb-footer a:focus {
-  background: rgba(255, 255, 255, 0.22);
-  border-color: rgba(255, 255, 255, 0.72);
-  transform: translateY(-1px);
-  outline: none;
-}
-.fat-breadcrumb-footer a:focus-visible {
-  outline: 3px solid var(--gold);
-  outline-offset: 3px;
-}
-.fat-breadcrumb-footer .breadcrumb-current {
-  color: var(--navy);
-  background: var(--gold);
-  border: 1px solid rgba(255, 255, 255, 0.42);
-  border-radius: 999px;
-  padding: 8px 13px;
-}
-.fat-breadcrumb-footer .breadcrumb-separator {
-  color: var(--gold);
-  font-weight: 900;
-  opacity: 0.95;
-}
-@media (max-width: 760px) {
-  .fat-breadcrumb-footer {
-    border-radius: 16px;
-    padding: 18px;
-  }
-  .fat-breadcrumb-footer .breadcrumb-trail {
-    gap: 8px;
-    font-size: 16px;
-  }
-}
-@media print {
-  .fat-breadcrumb-footer {
-    box-shadow: none;
-  }
-}
 </style>
 </head>
 <body>
 <main class="wrap">
-<section class="header"><h1>Crimping Team Group Site</h1></section>
-<nav class="nav">
-<a class="active" href="home.html">Home</a>
-<a href="action-items.html">Action Items</a>
-<a href="team-members.html">Team</a>
-<a href="priority-tasks.html">Priorities</a>
-<a href="deadline-reminder.html">Deliverables</a>
-<a href="note-section.html">Notes</a>
-<a href="resources.html">Resources</a>
-</nav>
+<header class="header">
+<h1>Crimping Team Group Site</h1>
+<p>Crimping RJ45 Ethernet Cables: A Practical Guide for TSV</p>
+</header>
+<nav aria-label="Project navigation" class="nav"><a class="active" href="home.html">Home</a><a href="action-items.html">Action Items</a><a href="team-members.html">Team</a><a href="priority-tasks.html">Priorities</a><a href="deadline-reminder.html">Deliverables</a><a href="note-section.html">Notes</a><a href="resources.html">Resources</a></nav>
 <section aria-label="Crimping project progress status" class="project-progress-card">
 <div class="progress-header">
 <div>
 <h2>Project Progress</h2>
-<p><strong>Current checkpoint:</strong> The title card and closing card are complete, and the recorded tutorial clips have been uploaded to the Crimping Google Drive folder. Lower-third and section-card templates remain complete. The next weekend milestone is to finish the voice-over, verify the uploaded footage and audio files, and prepare the project for rough-cut assembly.</p>
+<p><strong>Current checkpoint:</strong> The Crimping video is in the final editing stage. All remaining production work is focused on finishing the edit during this final weekend, completing final quality checks and export preparation, and submitting the approved final video on Monday, August 17.</p>
 </div>
 </div>
 <div class="progress-grid">
 <a aria-label="Go to Action Items page for current progress details" class="progress-panel progress-link" href="action-items.html">
-<div class="progress-meta"><strong>Current Progress</strong><span class="progress-percent">55%</span></div>
-<div aria-label="Current Crimping project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="55" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 55%;"></div></div>
-<p>The project has completed the main recording, core opening and closing graphics, and the footage handoff. Work now centers on voice-over completion, clip review and organization, scene-fitting cuts, remaining visual refinements, and the first rough-cut build.</p>
+<div class="progress-meta">
+<strong>Current Progress</strong>
+<span class="progress-percent">90%</span>
+</div>
+<div aria-label="Current Crimping project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="90" class="progress-track" role="progressbar">
+<div class="progress-fill" style="width: 90%;"></div>
+</div>
+<p>The project is approximately 90% complete. Recording and voice-over work are complete, and the remaining work is final editing and polish: captions, labels, callouts, audio cleanup, timing, technical verification, final playback review, and preparation of the submission-ready export.</p>
 </a>
 <a aria-label="Go to Deliverables page for target progress details" class="progress-panel target-progress progress-link" href="deadline-reminder.html">
-<div class="progress-meta"><strong>Target Progress</strong><span class="progress-percent">65%</span></div>
-<div aria-label="Target Crimping project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="65" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 65%;"></div></div>
-<p>Target is to reach 65% by the end of the weekend by completing and uploading the voice-over, syncing narration to the uploaded clips, confirming that the critical close-up shots are usable, and starting an edit sequence with the title card, section cards, lower thirds, and closing card in place.</p>
+<div class="progress-meta">
+<strong>Target Progress</strong>
+<span class="progress-percent">100%</span>
+</div>
+<div aria-label="Target Crimping project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" class="progress-track" role="progressbar">
+<div class="progress-fill" style="width: 100%;"></div>
+</div>
+<p>Reach 100% by finishing the final edit and quality review by Sunday, August 16, exporting and backing up the approved submission-ready video, and submitting the verified final video on Monday, August 17.</p>
 </a>
 </div>
 </section>
+<h2 class="section-title">Immediate Next Step</h2>
 <section class="immediate">
-<h2 class="section-title" style="margin-top: 0;">Immediate Next Step</h2>
 <div class="immediate-grid">
-<article class="action-card"><h2>Needed Next Week</h2><p>Build toward the August 2 full rough-cut deadline: sync the completed voice-over, trim the uploaded clips into the planned scene order, insert the completed title card, section cards, lower thirds, and closing card, place the T568B graphic and required labels or callouts, and maintain one short list of only the missing assets or pickups still needed.</p></article>
-<article class="action-card"><h2>Goal by End of Week</h2><p>Complete and upload the clean voice-over this weekend, organize the final takes by scene or section name, verify that all recorded clips open correctly and have backup copies, and begin the first edit sequence so rough-cut assembly can continue without waiting on audio or core graphics.</p></article>
-<article class="action-card"><h2>Main Reminder</h2><p>Protect technical clarity in every cut: the T568B wire order, RJ45 insertion depth and orientation, crimping action, second-end repeat, and cable tester proof must remain easy to see. Do not add a reshoot, new scene, or new visual style unless the existing material cannot show an essential step clearly and accurately.</p></article>
+<article class="action-card">
+<h2>Needed Next Week</h2>
+<p>Monday, August 17 is final submission day. Use Monday only for the final approved export, last playback/file verification, backup confirmation, and submission. Do not schedule new production work.</p>
+</article>
+<article class="action-card">
+<h2>Goal by End of Week</h2>
+<p>Finish all remaining editing by Sunday, August 16. Complete the final technical and visual quality check, verify captions and audio, confirm the critical crimping steps are clear, and have the submission-ready export plus a backup copy prepared before Monday.</p>
+</article>
+<article class="action-card">
+<h2>Main Reminder</h2>
+<p>This is the final weekend. Final fixes only—no new format, style, sections, or unnecessary pickups. Protect technical accuracy and readability, verify the full video plays correctly, and submit only the reviewed, backed-up final export on Monday, August 17.</p>
+</article>
 </div>
 </section>
 <h2 class="section-title">Crimping Team Site Menu</h2>
-<section class="card-grid">
-<a class="tile" href="action-items.html"><h2>Action Items</h2><p>View action items assigned for this week's sprint.</p></a>
-<a class="tile" href="team-members.html"><h2>Team</h2><p>Roles, responsibilities, and name reference for the Crimping team.</p></a>
-<a class="tile" href="priority-tasks.html"><h2>Priorities</h2><p>Main due dates, leads, and helpers for the Crimping project.</p></a>
-<a class="tile" href="deadline-reminder.html"><h2>Deliverables</h2><p>Shared schedule checkpoints from planning to final submission.</p></a>
-<a class="tile" href="note-section.html"><h2>Notes</h2><p>Simple definitions for shot list, close-up shots, T568B, labels, callouts, and retakes.</p></a>
-<a class="tile" href="resources.html"><h2>Resources</h2><p>Quick links for the team site, Google Drive folders, production materials, and TSV graphics.</p></a>
+<section aria-label="Crimping team pages" class="card-grid">
+<a class="menu-tile" href="action-items.html"><h2>Action Items</h2><p>Current production assignments for every Crimping team member.</p></a>
+<a class="menu-tile" href="team-members.html"><h2>Team</h2><p>Roles and responsibilities for the Crimping production team.</p></a>
+<a class="menu-tile" href="priority-tasks.html"><h2>Priorities</h2><p>Main tasks, due dates, leads, and support assignments.</p></a>
+<a class="menu-tile" href="deadline-reminder.html"><h2>Deliverables</h2><p>Project checkpoints from planning through final submission.</p></a>
+<a class="menu-tile" href="note-section.html"><h2>Notes</h2><p>Production definitions, technical reminders, and post-lock rules.</p></a>
+<a class="menu-tile" href="resources.html"><h2>Resources</h2><p>Team links, production references, TSV graphics, and how-to decks.</p></a>
 </section>
 <footer aria-label="Site breadcrumb" class="fat-breadcrumb-footer">
 <div class="breadcrumb-trail">
 <a href="../index.html">District of Florida and Caribbean</a>
 <span aria-hidden="true" class="breadcrumb-separator">/</span>
-<span class="breadcrumb-current">Crimping Team</span>
+<a href="home.html">Crimping Team</a>
+<span aria-hidden="true" class="breadcrumb-separator">/</span>
+<span class="breadcrumb-current">Home</span>
 </div>
 </footer>
 </main>

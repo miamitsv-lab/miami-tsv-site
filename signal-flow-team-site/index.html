@@ -741,67 +741,17 @@ body.project-popup-open { overflow: hidden; }
 </head>
 <body>
 <div aria-hidden="true" class="project-popup-overlay" id="projectReminderPopup">
-<section aria-describedby="noticeStatus" aria-labelledby="activeNoticeTitle" aria-modal="true" class="project-popup" role="dialog">
-<button aria-label="Close team notices" class="project-popup-close-x" data-project-popup-close type="button">×</button>
-<div aria-label="Choose a team notice" class="notice-tabs" role="tablist">
-<button aria-controls="meetingNoticePanel" aria-selected="true" class="notice-tab" data-notice-target="meeting" id="meetingNoticeTab" role="tab" type="button">Panata Meeting</button>
-<button aria-controls="reminderNoticePanel" aria-selected="false" class="notice-tab" data-notice-target="reminder" id="reminderNoticeTab" role="tab" type="button">Project Reminder</button>
-</div>
-<p aria-live="polite" class="notice-timer" id="noticeStatus">Automatically switching to next notification in <span id="noticeCountdown">20</span> seconds.</p>
+<section aria-describedby="projectReminderIntro" aria-labelledby="projectReminderTitle" aria-modal="true" class="project-popup" role="dialog">
+<button aria-label="Close project reminder" class="project-popup-close-x" data-project-popup-close="" type="button">×</button>
+<p class="project-popup-kicker">Signal Flow Team • Monday, August 17</p>
+<h2 id="projectReminderTitle">Meeting Schedule for Final Devotional Prayer</h2>
+<p class="project-popup-intro" id="projectReminderIntro"><strong>(ONLINE) Signal Flow TSV Team Weekly Devo</strong> • MONDAY • 9PM EDT/8PM AST • District of Florida &amp; Caribbean</p>
+<div aria-label="Important project reminder details" class="project-detail-grid"><div class="project-detail-label">Meeting Link</div><div class="project-detail-value"><a class="notice-meeting-link" href="https://miami-tsv.com/signal-flow-team-meeting" rel="noopener noreferrer" target="_blank">miami-tsv.com/signal-flow-team-meeting</a></div><div class="project-detail-label">Meeting Number</div><div class="project-detail-value"><span class="notice-code">2633 770 7136</span></div><div class="project-detail-label">Meeting Password</div><div class="project-detail-value"><span class="notice-code">TSVDEVOMONDAYS</span></div><div class="project-detail-label">Alternate Link</div><div class="project-detail-value"><a class="notice-meeting-link" href="https://inc-maimi-tsv.my.webex.com/inc-maimi-tsv.my/j.php?MTID=md2e6922f11098b6d3f160c9515dfd5ae" rel="noopener noreferrer" target="_blank">https://inc-maimi-tsv.my.webex.com/inc-maimi-tsv.my/j.php?MTID=md2e6922f11098b6d3f160c9515dfd5ae</a></div></div>
 
-<div aria-labelledby="meetingNoticeTab" class="notice-panel" data-notice-panel="meeting" id="meetingNoticePanel" role="tabpanel">
-<p class="project-popup-kicker">Next Signal Flow Team Panata</p>
-<h2 class="notice-meeting-title" id="activeNoticeTitle">Monday Panata Meeting</h2>
-<p class="project-popup-intro"><strong>(ONLINE) Signal Flow TSV Team Weekly Panata Meeting</strong><br>Monday, July 27, 2026 • 9 PM EDT / 8 PM AST<br>District of Florida and Caribbean</p>
-<div aria-label="Panata meeting details" class="project-detail-grid">
-<div class="project-detail-label">Meeting Link</div>
-<div class="project-detail-value"><a class="notice-meeting-link" href="https://miami-tsv.com/signal-flow-team-meeting" rel="noopener noreferrer" target="_blank">miami-tsv.com/signal-flow-team-meeting</a></div>
-<div class="project-detail-label">Meeting Number</div>
-<div class="project-detail-value"><span class="notice-code">2867 408 6132</span></div>
-<div class="project-detail-label">Password</div>
-<div class="project-detail-value"><span class="notice-code">JULY27TH</span></div>
-<div class="project-detail-label">Alternate Link</div>
-<div class="project-detail-value"><a class="notice-meeting-link" href="https://inc-maimi-tsv.my.webex.com/inc-maimi-tsv.my/j.php?MTID=m9ea53696c81b7e06e69101fc18dd9e6a" rel="noopener noreferrer" target="_blank">Open alternate WebEx link</a></div>
-</div>
-<p class="project-popup-note"><strong>Meeting reminder:</strong> Join a few minutes early so audio, video, the water-pipe analogy update, and the planned Roblox animation work can be reviewed before the Panata begins.</p>
-<div class="project-popup-actions">
-<a class="project-popup-primary" href="https://miami-tsv.com/signal-flow-team-meeting" rel="noopener noreferrer" target="_blank">Join Panata Meeting</a>
-<a class="project-popup-button" download href="signal-flow-panata-july-27-2026.ics">Save to Calendar</a>
-<a class="project-popup-button" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%28ONLINE%29%20Signal%20Flow%20TSV%20Team%20Weekly%20Panata%20Meeting&dates=20260728T010000Z/20260728T020000Z&details=District%20of%20Florida%20and%20Caribbean%0A%0AMeeting%20link%3A%20https%3A%2F%2Fmiami-tsv.com%2Fsignal-flow-team-meeting%0AMeeting%20number%3A%202867%20408%206132%0AMeeting%20password%3A%20JULY27TH%0AAlternate%20link%3A%20https%3A%2F%2Finc-maimi-tsv.my.webex.com%2Finc-maimi-tsv.my%2Fj.php%3FMTID%3Dm9ea53696c81b7e06e69101fc18dd9e6a%0A%0AMeeting%20time%3A%209%20PM%20EDT%20%2F%208%20PM%20AST.&location=WebEx%20-%20https%3A%2F%2Fmiami-tsv.com%2Fsignal-flow-team-meeting&ctz=America/New_York" rel="noopener noreferrer" target="_blank">Add to Google Calendar</a>
-<button class="project-popup-button" data-notice-target="reminder" type="button">View Project Reminder</button>
-<button class="project-popup-button" data-project-popup-close type="button">Close Notices</button>
-</div>
-</div>
-
-<div aria-labelledby="reminderNoticeTab" class="notice-panel" data-notice-panel="reminder" hidden id="reminderNoticePanel" role="tabpanel">
-<p class="project-popup-kicker">Signal Flow Team Reminder</p>
-<h2>Important Project Reminder</h2>
-<p class="project-popup-intro"><strong>The title card and closing card are complete, and the device graphic assets have been uploaded.</strong> The immediate milestone is to complete the Signal Flow water-pipe analogy and begin Roblox animation this weekend.</p>
-<div aria-label="Project reminder details" class="project-detail-grid">
-<div class="project-detail-label">Current Stage</div>
-<div class="project-detail-value">Finish the water-pipe analogy, confirm the first Roblox scene assignments, and organize the uploaded device graphics for animation and editing.</div>
-<div class="project-detail-label">Weekend Target</div>
-<div class="project-detail-value">Complete the analogy and begin the first priority Roblox scenes using the approved characters, rooms, camera views, and production environment.</div>
-<div class="project-detail-label">Next Week</div>
-<div class="project-detail-value">Expand the first reviewable animation batch, export scenes for editing, and maintain one controlled list of missing assets toward the August 2 rough-cut deadline.</div>
-<div class="project-detail-label">Protect</div>
-<div class="project-detail-value">Keep the microphone-to-mixer/processors-to-speaker path technically clear, use simple purposeful movement, and do not reopen the locked visual direction.</div>
-</div>
-<p class="project-popup-note"><strong>Reminder:</strong> Do not add major new scenes or restart the Roblox environment. Follow the locked script and finalized animation scene list, and prioritize technical accuracy, readability, and organized exports.</p>
-<div class="project-popup-actions">
-<a class="project-popup-primary" href="action-items.html">View Action Items</a>
-<button class="project-popup-button" data-notice-target="meeting" type="button">View Panata Meeting</button>
-<button class="project-popup-button" data-project-popup-close type="button">Close Notices</button>
-</div>
-</div>
-
-<div aria-label="Notice position" class="notice-dot-row">
-<button aria-current="true" aria-label="Show Panata meeting notice" class="notice-dot" data-notice-target="meeting" type="button"></button>
-<button aria-current="false" aria-label="Show project reminder" class="notice-dot" data-notice-target="reminder" type="button"></button>
-</div>
+<div class="project-popup-actions"><a class="project-popup-primary" href="https://miami-tsv.com/signal-flow-team-meeting" rel="noopener noreferrer" target="_blank">Open Meeting Link</a><button class="project-popup-button" data-project-popup-close="" type="button">Close</button></div>
 </section>
 </div>
-<button aria-haspopup="dialog" class="notice-launcher" id="noticeLauncher" type="button">Team Notices</button>
+<button aria-haspopup="dialog" class="notice-launcher" id="noticeLauncher" type="button">Final Devotional Prayer</button>
 <main class="wrap">
 <section class="header"><h1>Signal Flow Team Group Site</h1></section>
 <nav class="nav">
@@ -816,27 +766,27 @@ body.project-popup-open { overflow: hidden; }
 <section aria-label="Signal Flow project progress status" class="project-progress-card">
 <div class="progress-header">
 <h2>Project Progress</h2>
-<p><strong>Current checkpoint:</strong> Pre-production remains closed/locked. The title card and closing card are complete, and the device graphic assets have been uploaded. The immediate weekend focus is to complete the Signal Flow water-pipe analogy and begin the first Roblox animation scenes using the approved characters, rooms, and production environment.</p>
+<p><strong>Current checkpoint:</strong> Final weekend checkpoint: production is complete and the only remaining work is to finish the final edit, perform final technical, readability, audio, and playback checks, export and back up the submission-ready video, and submit the final entry on Monday, August 17.</p>
 </div>
 <div class="progress-grid">
 <a aria-label="Open Action Items for current progress" class="progress-panel" href="action-items.html">
-<div class="progress-meta"><strong>Current Progress</strong><span class="progress-percent">48%</span></div>
-<div aria-label="Current Signal Flow project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="48" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 48%;"></div></div>
-<p>The visual foundation is ready: the title and closing cards are complete, device graphics are uploaded, and the Roblox production environment is established. Work now centers on completing the water-pipe analogy and moving into coordinated scene animation.</p>
+<div class="progress-meta"><strong>Current Progress</strong><span class="progress-percent">90%</span></div>
+<div aria-label="Current Signal Flow project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="90" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 90%;"></div></div>
+<p>Signal Flow is at 90%. The animation, voice-over, title/closing cards, diagrams, and other production assets are in place. Remaining work is final editing and polish, final verification, export and backup, and Monday submission.</p>
 </a>
 <a aria-label="Open Deliverables for target progress" class="progress-panel target-progress" href="deadline-reminder.html">
-<div class="progress-meta"><strong>Target Progress</strong><span class="progress-percent">65%</span></div>
-<div aria-label="Target Signal Flow project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="65" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 65%;"></div></div>
-<p>Reach 65% by completing the water-pipe analogy, starting the first priority Roblox animation scenes, exporting an initial review batch, and organizing scene files for early editing toward the August 2 rough-cut deadline.</p>
+<div class="progress-meta"><strong>Target Progress</strong><span class="progress-percent">100%</span></div>
+<div aria-label="Target Signal Flow project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 100%;"></div></div>
+<p>Reach 100% by completing and verifying the final edit, exporting a submission-ready file with a backup copy, and submitting the reviewed final video on Monday, August 17.</p>
 </a>
 </div>
 </section>
 <section class="immediate">
 <h2 class="section-title" style="margin-top: 0;">Immediate Next Step</h2>
 <div class="immediate-grid">
-<article class="action-card"><h2>Needed Next Week</h2><p>Move fully from Roblox setup into animation production. Confirm scene owners, build the priority scenes from the finalized animation list, capture and export review versions, organize the files for editing, and close the remaining water-pipe analogy work.</p></article>
-<article class="action-card"><h2>Goal by End of Week</h2><p>Finish the water-pipe analogy illustration and complete the first reviewable Roblox animation batch. Confirm that the approved characters, rooms, camera views, title card, lower thirds, and section-card templates work consistently together.</p></article>
-<article class="action-card"><h2>Main Reminder</h2><p>The Roblox characters, rooms, and environment are already established. Do not restart the visual direction or add major new scenes. Follow the locked script and finalized scene list, keep movement simple, protect technical accuracy, and use organized exports.</p></article>
+<article class="action-card"><h2>Needed Next Week</h2><p>Have the final video ready before Monday. On Monday, August 17, use the approved final export and backup copy, confirm playback one last time, attend the final devotional prayer, and submit the final Signal Flow video.</p></article>
+<article class="action-card"><h2>Goal by End of Week</h2><p>By Sunday, August 16, finish all remaining editing and final polish, complete the technical/readability/audio review, export the submission-ready video, create a backup copy, and verify playback on the final file.</p></article>
+<article class="action-card"><h2>Main Reminder</h2><p>This is the final weekend and Monday, August 17 is submission day. Make final fixes only—do not add new creative sections or major animation changes. Protect technical accuracy, clear audio, readable visuals, and the verified final export and backup.</p></article>
 </div>
 </section>
 <h2 class="section-title">Signal Flow Site Menu</h2>
@@ -845,7 +795,7 @@ body.project-popup-open { overflow: hidden; }
 <a class="tile" href="team-members.html"><h2>Team</h2><p>Roles, responsibilities, and name reference for the Signal Flow team.</p></a>
 <a class="tile" href="priority-tasks.html"><h2>Priorities</h2><p>Main due dates, leads, and helpers for the Signal Flow project.</p></a>
 <a class="tile" href="deadline-reminder.html"><h2>Deliverables</h2><p>Shared schedule checkpoints from planning to final submission.</p></a>
-<a class="tile" href="note-section.html"><h2>Notes</h2><p>Simple definitions for run-of-show, storyboard, animation scene list, avatar movement, labels, and callouts.</p></a>
+<a class="tile" href="note-section.html"><h2>Notes</h2><p>Definitions for chibi animation, narration timing, signal-flow diagrams, rough-cut assembly, labels, and callouts.</p></a>
 <a class="tile" href="resources.html"><h2>Resources</h2><p>Quick access to team site links, Google Drive folders, production materials, TSV graphics, and how-to decks.</p></a>
 </section>
 <footer aria-label="Site breadcrumb" class="fat-breadcrumb-footer">
@@ -863,132 +813,51 @@ body.project-popup-open { overflow: hidden; }
   if (!popup || !launcher) return;
 
   var closeButtons = popup.querySelectorAll('[data-project-popup-close]');
-  var targetButtons = popup.querySelectorAll('[data-notice-target]');
-  var panels = popup.querySelectorAll('[data-notice-panel]');
-  var tabs = popup.querySelectorAll('[role="tab"]');
-  var dots = popup.querySelectorAll('.notice-dot');
-  var status = document.getElementById('noticeStatus');
   var focusableSelector = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
   var previousFocus = null;
-  var activeNotice = 'meeting';
-  var countdownTimer = null;
-  var secondsRemaining = 20;
-
-  function clearTimer() {
-    if (countdownTimer) window.clearInterval(countdownTimer);
-    countdownTimer = null;
-  }
-
-  function updateCountdown() {
-    if (!status) return;
-    status.hidden = false;
-    status.innerHTML = 'Automatically switching to next notification in <span id="noticeCountdown">' + secondsRemaining + '</span> seconds.';
-  }
-
-  function resetCountdown() {
-    secondsRemaining = 20;
-    updateCountdown();
-  }
-
-  function showNotice(name, options) {
-    options = options || {};
-    activeNotice = name === 'reminder' ? 'reminder' : 'meeting';
-
-    panels.forEach(function (panel) {
-      panel.hidden = panel.getAttribute('data-notice-panel') !== activeNotice;
-    });
-    tabs.forEach(function (tab) {
-      var selected = tab.getAttribute('data-notice-target') === activeNotice;
-      tab.setAttribute('aria-selected', selected ? 'true' : 'false');
-      tab.setAttribute('tabindex', selected ? '0' : '-1');
-    });
-    dots.forEach(function (dot) {
-      dot.setAttribute('aria-current', dot.getAttribute('data-notice-target') === activeNotice ? 'true' : 'false');
-    });
-
-    if (options.focusTab) {
-      var activeTab = popup.querySelector('[role="tab"][data-notice-target="' + activeNotice + '"]');
-      if (activeTab) activeTab.focus();
-    }
-
-    if (options.resetCountdown) resetCountdown();
-  }
-
-  function startAutomaticSwitching() {
-    clearTimer();
-    showNotice('meeting');
-    resetCountdown();
-
-    countdownTimer = window.setInterval(function () {
-      if (!popup.classList.contains('is-visible')) return;
-      secondsRemaining -= 1;
-      if (secondsRemaining <= 0) {
-        showNotice(activeNotice === 'meeting' ? 'reminder' : 'meeting');
-        secondsRemaining = 20;
-      }
-      updateCountdown();
-    }, 1000);
-  }
 
   function openPopup() {
     previousFocus = document.activeElement;
     popup.classList.add('is-visible');
     popup.setAttribute('aria-hidden', 'false');
     document.body.classList.add('project-popup-open');
-    startAutomaticSwitching();
-
-    var activeTab = popup.querySelector('[role="tab"][aria-selected="true"]');
-    if (activeTab) activeTab.focus();
+    var firstFocusable = popup.querySelector(focusableSelector);
+    if (firstFocusable) firstFocusable.focus();
   }
 
   function closePopup() {
-    clearTimer();
     popup.classList.remove('is-visible');
     popup.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('project-popup-open');
     if (previousFocus && typeof previousFocus.focus === 'function') previousFocus.focus();
   }
 
-  targetButtons.forEach(function (button) {
-    button.addEventListener('click', function () {
-      showNotice(button.getAttribute('data-notice-target'), {
-        focusTab: button.getAttribute('role') === 'tab',
-        resetCountdown: true
-      });
-    });
+  closeButtons.forEach(function (button) {
+    button.addEventListener('click', closePopup);
   });
 
-  tabs.forEach(function (tab, index) {
-    tab.addEventListener('keydown', function (event) {
-      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
-      event.preventDefault();
-      var direction = event.key === 'ArrowRight' ? 1 : -1;
-      var nextIndex = (index + direction + tabs.length) % tabs.length;
-      showNotice(tabs[nextIndex].getAttribute('data-notice-target'), {
-        focusTab: true,
-        resetCountdown: true
-      });
-    });
-  });
-
-  closeButtons.forEach(function (button) { button.addEventListener('click', closePopup); });
   launcher.addEventListener('click', openPopup);
-  popup.addEventListener('click', function (event) { if (event.target === popup) closePopup(); });
+  popup.addEventListener('click', function (event) {
+    if (event.target === popup) closePopup();
+  });
 
   document.addEventListener('keydown', function (event) {
     if (!popup.classList.contains('is-visible')) return;
-    if (event.key === 'Escape') { closePopup(); return; }
+    if (event.key === 'Escape') {
+      closePopup();
+      return;
+    }
     if (event.key === 'Tab') {
-      var focusable = Array.prototype.slice.call(popup.querySelectorAll(focusableSelector)).filter(function (element) {
-        return !element.closest('[hidden]');
-      });
+      var focusable = Array.prototype.slice.call(popup.querySelectorAll(focusableSelector));
       if (!focusable.length) return;
       var first = focusable[0];
       var last = focusable[focusable.length - 1];
       if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault(); last.focus();
+        event.preventDefault();
+        last.focus();
       } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault(); first.focus();
+        event.preventDefault();
+        first.focus();
       }
     }
   });

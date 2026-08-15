@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Unity Games Responsive Pages</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: #080a0d;
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    main {
+      width: min(760px, 100%);
+      text-align: center;
+    }
+    h1 { margin-top: 0; }
+    .links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin-top: 28px;
+    }
+    a {
+      display: grid;
+      place-items: center;
+      min-height: 130px;
+      padding: 24px;
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 18px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.25rem;
+      font-weight: 700;
+      background: rgba(255,255,255,.07);
+    }
+    a:hover, a:focus-visible {
+      background: rgba(255,255,255,.14);
+      outline: 3px solid rgba(255,255,255,.35);
+      outline-offset: 3px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Unity Games Responsive Pages</h1>
+    <p>Select a color version.</p>
+    <div class="links">
+      <a href="miami-neon/index.html">Miami Neon Colors</a>
+      <a href="inc-colors/index.html">INC Green, White & Red</a>
+    </div>
+  </main>
+</body>
+</html>

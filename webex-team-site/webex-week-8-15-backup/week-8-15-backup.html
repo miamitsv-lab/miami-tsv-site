@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WebEx Team - Week 8/15 Backup</title>
+<style>
+:root {
+  --navy: #17324D;
+  --blue: #2F6FAE;
+  --border: #C9D6E6;
+  --bg: #F6F9FD;
+  --text: #1C2733;
+  --muted: #51606F;
+  --gold: #FFF3DC;
+  --green: #EAF7EF;
+  --purple: #F2ECFF;
+  --red: #FFEAEA;
+  --light-blue: #EAF3FF;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  padding: 24px;
+}
+.wrap { max-width: 1280px; margin: 0 auto; }
+.header {
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  color: white;
+  border-radius: 20px;
+  padding: 28px 32px;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 24px rgba(23,50,77,.18);
+}
+.header h1 {
+  margin: 0;
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.1;
+}
+.header .project-title {
+  margin: 10px 0 0;
+  max-width: 980px;
+  line-height: 1.55;
+  font-size: 18px;
+  font-weight: 700;
+}
+.header .snapshot {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: var(--gold);
+  color: var(--navy);
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: .02em;
+}
+h2.section-title {
+  margin: 28px 0 12px;
+  color: var(--navy);
+  font-size: clamp(24px, 3vw, 32px);
+}
+.project-progress-card,
+.immediate,
+.member-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 8px 22px rgba(23,50,77,.10);
+}
+.project-progress-card {
+  width: 66.666%;
+  margin: 0 auto 24px;
+  padding: 20px;
+}
+.progress-header { margin-bottom: 16px; }
+.progress-header h2 {
+  margin: 0 0 8px;
+  text-align: center;
+  color: var(--navy);
+  font-size: clamp(24px, 3vw, 34px);
+}
+.progress-header p,
+.progress-panel p {
+  margin: 0;
+  line-height: 1.5;
+  font-size: 16px;
+}
+.progress-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-top: 16px;
+}
+.progress-panel {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 16px;
+  background: var(--light-blue);
+}
+.progress-panel.target-progress { background: var(--gold); }
+.progress-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  color: var(--navy);
+  font-size: 18px;
+}
+.progress-percent {
+  font-weight: 900;
+  font-size: 22px;
+}
+.progress-track {
+  height: 20px;
+  background: #E6EEF7;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--navy), var(--blue));
+  border-radius: 999px;
+}
+.immediate {
+  padding: 18px;
+  margin-bottom: 28px;
+}
+.immediate-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.action-card {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 20px;
+  min-height: 190px;
+}
+.action-card:nth-child(1) { background: var(--light-blue); }
+.action-card:nth-child(2) { background: var(--green); }
+.action-card:nth-child(3) { background: var(--gold); }
+.action-card h3 {
+  margin: 0 0 10px;
+  color: var(--navy);
+  font-size: 24px;
+}
+.action-card p {
+  margin: 0;
+  line-height: 1.55;
+  font-size: 17px;
+}
+.action-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+.member-card { overflow: hidden; }
+.member-card:nth-child(5n+1) .member-card-head { background: var(--light-blue); }
+.member-card:nth-child(5n+2) .member-card-head { background: var(--gold); }
+.member-card:nth-child(5n+3) .member-card-head { background: var(--green); }
+.member-card:nth-child(5n+4) .member-card-head { background: var(--purple); }
+.member-card:nth-child(5n+5) .member-card-head { background: var(--red); }
+.member-card-head {
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--border);
+}
+.member-card-head h3 {
+  margin: 0;
+  color: var(--navy);
+  font-size: 28px;
+}
+.member-role {
+  margin: 8px 0 0;
+  color: #1D5F8F;
+  font-weight: 700;
+  line-height: 1.45;
+}
+.member-card-body { padding: 20px 22px; }
+.member-card-body h4 {
+  margin: 0 0 12px;
+  color: var(--navy);
+  font-size: 21px;
+}
+.member-card-body ul { margin: 0; padding-left: 22px; }
+.member-card-body li {
+  margin: 0 0 10px;
+  line-height: 1.5;
+  font-size: 17px;
+}
+.member-card-body li:last-child { margin-bottom: 0; }
+.footer-note {
+  margin-top: 30px;
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  color: white;
+  border-radius: 20px;
+  padding: 18px 22px;
+  box-shadow: 0 10px 24px rgba(23,50,77,.18);
+  font-size: 15px;
+  line-height: 1.5;
+  font-weight: 700;
+}
+@media (max-width: 1024px) {
+  .project-progress-card { width: 80%; }
+}
+@media (max-width: 900px) {
+  .immediate-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  body { padding: 14px; }
+  .header { padding: 22px; border-radius: 16px; }
+  .project-progress-card,
+  .immediate,
+  .member-card,
+  .footer-note { border-radius: 16px; }
+  .project-progress-card { width: 100%; }
+  .member-card-head, .member-card-body { padding: 18px; }
+  .member-card-head h3 { font-size: 24px; }
+}
+@media print {
+  body { background: white; padding: 0; }
+  .header,
+  .project-progress-card,
+  .immediate,
+  .member-card,
+  .footer-note { box-shadow: none; }
+  .member-card { break-inside: avoid; }
+  .action-card { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="header">
+    <h1>WebEx Team - Week 8/15 Backup</h1>
+    <p class="project-title">Using WebEx for Hosting Worship Services</p>
+    <span class="snapshot">Backup Snapshot - August 15, 2026</span>
+  </header>
+
+  <section class="project-progress-card" aria-label="WebEx project progress status">
+    <div class="progress-header">
+      <h2>Project Progress</h2>
+      <p><strong>Current checkpoint:</strong> Pre-production remains closed/locked. The main WebEx interview/video recording is complete. The current production focus is to finish and upload every screen-demo recording this week, complete the matching voiceover, organize the interview/demo/audio assets, and begin the interview-to-demo assembly for the August 2 full rough cut.</p>
+    </div>
+    <div class="progress-grid">
+      <div class="progress-panel">
+        <div class="progress-meta">
+          <strong>Current Progress</strong>
+          <span class="progress-percent">60%</span>
+        </div>
+        <div class="progress-track" role="progressbar" aria-label="Current WebEx project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="60">
+          <div class="progress-fill" style="width:60%"></div>
+        </div>
+        <p>The main WebEx video recording is complete, and the title card, closing card, and core interview assets are ready for post-production. Remaining work centers on completing and verifying the screen-demo uploads, recording and cleaning the screen-demo voiceover, finishing only the necessary callouts, and synchronizing the interview and demonstrations in the editing timeline.</p>
+      </div>
+      <div class="progress-panel target-progress">
+        <div class="progress-meta">
+          <strong>Target Progress</strong>
+          <span class="progress-percent">75%</span>
+        </div>
+        <div class="progress-track" role="progressbar" aria-label="Target WebEx project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="75">
+          <div class="progress-fill" style="width:75%"></div>
+        </div>
+        <p>Reach 75% by completing and verifying every screen-demo upload, completing voiceover for all screen-recording segments, synchronizing the narration with the exact on-screen steps, and assembling a complete beginning-to-end rough cut with placeholders only for limited corrections.</p>
+      </div>
+    </div>
+  </section>
+
+  <h2 class="section-title">Immediate Next Step</h2>
+  <section class="immediate" aria-label="Immediate next steps">
+    <div class="immediate-grid">
+      <article class="action-card"><h3>Needed Next Week</h3><p>Use the completed screen-demo uploads and voiceover to polish the August 2 rough cut: tighten pacing, add captions, callouts, and zoom-ins, balance interview and narration audio, verify every host/cohost and Backup TSV PC procedure, and prepare one controlled correction list for the August 3-7 polished-edit period.</p></article>
+<article class="action-card"><h3>Goal by End of Week</h3><p>Complete and verify all screen-demo uploads; record, label, clean, and upload the matching voiceover; organize the interview, demo, audio, and graphics assets; and place them into a full sequence that is ready for rough-cut review.</p></article>
+<article class="action-card"><h3>Main Reminder</h3><p>The main WebEx video recording is complete. Do not reopen or re-record the interview unless a necessary pickup is approved. Voiceover must match the exact screen actions, WebEx menus must remain readable, private information must stay hidden, and technical accuracy takes priority over effects.</p></article>
+    </div>
+  </section>
+
+  <h2 class="section-title">All Action Items</h2>
+  <section class="action-list" aria-label="All current WebEx team action items">
+    
+<article class="member-card">
+  <div class="member-card-head">
+    <h3>Justyn</h3>
+    <p class="member-role">Director</p>
+  </div>
+  <div class="member-card-body">
+    <h4>Current Production Action Items</h4>
+    <ul>
+      <li>Lock the completed main WebEx interview/video recording and approve any pickup only when a necessary explanation or technical step is missing.</li>
+<li>Maintain one screen-demo upload checklist showing every required scene, owner, file name, upload status, and any approved re-recording need; close the checklist by the end of this week.</li>
+<li>Coordinate the screen-demo voiceover schedule and handoff with Julia, Jules T, Janna, NJ, Dennis, and Frank.</li>
+<li>Lead the end-of-week rough-cut readiness check so the interview footage, demo recordings, voiceovers, graphics, and backup copies are organized for August 2 assembly.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="member-card">
+  <div class="member-card-head">
+    <h3>Julia</h3>
+    <p class="member-role">Scriptwriter</p>
+  </div>
+  <div class="member-card-body">
+    <h4>Current Production Action Items</h4>
+    <ul>
+      <li>Finalize the screen-demo voiceover cue sheet so every narration line matches the final WebEx screen, click sequence, feature name, and transition.</li>
+<li>Keep voiceover wording concise and beginner-friendly while preserving the locked interview and demo flow.</li>
+<li>Flag any mismatch between the script and uploaded demo recordings for a small wording fix or approved limited pickup only.</li>
+<li>Provide NJ with the final scene order, narration text, and timing notes for rough-cut synchronization.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="member-card">
+  <div class="member-card-head">
+    <h3>Dennis</h3>
+    <p class="member-role">Main SME / Recording Support / Optional Music</p>
+  </div>
+  <div class="member-card-body">
+    <h4>Current Production Action Items</h4>
+    <ul>
+      <li>Review each uploaded screen-demo recording for technical accuracy, readable menus, proper cursor movement, privacy protection, and correct WebEx workflow.</li>
+<li>Validate Meeting Options, audio/video settings, layouts, Sync Stage, Breakout Sessions, host/cohost procedures, Backup TSV PC takeover, and troubleshooting steps.</li>
+<li>Review the completed screen-demo voiceover for technically accurate wording and alignment with the exact on-screen action.</li>
+<li>Approve a re-recording or pickup only when an essential screen, step, or explanation is missing or inaccurate.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="member-card">
+  <div class="member-card-head">
+    <h3>Frank</h3>
+    <p class="member-role">Main SME / Director Helper</p>
+  </div>
+  <div class="member-card-body">
+    <h4>Current Production Action Items</h4>
+    <ul>
+      <li>Review the uploaded screen demos and voiceover for practical TSV accuracy and an easy-to-follow host/cohost workflow.</li>
+<li>Confirm that the Backup TSV PC takeover and troubleshooting sequences remain correct when the narration is synchronized with the screen recording.</li>
+<li>Provide only necessary clarity or accuracy corrections before the August 2 rough-cut review.</li>
+<li>Support Justyn and Dennis in closing the technical review checklist without reopening the locked format.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="member-card">
+  <div class="member-card-head">
+    <h3>Angelino</h3>
+    <p class="member-role">Scriptwriter / SME Support Only</p>
+  </div>
+  <div class="member-card-body">
+    <h4>Current Production Action Items</h4>
+    <ul>
+      <li>Compare the final screen-demo recordings with the voiceover cue sheet and identify small terminology, label, or narration corrections.</li>
+<li>Review callout and troubleshooting wording for clarity while supporting Dennis and Frank during SME review.</li>
+<li>Help verify that each narration line explains only what is visible on the screen and does not introduce a missing or outdated step.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="member-card">
+  <div class="member-card-head">
+    <h3>Jules T</h3>
+    <p class="member-role">Script Support / Talent / Voiceover</p>
+  </div>
+  <div class="member-card-body">
+    <h4>Current Production Action Items</h4>
+    <ul>
+      <li>Complete the assigned screen-demo voiceover recordings this week using the final cue sheet and exact scene order.</li>
+<li>Record clean, consistent audio with clear pacing, accurate WebEx terms, and enough pause for menus, clicks, and callouts to remain readable.</li>
+<li>Label and upload every voiceover file by scene number and feature name, and provide a clean pickup only for an approved correction.</li>
+<li>Coordinate with NJ so narration timing matches the uploaded screen recordings without unnecessary screen-speed changes.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="member-card">
+  <div class="member-card-head">
+    <h3>Janna</h3>
+    <p class="member-role">Talent / Voiceover</p>
+  </div>
+  <div class="member-card-body">
+    <h4>Current Production Action Items</h4>
+    <ul>
+      <li>Complete any assigned or backup screen-demo voiceover segments this week and match the approved narration style, pace, and pronunciation.</li>
+<li>Help quality-check the completed voiceover for clear audio, consistent volume, and accurate alignment with the visible screen action.</li>
+<li>Remain available for a short approved pickup when an individual scene requires a corrected or replacement narration line.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="member-card">
+  <div class="member-card-head">
+    <h3>NJ</h3>
+    <p class="member-role">Video Editor / Recording Support</p>
+  </div>
+  <div class="member-card-body">
+    <h4>Current Production Action Items</h4>
+    <ul>
+      <li>Collect and verify every screen-demo upload, then organize the files by scene number, feature name, version, and approval status with backup copies.</li>
+<li>Clean and synchronize the completed voiceover with the exact screen actions, trimming pauses or adjusting pacing without making menus unreadable.</li>
+<li>Assemble the completed interview recording, screen demos, voiceover, title/closing cards, section cards, and available graphics into a full beginning-to-end rough cut.</li>
+<li>Add placeholders for only the remaining captions, callouts, corrections, or approved pickups and prepare the August 2 review copy.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="member-card">
+  <div class="member-card-head">
+    <h3>TJ</h3>
+    <p class="member-role">Animator / Graphics</p>
+  </div>
+  <div class="member-card-body">
+    <h4>Current Production Action Items</h4>
+    <ul>
+      <li>Complete only the remaining edit-required WebEx labels, callouts, agenda, troubleshooting, Backup TSV PC, closing, or summary graphics identified by the rough-cut checklist.</li>
+<li>Package all graphics in clearly named, edit-ready formats and verify that text remains readable over the screen recordings.</li>
+<li>Coordinate with NJ and Jhules B so graphic timing follows the voiceover and does not cover important WebEx menus or controls.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="member-card">
+  <div class="member-card-head">
+    <h3>Jhules B</h3>
+    <p class="member-role">Video Editor / Animator Helper</p>
+  </div>
+  <div class="member-card-body">
+    <h4>Current Production Action Items</h4>
+    <ul>
+      <li>Support NJ with screen-demo upload verification, file organization, voiceover synchronization, captions, callouts, zoom-ins, and visual cleanup.</li>
+<li>Quality-check the combined interview and demo sequence for readable screens, consistent graphics, and smooth transitions.</li>
+<li>Help prepare the August 2 rough-cut review copy without adding new major creative sections.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="member-card">
+  <div class="member-card-head">
+    <h3>Charles</h3>
+    <p class="member-role">Music / Soundtrack Support</p>
+  </div>
+  <div class="member-card-body">
+    <h4>Current Production Action Items</h4>
+    <ul>
+      <li>Wait until the complete rough cut and screen-demo voiceover are clear before recommending any optional music or soundtrack.</li>
+<li>Protect interview and narration clarity; any music must remain subtle, royalty-free, and limited to appropriate title, transition, or closing moments.</li>
+<li>Coordinate with NJ, Justyn, and Dennis and maintain a clean no-music comparison version.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="member-card">
+  <div class="member-card-head">
+    <h3>Boon</h3>
+    <p class="member-role">Post-Production Support / Pickup Standby</p>
+  </div>
+  <div class="member-card-body">
+    <h4>Current Production Action Items</h4>
+    <ul>
+      <li>Help verify that the completed main video recording and all incoming screen-demo files are safely copied, clearly named, and backed up as assigned.</li>
+<li>Assist with file-transfer or production-support needs that help NJ begin rough-cut assembly.</li>
+<li>Remain available only for an approved limited pickup or setup need; the main interview recording is complete.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="member-card">
+  <div class="member-card-head">
+    <h3>Eden</h3>
+    <p class="member-role">Post-Production Support / Pickup Standby</p>
+  </div>
+  <div class="member-card-body">
+    <h4>Current Production Action Items</h4>
+    <ul>
+      <li>Support the screen-demo voiceover session with quiet-room readiness, basic audio checks, file labeling, and backup copies as assigned.</li>
+<li>Help confirm that completed voiceover files are understandable and free from obvious clipping, noise, or missing lines.</li>
+<li>Remain available only for an approved limited pickup or production-support need; the main video recording is complete.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="member-card">
+  <div class="member-card-head">
+    <h3>Eduard</h3>
+    <p class="member-role">Screen Demo Upload Support</p>
+  </div>
+  <div class="member-card-body">
+    <h4>Current Production Action Items</h4>
+    <ul>
+      <li>Help complete and verify the remaining screen-demo recording uploads as assigned, including correct scene names, versions, and backup copies.</li>
+<li>Confirm that every required WebEx walkthrough is present before the team closes the upload checklist.</li>
+<li>Support a limited screen-demo re-recording only when an approved required scene is missing or technically unusable.</li>
+    </ul>
+  </div>
+</article>
+  </section>
+
+  <footer class="footer-note">Static backup page - no navigation links or selection controls. All team action items are shown on one page.</footer>
+</main>
+</body>
+</html>

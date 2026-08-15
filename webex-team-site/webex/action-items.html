@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>WebEx Team Action Items</title>
+<style>
+
+:root {
+  --navy: #17324D;
+  --blue: #2F6FAE;
+  --border: #C9D6E6;
+  --bg: #F6F9FD;
+  --text: #1C2733;
+  --muted: #51606F;
+  --gold: #FFF3DC;
+  --green: #EAF7EF;
+  --purple: #F2ECFF;
+  --red: #FFEAEA;
+  --light-blue: #EAF3FF;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  padding: 24px;
+}
+.wrap { max-width: 1280px; margin: 0 auto; }
+.header {
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  color: white;
+  border-radius: 20px;
+  padding: 28px 32px;
+  margin-bottom: 18px;
+  box-shadow: 0 10px 24px rgba(23, 50, 77, 0.18);
+}
+h1 {
+  margin: 0;
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.1;
+}
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 20px 0;
+}
+.nav .sep {
+  color: var(--navy);
+  font-weight: 800;
+  opacity: 0.75;
+}
+.nav a {
+  color: var(--navy);
+  background: white;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+.nav a:hover,
+.nav a.active {
+  background: var(--light-blue);
+  border-color: var(--blue);
+}
+.table-card,
+.card-grid,
+.immediate {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+}
+.section-title {
+  margin: 26px 0 12px 0;
+  color: var(--navy);
+  font-size: clamp(22px, 3vw, 30px);
+}
+.immediate {
+  margin-bottom: 24px;
+  padding: 18px;
+}
+.immediate-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.action-card {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 20px;
+  min-height: 175px;
+}
+.action-card:nth-child(1) { background: var(--light-blue); }
+.action-card:nth-child(2) { background: var(--green); }
+.action-card:nth-child(3) { background: var(--gold); }
+.action-card h2 {
+  margin: 0 0 10px 0;
+  color: var(--navy);
+  font-size: 24px;
+}
+.action-card p {
+  margin: 0;
+  line-height: 1.5;
+  font-size: 17px;
+}
+table { width: 100%; border-collapse: collapse; }
+thead { background: #255D91; color: white; }
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.45;
+}
+th { font-size: 18px; letter-spacing: 0.02em; }
+td { font-size: 17px; }
+tbody tr:nth-child(5n+1) { background: var(--light-blue); }
+tbody tr:nth-child(5n+2) { background: var(--gold); }
+tbody tr:nth-child(5n+3) { background: var(--green); }
+tbody tr:nth-child(5n+4) { background: var(--purple); }
+tbody tr:nth-child(5n+5) { background: var(--red); }
+tbody tr:last-child td { border-bottom: none; }
+td:first-child { color: var(--navy); font-size: 19px; font-weight: 700; }
+td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0;
+  padding: 14px;
+}
+.tile {
+  margin: 10px;
+  padding: 22px;
+  min-height: 150px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: var(--light-blue);
+  text-decoration: none;
+  color: var(--text);
+  display: block;
+}
+.tile:nth-child(2) { background: var(--gold); }
+.tile:nth-child(3) { background: var(--green); }
+.tile:nth-child(4) { background: var(--purple); }
+.tile h2 {
+  margin: 0 0 12px 0;
+  color: var(--navy);
+  font-size: 24px;
+}
+.tile p {
+  margin: 0;
+  line-height: 1.45;
+}
+.footer {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 14px;
+}
+@media (max-width: 900px) {
+  .immediate-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  body { padding: 14px; }
+  .header { padding: 22px; border-radius: 16px; }
+  .table-card, .immediate { border-radius: 16px; }
+  table, thead, tbody, th, td, tr { display: block; }
+  thead { display: none; }
+  tbody tr {
+    margin: 14px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(23, 50, 77, 0.08);
+  }
+  td {
+    width: 100% !important;
+    border-bottom: 1px solid rgba(201, 214, 230, 0.8);
+    padding: 14px 16px 14px 140px;
+    position: relative;
+    min-height: 54px;
+    font-size: 16px;
+  }
+  td:last-child { border-bottom: none; }
+  td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 16px;
+    top: 14px;
+    width: 110px;
+    color: var(--muted);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  td:first-child { font-size: 18px; }
+}
+@media print {
+  body { background: white; padding: 0; }
+  .header, .table-card, .card-grid, .immediate { box-shadow: none; }
+  th, td { font-size: 12px; padding: 9px 10px; }
+}
+
+.action-filter-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+  padding: 22px;
+  margin-bottom: 22px;
+}
+.filter-row {
+  display: grid;
+  grid-template-columns: minmax(180px, 260px) minmax(220px, 1fr);
+  gap: 14px;
+  align-items: center;
+}
+.filter-row label {
+  color: var(--navy);
+  font-weight: 800;
+  font-size: 19px;
+}
+.member-select {
+  width: 100%;
+  color: var(--text);
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 13px 14px;
+  font-size: 17px;
+  font-weight: 700;
+}
+.select-note {
+  color: var(--muted);
+  margin: 12px 0 0 0;
+  line-height: 1.5;
+}
+.empty-state {
+  background: var(--light-blue);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 28px;
+  color: var(--navy);
+  font-size: 20px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 22px;
+}
+.action-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+.member-card {
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+}
+.member-card:nth-child(5n+1) .member-card-head { background: var(--light-blue); }
+.member-card:nth-child(5n+2) .member-card-head { background: var(--gold); }
+.member-card:nth-child(5n+3) .member-card-head { background: var(--green); }
+.member-card:nth-child(5n+4) .member-card-head { background: var(--purple); }
+.member-card:nth-child(5n+5) .member-card-head { background: var(--red); }
+.member-card-head {
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--border);
+}
+.member-card h2 {
+  margin: 0;
+  color: var(--navy);
+  font-size: 28px;
+}
+.member-role {
+  margin: 8px 0 0 0;
+  color: #1D5F8F;
+  font-weight: 700;
+  line-height: 1.45;
+}
+.member-card-body {
+  padding: 20px 22px;
+}
+.member-card-body h3 {
+  margin: 0 0 12px 0;
+  color: var(--navy);
+  font-size: 21px;
+}
+.member-card-body ul {
+  margin: 0;
+  padding-left: 22px;
+}
+.member-card-body li {
+  margin: 0 0 10px 0;
+  line-height: 1.5;
+  font-size: 17px;
+}
+.member-card-body li:last-child { margin-bottom: 0; }
+.due-chip {
+  display: inline-block;
+  background: var(--navy);
+  color: white;
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+.home-action-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  padding: 14px;
+  margin-bottom: 24px;
+}
+.tile.action-items-tile {
+  grid-column: 1 / -1;
+  background: var(--light-blue);
+  min-height: 120px;
+}
+.tile.action-items-tile h2 {
+  font-size: clamp(26px, 3vw, 34px);
+}
+@media (max-width: 760px) {
+  .filter-row { grid-template-columns: 1fr; }
+  .member-card h2 { font-size: 24px; }
+}
+
+
+/* WebEx Project Progress */
+.project-progress-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 20px;
+  margin: 0 0 24px 0;
+  box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+}
+.progress-header {
+  margin-bottom: 16px;
+}
+.progress-header h2 {
+  margin: 0 0 8px 0;
+  color: var(--navy);
+  font-size: clamp(24px, 3vw, 34px);
+}
+.progress-header p,
+.progress-panel p,
+.progress-note {
+  margin: 0;
+  line-height: 1.5;
+  color: var(--text);
+  font-size: 16px;
+}
+.progress-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin: 16px 0;
+}
+.progress-panel {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 16px;
+  background: var(--light-blue);
+}
+.progress-panel.target-progress {
+  background: var(--gold);
+}
+.progress-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  color: var(--navy);
+  font-size: 18px;
+}
+.progress-percent {
+  font-weight: 900;
+  font-size: 22px;
+}
+.progress-track {
+  height: 20px;
+  background: #E6EEF7;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--navy), var(--blue));
+  border-radius: 999px;
+}
+.progress-note {
+  background: var(--green);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 14px 16px;
+}
+@media (max-width: 900px) {
+  .progress-grid { grid-template-columns: 1fr; }
+}
+@media print {
+  .project-progress-card { box-shadow: none; }
+}
+
+
+
+/* Responsive Project Progress layout */
+.project-progress-card {
+  width: 66.7%;
+  max-width: 100%;
+  margin: 0 auto 24px auto;
+}
+.project-progress-card .progress-header,
+.project-progress-card .progress-header h2 {
+  text-align: center;
+}
+.project-progress-card .progress-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  cursor: pointer;
+}
+.project-progress-card .progress-link:hover,
+.project-progress-card .progress-link:focus {
+  box-shadow: 0 10px 22px rgba(23, 50, 77, 0.14);
+  transform: translateY(-1px);
+  outline: none;
+}
+@media (max-width: 1024px) {
+  .project-progress-card { width: 80%; }
+}
+@media (max-width: 760px) {
+  .project-progress-card { width: 100%; }
+}
+
+
+/* Fat Footer Breadcrumb */
+.fat-breadcrumb-footer {
+  margin-top: 30px;
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  color: white;
+  border-radius: 20px;
+  padding: 22px 26px;
+  box-shadow: 0 10px 24px rgba(23, 50, 77, 0.18);
+}
+.fat-breadcrumb-footer .breadcrumb-trail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-size: clamp(16px, 2vw, 21px);
+  font-weight: 800;
+  line-height: 1.35;
+}
+.fat-breadcrumb-footer a {
+  color: white;
+  background: rgba(255, 255, 255, 0.13);
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 8px 13px;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+.fat-breadcrumb-footer a:hover,
+.fat-breadcrumb-footer a:focus {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.72);
+  transform: translateY(-1px);
+  outline: none;
+}
+.fat-breadcrumb-footer a:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+.fat-breadcrumb-footer .breadcrumb-current {
+  color: var(--navy);
+  background: var(--gold);
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 999px;
+  padding: 8px 13px;
+}
+.fat-breadcrumb-footer .breadcrumb-separator {
+  color: var(--gold);
+  font-weight: 900;
+  opacity: 0.95;
+}
+@media (max-width: 760px) {
+  .fat-breadcrumb-footer {
+    border-radius: 16px;
+    padding: 18px;
+  }
+  .fat-breadcrumb-footer .breadcrumb-trail {
+    gap: 8px;
+    font-size: 16px;
+  }
+}
+@media print {
+  .fat-breadcrumb-footer {
+    box-shadow: none;
+  }
+}
+
+</style>
+</head>
+<body>
+<main class="wrap">
+<section class="header">
+<h1>WebEx Team Action Items</h1>
+</section>
+<nav class="nav"><a href="home.html">Home</a>
+<a class="active" href="action-items.html">Action Items</a>
+<a href="team-members.html">Team</a>
+<a href="priority-tasks.html">Priorities</a>
+<a href="deadline-reminder.html">Deliverables</a>
+<a href="note-section.html">Notes</a>
+<a href="resources.html">Resources</a></nav>
+<section class="empty-state" id="emptyState">Select a Name to view current WebEx production action items.</section>
+<section aria-label="Select a team member" class="action-filter-card">
+<div class="filter-row">
+<label for="memberSelect">Action Items for:</label>
+<select aria-label="Select a team member to view action items" class="member-select" id="memberSelect">
+<option selected="" value="">Select a Name</option>
+<option value="Justyn">Justyn</option>
+<option value="Julia">Julia</option>
+<option value="Dennis">Dennis</option>
+<option value="Frank">Frank</option>
+<option value="Angelino">Angelino</option>
+<option value="Jules T">Jules T</option>
+<option value="Janna">Janna</option>
+<option value="NJ">NJ</option>
+<option value="TJ">TJ</option>
+<option value="Jhules B">Jhules B</option><option value="Charles">Charles</option>
+<option value="Boon">Boon</option>
+<option value="Eden">Eden</option>
+<option value="Eduard">Eduard</option>
+</select>
+</div>
+</section>
+<section aria-live="polite" class="action-list" id="actionList">
+<article class="member-card" data-member="Justyn" hidden="">
+<div class="member-card-head">
+<h2>Justyn</h2>
+<p class="member-role">Director</p>
+</div>
+<div class="member-card-body">
+<h3>Current Production Action Items</h3>
+<ul><li>Lock the completed main WebEx interview/video recording and approve any pickup only when a necessary explanation or technical step is missing.</li><li>Maintain one screen-demo upload checklist showing every required scene, owner, file name, upload status, and any approved re-recording need; close the checklist by the end of this week.</li><li>Coordinate the screen-demo voiceover schedule and handoff with Julia, Jules T, Janna, NJ, Dennis, and Frank.</li><li>Lead the end-of-week rough-cut readiness check so the interview footage, demo recordings, voiceovers, graphics, and backup copies are organized for August 2 assembly.</li></ul>
+</div>
+</article>
+<article class="member-card" data-member="Julia" hidden="">
+<div class="member-card-head">
+<h2>Julia</h2>
+<p class="member-role">Scriptwriter</p>
+</div>
+<div class="member-card-body">
+<h3>Current Production Action Items</h3>
+<ul><li>Finalize the screen-demo voiceover cue sheet so every narration line matches the final WebEx screen, click sequence, feature name, and transition.</li><li>Keep voiceover wording concise and beginner-friendly while preserving the locked interview and demo flow.</li><li>Flag any mismatch between the script and uploaded demo recordings for a small wording fix or approved limited pickup only.</li><li>Provide NJ with the final scene order, narration text, and timing notes for rough-cut synchronization.</li></ul>
+</div>
+</article>
+<article class="member-card" data-member="Dennis" hidden="">
+<div class="member-card-head">
+<h2>Dennis</h2>
+<p class="member-role">Main SME / Recording Support / Optional Music</p>
+</div>
+<div class="member-card-body">
+<h3>Current Production Action Items</h3>
+<ul><li>Review each uploaded screen-demo recording for technical accuracy, readable menus, proper cursor movement, privacy protection, and correct WebEx workflow.</li><li>Validate Meeting Options, audio/video settings, layouts, Sync Stage, Breakout Sessions, host/cohost procedures, Backup TSV PC takeover, and troubleshooting steps.</li><li>Review the completed screen-demo voiceover for technically accurate wording and alignment with the exact on-screen action.</li><li>Approve a re-recording or pickup only when an essential screen, step, or explanation is missing or inaccurate.</li></ul>
+</div>
+</article>
+<article class="member-card" data-member="Frank" hidden="">
+<div class="member-card-head">
+<h2>Frank</h2>
+<p class="member-role">Main SME / Director Helper</p>
+</div>
+<div class="member-card-body">
+<h3>Current Production Action Items</h3>
+<ul><li>Review the uploaded screen demos and voiceover for practical TSV accuracy and an easy-to-follow host/cohost workflow.</li><li>Confirm that the Backup TSV PC takeover and troubleshooting sequences remain correct when the narration is synchronized with the screen recording.</li><li>Provide only necessary clarity or accuracy corrections before the August 2 rough-cut review.</li><li>Support Justyn and Dennis in closing the technical review checklist without reopening the locked format.</li></ul>
+</div>
+</article>
+<article class="member-card" data-member="Angelino" hidden="">
+<div class="member-card-head">
+<h2>Angelino</h2>
+<p class="member-role">Scriptwriter / SME Support Only</p>
+</div>
+<div class="member-card-body">
+<h3>Current Production Action Items</h3>
+<ul><li>Compare the final screen-demo recordings with the voiceover cue sheet and identify small terminology, label, or narration corrections.</li><li>Review callout and troubleshooting wording for clarity while supporting Dennis and Frank during SME review.</li><li>Help verify that each narration line explains only what is visible on the screen and does not introduce a missing or outdated step.</li></ul>
+</div>
+</article>
+<article class="member-card" data-member="Jules T" hidden="">
+<div class="member-card-head">
+<h2>Jules T</h2>
+<p class="member-role">Script Support / Talent / Voiceover</p>
+</div>
+<div class="member-card-body">
+<h3>Current Production Action Items</h3>
+<ul><li>Complete the assigned screen-demo voiceover recordings this week using the final cue sheet and exact scene order.</li><li>Record clean, consistent audio with clear pacing, accurate WebEx terms, and enough pause for menus, clicks, and callouts to remain readable.</li><li>Label and upload every voiceover file by scene number and feature name, and provide a clean pickup only for an approved correction.</li><li>Coordinate with NJ so narration timing matches the uploaded screen recordings without unnecessary screen-speed changes.</li></ul>
+</div>
+</article>
+<article class="member-card" data-member="Janna" hidden="">
+<div class="member-card-head">
+<h2>Janna</h2>
+<p class="member-role">Talent / Voiceover</p>
+</div>
+<div class="member-card-body">
+<h3>Current Production Action Items</h3>
+<ul><li>Complete any assigned or backup screen-demo voiceover segments this week and match the approved narration style, pace, and pronunciation.</li><li>Help quality-check the completed voiceover for clear audio, consistent volume, and accurate alignment with the visible screen action.</li><li>Remain available for a short approved pickup when an individual scene requires a corrected or replacement narration line.</li></ul>
+</div>
+</article>
+<article class="member-card" data-member="NJ" hidden="">
+<div class="member-card-head">
+<h2>NJ</h2>
+<p class="member-role">Video Editor / Recording Support</p>
+</div>
+<div class="member-card-body">
+<h3>Current Production Action Items</h3>
+<ul><li>Collect and verify every screen-demo upload, then organize the files by scene number, feature name, version, and approval status with backup copies.</li><li>Clean and synchronize the completed voiceover with the exact screen actions, trimming pauses or adjusting pacing without making menus unreadable.</li><li>Assemble the completed interview recording, screen demos, voiceover, title/closing cards, section cards, and available graphics into a full beginning-to-end rough cut.</li><li>Add placeholders for only the remaining captions, callouts, corrections, or approved pickups and prepare the August 2 review copy.</li></ul>
+</div>
+</article>
+<article class="member-card" data-member="TJ" hidden="">
+<div class="member-card-head">
+<h2>TJ</h2>
+<p class="member-role">Animator / Graphics</p>
+</div>
+<div class="member-card-body">
+<h3>Current Production Action Items</h3>
+<ul><li>Complete only the remaining edit-required WebEx labels, callouts, agenda, troubleshooting, Backup TSV PC, closing, or summary graphics identified by the rough-cut checklist.</li><li>Package all graphics in clearly named, edit-ready formats and verify that text remains readable over the screen recordings.</li><li>Coordinate with NJ and Jhules B so graphic timing follows the voiceover and does not cover important WebEx menus or controls.</li></ul>
+</div>
+</article>
+<article class="member-card" data-member="Jhules B" hidden="">
+<div class="member-card-head">
+<h2>Jhules B</h2>
+<p class="member-role">Video Editor / Animator Helper</p>
+</div>
+<div class="member-card-body">
+<h3>Current Production Action Items</h3>
+<ul><li>Support NJ with screen-demo upload verification, file organization, voiceover synchronization, captions, callouts, zoom-ins, and visual cleanup.</li><li>Quality-check the combined interview and demo sequence for readable screens, consistent graphics, and smooth transitions.</li><li>Help prepare the August 2 rough-cut review copy without adding new major creative sections.</li></ul>
+</div>
+</article>
+<article class="member-card" data-member="Charles" hidden=""><div class="member-card-head"><h2>Charles</h2><p class="member-role">Music / Soundtrack Support</p></div><div class="member-card-body"><h3>Current Production Action Items</h3><ul><li>Wait until the complete rough cut and screen-demo voiceover are clear before recommending any optional music or soundtrack.</li><li>Protect interview and narration clarity; any music must remain subtle, royalty-free, and limited to appropriate title, transition, or closing moments.</li><li>Coordinate with NJ, Justyn, and Dennis and maintain a clean no-music comparison version.</li></ul></div></article><article class="member-card" data-member="Boon" hidden="">
+<div class="member-card-head">
+<h2>Boon</h2>
+<p class="member-role">Post-Production Support / Pickup Standby</p>
+</div>
+<div class="member-card-body">
+<h3>Current Production Action Items</h3>
+<ul><li>Help verify that the completed main video recording and all incoming screen-demo files are safely copied, clearly named, and backed up as assigned.</li><li>Assist with file-transfer or production-support needs that help NJ begin rough-cut assembly.</li><li>Remain available only for an approved limited pickup or setup need; the main interview recording is complete.</li></ul>
+</div>
+</article>
+<article class="member-card" data-member="Eden" hidden="">
+<div class="member-card-head">
+<h2>Eden</h2>
+<p class="member-role">Post-Production Support / Pickup Standby</p>
+</div>
+<div class="member-card-body">
+<h3>Current Production Action Items</h3>
+<ul><li>Support the screen-demo voiceover session with quiet-room readiness, basic audio checks, file labeling, and backup copies as assigned.</li><li>Help confirm that completed voiceover files are understandable and free from obvious clipping, noise, or missing lines.</li><li>Remain available only for an approved limited pickup or production-support need; the main video recording is complete.</li></ul>
+</div>
+</article>
+<article class="member-card" data-member="Eduard" hidden="">
+<div class="member-card-head">
+<h2>Eduard</h2>
+<p class="member-role">Screen Demo Upload Support</p>
+</div>
+<div class="member-card-body">
+<h3>Current Production Action Items</h3>
+<ul><li>Help complete and verify the remaining screen-demo recording uploads as assigned, including correct scene names, versions, and backup copies.</li><li>Confirm that every required WebEx walkthrough is present before the team closes the upload checklist.</li><li>Support a limited screen-demo re-recording only when an approved required scene is missing or technically unusable.</li></ul>
+</div>
+</article>
+</section>
+<section aria-label="WebEx project progress status" class="project-progress-card">
+<div class="progress-header">
+<div>
+<h2>Project Progress</h2>
+<p><strong>Current checkpoint:</strong> Pre-production remains closed/locked. The main WebEx interview/video recording is complete. The current production focus is to finish and upload every screen-demo recording this week, complete the matching voiceover, organize the interview/demo/audio assets, and begin the interview-to-demo assembly for the August 2 full rough cut.</p>
+</div>
+</div>
+<div class="progress-grid">
+<article class="progress-panel">
+<div class="progress-meta"><strong>Current Progress</strong><span class="progress-percent">60%</span></div>
+<div aria-label="Current WebEx project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="60" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 60%;"></div></div>
+<p>The main WebEx video recording is complete, and the title card, closing card, and core interview assets are ready for post-production. Remaining work centers on completing and verifying the screen-demo uploads, recording and cleaning the screen-demo voiceover, finishing only the necessary callouts, and synchronizing the interview and demonstrations in the editing timeline.</p>
+</article>
+<article class="progress-panel target-progress">
+<div class="progress-meta"><strong>Target Progress</strong><span class="progress-percent">75%</span></div>
+<div aria-label="Target WebEx project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 75%;"></div></div>
+<p>Reach 75% by completing and verifying every screen-demo upload, completing voiceover for all screen-recording segments, synchronizing the narration with the exact on-screen steps, and assembling a complete beginning-to-end rough cut with placeholders only for limited corrections.</p>
+</article>
+</div>
+</section>
+<footer aria-label="Site breadcrumb" class="fat-breadcrumb-footer">
+<div class="breadcrumb-trail">
+<a href="../index.html">District of Florida and Caribbean</a>
+<span aria-hidden="true" class="breadcrumb-separator">/</span>
+<a href="home.html">WebEx Team</a>
+<span aria-hidden="true" class="breadcrumb-separator">/</span>
+<span class="breadcrumb-current">Action Items</span>
+</div>
+</footer>
+</main>
+<script>
+const select = document.getElementById('memberSelect');
+const cards = Array.from(document.querySelectorAll('.member-card'));
+const emptyState = document.getElementById('emptyState');
+
+function updateActionItems() {
+  const selectedName = select.value;
+  let shown = false;
+  cards.forEach(card => {
+    const shouldShow = selectedName !== '' && card.dataset.member === selectedName;
+    card.hidden = !shouldShow;
+    if (shouldShow) shown = true;
+  });
+  emptyState.hidden = shown;
+}
+
+select.addEventListener('change', updateActionItems);
+updateActionItems();
+</script>
+</body>
+</html>
