@@ -300,179 +300,6 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
   }
 }
 
-/* Final Devotional Prayer popup — WebEx-matched format/schema */
-.project-popup-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  background: rgba(23, 50, 77, 0.64);
-}
-.project-popup-overlay.is-visible { display: flex; }
-body.project-popup-open { overflow: hidden; }
-.project-popup {
-  position: relative;
-  width: min(680px, 100%);
-  max-height: min(92vh, 760px);
-  overflow: auto;
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  padding: 28px;
-  box-shadow: 0 24px 60px rgba(23, 50, 77, 0.34);
-  animation: projectPopupRise .22s ease-out;
-}
-.project-popup-kicker {
-  display: inline-block;
-  margin: 0 0 10px 0;
-  color: var(--navy);
-  background: var(--gold);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 7px 12px;
-  font-size: 13px;
-  font-weight: 900;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-}
-.project-popup h2 {
-  margin: 0 44px 12px 0;
-  color: var(--navy);
-  font-size: clamp(27px, 4vw, 38px);
-  line-height: 1.12;
-}
-.project-popup-intro {
-  margin: 0 0 18px 0;
-  color: var(--text);
-  font-size: 18px;
-  line-height: 1.5;
-}
-.project-detail-grid {
-  display: grid;
-  grid-template-columns: 165px 1fr;
-  gap: 0;
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  overflow: hidden;
-  margin: 16px 0 18px 0;
-}
-.project-detail-label,
-.project-detail-value {
-  padding: 13px 15px;
-  border-bottom: 1px solid var(--border);
-  line-height: 1.45;
-  font-size: 16px;
-}
-.project-detail-label {
-  color: var(--navy);
-  background: var(--light-blue);
-  font-weight: 900;
-}
-.project-detail-value {
-  color: var(--text);
-  background: white;
-  overflow-wrap: anywhere;
-}
-.project-detail-value a {
-  color: #1D5F8F;
-  font-weight: 800;
-  overflow-wrap: anywhere;
-}
-.project-detail-grid div:nth-last-child(-n+2) { border-bottom: none; }
-.project-popup-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 20px;
-}
-.project-popup-primary,
-.project-popup-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  border-radius: 999px;
-  padding: 11px 16px;
-  font-weight: 900;
-  font-size: 16px;
-  text-decoration: none;
-  cursor: pointer;
-}
-.project-popup-primary {
-  color: white;
-  background: linear-gradient(135deg, var(--navy), var(--blue));
-  border: 1px solid var(--blue);
-}
-.project-popup-button {
-  color: var(--navy);
-  background: var(--light-blue);
-  border: 1px solid var(--border);
-}
-.project-popup-close-x {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  width: 42px;
-  height: 42px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: white;
-  color: var(--navy);
-  font-size: 28px;
-  line-height: 1;
-  cursor: pointer;
-}
-.project-popup-primary:hover,
-.project-popup-button:hover,
-.project-popup-close-x:hover { filter: brightness(.98); transform: translateY(-1px); }
-.project-popup-primary:focus-visible,
-.project-popup-button:focus-visible,
-.project-popup-close-x:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
-@keyframes projectPopupRise {
-  from { opacity: 0; transform: translateY(14px) scale(.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
-.notice-launcher {
-  position: fixed;
-  right: 18px;
-  bottom: 18px;
-  z-index: 9997;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 46px;
-  padding: 11px 17px;
-  border: 1px solid var(--blue);
-  border-radius: 999px;
-  color: white;
-  background: linear-gradient(135deg, var(--navy), var(--blue));
-  box-shadow: 0 10px 24px rgba(23, 50, 77, .25);
-  font: inherit;
-  font-weight: 900;
-  cursor: pointer;
-}
-.notice-launcher:hover,
-.notice-launcher:focus { transform: translateY(-1px); }
-.notice-launcher:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
-@media (max-width: 640px) {
-  .project-popup { padding: 22px 20px; }
-  .project-popup h2 { margin-right: 40px; }
-  .project-detail-grid { grid-template-columns: 1fr; }
-  .project-detail-label { border-bottom: none; padding-bottom: 4px; }
-  .project-detail-value { padding-top: 4px; }
-  .project-popup-actions { flex-direction: column; }
-  .project-popup-primary,
-  .project-popup-button { width: 100%; }
-  .notice-launcher { right: 12px; bottom: 12px; }
-  .project-detail-label,
-  .project-detail-value { border-bottom: 1px solid var(--border) !important; }
-  .project-detail-grid div:last-child { border-bottom: none !important; }
-}
-@media print { .notice-launcher, .project-popup-overlay { display: none !important; } }
-
 /* Crimping Project Progress */
 .project-progress-card {
   background: white;
@@ -596,55 +423,33 @@ body.project-popup-open { overflow: hidden; }
 <p>Crimping RJ45 Ethernet Cables: A Practical Guide for TSV</p>
 </header>
 <nav aria-label="Project navigation" class="nav"><a class="active" href="home.html">Home</a><a href="action-items.html">Action Items</a><a href="team-members.html">Team</a><a href="priority-tasks.html">Priorities</a><a href="deadline-reminder.html">Deliverables</a><a href="note-section.html">Notes</a><a href="resources.html">Resources</a></nav>
-<div aria-hidden="true" class="project-popup-overlay" id="projectReminderPopup">
-<section aria-labelledby="projectReminderTitle" aria-modal="true" class="project-popup" role="dialog">
-<div class="project-popup-head">
-<div><p class="project-popup-kicker">Final Devotional Prayer</p><h2 id="projectReminderTitle">Meeting Schedule for Final Devotional Prayer</h2></div>
-<button aria-label="Close meeting schedule" class="project-popup-close-x" data-project-popup-close="" type="button">×</button>
-</div>
-<p class="project-popup-intro"><strong>(ONLINE) Crimping TSV Team Weekly Devo</strong><br/>MONDAY • 7PM EDT/6PM AST • District of Florida &amp; Caribbean</p>
-<div aria-label="Current Crimping project reminder details" class="project-detail-grid">
-<div class="project-detail-label">Date</div><div class="project-detail-value"><strong>Monday, August 17, 2026</strong></div>
-<div class="project-detail-label">Meeting Link</div><div class="project-detail-value"><a href="https://miami-tsv.com/crimping-team-meeting" rel="noopener noreferrer" target="_blank">https://miami-tsv.com/crimping-team-meeting</a></div>
-<div class="project-detail-label">Meeting Number</div><div class="project-detail-value">2633 770 7136</div>
-<div class="project-detail-label">Meeting Password</div><div class="project-detail-value">TSVDEVOMONDAYS</div>
-<div class="project-detail-label">Alternate Link</div><div class="project-detail-value"><a href="https://inc-maimi-tsv.my.webex.com/inc-maimi-tsv.my/j.php?MTID=md2e6922f11098b6d3f160c9515dfd5ae" rel="noopener noreferrer" target="_blank">https://inc-maimi-tsv.my.webex.com/inc-maimi-tsv.my/j.php?MTID=md2e6922f11098b6d3f160c9515dfd5ae</a></div>
-</div>
-<div class="project-popup-actions">
-<a class="project-popup-primary" href="https://miami-tsv.com/crimping-team-meeting" rel="noopener noreferrer" target="_blank">Open Meeting Link</a>
-<a class="project-popup-button" href="https://inc-maimi-tsv.my.webex.com/inc-maimi-tsv.my/j.php?MTID=md2e6922f11098b6d3f160c9515dfd5ae" rel="noopener noreferrer" target="_blank">Alternate Link</a>
-<button class="project-popup-button" data-project-popup-close="" type="button">Close</button>
-</div>
-</section>
-</div>
-<button aria-haspopup="dialog" class="notice-launcher" id="noticeLauncher" type="button">Final Devotional Prayer</button>
 <section aria-label="Crimping project progress status" class="project-progress-card">
 <div class="progress-header">
 <div>
 <h2>Project Progress</h2>
-<p><strong>Current checkpoint:</strong> The Crimping video is in the final editing stage. All remaining production work is focused on finishing the edit during this final weekend, completing final quality checks and export preparation, and submitting the approved final video on Monday, August 17.</p>
+<p><strong>Current checkpoint:</strong> All planned tutorial recordings have been uploaded, and video editing started last weekend. The immediate milestone is to complete and upload the voice-over this week, synchronize the narration with the recorded tutorial scenes, and prepare the complete rough-cut review version.</p>
 </div>
 </div>
 <div class="progress-grid">
 <a aria-label="Go to Action Items page for current progress details" class="progress-panel progress-link" href="action-items.html">
 <div class="progress-meta">
 <strong>Current Progress</strong>
-<span class="progress-percent">90%</span>
+<span class="progress-percent">65%</span>
 </div>
-<div aria-label="Current Crimping project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="90" class="progress-track" role="progressbar">
-<div class="progress-fill" style="width: 90%;"></div>
+<div aria-label="Current Crimping project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="65" class="progress-track" role="progressbar">
+<div class="progress-fill" style="width: 65%;"></div>
 </div>
-<p>The project is approximately 90% complete. Recording and voice-over work are complete, and the remaining work is final editing and polish: captions, labels, callouts, audio cleanup, timing, technical verification, final playback review, and preparation of the submission-ready export.</p>
+<p>All planned video recordings are uploaded, and editing is underway. Current work centers on completing the voice-over, synchronizing narration, organizing scene-fitting cuts, placing approved graphics, and checking that the critical technical close-ups remain clear.</p>
 </a>
 <a aria-label="Go to Deliverables page for target progress details" class="progress-panel target-progress progress-link" href="deadline-reminder.html">
 <div class="progress-meta">
 <strong>Target Progress</strong>
-<span class="progress-percent">100%</span>
+<span class="progress-percent">75%</span>
 </div>
-<div aria-label="Target Crimping project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" class="progress-track" role="progressbar">
-<div class="progress-fill" style="width: 100%;"></div>
+<div aria-label="Target Crimping project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" class="progress-track" role="progressbar">
+<div class="progress-fill" style="width: 75%;"></div>
 </div>
-<p>Reach 100% by finishing the final edit and quality review by Sunday, August 16, exporting and backing up the approved submission-ready video, and submitting the verified final video on Monday, August 17.</p>
+<p>Reach 75% by completing and uploading the voice-over, synchronizing it with the uploaded footage, placing the approved title, section, lower-third, label, callout, and closing graphics, and preparing a complete beginning-to-end rough-cut review version.</p>
 </a>
 </div>
 </section>
@@ -653,15 +458,15 @@ body.project-popup-open { overflow: hidden; }
 <div class="immediate-grid">
 <article class="action-card">
 <h2>Needed Next Week</h2>
-<p>Monday, August 17 is final submission day. Use Monday only for the final approved export, last playback/file verification, backup confirmation, and submission. Do not schedule new production work.</p>
+<p>Move from rough-cut assembly into controlled polish: finish captions, labels, callouts, audio cleanup, technical review, and only the corrections or pickups required for accuracy and clarity.</p>
 </article>
 <article class="action-card">
 <h2>Goal by End of Week</h2>
-<p>Finish all remaining editing by Sunday, August 16. Complete the final technical and visual quality check, verify captions and audio, confirm the critical crimping steps are clear, and have the submission-ready export plus a backup copy prepared before Monday.</p>
+<p>Complete and upload the voice-over, synchronize it with the tutorial footage, place the approved graphics, and prepare a beginning-to-end rough cut for team review.</p>
 </article>
 <article class="action-card">
 <h2>Main Reminder</h2>
-<p>This is the final weekend. Final fixes only—no new format, style, sections, or unnecessary pickups. Protect technical accuracy and readability, verify the full video plays correctly, and submit only the reviewed, backed-up final export on Monday, August 17.</p>
+<p>Do not reopen the format or visual style. Protect the T568B wire order, connector orientation, RJ45 insertion, crimping action, second-end repeat, and cable-tester proof. Record a pickup only when an essential technical step is unclear or missing.</p>
 </article>
 </div>
 </section>
@@ -684,45 +489,5 @@ body.project-popup-open { overflow: hidden; }
 </div>
 </footer>
 </main>
-<script>
-(function () {
-  var popup = document.getElementById('projectReminderPopup');
-  var launcher = document.getElementById('noticeLauncher');
-  if (!popup || !launcher) return;
-  var closeButtons = popup.querySelectorAll('[data-project-popup-close]');
-  var previousFocus = null;
-  var focusableSelector = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
-
-  function openPopup() {
-    previousFocus = document.activeElement;
-    popup.classList.add('is-visible');
-    popup.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('project-popup-open');
-    var first = popup.querySelector(focusableSelector);
-    if (first) first.focus();
-  }
-
-  function closePopup() {
-    popup.classList.remove('is-visible');
-    popup.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('project-popup-open');
-    if (previousFocus && previousFocus.focus) previousFocus.focus();
-  }
-
-  launcher.addEventListener('click', openPopup);
-  closeButtons.forEach(function (button) { button.addEventListener('click', closePopup); });
-  popup.addEventListener('click', function (event) { if (event.target === popup) closePopup(); });
-  popup.addEventListener('keydown', function (event) {
-    if (event.key === 'Escape') { closePopup(); return; }
-    if (event.key !== 'Tab') return;
-    var focusable = Array.prototype.slice.call(popup.querySelectorAll(focusableSelector));
-    if (!focusable.length) return;
-    var first = focusable[0], last = focusable[focusable.length - 1];
-    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
-  });
-  window.setTimeout(openPopup, 250);
-})();
-</script>
 </body>
 </html>

@@ -4,8 +4,9 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Signal Flow Team Resources</title>
+<title>Signal Flow Team Action Items</title>
 <style>
+
 :root {
   --navy: #17324D;
   --blue: #2F6FAE;
@@ -399,20 +400,6 @@ a.progress-panel:hover {
   th, td { font-size: 12px; padding: 9px 10px; }
 }
 
-.table-card a {
-  color: #1D5F8F;
-  font-weight: 700;
-  text-decoration: none;
-  overflow-wrap: anywhere;
-}
-.table-card a:hover,
-.table-card a:focus {
-  text-decoration: underline;
-}
-.resource-table {
-  margin-bottom: 22px;
-}
-
 
 
 /* Fat Footer Breadcrumb */
@@ -485,67 +472,99 @@ a.progress-panel:hover {
 </head>
 <body>
 <main class="wrap">
-<section class="header"><h1>Signal Flow Team Resources</h1></section>
+<section class="header"><h1>Signal Flow Team Action Items</h1></section>
 <nav class="nav">
 <a href="home.html">Home</a>
-<a href="action-items.html">Action Items</a>
+<a class="active" href="action-items.html">Action Items</a>
 <a href="team-members.html">Team</a>
 <a href="priority-tasks.html">Priorities</a>
 <a href="deadline-reminder.html">Deliverables</a>
 <a href="note-section.html">Notes</a>
-<a class="active" href="resources.html">Resources</a>
+<a href="resources.html">Resources</a>
 </nav>
-<h2 class="section-title">Team Site</h2>
-<section aria-label="Team Site resources" class="table-card resource-table">
-<table>
-<thead><tr><th>Resource</th><th>Link</th></tr></thead>
-<tbody>
-<tr><td data-label="Resource">Group Portal</td><td data-label="Link"><a href="https://miami-tsv.com/signal-flow-team-site" rel="noopener noreferrer" target="_blank">miami-tsv.com/signal-flow-team-site</a></td></tr>
-<tr><td data-label="Resource">Weekly Meeting</td><td data-label="Link"><a href="https://miami-tsv.com/signal-flow-team-meeting" rel="noopener noreferrer" target="_blank">miami-tsv.com/signal-flow-team-meeting</a></td></tr>
-<tr><td data-label="Resource">Telegram Messenger</td><td data-label="Link"><a class="resource-link" href="https://miami-tsv.com/signal-flow-team-telegram" rel="noopener" target="_blank">miami-tsv.com/signal-flow-team-telegram</a></td></tr>
-</tbody>
-</table>
+<section class="empty-state" id="emptyState">Select a Name to view updated production action items.</section>
+<section aria-label="Select a team member" class="action-filter-card">
+<div class="filter-row">
+<label for="memberSelect">Action Items for:</label>
+<select aria-label="Select a team member to view action items" class="member-select" id="memberSelect">
+<option selected="" value="">Select a Name</option>
+<option value="Jules T">Jules T</option>
+<option value="Janna">Janna</option>
+<option value="Jay">Jay</option>
+<option value="Dennis">Dennis</option>
+<option value="Frank">Frank</option>
+<option value="Geo">Geo</option>
+<option value="Jlyn">Jlyn</option>
+<option value="Aiden">Aiden</option>
+<option value="Charles">Charles</option>
+<option value="NJ">NJ</option>
+<option value="Jhules B">Jhules B</option>
+</select>
+</div>
 </section>
-<h2 class="section-title">Google Drive</h2>
-<section aria-label="Google Drive resources" class="table-card resource-table">
-<table>
-<thead><tr><th>Resource</th><th>Link</th></tr></thead>
-<tbody>
-<tr><td data-label="Resource">Folder Structure</td><td data-label="Link"><a href="https://miami-tsv.com/production-storage-doc" rel="noopener noreferrer" target="_blank">miami-tsv.com/production-storage-doc</a></td></tr>
-<tr><td data-label="Resource">Shared Common Folder</td><td data-label="Link"><a href="https://miami-tsv.com/production-shared-common" rel="noopener noreferrer" target="_blank">miami-tsv.com/production-shared-common</a></td></tr>
-<tr><td data-label="Resource">Team Folder</td><td data-label="Link"><a href="https://miami-tsv.com/signal-flow-team-folder" rel="noopener noreferrer" target="_blank">miami-tsv.com/signal-flow-team-folder</a></td></tr></tbody>
-</table>
+<section aria-live="polite" class="action-list" id="actionList">
+<article class="member-card" data-member="Jules T" hidden="">
+<div class="member-card-head"><h2>Jules T</h2><p class="member-role">Director / Script Support / Talent / Voiceover</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Coordinate chibi animation production and confirm the priority scene order, assigned owners, and review checkpoints.</li><li>Review the completed title and closing cards against the locked script and confirm their placement in the edit.</li><li>Review the completed voice-over and provide timing references for chibi scene production and rough-cut assembly.</li></ul></div>
+</article>
+<article class="member-card" data-member="Janna" hidden="">
+<div class="member-card-head"><h2>Janna</h2><p class="member-role">Scriptwriter / Animation Lead / Style Direction / Talent</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Lead production of the chibi animation using the finalized animation scene list.</li><li>Assign the priority scenes and maintain consistent character designs, environments, camera views, movements, and visual style.</li><li>Review the first exported chibi scenes before they are handed to Charles, NJ, and Jhules B.</li></ul></div>
+</article>
+<article class="member-card" data-member="Jay" hidden="">
+<div class="member-card-head"><h2>Jay</h2><p class="member-role">Main SME</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Review and approve the completed water-pipe analogy for technical accuracy and clarity.</li><li>Review the uploaded device graphics and initial chibi scenes for correct signal-flow representation.</li><li>Limit feedback to necessary corrections involving accuracy, clarity, and practical TSV usefulness.</li></ul></div>
+</article>
+<article class="member-card" data-member="Dennis" hidden="">
+<div class="member-card-head"><h2>Dennis</h2><p class="member-role">Support Role / Script Review / Recording Support / Final Review</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Track completion of the water-pipe analogy and progress of the chibi animation scenes.</li><li>Review early scene exports for readability, narration timing, continuity, and consistency with the locked script.</li><li>Maintain one consolidated missing-assets, technical-issues, and review-corrections list.</li></ul></div>
+</article>
+<article class="member-card" data-member="Frank" hidden="">
+<div class="member-card-head"><h2>Frank</h2><p class="member-role">SME / Director Support</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Support technical review of the water-pipe analogy, device graphics, and initial chibi scenes.</li><li>Confirm that the microphone-to-mixer-to-output explanation remains simple, accurate, and focused on worship-service use.</li><li>Recommend only necessary technical-accuracy or readability corrections.</li></ul></div>
+</article>
+<article class="member-card" data-member="Geo" hidden="">
+<div class="member-card-head"><h2>Geo</h2><p class="member-role">Team Support / SME Support / Secondary Graphics &amp; Animation</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Complete or refine device graphics and secondary graphics support for the water-pipe analogy.</li><li>Help refine labels, callouts, device graphics, backgrounds, and other visual details required by assigned scene owners.</li><li>Identify missing assets or technical issues early without introducing new major scenes.</li></ul></div>
+</article>
+<article class="member-card" data-member="Jlyn" hidden="">
+<div class="member-card-head"><h2>Jlyn</h2><p class="member-role">Title Card / Lower Thirds / Animation Support</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Help with music soundtrack ideas.</li><li>Support Janna with assigned chibi scenes while preserving the approved visual style.</li></ul></div>
+</article>
+<article class="member-card" data-member="Aiden" hidden="">
+<div class="member-card-head"><h2>Aiden</h2><p class="member-role">Graphics / Diagram Support / Avatar Movement Support</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Confirm that the completed title and closing cards are packaged in edit-ready formats.</li><li>Support finalization of the water-pipe analogy and prepare edit-ready graphic exports.</li><li>Organize all graphics using clear filenames, versions, and scene references.</li></ul></div>
+</article>
+<article class="member-card" data-member="Charles" hidden="">
+<div class="member-card-head"><h2>Charles</h2><p class="member-role">Main Video Editor / Music-Soundtrack Support</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Prepare the editing timeline and placeholders for incoming chibi animation exports and the completed voice-over.</li><li>Assemble the first reviewable animation batch using the title card, closing card, device graphics, chibi scenes, and synchronized narration.</li><li>Track missing scenes, timing problems, labels, audio issues, and continuity corrections in one review list.</li></ul></div>
+</article>
+<article class="member-card" data-member="NJ" hidden="">
+<div class="member-card-head"><h2>NJ</h2><p class="member-role">Animation / Graphics / Editing Support</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Support chibi scene exports, quality checks, animation cleanup, and file organization.</li><li>Verify that device graphics, labels, title card, closing card, and captions remain readable on both laptop and television playback.</li><li>Assist with version control, narration synchronization, and rough-cut preparation.</li></ul></div>
+</article>
+<article class="member-card" data-member="Jhules B" hidden="">
+<div class="member-card-head"><h2>Jhules B</h2><p class="member-role">Video Editor / Animator Helper / Diagram Illustrator</p></div>
+<div class="member-card-body"><h3>Updated Action Items This Week</h3><ul><li>Help complete and polish the water-pipe analogy for final approval.</li><li>Support the first chibi scenes with visual cleanup, callouts, captions, transitions, and export preparation.</li><li>Quality-check the first reviewable batch without introducing new creative sections.</li></ul></div>
+</article>
 </section>
-<h2 class="section-title">Production Materials</h2>
-<section aria-label="Production Materials resources" class="table-card resource-table">
-<table>
-<thead><tr><th>Resource</th><th>Link</th></tr></thead>
-<tbody>
-<tr><td data-label="Resource">Script</td><td data-label="Link"><a href="https://miami-tsv.com/signal-flow-script" rel="noopener noreferrer" target="_blank">miami-tsv.com/signal-flow-script</a></td></tr>
-<tr><td data-label="Resource">Final Story / Show Flow</td><td data-label="Link"><a href="https://miami-tsv.com/signal-flow-preprod" rel="noopener noreferrer" target="_blank">miami-tsv.com/signal-flow-preprod</a></td></tr>
-</tbody>
-</table>
-</section>
-<h2 class="section-title">TSV Graphics</h2>
-<section aria-label="TSV Graphics resources" class="table-card resource-table">
-<table>
-<thead><tr><th>Resource</th><th>Link</th></tr></thead>
-<tbody>
-<tr><td data-label="Resource">Visual Guidelines</td><td data-label="Link"><a href="https://miami-tsv.com/production-visual-guide" rel="noopener noreferrer" target="_blank">miami-tsv.com/production-visual-guide</a></td></tr>
-<tr><td data-label="Resource">TSV Logo</td><td data-label="Link"><a href="https://drive.google.com/file/d/1RMi8joH0SKQJAi4ZAAmgia4G6BLud_Iz" rel="noopener noreferrer" target="_blank">drive.google.com/file/d/1RMi8joH0SKQJAi4ZAAmgia4G6BLud_Iz</a></td></tr>
-<tr><td data-label="Resource">INC TSV Logo</td><td data-label="Link"><a href="https://drive.google.com/file/d/1lK3mMjFbzm7p2_PzsiLvZFAagBlXIn5U" rel="noopener noreferrer" target="_blank">drive.google.com/file/d/1lK3mMjFbzm7p2_PzsiLvZFAagBlXIn5U</a></td></tr>
-</tbody>
-</table>
-</section>
-<h2 class="section-title">How-To-Decks</h2>
-<section aria-label="How-To-Decks resources" class="table-card resource-table">
-<table>
-<thead><tr><th>Resource</th><th>Link</th></tr></thead>
-<tbody>
-<tr><td data-label="Resource">Picture to Chibi</td><td data-label="Link"><a href="https://drive.google.com/file/d/1HM5JG_i8qfLF1vzm2_Pij7eelmiApAct" rel="noopener noreferrer" target="_blank">drive.google.com/file/d/1HM5JG_i8qfLF1vzm2_Pij7eelmiApAct</a></td></tr>
-<tr><td data-label="Resource">Picture / Video to Cartoon</td><td data-label="Link"><a href="https://drive.google.com/file/d/1_ykgrNHOqkIZH81yRB0VUn3swENAZRp4" rel="noopener noreferrer" target="_blank">drive.google.com/file/d/1_ykgrNHOqkIZH81yRB0VUn3swENAZRp4</a></td></tr>
-</tbody>
-</table>
+<section aria-label="Signal Flow project progress status" class="project-progress-card at-page-end">
+<div class="progress-header">
+<h2>Project Progress</h2>
+<p><strong>Current checkpoint:</strong> Pre-production remains closed/locked. Chibi animation started last weekend, and the voice-over recording was completed last weekend. The title card and closing card are complete, and the device graphic assets are uploaded. The current focus is expanding the priority chibi scenes, completing the water-pipe analogy, synchronizing scenes to the completed narration, and preparing the rough cut.</p>
+</div>
+<div class="progress-grid">
+<article class="progress-panel">
+<div class="progress-meta"><strong>Current Progress</strong><span class="progress-percent">55%</span></div>
+<div aria-label="Current Signal Flow project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="55" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 55%;"></div></div>
+<p>The completed voice-over, started chibi animation, completed title and closing cards, and available device graphics place the project at 55%. Remaining work centers on completing priority scenes, finalizing the water-pipe analogy, synchronizing narration, and assembling a reviewable rough cut.</p>
+</article>
+<article class="progress-panel target-progress">
+<div class="progress-meta"><strong>Target Progress</strong><span class="progress-percent">75%</span></div>
+<div aria-label="Target Signal Flow project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 75%;"></div></div>
+<p>Reach 75% by completing the priority chibi scenes, synchronizing the completed voice-over, finishing the water-pipe analogy, and assembling a complete beginning-to-end rough cut for technical and readability review.</p>
+</article>
+</div>
 </section>
 <footer aria-label="Site breadcrumb" class="fat-breadcrumb-footer">
 <div class="breadcrumb-trail">
@@ -553,9 +572,26 @@ a.progress-panel:hover {
 <span aria-hidden="true" class="breadcrumb-separator">/</span>
 <a href="home.html">Signal Flow Team</a>
 <span aria-hidden="true" class="breadcrumb-separator">/</span>
-<span class="breadcrumb-current">Resources</span>
+<span class="breadcrumb-current">Action Items</span>
 </div>
 </footer>
 </main>
+<script>
+const select = document.getElementById('memberSelect');
+const cards = Array.from(document.querySelectorAll('.member-card'));
+const emptyState = document.getElementById('emptyState');
+function updateActionItems() {
+  const selectedName = select.value;
+  let shown = false;
+  cards.forEach(card => {
+    const shouldShow = selectedName !== '' && card.dataset.member === selectedName;
+    card.hidden = !shouldShow;
+    if (shouldShow) shown = true;
+  });
+  emptyState.hidden = shown;
+}
+select.addEventListener('change', updateActionItems);
+updateActionItems();
+</script>
 </body>
 </html>

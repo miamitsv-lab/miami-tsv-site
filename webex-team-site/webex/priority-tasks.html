@@ -4,8 +4,9 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Signal Flow Team Resources</title>
+<title>WebEx Team Priorities</title>
 <style>
+
 :root {
   --navy: #17324D;
   --blue: #2F6FAE;
@@ -46,6 +47,11 @@ h1 {
   flex-wrap: wrap;
   gap: 10px;
   margin: 0 0 20px 0;
+}
+.nav .sep {
+  color: var(--navy);
+  font-weight: 800;
+  opacity: 0.75;
 }
 .nav a {
   color: var(--navy);
@@ -156,6 +162,51 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
   color: var(--muted);
   font-size: 14px;
 }
+@media (max-width: 900px) {
+  .immediate-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  body { padding: 14px; }
+  .header { padding: 22px; border-radius: 16px; }
+  .table-card, .immediate { border-radius: 16px; }
+  table, thead, tbody, th, td, tr { display: block; }
+  thead { display: none; }
+  tbody tr {
+    margin: 14px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(23, 50, 77, 0.08);
+  }
+  td {
+    width: 100% !important;
+    border-bottom: 1px solid rgba(201, 214, 230, 0.8);
+    padding: 14px 16px 14px 140px;
+    position: relative;
+    min-height: 54px;
+    font-size: 16px;
+  }
+  td:last-child { border-bottom: none; }
+  td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 16px;
+    top: 14px;
+    width: 110px;
+    color: var(--muted);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  td:first-child { font-size: 18px; }
+}
+@media print {
+  body { background: white; padding: 0; }
+  .header, .table-card, .card-grid, .immediate { box-shadow: none; }
+  th, td { font-size: 12px; padding: 9px 10px; }
+}
+
 .action-filter-card {
   background: white;
   border: 1px solid var(--border);
@@ -199,7 +250,6 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
   font-size: 20px;
   font-weight: 800;
   text-align: center;
-  margin-bottom: 22px;
 }
 .action-list {
   display: grid;
@@ -251,6 +301,16 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
   font-size: 17px;
 }
 .member-card-body li:last-child { margin-bottom: 0; }
+.due-chip {
+  display: inline-block;
+  background: var(--navy);
+  color: white;
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 14px;
+}
 .home-action-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -266,153 +326,40 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
 .tile.action-items-tile h2 {
   font-size: clamp(26px, 3vw, 34px);
 }
-/* Signal Flow Project Progress */
+@media (max-width: 760px) {
+  .filter-row { grid-template-columns: 1fr; }
+  .member-card h2 { font-size: 24px; }
+}
+
+
+/* Responsive Project Progress layout */
 .project-progress-card {
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 20px;
-  margin: 0 auto 24px auto;
   width: 66.7%;
-  box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+  max-width: 100%;
+  margin: 0 auto 24px auto;
 }
-.project-progress-card.at-page-end { margin-top: 26px; margin-bottom: 0; }
-.progress-header {
-  margin-bottom: 16px;
+.project-progress-card .progress-header,
+.project-progress-card .progress-header h2 {
   text-align: center;
 }
-.progress-header h2 {
-  margin: 0 0 8px 0;
-  color: var(--navy);
-  font-size: clamp(24px, 3vw, 34px);
-  text-align: center;
-}
-.progress-header p,
-.progress-panel p,
-.progress-note {
-  margin: 0;
-  line-height: 1.5;
-  color: var(--text);
-  font-size: 16px;
-}
-.progress-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 14px;
-  margin: 16px 0 0 0;
-}
-.progress-panel {
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 16px;
-  background: var(--light-blue);
-  display: block;
-  color: var(--text);
+.project-progress-card .progress-link {
   text-decoration: none;
+  color: inherit;
+  display: block;
+  cursor: pointer;
 }
-a.progress-panel:hover {
-  border-color: var(--blue);
-  box-shadow: 0 6px 16px rgba(23, 50, 77, 0.14);
+.project-progress-card .progress-link:hover,
+.project-progress-card .progress-link:focus {
+  box-shadow: 0 10px 22px rgba(23, 50, 77, 0.14);
   transform: translateY(-1px);
+  outline: none;
 }
-.progress-panel.target-progress {
-  background: var(--gold);
-}
-.progress-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 10px;
-  color: var(--navy);
-  font-size: 18px;
-}
-.progress-percent {
-  font-weight: 900;
-  font-size: 22px;
-}
-.progress-track {
-  height: 20px;
-  background: #E6EEF7;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  overflow: hidden;
-  margin-bottom: 10px;
-}
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--navy), var(--blue));
-  border-radius: 999px;
-}
-.progress-note {
-  background: var(--green);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 14px 16px;
-}
-@media (max-width: 900px) {
-  .immediate-grid { grid-template-columns: 1fr; }
+@media (max-width: 1024px) {
   .project-progress-card { width: 80%; }
 }
 @media (max-width: 760px) {
-  body { padding: 14px; }
-  .header { padding: 22px; border-radius: 16px; }
-  .table-card, .immediate { border-radius: 16px; }
-  .filter-row { grid-template-columns: 1fr; }
-  .member-card h2 { font-size: 24px; }
-  .project-progress-card { width: 100%; padding: 18px; border-radius: 16px; }
-  table, thead, tbody, th, td, tr { display: block; }
-  thead { display: none; }
-  tbody tr {
-    margin: 14px;
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(23, 50, 77, 0.08);
-  }
-  td {
-    width: 100% !important;
-    border-bottom: 1px solid rgba(201, 214, 230, 0.8);
-    padding: 14px 16px 14px 140px;
-    position: relative;
-    min-height: 54px;
-    font-size: 16px;
-  }
-  td:last-child { border-bottom: none; }
-  td::before {
-    content: attr(data-label);
-    position: absolute;
-    left: 16px;
-    top: 14px;
-    width: 110px;
-    color: var(--muted);
-    font-weight: 700;
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-  td:first-child { font-size: 18px; }
+  .project-progress-card { width: 100%; }
 }
-@media print {
-  body { background: white; padding: 0; }
-  .header, .table-card, .card-grid, .immediate, .project-progress-card, .member-card { box-shadow: none; }
-  th, td { font-size: 12px; padding: 9px 10px; }
-}
-
-.table-card a {
-  color: #1D5F8F;
-  font-weight: 700;
-  text-decoration: none;
-  overflow-wrap: anywhere;
-}
-.table-card a:hover,
-.table-card a:focus {
-  text-decoration: underline;
-}
-.resource-table {
-  margin-bottom: 22px;
-}
-
 
 
 /* Fat Footer Breadcrumb */
@@ -485,75 +432,29 @@ a.progress-panel:hover {
 </head>
 <body>
 <main class="wrap">
-<section class="header"><h1>Signal Flow Team Resources</h1></section>
-<nav class="nav">
-<a href="home.html">Home</a>
+<section class="header">
+<h1>WebEx Team Priorities</h1>
+</section>
+<nav class="nav"><a href="home.html">Home</a>
 <a href="action-items.html">Action Items</a>
 <a href="team-members.html">Team</a>
-<a href="priority-tasks.html">Priorities</a>
+<a class="active" href="priority-tasks.html">Priorities</a>
 <a href="deadline-reminder.html">Deliverables</a>
 <a href="note-section.html">Notes</a>
-<a class="active" href="resources.html">Resources</a>
-</nav>
-<h2 class="section-title">Team Site</h2>
-<section aria-label="Team Site resources" class="table-card resource-table">
-<table>
-<thead><tr><th>Resource</th><th>Link</th></tr></thead>
-<tbody>
-<tr><td data-label="Resource">Group Portal</td><td data-label="Link"><a href="https://miami-tsv.com/signal-flow-team-site" rel="noopener noreferrer" target="_blank">miami-tsv.com/signal-flow-team-site</a></td></tr>
-<tr><td data-label="Resource">Weekly Meeting</td><td data-label="Link"><a href="https://miami-tsv.com/signal-flow-team-meeting" rel="noopener noreferrer" target="_blank">miami-tsv.com/signal-flow-team-meeting</a></td></tr>
-<tr><td data-label="Resource">Telegram Messenger</td><td data-label="Link"><a class="resource-link" href="https://miami-tsv.com/signal-flow-team-telegram" rel="noopener" target="_blank">miami-tsv.com/signal-flow-team-telegram</a></td></tr>
-</tbody>
-</table>
-</section>
-<h2 class="section-title">Google Drive</h2>
-<section aria-label="Google Drive resources" class="table-card resource-table">
-<table>
-<thead><tr><th>Resource</th><th>Link</th></tr></thead>
-<tbody>
-<tr><td data-label="Resource">Folder Structure</td><td data-label="Link"><a href="https://miami-tsv.com/production-storage-doc" rel="noopener noreferrer" target="_blank">miami-tsv.com/production-storage-doc</a></td></tr>
-<tr><td data-label="Resource">Shared Common Folder</td><td data-label="Link"><a href="https://miami-tsv.com/production-shared-common" rel="noopener noreferrer" target="_blank">miami-tsv.com/production-shared-common</a></td></tr>
-<tr><td data-label="Resource">Team Folder</td><td data-label="Link"><a href="https://miami-tsv.com/signal-flow-team-folder" rel="noopener noreferrer" target="_blank">miami-tsv.com/signal-flow-team-folder</a></td></tr></tbody>
-</table>
-</section>
-<h2 class="section-title">Production Materials</h2>
-<section aria-label="Production Materials resources" class="table-card resource-table">
-<table>
-<thead><tr><th>Resource</th><th>Link</th></tr></thead>
-<tbody>
-<tr><td data-label="Resource">Script</td><td data-label="Link"><a href="https://miami-tsv.com/signal-flow-script" rel="noopener noreferrer" target="_blank">miami-tsv.com/signal-flow-script</a></td></tr>
-<tr><td data-label="Resource">Final Story / Show Flow</td><td data-label="Link"><a href="https://miami-tsv.com/signal-flow-preprod" rel="noopener noreferrer" target="_blank">miami-tsv.com/signal-flow-preprod</a></td></tr>
-</tbody>
-</table>
-</section>
-<h2 class="section-title">TSV Graphics</h2>
-<section aria-label="TSV Graphics resources" class="table-card resource-table">
-<table>
-<thead><tr><th>Resource</th><th>Link</th></tr></thead>
-<tbody>
-<tr><td data-label="Resource">Visual Guidelines</td><td data-label="Link"><a href="https://miami-tsv.com/production-visual-guide" rel="noopener noreferrer" target="_blank">miami-tsv.com/production-visual-guide</a></td></tr>
-<tr><td data-label="Resource">TSV Logo</td><td data-label="Link"><a href="https://drive.google.com/file/d/1RMi8joH0SKQJAi4ZAAmgia4G6BLud_Iz" rel="noopener noreferrer" target="_blank">drive.google.com/file/d/1RMi8joH0SKQJAi4ZAAmgia4G6BLud_Iz</a></td></tr>
-<tr><td data-label="Resource">INC TSV Logo</td><td data-label="Link"><a href="https://drive.google.com/file/d/1lK3mMjFbzm7p2_PzsiLvZFAagBlXIn5U" rel="noopener noreferrer" target="_blank">drive.google.com/file/d/1lK3mMjFbzm7p2_PzsiLvZFAagBlXIn5U</a></td></tr>
-</tbody>
-</table>
-</section>
-<h2 class="section-title">How-To-Decks</h2>
-<section aria-label="How-To-Decks resources" class="table-card resource-table">
-<table>
-<thead><tr><th>Resource</th><th>Link</th></tr></thead>
-<tbody>
-<tr><td data-label="Resource">Picture to Chibi</td><td data-label="Link"><a href="https://drive.google.com/file/d/1HM5JG_i8qfLF1vzm2_Pij7eelmiApAct" rel="noopener noreferrer" target="_blank">drive.google.com/file/d/1HM5JG_i8qfLF1vzm2_Pij7eelmiApAct</a></td></tr>
-<tr><td data-label="Resource">Picture / Video to Cartoon</td><td data-label="Link"><a href="https://drive.google.com/file/d/1_ykgrNHOqkIZH81yRB0VUn3swENAZRp4" rel="noopener noreferrer" target="_blank">drive.google.com/file/d/1_ykgrNHOqkIZH81yRB0VUn3swENAZRp4</a></td></tr>
-</tbody>
+<a href="resources.html">Resources</a></nav>
+<section class="table-card">
+<table aria-label="WebEx Team Priorities">
+<thead><tr><th>Due Date</th><th>Task</th><th>Lead</th><th>Helpers</th></tr></thead>
+<tbody><tr><td data-label="Due Date">June 30</td><td data-label="Task">Finish podcast run-of-show, storyboard, and WebEx demo map</td><td data-label="Lead">Julia, Justyn</td><td data-label="Helpers">Dennis, Frank, Angelino, Jules T</td></tr><tr><td data-label="Due Date">July 3</td><td data-label="Task">Prepare WebEx test meeting, host/cohost accounts, Backup TSV PC workflow, and screen recording checklist</td><td data-label="Lead">Justyn</td><td data-label="Helpers">Dennis, Frank, Angelino</td></tr><tr><td data-label="Due Date">July 6</td><td data-label="Task">Finish lower thirds, WebEx labels, callout style, and troubleshooting cards</td><td data-label="Lead">TJ</td><td data-label="Helpers">Jhules B</td></tr><tr><td data-label="Due Date">July 10</td><td data-label="Task">Record podcast/interview, talent/voiceover parts, and main screen demos</td><td data-label="Lead">Justyn, Dennis</td><td data-label="Helpers">NJ, Boon, Eden, Eduard, Jules T, Janna</td></tr><tr><td data-label="Due Date">July 14</td><td data-label="Task">Record missing demos, pickup lines, and backup screenshots</td><td data-label="Lead">Justyn, NJ</td><td data-label="Helpers">Dennis, Frank, Angelino, Jhules B</td></tr><tr><td data-label="Due Date">July 10–19</td><td data-label="Task">Start early editing: sync audio/video, trim pauses, insert demo clips, and place graphics placeholders</td><td data-label="Lead">NJ</td><td data-label="Helpers">Jhules B, TJ</td></tr><tr><td data-label="Due Date">July 29-August 1</td><td data-label="Task">Complete and verify all screen-demo uploads, record and upload matching voiceover, organize assets, and begin the interview-to-demo rough-cut assembly</td><td data-label="Lead">Justyn, NJ, Jules T</td><td data-label="Helpers">Julia, Janna, Dennis, Frank, Angelino, Jhules B, TJ, Eduard</td></tr><tr><td data-label="Due Date">August 2</td><td data-label="Task">Assemble the completed interview, screen demos, voiceover, callouts, and graphics into a complete beginning-to-end rough cut</td><td data-label="Lead">NJ</td><td data-label="Helpers">Jhules B, TJ, Justyn, Jules T</td></tr><tr><td data-label="Due Date">August 7</td><td data-label="Task">Complete polished edit with zoom-ins, captions, callouts, graphics, voiceover leveling, audio cleanup, and optional limited music/soundtrack if any</td><td data-label="Lead">NJ, TJ</td><td data-label="Helpers">Jhules B, Dennis</td></tr><tr><td data-label="Due Date">August 10</td><td data-label="Task">Internal review for WebEx accuracy, screen readability, troubleshooting flow, storyboard alignment, and timing</td><td data-label="Lead">Justyn, Dennis, Frank</td><td data-label="Helpers">Angelino, Jules T</td></tr><tr><td data-label="Due Date">August 14</td><td data-label="Task">Final export and backup copy</td><td data-label="Lead">NJ</td><td data-label="Helpers">Justyn, Jhules B</td></tr></tbody>
 </table>
 </section>
 <footer aria-label="Site breadcrumb" class="fat-breadcrumb-footer">
 <div class="breadcrumb-trail">
 <a href="../index.html">District of Florida and Caribbean</a>
 <span aria-hidden="true" class="breadcrumb-separator">/</span>
-<a href="home.html">Signal Flow Team</a>
+<a href="home.html">WebEx Team</a>
 <span aria-hidden="true" class="breadcrumb-separator">/</span>
-<span class="breadcrumb-current">Resources</span>
+<span class="breadcrumb-current">Priorities</span>
 </div>
 </footer>
 </main>

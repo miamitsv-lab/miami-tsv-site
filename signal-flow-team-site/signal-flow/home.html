@@ -4,8 +4,9 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Signal Flow Team Resources</title>
+<title>Signal Flow Team Group Site</title>
 <style>
+
 :root {
   --navy: #17324D;
   --blue: #2F6FAE;
@@ -399,18 +400,29 @@ a.progress-panel:hover {
   th, td { font-size: 12px; padding: 9px 10px; }
 }
 
-.table-card a {
-  color: #1D5F8F;
-  font-weight: 700;
-  text-decoration: none;
-  overflow-wrap: anywhere;
+
+
+/* Site Menu Tile Hover - matches Project Progress hover behavior */
+.card-grid .tile {
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, filter .15s ease;
 }
-.table-card a:hover,
-.table-card a:focus {
-  text-decoration: underline;
+.card-grid .tile:hover,
+.card-grid .tile:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(23, 50, 77, 0.14);
+  border-color: var(--blue);
+  outline: none;
+  filter: brightness(.995);
 }
-.resource-table {
-  margin-bottom: 22px;
+.card-grid .tile:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-grid .tile { transition: none; }
+  .card-grid .tile:hover,
+  .card-grid .tile:focus { transform: none; }
 }
 
 
@@ -485,75 +497,56 @@ a.progress-panel:hover {
 </head>
 <body>
 <main class="wrap">
-<section class="header"><h1>Signal Flow Team Resources</h1></section>
+<section class="header"><h1>Signal Flow Team Group Site</h1></section>
 <nav class="nav">
-<a href="home.html">Home</a>
+<a class="active" href="home.html">Home</a>
 <a href="action-items.html">Action Items</a>
 <a href="team-members.html">Team</a>
 <a href="priority-tasks.html">Priorities</a>
 <a href="deadline-reminder.html">Deliverables</a>
 <a href="note-section.html">Notes</a>
-<a class="active" href="resources.html">Resources</a>
+<a href="resources.html">Resources</a>
 </nav>
-<h2 class="section-title">Team Site</h2>
-<section aria-label="Team Site resources" class="table-card resource-table">
-<table>
-<thead><tr><th>Resource</th><th>Link</th></tr></thead>
-<tbody>
-<tr><td data-label="Resource">Group Portal</td><td data-label="Link"><a href="https://miami-tsv.com/signal-flow-team-site" rel="noopener noreferrer" target="_blank">miami-tsv.com/signal-flow-team-site</a></td></tr>
-<tr><td data-label="Resource">Weekly Meeting</td><td data-label="Link"><a href="https://miami-tsv.com/signal-flow-team-meeting" rel="noopener noreferrer" target="_blank">miami-tsv.com/signal-flow-team-meeting</a></td></tr>
-<tr><td data-label="Resource">Telegram Messenger</td><td data-label="Link"><a class="resource-link" href="https://miami-tsv.com/signal-flow-team-telegram" rel="noopener" target="_blank">miami-tsv.com/signal-flow-team-telegram</a></td></tr>
-</tbody>
-</table>
+<section aria-label="Signal Flow project progress status" class="project-progress-card">
+<div class="progress-header">
+<h2>Project Progress</h2>
+<p><strong>Current checkpoint:</strong> Pre-production remains closed/locked. Chibi animation started last weekend, and the voice-over recording was completed last weekend. The title card and closing card are complete, and the device graphic assets are uploaded. The current focus is expanding the priority chibi scenes, completing the water-pipe analogy, synchronizing scenes to the completed narration, and preparing the rough cut.</p>
+</div>
+<div class="progress-grid">
+<a aria-label="Open Action Items for current progress" class="progress-panel" href="action-items.html">
+<div class="progress-meta"><strong>Current Progress</strong><span class="progress-percent">55%</span></div>
+<div aria-label="Current Signal Flow project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="55" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 55%;"></div></div>
+<p>The completed voice-over, started chibi animation, completed title and closing cards, and available device graphics place the project at 55%. Remaining work centers on completing priority scenes, finalizing the water-pipe analogy, synchronizing narration, and assembling a reviewable rough cut.</p>
+</a>
+<a aria-label="Open Deliverables for target progress" class="progress-panel target-progress" href="deadline-reminder.html">
+<div class="progress-meta"><strong>Target Progress</strong><span class="progress-percent">75%</span></div>
+<div aria-label="Target Signal Flow project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 75%;"></div></div>
+<p>Reach 75% by completing the priority chibi scenes, synchronizing the completed voice-over, finishing the water-pipe analogy, and assembling a complete beginning-to-end rough cut for technical and readability review.</p>
+</a>
+</div>
 </section>
-<h2 class="section-title">Google Drive</h2>
-<section aria-label="Google Drive resources" class="table-card resource-table">
-<table>
-<thead><tr><th>Resource</th><th>Link</th></tr></thead>
-<tbody>
-<tr><td data-label="Resource">Folder Structure</td><td data-label="Link"><a href="https://miami-tsv.com/production-storage-doc" rel="noopener noreferrer" target="_blank">miami-tsv.com/production-storage-doc</a></td></tr>
-<tr><td data-label="Resource">Shared Common Folder</td><td data-label="Link"><a href="https://miami-tsv.com/production-shared-common" rel="noopener noreferrer" target="_blank">miami-tsv.com/production-shared-common</a></td></tr>
-<tr><td data-label="Resource">Team Folder</td><td data-label="Link"><a href="https://miami-tsv.com/signal-flow-team-folder" rel="noopener noreferrer" target="_blank">miami-tsv.com/signal-flow-team-folder</a></td></tr></tbody>
-</table>
+<section class="immediate">
+<h2 class="section-title" style="margin-top: 0;">Immediate Next Step</h2>
+<div class="immediate-grid">
+<article class="action-card"><h2>Needed Next Week</h2><p>Continue chibi scene production, maintain visual continuity, add captions and callouts, synchronize scene timing to the completed voice-over, clean the audio, and prepare the project for technical review.</p></article>
+<article class="action-card"><h2>Goal by End of Week</h2><p>Complete the priority chibi scenes, finish the water-pipe analogy, synchronize the completed voice-over, and assemble a complete beginning-to-end rough cut.</p></article>
+<article class="action-card"><h2>Main Reminder</h2><p>Chibi is the only approved animation direction. Maintain one consistent visual style, use the completed voice-over as the timing anchor, keep signal-flow explanations technically accurate, and avoid adding major new scenes.</p></article>
+</div>
 </section>
-<h2 class="section-title">Production Materials</h2>
-<section aria-label="Production Materials resources" class="table-card resource-table">
-<table>
-<thead><tr><th>Resource</th><th>Link</th></tr></thead>
-<tbody>
-<tr><td data-label="Resource">Script</td><td data-label="Link"><a href="https://miami-tsv.com/signal-flow-script" rel="noopener noreferrer" target="_blank">miami-tsv.com/signal-flow-script</a></td></tr>
-<tr><td data-label="Resource">Final Story / Show Flow</td><td data-label="Link"><a href="https://miami-tsv.com/signal-flow-preprod" rel="noopener noreferrer" target="_blank">miami-tsv.com/signal-flow-preprod</a></td></tr>
-</tbody>
-</table>
-</section>
-<h2 class="section-title">TSV Graphics</h2>
-<section aria-label="TSV Graphics resources" class="table-card resource-table">
-<table>
-<thead><tr><th>Resource</th><th>Link</th></tr></thead>
-<tbody>
-<tr><td data-label="Resource">Visual Guidelines</td><td data-label="Link"><a href="https://miami-tsv.com/production-visual-guide" rel="noopener noreferrer" target="_blank">miami-tsv.com/production-visual-guide</a></td></tr>
-<tr><td data-label="Resource">TSV Logo</td><td data-label="Link"><a href="https://drive.google.com/file/d/1RMi8joH0SKQJAi4ZAAmgia4G6BLud_Iz" rel="noopener noreferrer" target="_blank">drive.google.com/file/d/1RMi8joH0SKQJAi4ZAAmgia4G6BLud_Iz</a></td></tr>
-<tr><td data-label="Resource">INC TSV Logo</td><td data-label="Link"><a href="https://drive.google.com/file/d/1lK3mMjFbzm7p2_PzsiLvZFAagBlXIn5U" rel="noopener noreferrer" target="_blank">drive.google.com/file/d/1lK3mMjFbzm7p2_PzsiLvZFAagBlXIn5U</a></td></tr>
-</tbody>
-</table>
-</section>
-<h2 class="section-title">How-To-Decks</h2>
-<section aria-label="How-To-Decks resources" class="table-card resource-table">
-<table>
-<thead><tr><th>Resource</th><th>Link</th></tr></thead>
-<tbody>
-<tr><td data-label="Resource">Picture to Chibi</td><td data-label="Link"><a href="https://drive.google.com/file/d/1HM5JG_i8qfLF1vzm2_Pij7eelmiApAct" rel="noopener noreferrer" target="_blank">drive.google.com/file/d/1HM5JG_i8qfLF1vzm2_Pij7eelmiApAct</a></td></tr>
-<tr><td data-label="Resource">Picture / Video to Cartoon</td><td data-label="Link"><a href="https://drive.google.com/file/d/1_ykgrNHOqkIZH81yRB0VUn3swENAZRp4" rel="noopener noreferrer" target="_blank">drive.google.com/file/d/1_ykgrNHOqkIZH81yRB0VUn3swENAZRp4</a></td></tr>
-</tbody>
-</table>
+<h2 class="section-title">Signal Flow Site Menu</h2>
+<section class="card-grid">
+<a class="tile" href="action-items.html"><h2>Action Items</h2><p>View action items assigned for this week's sprint.</p></a>
+<a class="tile" href="team-members.html"><h2>Team</h2><p>Roles, responsibilities, and name reference for the Signal Flow team.</p></a>
+<a class="tile" href="priority-tasks.html"><h2>Priorities</h2><p>Main due dates, leads, and helpers for the Signal Flow project.</p></a>
+<a class="tile" href="deadline-reminder.html"><h2>Deliverables</h2><p>Shared schedule checkpoints from planning to final submission.</p></a>
+<a class="tile" href="note-section.html"><h2>Notes</h2><p>Definitions for chibi animation, narration timing, signal-flow diagrams, rough-cut assembly, labels, and callouts.</p></a>
+<a class="tile" href="resources.html"><h2>Resources</h2><p>Quick access to team site links, Google Drive folders, production materials, TSV graphics, and how-to decks.</p></a>
 </section>
 <footer aria-label="Site breadcrumb" class="fat-breadcrumb-footer">
 <div class="breadcrumb-trail">
 <a href="../index.html">District of Florida and Caribbean</a>
 <span aria-hidden="true" class="breadcrumb-separator">/</span>
-<a href="home.html">Signal Flow Team</a>
-<span aria-hidden="true" class="breadcrumb-separator">/</span>
-<span class="breadcrumb-current">Resources</span>
+<span class="breadcrumb-current">Signal Flow Team</span>
 </div>
 </footer>
 </main>

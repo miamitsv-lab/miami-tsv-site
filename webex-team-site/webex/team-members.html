@@ -4,9 +4,8 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>WebEx Team Resources</title>
+<title>WebEx Team Members</title>
 <style>
-
 
 :root {
   --navy: #17324D;
@@ -333,88 +332,6 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
 }
 
 
-
-/* WebEx Project Progress */
-.project-progress-card {
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 20px;
-  margin: 0 0 24px 0;
-  box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
-}
-.progress-header {
-  margin-bottom: 16px;
-}
-.progress-header h2 {
-  margin: 0 0 8px 0;
-  color: var(--navy);
-  font-size: clamp(24px, 3vw, 34px);
-}
-.progress-header p,
-.progress-panel p,
-.progress-note {
-  margin: 0;
-  line-height: 1.5;
-  color: var(--text);
-  font-size: 16px;
-}
-.progress-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 14px;
-  margin: 16px 0;
-}
-.progress-panel {
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  padding: 16px;
-  background: var(--light-blue);
-}
-.progress-panel.target-progress {
-  background: var(--gold);
-}
-.progress-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 10px;
-  color: var(--navy);
-  font-size: 18px;
-}
-.progress-percent {
-  font-weight: 900;
-  font-size: 22px;
-}
-.progress-track {
-  height: 20px;
-  background: #E6EEF7;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  overflow: hidden;
-  margin-bottom: 10px;
-}
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--navy), var(--blue));
-  border-radius: 999px;
-}
-.progress-note {
-  background: var(--green);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 14px 16px;
-}
-@media (max-width: 900px) {
-  .progress-grid { grid-template-columns: 1fr; }
-}
-@media print {
-  .project-progress-card { box-shadow: none; }
-}
-
-
-
 /* Responsive Project Progress layout */
 .project-progress-card {
   width: 66.7%;
@@ -442,18 +359,6 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
 }
 @media (max-width: 760px) {
   .project-progress-card { width: 100%; }
-}
-
-
-
-.resource-link {
-  color: var(--navy);
-  font-weight: 700;
-  word-break: break-word;
-}
-.resource-link:hover,
-.resource-link:focus {
-  color: var(--blue);
 }
 
 
@@ -528,61 +433,28 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
 <body>
 <main class="wrap">
 <section class="header">
-<h1>WebEx Team Resources</h1>
+<h1>WebEx Team Members</h1>
 </section>
 <nav class="nav"><a href="home.html">Home</a>
 <a href="action-items.html">Action Items</a>
-<a href="team-members.html">Team</a>
+<a class="active" href="team-members.html">Team</a>
 <a href="priority-tasks.html">Priorities</a>
 <a href="deadline-reminder.html">Deliverables</a>
 <a href="note-section.html">Notes</a>
-<a class="active" href="resources.html">Resources</a></nav>
-<h2 class="section-title">Team Site</h2>
+<a href="resources.html">Resources</a></nav>
 <section class="table-card">
-<table>
-<thead><tr><th>Resource</th><th>Link</th></tr></thead>
-<tbody>
-<tr><td data-label="Resource">Group Portal</td><td data-label="Link"><a class="resource-link" href="https://miami-tsv.com/webex-team-site" rel="noopener" target="_blank">miami-tsv.com/webex-team-site</a></td></tr>
-<tr><td data-label="Resource">Weekly Meeting</td><td data-label="Link"><a class="resource-link" href="https://miami-tsv.com/webex-team-meeting" rel="noopener" target="_blank">miami-tsv.com/webex-team-meeting</a></td></tr>
-<tr><td data-label="Resource">Telegram Messenger</td><td data-label="Link"><a class="resource-link" href="https://miami-tsv.com/webex-team-telegram" rel="noopener" target="_blank">miami-tsv.com/webex-team-telegram</a></td></tr>
-</tbody>
+<table aria-label="WebEx Team Members">
+<thead><tr><th>Member</th><th>Role</th><th>Responsibilities</th></tr></thead>
+<tbody><tr><td data-label="Member">Justyn</td><td data-label="Role">Director</td><td data-label="Responsibilities">Lead the current post-production sprint. Close the screen-demo upload checklist, coordinate voiceover completion, protect the locked main recording, and lead rough-cut readiness and final review planning.</td></tr><tr><td data-label="Member">Julia</td><td data-label="Role">Scriptwriter</td><td data-label="Responsibilities">Maintain the locked script and prepare the final screen-demo voiceover cue sheet, scene order, terminology, and timing notes for the editor and talent.</td></tr><tr><td data-label="Member">NJ</td><td data-label="Role">Video Editor; Recording Support</td><td data-label="Responsibilities">Organize uploaded interview and demo files, clean and sync voiceover, assemble the full rough cut, and add captions, zoom-ins, callouts, transitions, audio cleanup, and final export.</td></tr><tr><td data-label="Member">TJ</td><td data-label="Role">Animator / Graphics</td><td data-label="Responsibilities">Create and package only the edit-required lower thirds, feature labels, callouts, troubleshooting graphics, agenda, Backup TSV PC, closing, and summary cards.</td></tr><tr><td data-label="Member">Angelino</td><td data-label="Role">Scriptwriter; SME Support Only</td><td data-label="Responsibilities">Support voiceover wording and technical review. Help compare the script, screen demos, labels, and narration while Dennis and Frank remain the main WebEx SMEs.</td></tr><tr><td data-label="Member">Dennis</td><td data-label="Role">Main SME; Director / Scriptwriter Helper; Recording Support; Optional Music/Soundtrack Support</td><td data-label="Responsibilities">Serve as a main WebEx SME. Review demo accuracy, voiceover wording, privacy/readability, host/cohost and Backup TSV PC procedures, and approve only necessary pickups.</td></tr><tr><td data-label="Member">Frank</td><td data-label="Role">Main SME; Director Helper</td><td data-label="Responsibilities">Serve as a main WebEx SME and director helper. Validate the uploaded demos, voiceover synchronization, troubleshooting workflow, and rough-cut technical accuracy.</td></tr><tr><td data-label="Member">Jules T</td><td data-label="Role">Scriptwriter Support; Talent / Voiceover</td><td data-label="Responsibilities">Lead or complete assigned WebEx screen-demo voiceover, follow the final cue sheet, provide clearly named clean takes, and support only approved pickup lines.</td></tr><tr><td data-label="Member">Janna</td><td data-label="Role">Talent / Voiceover</td><td data-label="Responsibilities">Complete assigned or backup WebEx voiceover segments and help quality-check pacing, pronunciation, volume consistency, and alignment with the visible screen action.</td></tr><tr><td data-label="Member">Jhules B</td><td data-label="Role">Video Editor / Animator Helper</td><td data-label="Responsibilities">Help NJ and TJ with upload verification, screen-recording polish, voiceover sync, graphics, callouts, captions, zoom-ins, and final editing support.</td></tr><tr><td data-label="Member">Charles</td><td data-label="Role">Music / Soundtrack Support</td><td data-label="Responsibilities">Provide optional, very limited music support only after dialogue and screen-demo voiceover are clear. Maintain a no-music comparison version.</td></tr><tr><td data-label="Member">Boon</td><td data-label="Role">Production Support</td><td data-label="Responsibilities">Support post-production file verification, backup copies, transfer needs, and only approved limited pickup support as assigned.</td></tr><tr><td data-label="Member">Eden</td><td data-label="Role">Production Support</td><td data-label="Responsibilities">Support voiceover-session readiness, basic audio checks, file labeling, backup copies, and only approved limited pickup support as assigned.</td></tr><tr><td data-label="Member">Eduard</td><td data-label="Role">Demo Recording Support</td><td data-label="Responsibilities">Support completion and verification of screen-demo uploads, file naming, backup copies, and limited re-recording only for an approved missing or unusable demo scene.</td></tr></tbody>
 </table>
-</section>
-<h2 class="section-title">Google Drive</h2>
-<section class="table-card">
-<table>
-<thead><tr><th>Resource</th><th>Link</th></tr></thead>
-<tbody>
-<tr><td data-label="Resource">Folder Structure</td><td data-label="Link"><a class="resource-link" href="https://miami-tsv.com/production-storage-doc" rel="noopener" target="_blank">miami-tsv.com/production-storage-doc</a></td></tr>
-<tr><td data-label="Resource">Shared Common Folder</td><td data-label="Link"><a class="resource-link" href="https://miami-tsv.com/production-shared-common" rel="noopener" target="_blank">miami-tsv.com/production-shared-common</a></td></tr>
-<tr><td data-label="Resource">Team Folder</td><td data-label="Link"><a class="resource-link" href="https://miami-tsv.com/webex-team-folder" rel="noopener" target="_blank">miami-tsv.com/webex-team-folder</a></td></tr></tbody>
-</table>
-</section>
-<h2 class="section-title">Production Materials</h2>
-<section class="table-card">
-<table>
-<thead><tr><th>Resource</th><th>Link</th></tr></thead>
-<tbody><tr><td data-label="Resource">Scripts</td><td data-label="Link"><a class="resource-link" href="https://miami-tsv.com/webex-script" rel="noopener noreferrer" target="_blank">miami-tsv.com/webex-script</a></td></tr><tr><td data-label="Resource">Story / Show Flow</td><td data-label="Link"><a class="resource-link" href="https://miami-tsv.com/webex-preprod" rel="noopener noreferrer" target="_blank">miami-tsv.com/webex-preprod</a></td></tr></tbody>
-</table>
-</section>
-<h2 class="section-title">TSV Graphics</h2>
-<section class="table-card">
-<table>
-<thead><tr><th>Resource</th><th>Link</th></tr></thead>
-<tbody>
-<tr><td data-label="Resource">Visual Guidelines</td><td data-label="Link"><a class="resource-link" href="https://miami-tsv.com/production-visual-guide" rel="noopener" target="_blank">miami-tsv.com/production-visual-guide</a></td></tr>
-<tr><td data-label="Resource">TSV Logo</td><td data-label="Link"><a class="resource-link" href="https://drive.google.com/file/d/1RMi8joH0SKQJAi4ZAAmgia4G6BLud_Iz" rel="noopener" target="_blank">drive.google.com/file/d/1RMi8joH0SKQJAi4ZAAmgia4G6BLud_Iz</a></td></tr>
-<tr><td data-label="Resource">INC TSV Logo</td><td data-label="Link"><a class="resource-link" href="https://drive.google.com/file/d/1lK3mMjFbzm7p2_PzsiLvZFAagBlXIn5U" rel="noopener" target="_blank">drive.google.com/file/d/1lK3mMjFbzm7p2_PzsiLvZFAagBlXIn5U</a></td></tr>
-</tbody>
-</table>
-</section>
+</section><h2 class="section-title">Name Reference</h2><section class="table-card"><table><thead><tr><th>Short Name</th><th>Full Name</th><th>Local / GWS</th></tr></thead><tbody><tr><td data-label="Short Name">Justyn</td><td data-label="Full Name">Justyn Ryan DeGuzman</td><td data-label="Local / GWS">Miami</td></tr><tr><td data-label="Short Name">Julia</td><td data-label="Full Name">Julia Demetita</td><td data-label="Local / GWS">Daytona</td></tr><tr><td data-label="Short Name">NJ</td><td data-label="Full Name">Neiljay Tugaoen</td><td data-label="Local / GWS">Miami</td></tr><tr><td data-label="Short Name">TJ</td><td data-label="Full Name">Tony Soria DeGuzman Jr.</td><td data-label="Local / GWS">Miami</td></tr><tr><td data-label="Short Name">Angelino</td><td data-label="Full Name">Angelino Romanos</td><td data-label="Local / GWS">Orlando</td></tr><tr><td data-label="Short Name">Dennis</td><td data-label="Full Name">Dennis Umbal</td><td data-label="Local / GWS">Miami</td></tr><tr><td data-label="Short Name">Frank</td><td data-label="Full Name">Frank Mayores</td><td data-label="Local / GWS">Grand Cayman</td></tr><tr><td data-label="Short Name">Jules T</td><td data-label="Full Name">Jules Tasis</td><td data-label="Local / GWS">Miami</td></tr><tr><td data-label="Short Name">Janna</td><td data-label="Full Name">Janna Kerr Tabanag</td><td data-label="Local / GWS">Miami</td></tr><tr><td data-label="Short Name">Jhules B</td><td data-label="Full Name">Jhules Bonifacio</td><td data-label="Local / GWS">Orlando</td></tr><tr><td data-label="Short Name">Charles</td><td data-label="Full Name">Charles Garcia</td><td data-label="Local / GWS">Orlando</td></tr><tr><td data-label="Short Name">Boon</td><td data-label="Full Name">Edward B. Franco</td><td data-label="Local / GWS">Miami</td></tr><tr><td data-label="Short Name">Eden</td><td data-label="Full Name">Eden Blasco Umbal</td><td data-label="Local / GWS">Miami</td></tr><tr><td data-label="Short Name">Eduard</td><td data-label="Full Name">Eduard Dayrit</td><td data-label="Local / GWS">Miami</td></tr></tbody></table></section>
 <footer aria-label="Site breadcrumb" class="fat-breadcrumb-footer">
 <div class="breadcrumb-trail">
 <a href="../index.html">District of Florida and Caribbean</a>
 <span aria-hidden="true" class="breadcrumb-separator">/</span>
 <a href="home.html">WebEx Team</a>
 <span aria-hidden="true" class="breadcrumb-separator">/</span>
-<span class="breadcrumb-current">Resources</span>
+<span class="breadcrumb-current">Team</span>
 </div>
 </footer>
 </main>

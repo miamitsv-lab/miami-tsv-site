@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>WebEx Team Group Site</title>
+<title>Signal Flow Team Group Site</title>
 <style>
 
 :root {
@@ -47,11 +47,6 @@ h1 {
   flex-wrap: wrap;
   gap: 10px;
   margin: 0 0 20px 0;
-}
-.nav .sep {
-  color: var(--navy);
-  font-weight: 800;
-  opacity: 0.75;
 }
 .nav a {
   color: var(--navy);
@@ -162,51 +157,6 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
   color: var(--muted);
   font-size: 14px;
 }
-@media (max-width: 900px) {
-  .immediate-grid { grid-template-columns: 1fr; }
-}
-@media (max-width: 760px) {
-  body { padding: 14px; }
-  .header { padding: 22px; border-radius: 16px; }
-  .table-card, .immediate { border-radius: 16px; }
-  table, thead, tbody, th, td, tr { display: block; }
-  thead { display: none; }
-  tbody tr {
-    margin: 14px;
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(23, 50, 77, 0.08);
-  }
-  td {
-    width: 100% !important;
-    border-bottom: 1px solid rgba(201, 214, 230, 0.8);
-    padding: 14px 16px 14px 140px;
-    position: relative;
-    min-height: 54px;
-    font-size: 16px;
-  }
-  td:last-child { border-bottom: none; }
-  td::before {
-    content: attr(data-label);
-    position: absolute;
-    left: 16px;
-    top: 14px;
-    width: 110px;
-    color: var(--muted);
-    font-weight: 700;
-    font-size: 13px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-  td:first-child { font-size: 18px; }
-}
-@media print {
-  body { background: white; padding: 0; }
-  .header, .table-card, .card-grid, .immediate { box-shadow: none; }
-  th, td { font-size: 12px; padding: 9px 10px; }
-}
-
 .action-filter-card {
   background: white;
   border: 1px solid var(--border);
@@ -250,6 +200,7 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
   font-size: 20px;
   font-weight: 800;
   text-align: center;
+  margin-bottom: 22px;
 }
 .action-list {
   display: grid;
@@ -301,16 +252,6 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
   font-size: 17px;
 }
 .member-card-body li:last-child { margin-bottom: 0; }
-.due-chip {
-  display: inline-block;
-  background: var(--navy);
-  color: white;
-  border-radius: 999px;
-  padding: 7px 12px;
-  font-size: 14px;
-  font-weight: 800;
-  margin-bottom: 14px;
-}
 .home-action-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -326,29 +267,26 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
 .tile.action-items-tile h2 {
   font-size: clamp(26px, 3vw, 34px);
 }
-@media (max-width: 760px) {
-  .filter-row { grid-template-columns: 1fr; }
-  .member-card h2 { font-size: 24px; }
-}
-
-
-
-/* WebEx Project Progress */
+/* Signal Flow Project Progress */
 .project-progress-card {
   background: white;
   border: 1px solid var(--border);
   border-radius: 20px;
   padding: 20px;
-  margin: 0 0 24px 0;
+  margin: 0 auto 24px auto;
+  width: 66.7%;
   box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
 }
+.project-progress-card.at-page-end { margin-top: 26px; margin-bottom: 0; }
 .progress-header {
   margin-bottom: 16px;
+  text-align: center;
 }
 .progress-header h2 {
   margin: 0 0 8px 0;
   color: var(--navy);
   font-size: clamp(24px, 3vw, 34px);
+  text-align: center;
 }
 .progress-header p,
 .progress-panel p,
@@ -362,13 +300,21 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
   display: grid;
   grid-template-columns: 1fr;
   gap: 14px;
-  margin: 16px 0;
+  margin: 16px 0 0 0;
 }
 .progress-panel {
   border: 1px solid var(--border);
   border-radius: 18px;
   padding: 16px;
   background: var(--light-blue);
+  display: block;
+  color: var(--text);
+  text-decoration: none;
+}
+a.progress-panel:hover {
+  border-color: var(--blue);
+  box-shadow: 0 6px 16px rgba(23, 50, 77, 0.14);
+  transform: translateY(-1px);
 }
 .progress-panel.target-progress {
   background: var(--gold);
@@ -406,46 +352,57 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
   padding: 14px 16px;
 }
 @media (max-width: 900px) {
-  .progress-grid { grid-template-columns: 1fr; }
-}
-@media print {
-  .project-progress-card { box-shadow: none; }
-}
-
-
-
-/* Responsive Project Progress layout */
-.project-progress-card {
-  width: 66.7%;
-  max-width: 100%;
-  margin: 0 auto 24px auto;
-}
-.project-progress-card .progress-header,
-.project-progress-card .progress-header h2 {
-  text-align: center;
-}
-.project-progress-card .progress-link {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-  cursor: pointer;
-}
-.project-progress-card .progress-link:hover,
-.project-progress-card .progress-link:focus {
-  box-shadow: 0 10px 22px rgba(23, 50, 77, 0.14);
-  transform: translateY(-1px);
-  outline: none;
-}
-@media (max-width: 1024px) {
+  .immediate-grid { grid-template-columns: 1fr; }
   .project-progress-card { width: 80%; }
 }
 @media (max-width: 760px) {
-  .project-progress-card { width: 100%; }
+  body { padding: 14px; }
+  .header { padding: 22px; border-radius: 16px; }
+  .table-card, .immediate { border-radius: 16px; }
+  .filter-row { grid-template-columns: 1fr; }
+  .member-card h2 { font-size: 24px; }
+  .project-progress-card { width: 100%; padding: 18px; border-radius: 16px; }
+  table, thead, tbody, th, td, tr { display: block; }
+  thead { display: none; }
+  tbody tr {
+    margin: 14px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(23, 50, 77, 0.08);
+  }
+  td {
+    width: 100% !important;
+    border-bottom: 1px solid rgba(201, 214, 230, 0.8);
+    padding: 14px 16px 14px 140px;
+    position: relative;
+    min-height: 54px;
+    font-size: 16px;
+  }
+  td:last-child { border-bottom: none; }
+  td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 16px;
+    top: 14px;
+    width: 110px;
+    color: var(--muted);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  td:first-child { font-size: 18px; }
+}
+@media print {
+  body { background: white; padding: 0; }
+  .header, .table-card, .card-grid, .immediate, .project-progress-card, .member-card { box-shadow: none; }
+  th, td { font-size: 12px; padding: 9px 10px; }
 }
 
 
 
-/* WebEx Site Menu Hover Matching Project Progress */
+/* Site Menu Tile Hover - matches Project Progress hover behavior */
 .card-grid .tile {
   cursor: pointer;
   transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, filter .15s ease;
@@ -453,7 +410,7 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
 .card-grid .tile:hover,
 .card-grid .tile:focus {
   transform: translateY(-2px);
-  box-shadow: 0 10px 22px rgba(23, 50, 77, 0.14);
+  box-shadow: 0 8px 18px rgba(23, 50, 77, 0.14);
   border-color: var(--blue);
   outline: none;
   filter: brightness(.995);
@@ -462,196 +419,14 @@ td:nth-child(2) { color: #1D5F8F; font-weight: 600; }
   outline: 3px solid var(--blue);
   outline-offset: 3px;
 }
-
-
-/* SPA Notice Popup */
-.site-popup-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  background: rgba(23, 50, 77, 0.62);
-}
-.site-popup-overlay.is-visible {
-  display: flex;
-}
-body.popup-open {
-  overflow: hidden;
-}
-.site-popup {
-  position: relative;
-  width: min(560px, 100%);
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  padding: 28px;
-  box-shadow: 0 24px 60px rgba(23, 50, 77, 0.32);
-  animation: popupRise .22s ease-out;
-}
-.site-popup-kicker {
-  display: inline-block;
-  margin: 0 0 10px 0;
-  color: var(--navy);
-  background: var(--gold);
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 7px 12px;
-  font-size: 13px;
-  font-weight: 900;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-}
-.site-popup h2 {
-  margin: 0 0 12px 0;
-  color: var(--navy);
-  font-size: clamp(25px, 4vw, 34px);
-  line-height: 1.15;
-}
-.site-popup p {
-  margin: 0 0 14px 0;
-  color: var(--text);
-  font-size: 17px;
-  line-height: 1.55;
-}
-.site-popup-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 20px;
-}
-.site-popup-button,
-.site-popup-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  border-radius: 999px;
-  padding: 11px 16px;
-  font-weight: 800;
-  font-size: 16px;
-  text-decoration: none;
-  cursor: pointer;
-}
-.site-popup-link {
-  color: white;
-  background: linear-gradient(135deg, var(--navy), var(--blue));
-  border: 1px solid var(--blue);
-}
-.site-popup-button {
-  color: var(--navy);
-  background: var(--light-blue);
-  border: 1px solid var(--border);
-}
-.site-popup-close-x {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  width: 42px;
-  height: 42px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: white;
-  color: var(--navy);
-  font-size: 28px;
-  line-height: 1;
-  cursor: pointer;
-}
-.site-popup-button:hover,
-.site-popup-link:hover,
-.site-popup-close-x:hover {
-  filter: brightness(.98);
-  transform: translateY(-1px);
-}
-.site-popup-button:focus-visible,
-.site-popup-link:focus-visible,
-.site-popup-close-x:focus-visible {
-  outline: 3px solid var(--blue);
-  outline-offset: 3px;
-}
-@keyframes popupRise {
-  from { opacity: 0; transform: translateY(14px) scale(.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
-@media (max-width: 560px) {
-  .site-popup { padding: 24px 20px; }
-  .site-popup-actions { flex-direction: column; }
-  .site-popup-button,
-  .site-popup-link { width: 100%; }
+@media (prefers-reduced-motion: reduce) {
+  .card-grid .tile { transition: none; }
+  .card-grid .tile:hover,
+  .card-grid .tile:focus { transform: none; }
 }
 
 
-/* Fat Footer Breadcrumb */
-.fat-breadcrumb-footer {
-  margin-top: 30px;
-  background: linear-gradient(135deg, var(--navy), var(--blue));
-  color: white;
-  border-radius: 20px;
-  padding: 22px 26px;
-  box-shadow: 0 10px 24px rgba(23, 50, 77, 0.18);
-}
-.fat-breadcrumb-footer .breadcrumb-trail {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px;
-  font-size: clamp(16px, 2vw, 21px);
-  font-weight: 800;
-  line-height: 1.35;
-}
-.fat-breadcrumb-footer a {
-  color: white;
-  background: rgba(255, 255, 255, 0.13);
-  border: 1px solid rgba(255, 255, 255, 0.34);
-  text-decoration: none;
-  border-radius: 999px;
-  padding: 8px 13px;
-  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
-}
-.fat-breadcrumb-footer a:hover,
-.fat-breadcrumb-footer a:focus {
-  background: rgba(255, 255, 255, 0.22);
-  border-color: rgba(255, 255, 255, 0.72);
-  transform: translateY(-1px);
-  outline: none;
-}
-.fat-breadcrumb-footer a:focus-visible {
-  outline: 3px solid var(--gold);
-  outline-offset: 3px;
-}
-.fat-breadcrumb-footer .breadcrumb-current {
-  color: var(--navy);
-  background: var(--gold);
-  border: 1px solid rgba(255, 255, 255, 0.42);
-  border-radius: 999px;
-  padding: 8px 13px;
-}
-.fat-breadcrumb-footer .breadcrumb-separator {
-  color: var(--gold);
-  font-weight: 900;
-  opacity: 0.95;
-}
-@media (max-width: 760px) {
-  .fat-breadcrumb-footer {
-    border-radius: 16px;
-    padding: 18px;
-  }
-  .fat-breadcrumb-footer .breadcrumb-trail {
-    gap: 8px;
-    font-size: 16px;
-  }
-}
-@media print {
-  .fat-breadcrumb-footer {
-    box-shadow: none;
-  }
-}
-
-
-
-/* Two-panel timed WebEx team notices */
+/* SPA Important Project Reminder Popup */
 .project-popup-overlay {
   position: fixed;
   inset: 0;
@@ -787,6 +562,8 @@ body.project-popup-open { overflow: hidden; }
   from { opacity: 0; transform: translateY(14px) scale(.98); }
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
+
+/* Two-panel timed team notices */
 .notice-launcher {
   position: fixed;
   right: 18px;
@@ -836,6 +613,7 @@ body.project-popup-open { overflow: hidden; }
   margin: -2px 0 16px 0;
   padding: 0;
   border: 0;
+  border-radius: 0;
   color: var(--muted);
   background: transparent;
   font-size: 14px;
@@ -877,7 +655,7 @@ body.project-popup-open { overflow: hidden; }
 }
 .notice-dot[aria-current="true"] { background: var(--blue); }
 @media (max-width: 640px) {
-  .project-popup { padding: 22px 20px; }
+  .project-popup { padding: 24px 20px; }
   .project-popup h2 { margin-right: 40px; }
   .project-detail-grid { grid-template-columns: 1fr; }
   .project-detail-label { border-bottom: none; padding-bottom: 4px; }
@@ -893,113 +671,217 @@ body.project-popup-open { overflow: hidden; }
 }
 @media print { .notice-launcher, .project-popup-overlay { display: none !important; } }
 
+/* Fat Footer Breadcrumb */
+.fat-breadcrumb-footer {
+  margin-top: 30px;
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  color: white;
+  border-radius: 20px;
+  padding: 22px 26px;
+  box-shadow: 0 10px 24px rgba(23, 50, 77, 0.18);
+}
+.fat-breadcrumb-footer .breadcrumb-trail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-size: clamp(16px, 2vw, 21px);
+  font-weight: 800;
+  line-height: 1.35;
+}
+.fat-breadcrumb-footer a {
+  color: white;
+  background: rgba(255, 255, 255, 0.13);
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 8px 13px;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+.fat-breadcrumb-footer a:hover,
+.fat-breadcrumb-footer a:focus {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.72);
+  transform: translateY(-1px);
+  outline: none;
+}
+.fat-breadcrumb-footer a:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+.fat-breadcrumb-footer .breadcrumb-current {
+  color: var(--navy);
+  background: var(--gold);
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 999px;
+  padding: 8px 13px;
+}
+.fat-breadcrumb-footer .breadcrumb-separator {
+  color: var(--gold);
+  font-weight: 900;
+  opacity: 0.95;
+}
+@media (max-width: 760px) {
+  .fat-breadcrumb-footer {
+    border-radius: 16px;
+    padding: 18px;
+  }
+  .fat-breadcrumb-footer .breadcrumb-trail {
+    gap: 8px;
+    font-size: 16px;
+  }
+}
+@media print {
+  .fat-breadcrumb-footer {
+    box-shadow: none;
+  }
+}
+
 </style>
 </head>
 <body>
 <div aria-hidden="true" class="project-popup-overlay" id="projectReminderPopup">
-<section aria-labelledby="projectReminderTitle" aria-modal="true" class="project-popup" role="dialog">
-<div class="project-popup-head">
-<div><p class="project-popup-kicker">Final Devotional Prayer</p><h2 id="projectReminderTitle">Meeting Schedule for Final Devotional Prayer</h2></div>
-<button aria-label="Close project reminder" class="project-popup-close-x" data-project-popup-close="" type="button">×</button>
+<section aria-describedby="projectReminderIntro" aria-labelledby="projectReminderTitle" aria-modal="true" class="project-popup" role="dialog">
+<button aria-label="Close project reminder" class="project-popup-close-x" data-project-popup-close type="button">×</button>
+<p class="project-popup-kicker">Signal Flow Team Reminder</p>
+<h2 id="projectReminderTitle">Important Project Reminder</h2>
+<p class="project-popup-intro" id="projectReminderIntro"><strong>Current project progress is 55%.</strong> Chibi animation is underway and the voice-over recording is complete. The team must now turn the finished production assets into a synchronized, reviewable rough cut.</p>
+<div aria-label="Important project reminder details" class="project-detail-grid">
+<div class="project-detail-label">Current Focus</div>
+<div class="project-detail-value">Complete the priority chibi scenes, refine the water-pipe analogy graphics, and synchronize animation timing to the completed voice-over.</div>
+<div class="project-detail-label">Editing Support</div>
+<div class="project-detail-value">Package the completed title and closing cards in edit-ready formats, organize scene exports clearly, and prepare the timeline for rough-cut assembly.</div>
+<div class="project-detail-label">Creative Support</div>
+<div class="project-detail-value">Develop music soundtrack ideas that support the lesson without competing with narration or reducing technical clarity.</div>
+<div class="project-detail-label">Target</div>
+<div class="project-detail-value">Reach 75% by completing the main chibi sequence, finishing the water-pipe analogy, synchronizing narration, and assembling a complete beginning-to-end rough cut.</div>
 </div>
-<p class="project-popup-intro">(ONLINE) WebEx TSV Team Weekly Devo • MONDAY • 8PM EDT/7PM AST • District of Florida &amp; Caribbean</p>
-<div aria-label="Current WebEx project reminder details" class="project-detail-grid"><div class="project-detail-label">Date</div><div class="project-detail-value">Monday, August 17</div><div class="project-detail-label">Meeting Link</div><div class="project-detail-value"><a href="https://miami-tsv.com/signal-flow-team-meeting" rel="noopener noreferrer" target="_blank">miami-tsv.com/signal-flow-team-meeting</a></div><div class="project-detail-label">Meeting Number</div><div class="project-detail-value">2633 770 7136</div><div class="project-detail-label">Meeting Password</div><div class="project-detail-value">TSVDEVOMONDAYS</div><div class="project-detail-label">Alternate Link</div><div class="project-detail-value"><a href="https://inc-maimi-tsv.my.webex.com/inc-maimi-tsv.my/j.php?MTID=md2e6922f11098b6d3f160c9515dfd5ae" rel="noopener noreferrer" target="_blank">inc-maimi-tsv.my.webex.com/inc-maimi-tsv.my/j.php?MTID=md2e6922f11098b6d3f160c9515dfd5ae</a></div></div>
-<p class="project-popup-note"><strong>Final weekend reminder:</strong> Finish the final edit and verification by Sunday so Monday, August 17 is reserved for final devotional prayer and submission.</p>
-<div class="project-popup-actions"><a class="project-popup-primary" href="https://miami-tsv.com/signal-flow-team-meeting" rel="noopener noreferrer" target="_blank">Open Meeting Link</a><button class="project-popup-button" data-project-popup-close="" type="button">Close</button></div>
-</section></div>
-<button aria-haspopup="dialog" class="notice-launcher" id="noticeLauncher" type="button">Final Devotional Prayer</button>
-<main class="wrap">
-<section class="header">
-<h1>WebEx Team Group Site</h1>
+<p class="project-popup-note"><strong>Main reminder:</strong> Chibi remains the approved animation direction. Maintain one consistent visual style, keep the signal-flow explanation technically accurate, and avoid adding major new scenes that could delay editing.</p>
+<div class="project-popup-actions">
+<a class="project-popup-primary" href="action-items.html">View Action Items</a>
+<button class="project-popup-button" data-project-popup-close type="button">Close Reminder</button>
+</div>
 </section>
-<nav class="nav"><a class="active" href="home.html">Home</a>
+</div>
+<button aria-haspopup="dialog" class="notice-launcher" id="noticeLauncher" type="button">Project Reminder</button>
+
+
+
+<main class="wrap">
+<section class="header"><h1>Signal Flow Team Group Site</h1></section>
+<nav class="nav">
+<a class="active" href="home.html">Home</a>
 <a href="action-items.html">Action Items</a>
 <a href="team-members.html">Team</a>
 <a href="priority-tasks.html">Priorities</a>
 <a href="deadline-reminder.html">Deliverables</a>
 <a href="note-section.html">Notes</a>
-<a href="resources.html">Resources</a></nav>
-<section aria-label="WebEx project progress status" class="project-progress-card">
+<a href="resources.html">Resources</a>
+</nav>
+<section aria-label="Signal Flow project progress status" class="project-progress-card">
 <div class="progress-header">
-<div>
 <h2>Project Progress</h2>
-<p><strong>Current checkpoint:</strong> Final weekend: all recording and production assets are complete. The only work left is to finish the final WebEx edit, complete final technical and playback checks, prepare the verified export and backup copy, and submit the final video on Monday, August 17.</p>
-</div>
+<p><strong>Current checkpoint:</strong> Pre-production remains closed/locked. Chibi animation started last weekend, and the voice-over recording was completed last weekend. The title card and closing card are complete, and the device graphic assets are uploaded. The current focus is expanding the priority chibi scenes, completing the water-pipe analogy, synchronizing scenes to the completed narration, and preparing the rough cut.</p>
 </div>
 <div class="progress-grid">
-<a aria-label="Open Action Items for current progress" class="progress-panel progress-link" href="action-items.html">
-<div class="progress-meta"><strong>Current Progress</strong><span class="progress-percent">90%</span></div>
-<div aria-label="Current WebEx project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="90" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 90%;"></div></div>
-<p>The WebEx project is in final editing. The interview, screen demonstrations, voiceover, and core graphics are already in place. Remaining work is limited to final pacing, captions/callouts, zoom-ins, audio cleanup, technical verification, final export, backup, and submission readiness.</p>
+<a aria-label="Open Action Items for current progress" class="progress-panel" href="action-items.html">
+<div class="progress-meta"><strong>Current Progress</strong><span class="progress-percent">55%</span></div>
+<div aria-label="Current Signal Flow project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="55" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 55%;"></div></div>
+<p>The completed voice-over, started chibi animation, completed title and closing cards, and available device graphics place the project at 55%. Remaining work centers on completing priority scenes, finalizing the water-pipe analogy, synchronizing narration, and assembling a reviewable rough cut.</p>
 </a>
-<a aria-label="Open Deliverables for target progress" class="progress-panel target-progress progress-link" href="deadline-reminder.html">
-<div class="progress-meta"><strong>Target Progress</strong><span class="progress-percent">100%</span></div>
-<div aria-label="Target WebEx project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="100" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 100%;"></div></div>
-<p>Reach 100% by finishing the final edit, completing the last WebEx technical and readability review, exporting and verifying the final submission file, saving a backup copy, and submitting the approved video on Monday, August 17.</p>
+<a aria-label="Open Deliverables for target progress" class="progress-panel target-progress" href="deadline-reminder.html">
+<div class="progress-meta"><strong>Target Progress</strong><span class="progress-percent">75%</span></div>
+<div aria-label="Target Signal Flow project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="75" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 75%;"></div></div>
+<p>Reach 75% by completing the priority chibi scenes, synchronizing the completed voice-over, finishing the water-pipe analogy, and assembling a complete beginning-to-end rough cut for technical and readability review.</p>
 </a>
 </div>
 </section>
 <section class="immediate">
 <h2 class="section-title" style="margin-top: 0;">Immediate Next Step</h2>
 <div class="immediate-grid">
-<article class="action-card"><h2>Needed Next Week</h2><p>Monday, August 17 is submission day. Use the final approved export only: confirm the file opens and plays correctly, confirm the backup copy is available, complete the final upload/submission, and save any submission confirmation or final handoff record.</p></article><article class="action-card"><h2>Goal by End of Week</h2><p>By Sunday, August 16, finish the remaining edit and final fixes, complete the full team/SME review, verify screen readability and audio, export the submission-ready master, and keep a tested backup copy ready so Monday is reserved for submission—not more editing.</p></article><article class="action-card"><h2>Main Reminder</h2><p>This is the final weekend. Do not add new creative sections or reopen completed production work. Make final fixes only, protect technical accuracy and readable WebEx screens, verify the approved 1080p 16:9 MP4/MOV export with clear audio and no watermarks, and be ready to submit on Monday, August 17.</p></article>
+<article class="action-card"><h2>Needed Next Week</h2><p>Continue chibi scene production, maintain visual continuity, add captions and callouts, synchronize scene timing to the completed voice-over, clean the audio, and prepare the project for technical review.</p></article>
+<article class="action-card"><h2>Goal by End of Week</h2><p>Complete the priority chibi scenes, finish the water-pipe analogy, synchronize the completed voice-over, and assemble a complete beginning-to-end rough cut.</p></article>
+<article class="action-card"><h2>Main Reminder</h2><p>Chibi is the only approved animation direction. Maintain one consistent visual style, use the completed voice-over as the timing anchor, keep signal-flow explanations technically accurate, and avoid adding major new scenes.</p></article>
 </div>
 </section>
-<h2 class="section-title">WebEx Team Site Menu</h2>
+<h2 class="section-title">Signal Flow Site Menu</h2>
 <section class="card-grid">
 <a class="tile" href="action-items.html"><h2>Action Items</h2><p>View action items assigned for this week's sprint.</p></a>
-<a class="tile" href="team-members.html"><h2>Team</h2><p>Roles and assigned tasks for each WebEx team member.</p></a>
-<a class="tile" href="priority-tasks.html"><h2>Priorities</h2><p>Main due dates, leads, and helpers for the WebEx project.</p></a>
-<a class="tile" href="deadline-reminder.html"><h2>Deliverables</h2><p>Shared deliverables schedule from planning to final submission.</p></a>
-<a class="tile" href="note-section.html"><h2>Notes</h2><p>Simple definitions for lower thirds, labels, callouts, run-of-show, storyboard, and demo map.</p></a>
-<a class="tile" href="resources.html"><h2>Resources</h2><p>Quick access to team links, Google Drive folders, production materials, TSV graphics, and how-to decks.</p></a>
+<a class="tile" href="team-members.html"><h2>Team</h2><p>Roles, responsibilities, and name reference for the Signal Flow team.</p></a>
+<a class="tile" href="priority-tasks.html"><h2>Priorities</h2><p>Main due dates, leads, and helpers for the Signal Flow project.</p></a>
+<a class="tile" href="deadline-reminder.html"><h2>Deliverables</h2><p>Shared schedule checkpoints from planning to final submission.</p></a>
+<a class="tile" href="note-section.html"><h2>Notes</h2><p>Definitions for chibi animation, narration timing, signal-flow diagrams, rough-cut assembly, labels, and callouts.</p></a>
+<a class="tile" href="resources.html"><h2>Resources</h2><p>Quick access to team site links, Google Drive folders, production materials, TSV graphics, and how-to decks.</p></a>
 </section>
 <footer aria-label="Site breadcrumb" class="fat-breadcrumb-footer">
 <div class="breadcrumb-trail">
 <a href="../index.html">District of Florida and Caribbean</a>
 <span aria-hidden="true" class="breadcrumb-separator">/</span>
-<span class="breadcrumb-current">WebEx Team</span>
+<span class="breadcrumb-current">Signal Flow Team</span>
 </div>
 </footer>
 </main>
+
 <script>
 (function () {
   var popup = document.getElementById('projectReminderPopup');
   var launcher = document.getElementById('noticeLauncher');
   if (!popup || !launcher) return;
+
   var closeButtons = popup.querySelectorAll('[data-project-popup-close]');
-  var previousFocus = null;
   var focusableSelector = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+  var previousFocus = null;
 
   function openPopup() {
     previousFocus = document.activeElement;
     popup.classList.add('is-visible');
     popup.setAttribute('aria-hidden', 'false');
     document.body.classList.add('project-popup-open');
-    var first = popup.querySelector(focusableSelector);
-    if (first) first.focus();
+    var firstFocusable = popup.querySelector(focusableSelector);
+    if (firstFocusable) firstFocusable.focus();
   }
 
   function closePopup() {
     popup.classList.remove('is-visible');
     popup.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('project-popup-open');
-    if (previousFocus && previousFocus.focus) previousFocus.focus();
+    if (previousFocus && typeof previousFocus.focus === 'function') previousFocus.focus();
   }
 
-  launcher.addEventListener('click', openPopup);
-  closeButtons.forEach(function (button) { button.addEventListener('click', closePopup); });
-  popup.addEventListener('click', function (event) { if (event.target === popup) closePopup(); });
-  popup.addEventListener('keydown', function (event) {
-    if (event.key === 'Escape') { closePopup(); return; }
-    if (event.key !== 'Tab') return;
-    var focusable = Array.prototype.slice.call(popup.querySelectorAll(focusableSelector));
-    if (!focusable.length) return;
-    var first = focusable[0], last = focusable[focusable.length - 1];
-    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
-    else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+  closeButtons.forEach(function (button) {
+    button.addEventListener('click', closePopup);
   });
-  window.setTimeout(openPopup, 250);
+
+  launcher.addEventListener('click', openPopup);
+  popup.addEventListener('click', function (event) {
+    if (event.target === popup) closePopup();
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (!popup.classList.contains('is-visible')) return;
+    if (event.key === 'Escape') {
+      closePopup();
+      return;
+    }
+    if (event.key === 'Tab') {
+      var focusable = Array.prototype.slice.call(popup.querySelectorAll(focusableSelector));
+      if (!focusable.length) return;
+      var first = focusable[0];
+      var last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+  });
+
+  window.addEventListener('DOMContentLoaded', function () {
+    window.setTimeout(openPopup, 350);
+  });
 })();
-</script></body>
+</script>
+</body>
 </html>
