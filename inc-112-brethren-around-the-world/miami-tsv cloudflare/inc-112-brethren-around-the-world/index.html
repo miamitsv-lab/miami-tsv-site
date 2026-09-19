@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#E5A900" />
+  <title>Happy 112 Years — Iglesia Ni Cristo</title>
+
+  <style>
+    :root {
+      /* Matches the poster background so any small letterboxing blends in. */
+      --poster-gold: #E5A900;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      background: var(--poster-gold);
+    }
+
+    body {
+      overflow: hidden;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .poster-page {
+      width: 100vw;
+      height: 100vh;
+      height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--poster-gold);
+      overflow: hidden;
+    }
+
+    .poster-picture {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .poster-image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      background: var(--poster-gold);
+    }
+
+    /*
+      Responsive image selection:
+      Mobile: 0–767px
+      Tablet: 768–1199px
+      Desktop: 1200px and wider
+    */
+
+    @media (max-width: 767px) {
+      .poster-image {
+        object-position: center center;
+      }
+    }
+
+    @media (min-width: 768px) and (max-width: 1199px) {
+      .poster-image {
+        object-position: center center;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .poster-image {
+        object-position: center center;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="poster-page">
+    <picture class="poster-picture">
+      <source
+        media="(max-width: 767px)"
+        srcset="inc-112-mobile.jpg"
+      />
+
+      <source
+        media="(max-width: 1199px)"
+        srcset="inc-112-tablet.jpg"
+      />
+
+      <img
+        class="poster-image"
+        src="inc-112-desktop.jpg"
+        alt="Happy 112 Years Iglesia Ni Cristo, 1914–2026. Stand firm in the faith, our salvation is at hand."
+        width="1536"
+        height="960"
+        decoding="async"
+        fetchpriority="high"
+      />
+    </picture>
+  </main>
+</body>
+</html>

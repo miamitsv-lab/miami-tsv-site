@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <!-- Makes the page responsive on phones, tablets, and desktops. -->
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
+  <meta name="theme-color" content="#000000">
+  <title>112th Anniversary Video</title>
+
+  <style>
+    :root {
+      color-scheme: dark;
+      background: #000000;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #000000;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .video-page {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background: #000000;
+    }
+
+    .video-page video {
+      width: 100%;
+      height: 100%;
+      display: block;
+
+      /*
+        The video is already 16:9.
+        "contain" keeps the entire video visible without cropping.
+        Change this to "cover" only when you want the video to fill
+        every part of the screen and accept possible edge cropping.
+      */
+      object-fit: contain;
+      object-position: center;
+      background: #000000;
+    }
+
+    .play-message {
+      position: fixed;
+      left: 50%;
+      bottom: max(22px, env(safe-area-inset-bottom));
+      z-index: 10;
+      transform: translateX(-50%);
+      max-width: calc(100% - 32px);
+      padding: 11px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 999px;
+      color: #ffffff;
+      background: rgba(0, 0, 0, 0.72);
+      font-size: 14px;
+      text-align: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition:
+        opacity 180ms ease,
+        visibility 180ms ease;
+    }
+
+    .play-message.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .play-message {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="video-page" aria-label="112th Anniversary video">
+    <video
+      id="carouselVideo"
+      autoplay
+      muted
+      loop
+      playsinline
+      webkit-playsinline
+      preload="auto"
+      disablepictureinpicture
+      controlslist="nodownload noplaybackrate noremoteplayback"
+      aria-label="112th Anniversary presentation video"
+    >
+      <source
+        src="assets/inc-112-video-16x9.mp4"
+        type="video/mp4"
+      >
+
+      Your browser does not support HTML5 video.
+    </video>
+  </main>
+
+  <!-- Only appears if the browser blocks autoplay. -->
+  <button id="playMessage" class="play-message" type="button">
+    Tap to play video
+  </button>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const video = document.getElementById("carouselVideo");
+      const playMessage = document.getElementById("playMessage");
+
+      /*
+        Autoplay is most reliable when the video starts muted.
+        The loop attribute restarts the video automatically.
+      */
+      video.muted = true;
+      video.loop = true;
+      video.playsInline = true;
+
+      async function startVideo() {
+        try {
+          await video.play();
+          playMessage.classList.remove("visible");
+        } catch (error) {
+          /*
+            Some browsers may still block autoplay.
+            In that case, show a button for the viewer to start it.
+          */
+          playMessage.classList.add("visible");
+          console.warn("Autoplay was blocked:", error);
+        }
+      }
+
+      playMessage.addEventListener("click", startVideo);
+
+      /*
+        Restart playback when the browser restores the page
+        from its back-forward cache.
+      */
+      window.addEventListener("pageshow", startVideo);
+
+      /*
+        Resume the video when this page becomes visible again.
+        This is useful when the page is loaded inside a carousel iframe.
+      */
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "visible") {
+          startVideo();
+        } else {
+          video.pause();
+        }
+      });
+
+      /*
+        Optional messages that the parent carousel can send to this iframe:
+
+        iframe.contentWindow.postMessage(
+          { type: "video-slide", action: "play" },
+          "*"
+        );
+
+        Available actions:
+        play, pause, restart, mute, unmute
+      */
+      window.addEventListener("message", (event) => {
+        const message = event.data;
+
+        if (!message || message.type !== "video-slide") {
+          return;
+        }
+
+        switch (message.action) {
+          case "play":
+            startVideo();
+            break;
+
+          case "pause":
+            video.pause();
+            break;
+
+          case "restart":
+            video.currentTime = 0;
+            startVideo();
+            break;
+
+          case "mute":
+            video.muted = true;
+            break;
+
+          case "unmute":
+            video.muted = false;
+            startVideo();
+            break;
+        }
+      });
+
+      /*
+        Let the parent carousel know that the video page is ready.
+      */
+      window.parent.postMessage(
+        {
+          type: "video-slide",
+          event: "ready",
+          looping: true
+        },
+        "*"
+      );
+
+      startVideo();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clothing Swap & Clothes Drive</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      min-height: 100%;
+      background: #f4eadb;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .flyer-page {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f4eadb;
+    }
+
+    picture {
+      display: block;
+      width: 100%;
+    }
+
+    .responsive-flyer {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    /* Desktop: 1200px and wider */
+    @media (min-width: 1200px) {
+      .flyer-page {
+        min-height: 100vh;
+        padding: 0;
+      }
+
+      .responsive-flyer {
+        width: 100vw;
+        height: 100vh;
+        object-fit: contain;
+      }
+    }
+
+    /* Tablet: 600px–1199px */
+    @media (min-width: 600px) and (max-width: 1199px) {
+      .flyer-page {
+        min-height: 100vh;
+        padding: 0;
+      }
+
+      .responsive-flyer {
+        width: 100vw;
+        height: 100vh;
+        object-fit: contain;
+      }
+    }
+
+    /* Mobile: below 600px */
+    @media (max-width: 599px) {
+      .flyer-page {
+        align-items: flex-start;
+        min-height: 100svh;
+      }
+
+      .responsive-flyer {
+        width: 100vw;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="flyer-page">
+    <picture>
+      <!-- Desktop: 1200px and wider -->
+      <source
+        media="(min-width: 1200px)"
+        srcset="clothing-swap-desktop.png">
+
+      <!-- Tablet: 600px–1199px -->
+      <source
+        media="(min-width: 600px) and (max-width: 1199px)"
+        srcset="clothing-swap-tablet.png">
+
+      <!-- Mobile: below 600px -->
+      <source
+        media="(max-width: 599px)"
+        srcset="clothing-swap-mobile.png">
+
+      <!-- Fallback -->
+      <img
+        class="responsive-flyer"
+        src="clothing-swap-mobile.png"
+        alt="Clothing Swap and Clothes Drive flyer">
+    </picture>
+  </main>
+</body>
+</html>

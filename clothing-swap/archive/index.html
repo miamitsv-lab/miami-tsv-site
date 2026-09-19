@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clothing Swap & Clothes Drive</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: #f3eadc;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .flyer-page {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #f3eadc;
+      overflow: hidden;
+    }
+
+    picture {
+      display: block;
+      width: 100%;
+    }
+
+    .responsive-flyer {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: 0 auto;
+      object-fit: contain;
+    }
+
+    /* Desktop: 1025px and wider */
+    @media (min-width: 1025px) {
+      .responsive-flyer {
+        width: 100vw;
+        max-height: 100vh;
+        object-fit: contain;
+      }
+    }
+
+    /* Tablet: 601px to 1024px */
+    @media (min-width: 601px) and (max-width: 1024px) {
+      .flyer-page {
+        min-height: 100vh;
+      }
+
+      .responsive-flyer {
+        width: auto;
+        max-width: 100vw;
+        height: 100vh;
+        margin: 0 auto;
+      }
+    }
+
+    /* Mobile: 600px and below */
+    @media (max-width: 600px) {
+      body,
+      .flyer-page {
+        align-items: flex-start;
+      }
+
+      .responsive-flyer {
+        width: 100vw;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="flyer-page">
+    <picture>
+      <!-- Desktop image -->
+      <source
+        media="(min-width: 1025px)"
+        srcset="clothing-swap-desktop.png">
+
+      <!-- Tablet image -->
+      <source
+        media="(min-width: 601px)"
+        srcset="clothing-swap-tablet.png">
+
+      <!-- Mobile image -->
+      <img
+        class="responsive-flyer"
+        src="clothing-swap-mobile.png"
+        alt="Clothing Swap and Clothes Drive flyer">
+    </picture>
+  </main>
+</body>
+</html>

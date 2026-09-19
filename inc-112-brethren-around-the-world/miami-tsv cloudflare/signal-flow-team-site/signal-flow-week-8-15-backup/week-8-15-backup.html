@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Signal Flow Team - Week 8/15 Backup</title>
+<style>
+:root {
+  --navy: #17324D;
+  --blue: #2F6FAE;
+  --border: #C9D6E6;
+  --bg: #F6F9FD;
+  --text: #1C2733;
+  --muted: #51606F;
+  --gold: #FFF3DC;
+  --green: #EAF7EF;
+  --purple: #F2ECFF;
+  --red: #FFEAEA;
+  --light-blue: #EAF3FF;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  padding: 24px;
+}
+.wrap { max-width: 1280px; margin: 0 auto; }
+.header {
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  color: white;
+  border-radius: 20px;
+  padding: 28px 32px;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 24px rgba(23,50,77,.18);
+}
+.header h1 {
+  margin: 0;
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.1;
+}
+.header .project-title {
+  margin: 10px 0 0;
+  max-width: 980px;
+  line-height: 1.55;
+  font-size: 18px;
+  font-weight: 700;
+}
+.header .snapshot {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: var(--gold);
+  color: var(--navy);
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: .02em;
+}
+h2.section-title {
+  margin: 28px 0 12px;
+  color: var(--navy);
+  font-size: clamp(24px, 3vw, 32px);
+}
+.project-progress-card,
+.immediate,
+.member-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 8px 22px rgba(23,50,77,.10);
+}
+.project-progress-card {
+  width: 66.666%;
+  margin: 0 auto 24px;
+  padding: 20px;
+}
+.progress-header { margin-bottom: 16px; }
+.progress-header h2 {
+  margin: 0 0 8px;
+  text-align: center;
+  color: var(--navy);
+  font-size: clamp(24px, 3vw, 34px);
+}
+.progress-header p,
+.progress-panel p {
+  margin: 0;
+  line-height: 1.5;
+  font-size: 16px;
+}
+.progress-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin-top: 16px;
+}
+.progress-panel {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 16px;
+  background: var(--light-blue);
+}
+.progress-panel.target-progress { background: var(--gold); }
+.progress-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  color: var(--navy);
+  font-size: 18px;
+}
+.progress-percent {
+  font-weight: 900;
+  font-size: 22px;
+}
+.progress-track {
+  height: 20px;
+  background: #E6EEF7;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--navy), var(--blue));
+  border-radius: 999px;
+}
+.immediate {
+  padding: 18px;
+  margin-bottom: 28px;
+}
+.immediate-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.action-card {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 20px;
+  min-height: 190px;
+}
+.action-card:nth-child(1) { background: var(--light-blue); }
+.action-card:nth-child(2) { background: var(--green); }
+.action-card:nth-child(3) { background: var(--gold); }
+.action-card h3 {
+  margin: 0 0 10px;
+  color: var(--navy);
+  font-size: 24px;
+}
+.action-card p {
+  margin: 0;
+  line-height: 1.55;
+  font-size: 17px;
+}
+.action-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+.member-card { overflow: hidden; }
+.member-card:nth-child(5n+1) .member-card-head { background: var(--light-blue); }
+.member-card:nth-child(5n+2) .member-card-head { background: var(--gold); }
+.member-card:nth-child(5n+3) .member-card-head { background: var(--green); }
+.member-card:nth-child(5n+4) .member-card-head { background: var(--purple); }
+.member-card:nth-child(5n+5) .member-card-head { background: var(--red); }
+.member-card-head {
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--border);
+}
+.member-card-head h3 {
+  margin: 0;
+  color: var(--navy);
+  font-size: 28px;
+}
+.member-role {
+  margin: 8px 0 0;
+  color: #1D5F8F;
+  font-weight: 700;
+  line-height: 1.45;
+}
+.member-card-body { padding: 20px 22px; }
+.member-card-body h4 {
+  margin: 0 0 12px;
+  color: var(--navy);
+  font-size: 21px;
+}
+.member-card-body ul { margin: 0; padding-left: 22px; }
+.member-card-body li {
+  margin: 0 0 10px;
+  line-height: 1.5;
+  font-size: 17px;
+}
+.member-card-body li:last-child { margin-bottom: 0; }
+.footer-note {
+  margin-top: 30px;
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  color: white;
+  border-radius: 20px;
+  padding: 18px 22px;
+  box-shadow: 0 10px 24px rgba(23,50,77,.18);
+  font-size: 15px;
+  line-height: 1.5;
+  font-weight: 700;
+}
+@media (max-width: 1024px) {
+  .project-progress-card { width: 80%; }
+}
+@media (max-width: 900px) {
+  .immediate-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  body { padding: 14px; }
+  .header { padding: 22px; border-radius: 16px; }
+  .project-progress-card,
+  .immediate,
+  .member-card,
+  .footer-note { border-radius: 16px; }
+  .project-progress-card { width: 100%; }
+  .member-card-head, .member-card-body { padding: 18px; }
+  .member-card-head h3 { font-size: 24px; }
+}
+@media print {
+  body { background: white; padding: 0; }
+  .header,
+  .project-progress-card,
+  .immediate,
+  .member-card,
+  .footer-note { box-shadow: none; }
+  .member-card { break-inside: avoid; }
+  .action-card { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="header">
+    <h1>Signal Flow Team - Week 8/15 Backup</h1>
+    <p class="project-title">Signal Flow: Improving Sound for Worship Services</p>
+    <span class="snapshot">Backup Snapshot - August 15, 2026</span>
+  </header>
+
+  <section class="project-progress-card" aria-label="Signal Flow project progress status">
+    <div class="progress-header">
+      <h2>Project Progress</h2>
+      <p><strong>Current checkpoint:</strong> Pre-production remains closed/locked. Chibi animation started last weekend, and the voice-over recording was completed last weekend. The title card and closing card are complete, and the device graphic assets are uploaded. The current focus is expanding the priority chibi scenes, completing the water-pipe analogy, synchronizing scenes to the completed narration, and preparing the rough cut.</p>
+    </div>
+    <div class="progress-grid">
+      <div class="progress-panel">
+        <div class="progress-meta">
+          <strong>Current Progress</strong>
+          <span class="progress-percent">55%</span>
+        </div>
+        <div class="progress-track" role="progressbar" aria-label="Current Signal Flow project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="55">
+          <div class="progress-fill" style="width:55%"></div>
+        </div>
+        <p>The completed voice-over, started chibi animation, completed title and closing cards, and available device graphics place the project at 55%. Remaining work centers on completing priority scenes, finalizing the water-pipe analogy, synchronizing narration, and assembling a reviewable rough cut.</p>
+      </div>
+      <div class="progress-panel target-progress">
+        <div class="progress-meta">
+          <strong>Target Progress</strong>
+          <span class="progress-percent">75%</span>
+        </div>
+        <div class="progress-track" role="progressbar" aria-label="Target Signal Flow project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="75">
+          <div class="progress-fill" style="width:75%"></div>
+        </div>
+        <p>Reach 75% by completing the priority chibi scenes, synchronizing the completed voice-over, finishing the water-pipe analogy, and assembling a complete beginning-to-end rough cut for technical and readability review.</p>
+      </div>
+    </div>
+  </section>
+
+  <h2 class="section-title">Immediate Next Step</h2>
+  <section class="immediate" aria-label="Immediate next steps">
+    <div class="immediate-grid">
+      <article class="action-card"><h3>Needed Next Week</h3><p>Continue chibi scene production, maintain visual continuity, add captions and callouts, synchronize scene timing to the completed voice-over, clean the audio, and prepare the project for technical review.</p></article>
+<article class="action-card"><h3>Goal by End of Week</h3><p>Complete the priority chibi scenes, finish the water-pipe analogy, synchronize the completed voice-over, and assemble a complete beginning-to-end rough cut.</p></article>
+<article class="action-card"><h3>Main Reminder</h3><p>Chibi is the only approved animation direction. Maintain one consistent visual style, use the completed voice-over as the timing anchor, keep signal-flow explanations technically accurate, and avoid adding major new scenes.</p></article>
+    </div>
+  </section>
+
+  <h2 class="section-title">All Action Items</h2>
+  <section class="action-list" aria-label="All current Signal Flow team action items">
+    
+<article class="member-card">
+  <div class="member-card-head">
+    <h3>Jules T</h3>
+    <p class="member-role">Director / Script Support / Talent / Voiceover</p>
+  </div>
+  <div class="member-card-body">
+    <h4>Current Production Action Items</h4>
+    <ul>
+      <li>Coordinate chibi animation production and confirm the priority scene order, assigned owners, and review checkpoints.</li>
+<li>Review the completed title and closing cards against the locked script and confirm their placement in the edit.</li>
+<li>Review the completed voice-over and provide timing references for chibi scene production and rough-cut assembly.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="member-card">
+  <div class="member-card-head">
+    <h3>Janna</h3>
+    <p class="member-role">Scriptwriter / Animation Lead / Style Direction / Talent</p>
+  </div>
+  <div class="member-card-body">
+    <h4>Current Production Action Items</h4>
+    <ul>
+      <li>Lead production of the chibi animation using the finalized animation scene list.</li>
+<li>Assign the priority scenes and maintain consistent character designs, environments, camera views, movements, and visual style.</li>
+<li>Review the first exported chibi scenes before they are handed to Charles, NJ, and Jhules B.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="member-card">
+  <div class="member-card-head">
+    <h3>Jay</h3>
+    <p class="member-role">Main SME</p>
+  </div>
+  <div class="member-card-body">
+    <h4>Current Production Action Items</h4>
+    <ul>
+      <li>Review and approve the completed water-pipe analogy for technical accuracy and clarity.</li>
+<li>Review the uploaded device graphics and initial chibi scenes for correct signal-flow representation.</li>
+<li>Limit feedback to necessary corrections involving accuracy, clarity, and practical TSV usefulness.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="member-card">
+  <div class="member-card-head">
+    <h3>Dennis</h3>
+    <p class="member-role">Support Role / Script Review / Recording Support / Final Review</p>
+  </div>
+  <div class="member-card-body">
+    <h4>Current Production Action Items</h4>
+    <ul>
+      <li>Track completion of the water-pipe analogy and progress of the chibi animation scenes.</li>
+<li>Review early scene exports for readability, narration timing, continuity, and consistency with the locked script.</li>
+<li>Maintain one consolidated missing-assets, technical-issues, and review-corrections list.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="member-card">
+  <div class="member-card-head">
+    <h3>Frank</h3>
+    <p class="member-role">SME / Director Support</p>
+  </div>
+  <div class="member-card-body">
+    <h4>Current Production Action Items</h4>
+    <ul>
+      <li>Support technical review of the water-pipe analogy, device graphics, and initial chibi scenes.</li>
+<li>Confirm that the microphone-to-mixer-to-output explanation remains simple, accurate, and focused on worship-service use.</li>
+<li>Recommend only necessary technical-accuracy or readability corrections.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="member-card">
+  <div class="member-card-head">
+    <h3>Geo</h3>
+    <p class="member-role">Team Support / SME Support / Secondary Graphics &amp; Animation</p>
+  </div>
+  <div class="member-card-body">
+    <h4>Current Production Action Items</h4>
+    <ul>
+      <li>Complete or refine device graphics and secondary graphics support for the water-pipe analogy.</li>
+<li>Help refine labels, callouts, device graphics, backgrounds, and other visual details required by assigned scene owners.</li>
+<li>Identify missing assets or technical issues early without introducing new major scenes.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="member-card">
+  <div class="member-card-head">
+    <h3>Jlyn</h3>
+    <p class="member-role">Title Card / Lower Thirds / Animation Support</p>
+  </div>
+  <div class="member-card-body">
+    <h4>Current Production Action Items</h4>
+    <ul>
+      <li>Help with music soundtrack ideas.</li>
+<li>Support Janna with assigned chibi scenes while preserving the approved visual style.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="member-card">
+  <div class="member-card-head">
+    <h3>Aiden</h3>
+    <p class="member-role">Graphics / Diagram Support / Avatar Movement Support</p>
+  </div>
+  <div class="member-card-body">
+    <h4>Current Production Action Items</h4>
+    <ul>
+      <li>Confirm that the completed title and closing cards are packaged in edit-ready formats.</li>
+<li>Support finalization of the water-pipe analogy and prepare edit-ready graphic exports.</li>
+<li>Organize all graphics using clear filenames, versions, and scene references.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="member-card">
+  <div class="member-card-head">
+    <h3>Charles</h3>
+    <p class="member-role">Main Video Editor / Music-Soundtrack Support</p>
+  </div>
+  <div class="member-card-body">
+    <h4>Current Production Action Items</h4>
+    <ul>
+      <li>Prepare the editing timeline and placeholders for incoming chibi animation exports and the completed voice-over.</li>
+<li>Assemble the first reviewable animation batch using the title card, closing card, device graphics, chibi scenes, and synchronized narration.</li>
+<li>Track missing scenes, timing problems, labels, audio issues, and continuity corrections in one review list.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="member-card">
+  <div class="member-card-head">
+    <h3>NJ</h3>
+    <p class="member-role">Animation / Graphics / Editing Support</p>
+  </div>
+  <div class="member-card-body">
+    <h4>Current Production Action Items</h4>
+    <ul>
+      <li>Support chibi scene exports, quality checks, animation cleanup, and file organization.</li>
+<li>Verify that device graphics, labels, title card, closing card, and captions remain readable on both laptop and television playback.</li>
+<li>Assist with version control, narration synchronization, and rough-cut preparation.</li>
+    </ul>
+  </div>
+</article>
+
+<article class="member-card">
+  <div class="member-card-head">
+    <h3>Jhules B</h3>
+    <p class="member-role">Video Editor / Animator Helper / Diagram Illustrator</p>
+  </div>
+  <div class="member-card-body">
+    <h4>Current Production Action Items</h4>
+    <ul>
+      <li>Help complete and polish the water-pipe analogy for final approval.</li>
+<li>Support the first chibi scenes with visual cleanup, callouts, captions, transitions, and export preparation.</li>
+<li>Quality-check the first reviewable batch without introducing new creative sections.</li>
+    </ul>
+  </div>
+</article>
+  </section>
+
+  <footer class="footer-note">Static backup page - no navigation links or selection controls. All team action items are shown on one page.</footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Miami TSV//Crimping Team Site//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:crimping-group1-next-meeting-20260708T200000@miami-tsv.com
+DTSTAMP:20260704T091317Z
+SUMMARY:(ONLINE) TSV Group 1 Meeting
+DTSTART;TZID=America/New_York:20260708T200000
+DTEND;TZID=America/New_York:20260708T210000
+LOCATION:WebEx / Online
+URL:https://miami-tsv.com/crimping-group1-meeting
+DESCRIPTION:(ONLINE) TSV Group 1 Meeting\nWednesday July 8th at 8:00 PM EDT / 9:00 PM AST\nDistrict of Florida and Caribbean\n\nMeeting link: https://miami-tsv.com/crimping-group1-meeting\nMeeting number: 2866 470 5833\nMeeting password: WEDNESDAYJULY8TH\nAlternate link: https://inc-maimi-tsv.my.webex.com/inc-maimi-tsv.my/j.php?MTID=m99151327373d4fc2473195c295355c46
+BEGIN:VALARM
+TRIGGER:-PT30M
+ACTION:DISPLAY
+DESCRIPTION:TSV Group 1 Meeting starts in 30 minutes.
+END:VALARM
+END:VEVENT
+END:VCALENDAR

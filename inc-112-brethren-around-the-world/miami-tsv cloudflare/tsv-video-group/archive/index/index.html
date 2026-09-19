@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#17324D">
+<title>TSV Technical Video Competition — Thank You</title>
+<style>
+:root {
+  --navy: #17324D;
+  --blue: #2F6FAE;
+  --border: #C9D6E6;
+  --text: #1C2733;
+  --muted: #51606F;
+  --gold: #FFF3DC;
+  --green: #EAF7EF;
+  --purple: #F2ECFF;
+  --red: #FFEAEA;
+  --light-blue: #EAF3FF;
+  --white: #FFFFFF;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; width: 100%; }
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+  background: #fff;
+}
+button { font: inherit; }
+
+
+/* Separate INC TSV wordmark so it stays visible even when the background crops. */
+.inc-tsv-logo-overlay {
+  position: absolute;
+  z-index: 5;
+  top: clamp(14px, 2.2vw, 28px);
+  left: clamp(14px, 2.2vw, 30px);
+  width: clamp(170px, 16.5vw, 285px);
+  height: auto;
+  max-width: 46vw;
+  object-fit: contain !important;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 4px rgba(23,50,77,.10));
+}
+@media (max-width: 980px) {
+  .inc-tsv-logo-overlay {
+    width: clamp(145px, 24vw, 235px);
+    max-width: 48vw;
+  }
+}
+@media (max-width: 760px) {
+  .inc-tsv-logo-overlay {
+    top: 14px;
+    left: 14px;
+    width: clamp(130px, 32vw, 200px);
+    max-width: 50vw;
+  }
+}
+
+/* Same responsive TSV background-image treatment as the attached landing page. */
+.responsive-hero {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+}
+.responsive-hero picture,
+.responsive-hero img {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+}
+.responsive-hero img {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.hero-quote {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  width: min(1100px, calc(100% - 40px));
+  transform: translate(-50%, -50%) scaleY(1.18);
+  transform-origin: center;
+  margin: 0;
+  color: var(--navy);
+  font-size: clamp(44px, 6.5vw, 88px);
+  font-weight: 950;
+  font-style: italic;
+  line-height: 1.08;
+  letter-spacing: -.025em;
+  text-align: center;
+  text-wrap: balance;
+  text-shadow: 0 2px 0 rgba(255,255,255,.95), 0 0 14px rgba(255,255,255,.72);
+  pointer-events: none;
+}
+@media (max-width: 980px) {
+  .hero-quote {
+    width: calc(100% - 34px);
+    font-size: clamp(38px, 7vw, 68px);
+  }
+}
+@media (max-width: 760px) {
+  .hero-quote {
+    width: calc(100% - 28px);
+    font-size: clamp(34px, 9.2vw, 56px);
+    line-height: 1.12;
+  }
+}
+
+.reopen-button {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 9000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 62px;
+  padding: 16px 30px;
+  border: 1px solid rgba(255,255,255,.40);
+  border-radius: 999px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  font-size: 17px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(23,50,77,.28);
+  transition: transform .15s ease, filter .15s ease;
+}
+.reopen-button:hover { transform: translateY(-1px); filter: brightness(1.03); }
+.reopen-button:focus-visible { outline: 3px solid rgba(255,255,255,.9); outline-offset: 3px; }
+
+/* Thank-you popup */
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(8,20,33,.78);
+  backdrop-filter: blur(5px);
+}
+.popup-overlay.is-visible { display: flex; }
+body.popup-open { overflow: hidden; }
+.popup {
+  position: relative;
+  width: min(900px, 100%);
+  max-height: 94vh;
+  overflow: auto;
+  padding: clamp(18px, 3vw, 28px);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: var(--white);
+  box-shadow: 0 24px 70px rgba(0,0,0,.38);
+  animation: popupRise .24s ease-out;
+}
+.popup-head { padding-right: 48px; text-align: center; }
+.popup-kicker {
+  display: inline-block;
+  margin: 0 0 10px;
+  padding: 7px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--green);
+  color: var(--navy);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+.popup h2 {
+  margin: 0;
+  color: var(--navy);
+  font-size: clamp(27px, 4.6vw, 42px);
+  line-height: 1.08;
+  letter-spacing: -.02em;
+}
+.popup-district {
+  margin: 8px 0 0;
+  color: var(--blue);
+  font-size: clamp(16px, 2.4vw, 21px);
+  font-weight: 800;
+  line-height: 1.4;
+}
+.close-x {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--navy);
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1;
+  cursor: pointer;
+}
+.close-x:hover { transform: translateY(-1px); filter: brightness(.98); }
+.close-x:focus-visible,
+.close-button:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+
+.thank-you-card {
+  position: relative;
+  overflow: hidden;
+  margin: 22px 0 18px;
+  padding: clamp(20px, 3vw, 28px);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: linear-gradient(135deg, var(--gold), var(--green));
+  text-align: center;
+}
+.thank-you-card::after {
+  content: "";
+  position: absolute;
+  width: 170px;
+  height: 170px;
+  right: -80px;
+  bottom: -92px;
+  border-radius: 50%;
+  background: rgba(47,111,174,.07);
+}
+.thank-you-card p {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: var(--navy);
+  font-size: clamp(20px, 3.2vw, 29px);
+  font-weight: 600;
+  line-height: 1.42;
+}
+.thank-you-card p strong { font-weight: 900; }
+.roll-card {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 8px 22px rgba(23,50,77,.08);
+}
+.roll-title {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 14px;
+  padding: 13px 18px;
+  background: #255D91;
+  color: white;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: .025em;
+}
+.roll-viewport {
+  position: relative;
+  height: clamp(270px, 40vh, 360px);
+  overflow: hidden;
+  background: #fff;
+}
+.roll-viewport::before,
+.roll-viewport::after {
+  content: "";
+  position: absolute;
+  z-index: 4;
+  left: 0;
+  right: 0;
+  height: 42px;
+  pointer-events: none;
+}
+.roll-viewport::before { top: 0; background: linear-gradient(to bottom,#fff 0%,rgba(255,255,255,0) 100%); }
+.roll-viewport::after { bottom: 0; background: linear-gradient(to top,#fff 0%,rgba(255,255,255,0) 100%); }
+.roll-track { will-change: transform; animation: participantScroll 40s linear infinite; }
+.roll-group { width: 100%; }
+.member-row {
+  display: grid;
+  grid-template-columns: minmax(0,1.4fr) minmax(0,1fr);
+  gap: 14px;
+  align-items: center;
+  min-height: 52px;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--border);
+}
+.member-row:nth-child(5n+1) { background: var(--light-blue); }
+.member-row:nth-child(5n+2) { background: var(--gold); }
+.member-row:nth-child(5n+3) { background: var(--green); }
+.member-row:nth-child(5n+4) { background: var(--purple); }
+.member-row:nth-child(5n+5) { background: var(--red); }
+.member-name { min-width: 0; padding-left: 50px; color: var(--navy); font-size: clamp(15px,2.1vw,18px); font-weight: 900; overflow-wrap: anywhere; }
+.roll-title > span:first-child { padding-left: 50px; }
+.member-local { min-width: 0; color: #1D5F8F; font-size: clamp(14px,1.9vw,17px); font-weight: 800; overflow-wrap: anywhere; }
+.roll-card:hover .roll-track,
+.roll-card:focus-within .roll-track { animation-play-state: paused; }
+.roll-hint { margin: 10px 2px 0; text-align: center; color: var(--muted); font-size: 12px; line-height: 1.4; }
+.popup-actions { display: flex; justify-content: center; margin-top: 18px; }
+.close-button {
+  min-height: 44px;
+  padding: 10px 20px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--navy);
+  background: var(--light-blue);
+  font-weight: 900;
+  cursor: pointer;
+}
+.close-button:hover { transform: translateY(-1px); filter: brightness(.98); }
+
+@keyframes popupRise { from { opacity: 0; transform: translateY(14px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes participantScroll { from { transform: translateY(0); } to { transform: translateY(-50%); } }
+
+/* Desktop */
+@media (min-width: 1200px) {
+  .responsive-hero img { width: 100vw; height: 100vh; object-fit: cover; }
+}
+/* Tablet */
+@media (min-width: 600px) and (max-width: 1199px) {
+  .responsive-hero img { width: 100vw; height: 100vh; object-fit: cover; }
+}
+/* Mobile */
+@media (max-width: 599px) {
+  .responsive-hero img { width: 100vw; height: 100vh; object-fit: cover; }
+  .popup-overlay { padding: 10px; }
+  .popup { max-height: 96vh; border-radius: 18px; padding: 16px; }
+  .popup-head { padding: 4px 42px 0 0; }
+  .close-x { top: 10px; right: 10px; width: 38px; height: 38px; font-size: 25px; }
+  .thank-you-card { margin-top: 18px; padding: 18px 14px; }
+  .roll-title,
+  .member-row { grid-template-columns: minmax(0,1.25fr) minmax(0,.95fr); gap: 9px; padding-left: 12px; padding-right: 12px; }
+  .roll-title { font-size: 12px; }
+  .member-row { min-height: 50px; }
+  .roll-viewport { height: min(340px,43vh); }
+  .reopen-button { right: 12px; bottom: 12px; min-height: 54px; padding: 13px 18px; font-size: 15px; }
+}
+@media (max-width: 390px) {
+  .popup h2 { font-size: 25px; }
+  .popup-district { font-size: 15px; }
+  .thank-you-card p { font-size: 18px; }
+  .member-name { font-size: 14px; }
+  .member-local { font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; }
+  .popup { animation: none; }
+  .roll-viewport { overflow-y: auto; }
+  .roll-track { animation: none; }
+  .roll-group[aria-hidden="true"] { display: none; }
+}
+@media print {
+  .responsive-hero, .reopen-button { display: none; }
+  .popup-overlay { position: static; display: block !important; padding: 0; background: white; }
+  .popup { width: 100%; max-height: none; box-shadow: none; border: none; }
+  .close-x, .popup-actions, .roll-hint { display: none; }
+  .roll-viewport { height: auto; overflow: visible; }
+  .roll-track { animation: none; transform: none; }
+  .roll-group[aria-hidden="true"] { display: none; }
+}
+
+
+/* TSV Group Video Carousel Popup — embedded from the landing-page index */
+.video-popup-trigger {
+  position: fixed;
+  left: 18px;
+  bottom: 18px;
+  z-index: 9000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 62px;
+  padding: 16px 30px;
+  border: 0;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  color: white;
+  font: inherit;
+  font-size: 17px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(23, 50, 77, 0.20);
+}
+.video-popup-trigger:hover,
+.video-popup-trigger:focus-visible {
+  transform: translateY(-1px);
+  outline: 3px solid rgba(47, 111, 174, 0.28);
+  outline-offset: 3px;
+}
+.video-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 11000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+  background: rgba(8, 20, 33, 0.78);
+  backdrop-filter: blur(5px);
+}
+.video-modal.open { display: flex; }
+.video-modal-panel {
+  width: min(980px, 100%);
+  max-height: calc(100vh - 36px);
+  overflow: auto;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.36);
+}
+.video-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.video-modal-header h2 {
+  margin: 0;
+  color: var(--navy);
+  font-size: clamp(22px, 3vw, 32px);
+}
+.video-modal-header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  min-width: 0;
+}
+.video-group-nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.video-group-nav-button {
+  appearance: none;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 9px 13px;
+  color: var(--navy);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1.1;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(23, 50, 77, 0.08);
+  transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease, filter 0.16s ease;
+  white-space: nowrap;
+}
+.video-group-nav-button.crimping { background: var(--light-blue); }
+.video-group-nav-button.signal-flow { background: var(--gold); }
+.video-group-nav-button.webex { background: var(--green); }
+.video-group-nav-button:hover,
+.video-group-nav-button:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(23, 50, 77, 0.18);
+  border-color: var(--blue);
+  filter: saturate(1.08);
+  outline: none;
+}
+.video-group-nav-button:focus-visible {
+  outline: 3px solid rgba(47, 111, 174, 0.24);
+  outline-offset: 2px;
+}
+.video-group-nav-button.active,
+.video-group-nav-button[aria-current="true"] {
+  border-color: var(--navy);
+  box-shadow: 0 0 0 3px rgba(47, 111, 174, 0.16), 0 7px 16px rgba(23, 50, 77, 0.16);
+  transform: translateY(-1px);
+}
+.video-modal-close {
+  flex: 0 0 auto;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--navy);
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+}
+.video-carousel {
+  position: relative;
+  padding: 18px 64px 8px;
+}
+.video-slide { display: none; }
+.video-slide.active { display: block; }
+.video-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #000;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(23, 50, 77, 0.16);
+}
+.video-frame video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  background: #000;
+}
+.video-slide-title {
+  margin: 15px 0 4px;
+  color: var(--navy);
+  text-align: center;
+  font-size: clamp(20px, 2.5vw, 28px);
+}
+.video-slide-note {
+  margin: 0 auto;
+  max-width: 760px;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.5;
+}
+.carousel-nav-button {
+  position: absolute;
+  top: 46%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(23, 50, 77, 0.92);
+  color: white;
+  font-size: 26px;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+}
+.carousel-nav-button.prev { left: 10px; }
+.carousel-nav-button.next { right: 10px; }
+.video-carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 20px 22px;
+}
+.video-carousel-dot {
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #B5C1CF;
+  cursor: pointer;
+}
+.video-carousel-dot.active {
+  background: var(--blue);
+  box-shadow: 0 0 0 4px rgba(47, 111, 174, 0.13);
+}
+body.video-modal-open { overflow: hidden; }
+.popup-actions { flex-wrap: wrap; gap: 10px; }
+.watch-videos-button {
+  min-height: 44px;
+  padding: 10px 20px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: white;
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  font-weight: 900;
+  cursor: pointer;
+}
+.watch-videos-button:hover { transform: translateY(-1px); filter: brightness(1.04); }
+.watch-videos-button:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+
+@media (max-width: 760px) {
+  .video-modal-header { align-items: flex-start; flex-wrap: wrap; }
+  .video-modal-header-actions { width: 100%; justify-content: flex-end; }
+  .video-group-nav { flex: 1 1 auto; justify-content: flex-end; }
+}
+@media (max-width: 640px) {
+  .video-modal { padding: 10px; }
+  .video-modal-panel { max-height: calc(100vh - 20px); border-radius: 18px; }
+  .video-modal-header { padding: 14px; }
+  .video-group-nav-button { padding: 8px 10px; font-size: 12px; }
+  .video-carousel { padding: 14px 44px 4px; }
+  .carousel-nav-button { width: 38px; height: 38px; font-size: 22px; }
+  .carousel-nav-button.prev { left: 4px; }
+  .carousel-nav-button.next { right: 4px; }
+  .video-popup-trigger { left: 12px; bottom: 12px; min-height: 54px; padding: 13px 18px; font-size: 15px; }
+}
+@media (max-width: 460px) {
+  .reopen-button, .video-popup-trigger { max-width: calc(50vw - 16px); white-space: normal; text-align: center; line-height: 1.2; }
+}
+@media print { .video-popup-trigger, .video-modal { display: none !important; } }
+
+/* Main-page pastel action tiles */
+.main-action-tiles {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  z-index: 9000;
+  width: min(820px, calc(100% - 36px));
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.main-action-tiles .action-tile {
+  position: static;
+  width: 100%;
+  min-height: 104px;
+  padding: 20px 24px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  color: var(--navy);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(23,50,77,.16);
+  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease, filter .16s ease;
+}
+
+.main-action-tiles .thank-you-tile { background: var(--light-blue); }
+.main-action-tiles .videos-tile { background: var(--gold); }
+
+.main-action-tiles .action-tile-title {
+  display: block;
+  font-size: clamp(18px, 2vw, 22px);
+  font-weight: 900;
+  line-height: 1.15;
+}
+
+.main-action-tiles .action-tile-note {
+  display: block;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.main-action-tiles .action-tile:hover,
+.main-action-tiles .action-tile:focus-visible {
+  transform: translateY(-4px);
+  border-color: var(--blue);
+  box-shadow: 0 14px 28px rgba(23,50,77,.22);
+  filter: saturate(1.05);
+  outline: none;
+}
+
+.main-action-tiles .action-tile:focus-visible {
+  outline: 3px solid rgba(47,111,174,.28);
+  outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+  .main-action-tiles {
+    bottom: 12px;
+    width: calc(100% - 24px);
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .main-action-tiles .action-tile {
+    max-width: none;
+    min-height: 76px;
+    padding: 14px 16px;
+    border-radius: 17px;
+  }
+
+  .main-action-tiles .action-tile-title { font-size: 17px; }
+  .main-action-tiles .action-tile-note { font-size: 12px; }
+}
+
+@media print { .main-action-tiles { display: none !important; } }
+
+</style>
+</head>
+<body>
+<main class="responsive-hero" aria-label="TSV Technical Video Competition background">
+  <picture>
+    <source media="(min-width: 1200px)" srcset="images/tsv-desktop-nologo.png">
+    <source media="(min-width: 600px)" srcset="images/tsv-tablet-nologo.png">
+    <img src="images/tsv-mobile-nologo.png" alt="TSV technology background">
+  </picture>
+  <img class="inc-tsv-logo-overlay" src="images/inc-tsv-wordmark.png" alt="INC TSV">
+  <p class="hero-quote"><span>Enabling TSV for</span><br><span>a Better Worship Experience</span></p>
+</main>
+
+<div class="main-action-tiles" aria-label="TSV page actions">
+  <button class="reopen-button action-tile thank-you-tile" id="openPopup" type="button" aria-haspopup="dialog" aria-controls="thankYouPopup">
+    <span class="action-tile-title">View TSV Group Members</span>
+    <span class="action-tile-note">TSV Team Participants</span>
+  </button>
+
+  <button class="video-popup-trigger action-tile videos-tile" id="openVideoPopup" type="button" aria-haspopup="dialog" aria-controls="videoModal">
+    <span class="action-tile-title">▶ Watch TSV Group Videos</span>
+    <span class="action-tile-note">Crimping · Signal Flow · WebEx</span>
+  </button>
+</div>
+
+<div class="popup-overlay" id="thankYouPopup" aria-hidden="true">
+  <section class="popup" role="dialog" aria-modal="true" aria-labelledby="popupTitle" aria-describedby="popupDistrict thankYouMessage">
+    <button class="close-x" type="button" data-close aria-label="Close thank you message">×</button>
+
+    <header class="popup-head">
+      <p class="popup-district" id="popupDistrict">District of Florida and Caribbean</p>
+      <h2 id="popupTitle">TSV Technical Video Competition</h2>
+    </header>
+
+    <section class="thank-you-card" aria-label="Thank you message">
+      <p id="thankYouMessage">
+        Thank you for your teamwork, time, effort, creativity, and support for our district, Your shared commitment and hard work led to the successful completion and final delivery of our district video entries
+      </p>
+    </section>
+
+    <section class="roll-card" aria-label="TSV participants and Local Congregation or GWS">
+      <div class="roll-title" aria-hidden="true">
+        <span>Team Member</span>
+        <span>Local Congregation / GWS</span>
+      </div>
+      <div class="roll-viewport" tabindex="0" aria-label="Continuously scrolling participant list. Hover or focus to pause.">
+        <div class="roll-track" id="rollTrack">
+          <div class="roll-group">
+            <div class="member-row"><span class="member-name">Aiden Mesina</span><span class="member-local">Miami</span></div>
+            <div class="member-row"><span class="member-name">AJ Ancheta</span><span class="member-local">Cayman Brac</span></div>
+            <div class="member-row"><span class="member-name">Angelino Romanos</span><span class="member-local">Orlando</span></div>
+            <div class="member-row"><span class="member-name">Austin Roson</span><span class="member-local">Miami</span></div>
+            <div class="member-row"><span class="member-name">Boon Franco</span><span class="member-local">Miami</span></div>
+            <div class="member-row"><span class="member-name">Charles Garcia</span><span class="member-local">Orlando</span></div>
+            <div class="member-row"><span class="member-name">Eden Umbal</span><span class="member-local">Miami</span></div>
+            <div class="member-row"><span class="member-name">Eduard Dayrit</span><span class="member-local">Miami</span></div>
+            <div class="member-row"><span class="member-name">Frank Mayores</span><span class="member-local">Grand Cayman</span></div>
+            <div class="member-row"><span class="member-name">Geo Urtula</span><span class="member-local">West Palm Beach</span></div>
+            <div class="member-row"><span class="member-name">Janna Tabanag</span><span class="member-local">Miami</span></div>
+            <div class="member-row"><span class="member-name">Jay Rosquites</span><span class="member-local">Tampa</span></div>
+            <div class="member-row"><span class="member-name">Jhules Bonifacio</span><span class="member-local">Orlando</span></div>
+            <div class="member-row"><span class="member-name">Jlyn Tugaeon</span><span class="member-local">Miami</span></div>
+            <div class="member-row"><span class="member-name">Jules Tasis</span><span class="member-local">Miami</span></div>
+            <div class="member-row"><span class="member-name">Julia Demetita</span><span class="member-local">Daytona</span></div>
+            <div class="member-row"><span class="member-name">Justyn DeGuzman</span><span class="member-local">Kissimmee</span></div>
+            <div class="member-row"><span class="member-name">NJ Tugaoen</span><span class="member-local">Miami</span></div>
+            <div class="member-row"><span class="member-name">TJ DeGuzman</span><span class="member-local">Kissimmee</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <p class="roll-hint">The participant list scrolls continuously. Hover over the list or focus it with the keyboard to pause.</p>
+
+    <div class="popup-actions">
+      <button class="watch-videos-button" id="watchVideosFromThankYou" type="button">▶ Watch TSV Group Videos</button>
+      <button class="close-button" type="button" data-close>Close</button>
+    </div>
+  </section>
+</div>
+
+
+<div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-labelledby="videoModalTitle" aria-hidden="true">
+  <div class="video-modal-panel">
+    <div class="video-modal-header">
+      <h2 id="videoModalTitle">TSV Group Videos</h2>
+      <div class="video-modal-header-actions">
+        <nav class="video-group-nav" aria-label="Choose a TSV group video">
+          <button class="video-group-nav-button crimping active" type="button" data-video-header-nav="0" aria-label="Show Crimping video" aria-current="true">Crimping</button>
+          <button class="video-group-nav-button signal-flow" type="button" data-video-header-nav="1" aria-label="Show Signal Flow video" aria-current="false">Signal Flow</button>
+          <button class="video-group-nav-button webex" type="button" data-video-header-nav="2" aria-label="Show WebEx video" aria-current="false">WebEx</button>
+        </nav>
+        <button class="video-modal-close" id="closeVideoPopup" type="button" aria-label="Close video popup">×</button>
+      </div>
+    </div>
+
+    <div class="video-carousel" id="tsvVideoCarousel">
+      <button class="carousel-nav-button prev" id="videoPrev" type="button" aria-label="Previous video">‹</button>
+
+      <section class="video-slide active" data-video-slide="0" aria-label="Crimping Team video">
+        <div class="video-frame">
+          <video id="crimpingVideo" controls playsinline preload="metadata">
+            <source src="https://pub-e605f3dc0e634e67928661918fa2d9d4.r2.dev/crimping.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+          </video>
+        </div>
+        <h3 class="video-slide-title">Crimping Team Group</h3>
+        <p class="video-slide-note">Crimping RJ45 Ethernet Cables — TSV technical video.</p>
+      </section>
+
+      <section class="video-slide" data-video-slide="1" aria-label="Signal Flow Team video">
+        <div class="video-frame">
+          <video id="signalFlowVideo" controls playsinline preload="metadata">
+            <source src="https://pub-e605f3dc0e634e67928661918fa2d9d4.r2.dev/signal-flow.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+          </video>
+        </div>
+        <h3 class="video-slide-title">Signal Flow Team Group</h3>
+        <p class="video-slide-note">Signal Flow: Improving Sound for Worship Services — TSV technical video.</p>
+      </section>
+
+      <section class="video-slide" data-video-slide="2" aria-label="WebEx Team video">
+        <div class="video-frame">
+          <video id="webexVideo" controls playsinline preload="metadata">
+            <source src="https://pub-e605f3dc0e634e67928661918fa2d9d4.r2.dev/webex.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+          </video>
+        </div>
+        <h3 class="video-slide-title">WebEx Team Group</h3>
+        <p class="video-slide-note">Using WebEx for Hosting Worship Services — TSV technical video.</p>
+      </section>
+
+      <button class="carousel-nav-button next" id="videoNext" type="button" aria-label="Next video">›</button>
+    </div>
+
+    <div class="video-carousel-dots" aria-label="Choose a TSV group video">
+      <button class="video-carousel-dot active" type="button" data-video-dot="0" aria-label="Crimping video"></button>
+      <button class="video-carousel-dot" type="button" data-video-dot="1" aria-label="Signal Flow video"></button>
+      <button class="video-carousel-dot" type="button" data-video-dot="2" aria-label="WebEx video"></button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const overlay = document.getElementById('thankYouPopup');
+  const popup = overlay.querySelector('.popup');
+  const openButton = document.getElementById('openPopup');
+  const closeButtons = overlay.querySelectorAll('[data-close]');
+  const rollTrack = document.getElementById('rollTrack');
+  const firstGroup = rollTrack.querySelector('.roll-group');
+  let previousFocus = null;
+  let initialAutoPopupActive = false;
+  let initialAutoHandoffDone = false;
+  const thankYouVideoButton = document.getElementById('watchVideosFromThankYou');
+
+  // Duplicate the participant group for a seamless, continuous vertical loop.
+  const duplicate = firstGroup.cloneNode(true);
+  duplicate.setAttribute('aria-hidden', 'true');
+  rollTrack.appendChild(duplicate);
+
+  function openPopup(isAutomatic) {
+    previousFocus = document.activeElement;
+    initialAutoPopupActive = Boolean(isAutomatic) && !initialAutoHandoffDone;
+    overlay.classList.add('is-visible');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('popup-open');
+    overlay.querySelector('.close-x').focus();
+  }
+
+  function closePopup() {
+    const shouldLaunchVideo = initialAutoPopupActive && !initialAutoHandoffDone;
+    initialAutoPopupActive = false;
+    if (shouldLaunchVideo) initialAutoHandoffDone = true;
+
+    overlay.classList.remove('is-visible');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('popup-open');
+    if (previousFocus && typeof previousFocus.focus === 'function') previousFocus.focus();
+
+    // The only automatic handoff on the page: closing the initial,
+    // auto-opened Thank You popup launches the TSV video carousel once.
+    if (shouldLaunchVideo) {
+      window.dispatchEvent(new CustomEvent('tsvThankYouInitialClosed'));
+    }
+  }
+
+  openButton.addEventListener('click', function () { openPopup(false); });
+  if (thankYouVideoButton) {
+    thankYouVideoButton.addEventListener('click', function () {
+      // A manual Watch Videos action cancels the automatic close handoff.
+      initialAutoPopupActive = false;
+      initialAutoHandoffDone = true;
+    });
+  }
+  closeButtons.forEach(button => button.addEventListener('click', closePopup));
+
+  overlay.addEventListener('click', function (event) {
+    if (event.target === overlay) closePopup();
+  });
+
+  document.addEventListener('keydown', function (event) {
+    const videoModal = document.getElementById('videoModal');
+    if (videoModal && videoModal.classList.contains('open')) return;
+    if (!overlay.classList.contains('is-visible')) return;
+    if (event.key === 'Escape') closePopup();
+
+    if (event.key === 'Tab') {
+      const focusable = popup.querySelectorAll('button, [tabindex]:not([tabindex="-1"])');
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+  });
+
+  // Open automatically when the page loads.
+  window.addEventListener('load', function () {
+    setTimeout(function () { openPopup(true); }, 350);
+  });
+})();
+
+(function () {
+  const modal = document.getElementById("videoModal");
+  const openButton = document.getElementById("openVideoPopup");
+  const thankYouVideoButton = document.getElementById("watchVideosFromThankYou");
+  const closeButton = document.getElementById("closeVideoPopup");
+  const prevButton = document.getElementById("videoPrev");
+  const nextButton = document.getElementById("videoNext");
+  const slides = Array.from(document.querySelectorAll("[data-video-slide]"));
+  const dots = Array.from(document.querySelectorAll("[data-video-dot]"));
+  const headerNavButtons = Array.from(document.querySelectorAll("[data-video-header-nav]"));
+  const videos = Array.from(modal.querySelectorAll("video"));
+
+  let currentSlide = 0;
+  let lastTrigger = openButton;
+
+  function pauseAllVideos() {
+    videos.forEach(function (video) { video.pause(); });
+  }
+
+  function showSlide(index) {
+    currentSlide = (index + slides.length) % slides.length;
+    pauseAllVideos();
+
+    slides.forEach(function (slide, slideIndex) {
+      slide.classList.toggle("active", slideIndex === currentSlide);
+    });
+
+    dots.forEach(function (dot, dotIndex) {
+      const isActive = dotIndex === currentSlide;
+      dot.classList.toggle("active", isActive);
+      dot.setAttribute("aria-current", isActive ? "true" : "false");
+    });
+
+    headerNavButtons.forEach(function (button, buttonIndex) {
+      const isActive = buttonIndex === currentSlide;
+      button.classList.toggle("active", isActive);
+      button.setAttribute("aria-current", isActive ? "true" : "false");
+    });
+  }
+
+  function openModal(startIndex, trigger) {
+    const requestedIndex = Number.isInteger(startIndex) ? startIndex : 0;
+    lastTrigger = trigger || openButton;
+    showSlide(requestedIndex);
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("video-modal-open");
+    closeButton.focus();
+  }
+
+  function closeModal() {
+    pauseAllVideos();
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("video-modal-open");
+    if (lastTrigger && typeof lastTrigger.focus === "function") lastTrigger.focus();
+  }
+
+  function openCrimpingVideo(trigger) {
+    openModal(0, trigger || openButton);
+  }
+
+  openButton.addEventListener("click", function () { openCrimpingVideo(openButton); });
+  thankYouVideoButton.addEventListener("click", function () { openCrimpingVideo(thankYouVideoButton); });
+  window.addEventListener("tsvThankYouInitialClosed", function () { openCrimpingVideo(openButton); }, { once: true });
+  closeButton.addEventListener("click", closeModal);
+  prevButton.addEventListener("click", function () { showSlide(currentSlide - 1); });
+  nextButton.addEventListener("click", function () { showSlide(currentSlide + 1); });
+
+  dots.forEach(function (dot) {
+    dot.addEventListener("click", function () { showSlide(Number(dot.getAttribute("data-video-dot"))); });
+  });
+
+  headerNavButtons.forEach(function (button) {
+    button.addEventListener("click", function () { showSlide(Number(button.getAttribute("data-video-header-nav"))); });
+  });
+
+  modal.addEventListener("click", function (event) {
+    if (event.target === modal) closeModal();
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (!modal.classList.contains("open")) return;
+    if (event.key === "Escape") { event.preventDefault(); closeModal(); }
+    if (event.key === "ArrowLeft") showSlide(currentSlide - 1);
+    if (event.key === "ArrowRight") showSlide(currentSlide + 1);
+  });
+}());
+
+</script>
+
+<script>
+(function () {
+  /* Dynamic vertical centering between logo and action tiles */
+  const hero = document.querySelector(".responsive-hero");
+  const logo = document.querySelector(".inc-tsv-logo-overlay");
+  const quote = document.querySelector(".hero-quote");
+  const tiles = document.querySelector(".main-action-tiles");
+
+  if (!hero || !logo || !quote || !tiles) return;
+
+  function positionTagline() {
+    const heroRect = hero.getBoundingClientRect();
+    const logoRect = logo.getBoundingClientRect();
+    const tilesRect = tiles.getBoundingClientRect();
+
+    const gap = window.innerWidth <= 640 ? 18 : 26;
+    const upperBoundary = Math.max(heroRect.top, logoRect.bottom) + gap;
+    const lowerBoundary = Math.min(heroRect.bottom, tilesRect.top) - gap;
+
+    if (lowerBoundary <= upperBoundary) {
+      quote.style.top = "50%";
+      return;
+    }
+
+    const midpointInViewport = (upperBoundary + lowerBoundary) / 2;
+    quote.style.top = (midpointInViewport - heroRect.top) + "px";
+  }
+
+  positionTagline();
+  window.addEventListener("load", positionTagline);
+  window.addEventListener("resize", positionTagline);
+  window.addEventListener("orientationchange", function () {
+    window.setTimeout(positionTagline, 80);
+  });
+
+  if ("ResizeObserver" in window) {
+    const observer = new ResizeObserver(positionTagline);
+    observer.observe(logo);
+    observer.observe(tiles);
+    observer.observe(hero);
+  }
+}());
+</script>
+</body>
+</html>

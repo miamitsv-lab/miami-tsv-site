@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <title>Unity Games: Volleyball</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: #ffffff;
+    }
+
+    body {
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      overflow-x: hidden;
+    }
+
+    .poster {
+      width: 100%;
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      background: #ffffff;
+    }
+
+    .poster picture {
+      display: block;
+      width: 100%;
+    }
+
+    .poster img {
+      display: block;
+      width: 100%;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    /* Desktop: keep the wide artwork comfortably inside very tall screens. */
+    @media (min-width: 1024px) {
+      .poster img {
+        width: 100vw;
+        height: 100svh;
+        object-fit: contain;
+      }
+    }
+
+    /* Tablet: use the dedicated 4:3-ish layout. */
+    @media (min-width: 600px) and (max-width: 1023px) {
+      .poster img {
+        width: 100vw;
+        height: 100svh;
+        object-fit: contain;
+      }
+    }
+
+    /* Mobile: portrait artwork fills the available width. */
+    @media (max-width: 599px) {
+      body {
+        align-items: start;
+      }
+
+      .poster {
+        min-height: 100svh;
+        align-items: start;
+      }
+
+      .poster img {
+        width: 100vw;
+        height: auto;
+        object-fit: contain;
+      }
+    }
+
+    /* Landscape phones get the tablet layout via the <picture> source below. */
+    @media (max-height: 599px) and (orientation: landscape) {
+      .poster img {
+        width: 100vw;
+        height: 100svh;
+        object-fit: contain;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="poster" aria-label="Unity Games Volleyball event poster">
+    <picture>
+      <!-- Landscape phones -->
+      <source
+        media="(max-height: 599px) and (orientation: landscape)"
+        srcset="unity-games-tablet.png">
+
+      <!-- Desktop -->
+      <source
+        media="(min-width: 1024px)"
+        srcset="unity-games-desktop.png">
+
+      <!-- Tablet -->
+      <source
+        media="(min-width: 600px)"
+        srcset="unity-games-tablet.png">
+
+      <!-- Mobile fallback -->
+      <img
+        src="unity-games-mobile.png"
+        alt="Unity Games Volleyball — Wells Activity Center, Apopka, Florida. Monday, September 7, 2026. Registration opens at 7:30 AM. Contact a CFO officer for details."
+        decoding="async">
+    </picture>
+  </main>
+</body>
+</html>

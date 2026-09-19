@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Crimping project weekly backup snapshot for July 29, 2026.">
+  <title>Crimping Project — Week 7/29 Backup</title>
+  <style>
+    :root {
+      --navy: #17324D;
+      --blue: #2F6FAE;
+      --border: #C9D6E6;
+      --bg: #F6F9FD;
+      --text: #1C2733;
+      --muted: #51606F;
+      --gold: #FFF3DC;
+      --green: #EAF7EF;
+      --purple: #F2ECFF;
+      --red: #FFEAEA;
+      --light-blue: #EAF3FF;
+      --white: #FFFFFF;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      padding: 24px;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .wrap {
+      width: min(1280px, 100%);
+      margin: 0 auto;
+    }
+
+    .header {
+      position: relative;
+      overflow: hidden;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      border-radius: 22px;
+      padding: 30px 34px;
+      box-shadow: 0 12px 28px rgba(23, 50, 77, 0.20);
+    }
+
+    .header::after {
+      content: "";
+      position: absolute;
+      right: -75px;
+      bottom: -95px;
+      width: 260px;
+      height: 260px;
+      border: 34px solid rgba(255, 255, 255, 0.08);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      padding: 7px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.34);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 920px;
+      font-size: clamp(32px, 5vw, 54px);
+      line-height: 1.05;
+    }
+
+    .header-subtitle {
+      margin: 14px 0 0;
+      max-width: 900px;
+      font-size: clamp(16px, 2vw, 20px);
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.92);
+    }
+
+    .milestone-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .milestone {
+      min-height: 92px;
+      padding: 14px 15px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.11);
+      backdrop-filter: blur(2px);
+    }
+
+    .milestone strong,
+    .milestone span {
+      display: block;
+    }
+
+    .milestone strong {
+      margin-bottom: 5px;
+      font-size: 17px;
+    }
+
+    .milestone span {
+      font-size: 14px;
+      line-height: 1.4;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    .section {
+      margin-top: 28px;
+    }
+
+    .section-heading {
+      margin: 0 0 13px;
+      color: var(--navy);
+      font-size: clamp(25px, 3.5vw, 36px);
+      line-height: 1.15;
+    }
+
+    .section-intro {
+      margin: -3px 0 15px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .surface {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+    }
+
+    .progress-card {
+      padding: 22px;
+    }
+
+    .progress-summary {
+      margin: 0;
+      padding: 17px 18px;
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      background: var(--green);
+      font-size: 17px;
+      line-height: 1.55;
+    }
+
+    .progress-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin: 16px 0;
+    }
+
+    .progress-panel {
+      padding: 19px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--light-blue);
+    }
+
+    .progress-panel.target { background: var(--gold); }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 11px;
+      color: var(--navy);
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .progress-percent {
+      font-size: 29px;
+      font-weight: 900;
+    }
+
+    .progress-track {
+      height: 22px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #E6EEF7;
+    }
+
+    .progress-fill {
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--navy), var(--blue));
+    }
+
+    .progress-panel p {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+
+    .deadline-note {
+      margin: 0;
+      padding: 15px 17px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--red);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .immediate {
+      padding: 18px;
+    }
+
+    .immediate-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .action-card {
+      min-height: 235px;
+      padding: 21px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+    }
+
+    /* Preserve the source page color order: blue, green, gold. */
+    .action-card:nth-child(1) { background: var(--light-blue); }
+    .action-card:nth-child(2) { background: var(--green); }
+    .action-card:nth-child(3) { background: var(--gold); }
+
+    .action-card h3 {
+      margin: 0 0 11px;
+      color: var(--navy);
+      font-size: 24px;
+      line-height: 1.2;
+    }
+
+    .action-card p {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.55;
+    }
+
+    .action-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .member-card {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: var(--white);
+      box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+      break-inside: avoid;
+    }
+
+    /* Preserve the source action-item color cycle and member order. */
+    .member-card:nth-child(5n+1) .member-head { background: var(--light-blue); }
+    .member-card:nth-child(5n+2) .member-head { background: var(--gold); }
+    .member-card:nth-child(5n+3) .member-head { background: var(--green); }
+    .member-card:nth-child(5n+4) .member-head { background: var(--purple); }
+    .member-card:nth-child(5n+5) .member-head { background: var(--red); }
+
+    .member-head {
+      padding: 19px 22px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .member-head h3 {
+      margin: 0;
+      color: var(--navy);
+      font-size: 29px;
+      line-height: 1.1;
+    }
+
+    .member-role {
+      margin: 7px 0 0;
+      color: #1D5F8F;
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.45;
+    }
+
+    .member-body {
+      padding: 20px 23px 22px;
+    }
+
+    .member-body h4 {
+      margin: 0 0 12px;
+      color: var(--navy);
+      font-size: 20px;
+    }
+
+    .member-body ul {
+      margin: 0;
+      padding-left: 23px;
+    }
+
+    .member-body li {
+      margin: 0 0 10px;
+      padding-left: 2px;
+      font-size: 17px;
+      line-height: 1.52;
+    }
+
+    .member-body li:last-child { margin-bottom: 0; }
+
+    .date-adjusted {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 3px 7px;
+      border: 1px solid #E0B0B0;
+      border-radius: 999px;
+      background: var(--red);
+      color: #7A2525;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      vertical-align: middle;
+    }
+
+    .footer {
+      margin-top: 30px;
+      padding: 20px 24px;
+      border-radius: 20px;
+      color: var(--white);
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      box-shadow: 0 10px 24px rgba(23, 50, 77, 0.18);
+      font-size: 15px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+      .milestone-strip { grid-template-columns: repeat(2, 1fr); }
+      .immediate-grid { grid-template-columns: 1fr; }
+      .action-card { min-height: 0; }
+    }
+
+    @media (max-width: 760px) {
+      body { padding: 14px; }
+      .header { padding: 24px 21px; border-radius: 18px; }
+      .milestone-strip,
+      .progress-grid { grid-template-columns: 1fr; }
+      .surface,
+      .member-card { border-radius: 17px; }
+      .progress-card { padding: 15px; }
+      .immediate { padding: 13px; }
+      .member-head { padding: 17px 18px; }
+      .member-body { padding: 18px; }
+      .member-head h3 { font-size: 25px; }
+      .member-body li { font-size: 16px; }
+    }
+
+    @media print {
+      @page { margin: 0.45in; }
+      body { padding: 0; background: var(--white); }
+      .header,
+      .surface,
+      .member-card,
+      .footer { box-shadow: none; }
+      .header { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .member-card { page-break-inside: avoid; }
+      .section { margin-top: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="header">
+      <div class="eyebrow">Weekly Backup Snapshot • July 29, 2026</div>
+      <h1>Crimping Project</h1>
+      <p class="header-subtitle">A consolidated, link-free view of project progress, immediate next steps, and all team action items for the current rough-cut push.</p>
+
+      <div class="milestone-strip" aria-label="Current milestone dates">
+        <div class="milestone">
+          <strong>July 20–26</strong>
+          <span>Anniversary Thanksgiving break week is complete.</span>
+        </div>
+        <div class="milestone">
+          <strong>July 29–August 2</strong>
+          <span>Active voice-over, clip organization, syncing, and rough-cut assembly.</span>
+        </div>
+        <div class="milestone">
+          <strong>August 2</strong>
+          <span>Full rough cut due and rough-cut freeze begins.</span>
+        </div>
+        <div class="milestone">
+          <strong>August 17</strong>
+          <span>Final submission deadline.</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="section" aria-labelledby="progress-title">
+      <h2 class="section-heading" id="progress-title">Project Progress</h2>
+      <div class="surface progress-card">
+        <p class="progress-summary"><strong>Current checkpoint:</strong> The title card and closing card are complete, and the recorded tutorial clips have been uploaded to the Crimping Google Drive folder. Lower-third and section-card templates remain complete. The next milestone is to finish the voice-over, verify the uploaded footage and audio files, and prepare the project for rough-cut assembly.</p>
+
+        <div class="progress-grid">
+          <article class="progress-panel">
+            <div class="progress-meta">
+              <span>Current Progress</span>
+              <span class="progress-percent">55%</span>
+            </div>
+            <div class="progress-track" role="progressbar" aria-label="Current project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="55">
+              <div class="progress-fill" style="width:55%"></div>
+            </div>
+            <p>The project has completed the main recording, core opening and closing graphics, and the footage handoff. Work now centers on voice-over completion, clip review and organization, scene-fitting cuts, remaining visual refinements, and the first rough-cut build.</p>
+          </article>
+
+          <article class="progress-panel target">
+            <div class="progress-meta">
+              <span>Target Progress</span>
+              <span class="progress-percent">65%</span>
+            </div>
+            <div class="progress-track" role="progressbar" aria-label="Target project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="65">
+              <div class="progress-fill" style="width:65%"></div>
+            </div>
+            <p>Target is to reach 65% by the end of the weekend by completing and uploading the voice-over, syncing narration to the uploaded clips, confirming that the critical close-up shots are usable, and starting an edit sequence with the title card, section cards, lower thirds, and closing card in place.</p>
+          </article>
+        </div>
+
+        <p class="deadline-note"><strong>Date priority:</strong> The August 2 full rough-cut deadline is the controlling milestone. After that date, the project moves to polished editing from August 3–7, internal review from August 8–10, final fixes from August 11–13, final export on August 14, District review on August 15–16, and final submission on August 17.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="next-steps-title">
+      <h2 class="section-heading" id="next-steps-title">Immediate Next Steps</h2>
+      <div class="surface immediate">
+        <div class="immediate-grid">
+          <article class="action-card">
+            <h3>Needed Next Week</h3>
+            <p>Build toward the August 2 full rough-cut deadline: sync the completed voice-over, trim the uploaded clips into the planned scene order, insert the completed title card, section cards, lower thirds, and closing card, place the T568B graphic and required labels or callouts, and maintain one short list of only the missing assets or pickups still needed.</p>
+          </article>
+
+          <article class="action-card">
+            <h3>Goal by End of Week</h3>
+            <p>Complete and upload the clean voice-over this weekend, organize the final takes by scene or section name, verify that all recorded clips open correctly and have backup copies, and begin the first edit sequence so rough-cut assembly can continue without waiting on audio or core graphics.</p>
+          </article>
+
+          <article class="action-card">
+            <h3>Main Reminder</h3>
+            <p>Protect technical clarity in every cut: the T568B wire order, RJ45 insertion depth and orientation, crimping action, second-end repeat, and cable tester proof must remain easy to see. Do not add a reshoot, new scene, or new visual style unless the existing material cannot show an essential step clearly and accurately.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="action-items-title">
+      <h2 class="section-heading" id="action-items-title">All Team Action Items</h2>
+      <p class="section-intro">All names are displayed at once. Past break-week instructions and completed-asset conflicts were aligned to the July 29 project status and August 2 rough-cut deadline.</p>
+
+      <div class="action-list">
+        <article class="member-card">
+          <header class="member-head">
+            <h3>Boon</h3>
+            <p class="member-role">Director / SME Support / Recording Support</p>
+          </header>
+          <div class="member-body">
+            <h4>Action Items This Week</h4>
+            <ul>
+              <li>Review the recorded footage and first scene cuts to confirm the tutorial follows the locked step-by-step flow.</li>
+              <li>Coordinate the immediate voice-over completion and confirm the narration timing matches the recorded demo scenes.</li>
+              <li>Review the completed closing card and refined demo-screen visuals for technical relevance and TSV consistency.</li>
+              <li>Approve pickup shots only when the existing footage does not clearly show a required technical step.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="member-card">
+          <header class="member-head">
+            <h3>AJ</h3>
+            <p class="member-role">Scriptwriter</p>
+          </header>
+          <div class="member-body">
+            <h4>Action Items This Week</h4>
+            <ul>
+              <li>Use the locked tutorial script as the voice-over source.</li>
+              <li>Make only timing or clarity adjustments needed to fit the recorded scenes.</li>
+              <li>Confirm the narration follows the approved order from tools and preparation through T568B wiring, crimping, cable testing, and closing.</li>
+              <li>Prepare short pickup lines only when a scene needs clearer explanation; do not add new sections.</li>
+              <li>Review the section-card and lower-third wording for clear, beginner-friendly language before final placement.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="member-card">
+          <header class="member-head">
+            <h3>Dennis</h3>
+            <p class="member-role">Scriptwriter / SME Helper / Recording Support</p>
+          </header>
+          <div class="member-body">
+            <h4>Action Items This Week</h4>
+            <ul>
+              <li>Review the recorded footage for technical accuracy, especially T568B wire order, RJ45 connector orientation, crimping procedure, and cable tester proof.</li>
+              <li>Confirm the planned scene cuts keep wire colors, RJ45 insertion depth, crimping action, and tester lights visible long enough for viewers to understand.</li>
+              <li>Review the voice-over wording, demo-screen refinements, and graphics for technical accuracy before rough-cut assembly.</li>
+              <li>Recommend a pickup shot only when technical accuracy or clarity cannot be preserved with the existing footage.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="member-card">
+          <header class="member-head">
+            <h3>Eduard</h3>
+            <p class="member-role">Director Support / SME Helper / Recording Support</p>
+          </header>
+          <div class="member-body">
+            <h4>Action Items This Week</h4>
+            <ul>
+              <li>Support the technical review of the completed recording.</li>
+              <li>Identify any scene that does not clearly show the correct crimping procedure.</li>
+              <li>Check the first cuts for correct tool use, proper RJ45 connector orientation, correct crimper operation, and proper cable tester workflow.</li>
+              <li>Support the voice-over session with procedure and terminology checks as needed.</li>
+              <li>Keep recommendations limited to accuracy, clarity, recording quality, and necessary pickup work.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="member-card">
+          <header class="member-head">
+            <h3>Austin</h3>
+            <p class="member-role">Main Video Editor</p>
+          </header>
+          <div class="member-body">
+            <h4>Action Items This Week</h4>
+            <ul>
+              <li>Back up, label, and organize the completed recordings by scene before making the main editing cuts.</li>
+              <li>Complete the first pass of cuts so every recorded clip fits the planned tutorial scene and expected timing.</li>
+              <li>Place the completed title card, lower thirds, section-card templates, closing card, and available demo-screen visuals into the editing timeline.</li>
+              <li>Prepare the timeline for voice-over syncing.</li>
+              <li>Maintain a short list of missing graphics, captions, or required pickup shots.</li>
+              <li>Prioritize active rough-cut assembly now that the July 20–26 break week has ended; avoid work that does not directly support the August 2 full rough cut. <span class="date-adjusted">Date aligned</span></li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="member-card">
+          <header class="member-head">
+            <h3>Aiden</h3>
+            <p class="member-role">Animator / Graphics</p>
+          </header>
+          <div class="member-body">
+            <h4>Action Items This Week</h4>
+            <ul>
+              <li>Confirm that the completed title card is uploaded to Google Drive with a clearly named master file and an edit-ready export.</li>
+              <li>Package the completed lower-third and section-card templates for the editor, including clean master files and usable exports.</li>
+              <li>Confirm that the completed closing card is uploaded with a clearly named master file and an edit-ready export. <span class="date-adjusted">Status aligned</span></li>
+              <li>Finish refining the demo-screen visuals for readability, spacing, and scene timing.</li>
+              <li>Keep all remaining labels, arrows, and callouts consistent with the approved templates.</li>
+              <li>Do not introduce a new graphic style.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="member-card">
+          <header class="member-head">
+            <h3>Eden</h3>
+            <p class="member-role">Talent / Voice-over / Recording Support</p>
+          </header>
+          <div class="member-body">
+            <h4>Action Items This Week</h4>
+            <ul>
+              <li>Complete the tutorial voice-over using the locked script and current scene order.</li>
+              <li>Record clear, calm, and beginner-friendly narration.</li>
+              <li>Save every audio file using its scene number or section name.</li>
+              <li>Match the narration pace to the recorded demonstration footage.</li>
+              <li>Provide alternate takes only when timing or clarity requires them.</li>
+              <li>Prepare short pickup lines when the editor identifies a scene needing clearer explanation.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="member-card">
+          <header class="member-head">
+            <h3>Jhules B</h3>
+            <p class="member-role">Video Editor / Animator Helper</p>
+          </header>
+          <div class="member-body">
+            <h4>Action Items This Week</h4>
+            <ul>
+              <li>Quality-check the recorded footage, scene names, and first-pass editing notes.</li>
+              <li>Quality-check the completed closing card and help finish only the remaining demo-screen visual refinements.</li>
+              <li>Make sure graphics remain readable when placed over close-up footage.</li>
+              <li>Check the title card, lower thirds, section-card templates, and closing-card exports for edit readiness and consistent file naming.</li>
+              <li>Help maintain the missing-asset and pickup-shot list throughout the active rough-cut build. <span class="date-adjusted">Date aligned</span></li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="member-card">
+          <header class="member-head">
+            <h3>Dianne</h3>
+            <p class="member-role">Video Editor Support</p>
+          </header>
+          <div class="member-body">
+            <h4>Action Items This Week</h4>
+            <ul>
+              <li>Support Austin with the first-pass scene cuts.</li>
+              <li>Help prepare the project for voice-over placement using the completed recordings.</li>
+              <li>Review the completed title card, lower thirds, section cards, and closing card for spelling, readability, and consistent formatting.</li>
+              <li>Track missing captions, labels, demo-screen refinements, voice-over files, and necessary pickup shots.</li>
+              <li>Support active rough-cut assembly, editing cleanup, and file organization through the August 2 deadline.</li>
+              <li>Do not add new creative work that could delay the full rough cut. <span class="date-adjusted">Date aligned</span></li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="member-card">
+          <header class="member-head">
+            <h3>NJ</h3>
+            <p class="member-role">Recording Support</p>
+          </header>
+          <div class="member-body">
+            <h4>Action Items This Week</h4>
+            <ul>
+              <li>Confirm that the completed recordings have been transferred, backed up, and organized before editing continues.</li>
+              <li>Support the voice-over recording setup.</li>
+              <li>Verify clean audio capture, correct file naming, and backup copies.</li>
+              <li>Remain available for a limited pickup recording only when an essential technical step is unclear or missing.</li>
+              <li>Keep support focused on file control, audio quality, and the locked production plan.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="member-card">
+          <header class="member-head">
+            <h3>Charles</h3>
+            <p class="member-role">Music / Soundtrack Support</p>
+          </header>
+          <div class="member-body">
+            <h4>Action Items This Week</h4>
+            <ul>
+              <li>Identify where limited music could improve the opening, section transitions, and closing without distracting from the tutorial.</li>
+              <li>Select copyright-safe or royalty-free music options; for safety and consistency, prioritize suitable INC Media music options.</li>
+              <li>Upload music source files, license information, and required attribution notes to the team’s Google Drive folder.</li>
+              <li>Prepare short and subtle music beds or stingers for the title card, section transitions, and closing card.</li>
+              <li>Keep soundtrack use very limited.</li>
+              <li>Coordinate with Austin so the music remains below the voice-over and speech stays clear.</li>
+              <li>Provide alternate edits with and without music when needed.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer class="footer">
+      District of Florida and Caribbean • Crimping Team • Week of July 29, 2026 Backup
+    </footer>
+  </main>
+</body>
+</html>

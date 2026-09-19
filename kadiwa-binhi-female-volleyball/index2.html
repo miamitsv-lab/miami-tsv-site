@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#05000d" />
+  <title>Miami Kadiwa/Binhi Female Team — Volleyball District Champion</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      background: #05000d;
+      overflow: hidden;
+    }
+    body {
+      min-height: 100dvh;
+    }
+    .poster {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100dvh;
+      display: block;
+      overflow: hidden;
+      background: #05000d;
+    }
+    .poster picture,
+    .poster img {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .poster img {
+      object-fit: cover;
+      object-position: center center;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    /* On unusually tall/wide screens, preserve the complete artwork instead of cropping heavily. */
+    @media (max-aspect-ratio: 3 / 5), (min-aspect-ratio: 21 / 9) {
+      .poster img { object-fit: contain; }
+    }
+  </style>
+</head>
+<body>
+  <main class="poster" aria-label="Miami Kadiwa/Binhi Female Team Volleyball District Champion poster">
+    <picture>
+      <!-- Phone -->
+      <source media="(max-width: 767px)" srcset="image-mobile.png" />
+      <!-- Tablet -->
+      <source media="(min-width: 768px) and (max-width: 1199px)" srcset="image-tablet.png" />
+      <!-- Desktop / fallback -->
+      <img
+        src="image-desktop.png"
+        alt="Congratulations to the Miami Kadiwa/Binhi Female Team, Volleyball District Champion"
+        decoding="async"
+        fetchpriority="high"
+      />
+    </picture>
+  </main>
+</body>
+</html>

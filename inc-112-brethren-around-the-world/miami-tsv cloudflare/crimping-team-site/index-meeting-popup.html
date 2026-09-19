@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Crimping Team Group Site</title>
+<style>
+
+:root{--navy:#17324D;--blue:#2F6FAE;--border:#C9D6E6;--bg:#F6F9FD;--text:#1C2733;--muted:#51606F;--gold:#FFF3DC;--green:#EAF7EF;--purple:#F2ECFF;--red:#FFEAEA;--light-blue:#EAF3FF}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text);padding:24px}.wrap{max-width:1280px;margin:0 auto}.header{background:linear-gradient(135deg,var(--navy),var(--blue));color:white;border-radius:20px;padding:28px 32px;margin-bottom:18px;box-shadow:0 10px 24px rgba(23,50,77,.18)}h1{margin:0;font-size:clamp(30px,4vw,48px);line-height:1.1}.nav{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 20px}.nav a{color:var(--navy);background:white;border:1px solid var(--border);text-decoration:none;padding:10px 14px;border-radius:999px;font-weight:700}.nav a:hover,.nav a.active{background:var(--light-blue);border-color:var(--blue)}.table-card,.card-grid,.immediate{background:white;border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:0 8px 22px rgba(23,50,77,.10)}.section-title{margin:26px 0 12px;color:var(--navy);font-size:clamp(22px,3vw,30px)}.immediate{margin-bottom:24px;padding:18px}.immediate-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.action-card{border:1px solid var(--border);border-radius:18px;padding:20px;min-height:175px}.action-card:nth-child(1){background:var(--light-blue)}.action-card:nth-child(2){background:var(--green)}.action-card:nth-child(3){background:var(--gold)}.action-card h2{margin:0 0 10px;color:var(--navy);font-size:24px}.action-card p{margin:0;line-height:1.5;font-size:17px}table{width:100%;border-collapse:collapse}thead{background:#255D91;color:white}th,td{text-align:left;vertical-align:top;padding:18px 20px;border-bottom:1px solid var(--border);line-height:1.45}th{font-size:18px;letter-spacing:.02em}td{font-size:17px}tbody tr:nth-child(5n+1){background:var(--light-blue)}tbody tr:nth-child(5n+2){background:var(--gold)}tbody tr:nth-child(5n+3){background:var(--green)}tbody tr:nth-child(5n+4){background:var(--purple)}tbody tr:nth-child(5n+5){background:var(--red)}tbody tr:last-child td{border-bottom:none}td:first-child{color:var(--navy);font-size:19px;font-weight:700}td:nth-child(2){color:#1D5F8F;font-weight:600}.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0;padding:14px}.tile{margin:10px;padding:22px;min-height:150px;border-radius:18px;border:1px solid var(--border);background:var(--light-blue);text-decoration:none;color:var(--text);display:block}.tile:nth-child(2){background:var(--gold)}.tile:nth-child(3){background:var(--green)}.tile:nth-child(4){background:var(--purple)}.tile h2{margin:0 0 12px;color:var(--navy);font-size:24px}.tile p{margin:0;line-height:1.45}.footer{margin-top:18px;color:var(--muted);font-size:14px}@media(max-width:900px){.immediate-grid{grid-template-columns:1fr}}@media(max-width:760px){body{padding:14px}.header{padding:22px;border-radius:16px}.table-card,.immediate{border-radius:16px}table,thead,tbody,th,td,tr{display:block}thead{display:none}tbody tr{margin:14px;border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 4px 10px rgba(23,50,77,.08)}td{width:100%!important;border-bottom:1px solid rgba(201,214,230,.8);padding:14px 16px 14px 140px;position:relative;min-height:54px;font-size:16px}td:last-child{border-bottom:none}td::before{content:attr(data-label);position:absolute;left:16px;top:14px;width:110px;color:var(--muted);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.04em}td:first-child{font-size:18px}}@media print{body{background:white;padding:0}.header,.table-card,.card-grid,.immediate{box-shadow:none}th,td{font-size:12px;padding:9px 10px}}
+
+
+.action-filter-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+  padding: 22px;
+  margin-bottom: 22px;
+}
+.filter-row {
+  display: grid;
+  grid-template-columns: minmax(180px, 260px) minmax(220px, 1fr);
+  gap: 14px;
+  align-items: center;
+}
+.filter-row label {
+  color: var(--navy);
+  font-weight: 800;
+  font-size: 19px;
+}
+.member-select {
+  width: 100%;
+  color: var(--text);
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 13px 14px;
+  font-size: 17px;
+  font-weight: 700;
+}
+.select-note {
+  color: var(--muted);
+  margin: 12px 0 0 0;
+  line-height: 1.5;
+}
+.empty-state {
+  background: var(--light-blue);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 28px;
+  color: var(--navy);
+  font-size: 20px;
+  font-weight: 800;
+  text-align: center;
+}
+.action-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+.member-card {
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+}
+.member-card:nth-child(5n+1) .member-card-head { background: var(--light-blue); }
+.member-card:nth-child(5n+2) .member-card-head { background: var(--gold); }
+.member-card:nth-child(5n+3) .member-card-head { background: var(--green); }
+.member-card:nth-child(5n+4) .member-card-head { background: var(--purple); }
+.member-card:nth-child(5n+5) .member-card-head { background: var(--red); }
+.member-card-head {
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--border);
+}
+.member-card h2 {
+  margin: 0;
+  color: var(--navy);
+  font-size: 28px;
+}
+.member-role {
+  margin: 8px 0 0 0;
+  color: #1D5F8F;
+  font-weight: 700;
+  line-height: 1.45;
+}
+.member-card-body {
+  padding: 20px 22px;
+}
+.member-card-body h3 {
+  margin: 0 0 12px 0;
+  color: var(--navy);
+  font-size: 21px;
+}
+.member-card-body ul {
+  margin: 0;
+  padding-left: 22px;
+}
+.member-card-body li {
+  margin: 0 0 10px 0;
+  line-height: 1.5;
+  font-size: 17px;
+}
+.member-card-body li:last-child { margin-bottom: 0; }
+.home-action-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  padding: 14px;
+  margin-bottom: 24px;
+}
+.tile.action-items-tile {
+  grid-column: 1 / -1;
+  background: var(--light-blue);
+  min-height: 120px;
+}
+.tile.action-items-tile h2 {
+  font-size: clamp(26px, 3vw, 34px);
+}
+@media (max-width: 760px) {
+  .filter-row { grid-template-columns: 1fr; }
+  .member-card h2 { font-size: 24px; }
+}
+
+
+
+/* Crimping Project Progress */
+.project-progress-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 20px;
+  margin: 0 0 24px 0;
+  box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+}
+.progress-header {
+  margin-bottom: 16px;
+}
+.progress-header h2 {
+  margin: 0 0 8px 0;
+  color: var(--navy);
+  font-size: clamp(24px, 3vw, 34px);
+}
+.progress-header p,
+.progress-panel p,
+.progress-note {
+  margin: 0;
+  line-height: 1.5;
+  color: var(--text);
+  font-size: 16px;
+}
+.progress-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin: 16px 0;
+}
+.progress-panel {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 16px;
+  background: var(--light-blue);
+}
+.progress-panel.target-progress {
+  background: var(--gold);
+}
+.progress-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+  color: var(--navy);
+  font-size: 18px;
+}
+.progress-percent {
+  font-weight: 900;
+  font-size: 22px;
+}
+.progress-track {
+  height: 20px;
+  background: #E6EEF7;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--navy), var(--blue));
+  border-radius: 999px;
+}
+.progress-note {
+  background: var(--green);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 14px 16px;
+}
+@media (max-width: 900px) {
+  .progress-grid { grid-template-columns: 1fr; }
+}
+@media print {
+  .project-progress-card { box-shadow: none; }
+}
+
+
+/* Responsive centered progress tile */
+.project-progress-card {
+  width: 66.666%;
+  margin: 0 auto 24px auto;
+}
+.progress-header h2 {
+  text-align: center;
+}
+@media (max-width: 1024px) {
+  .project-progress-card { width: 80%; }
+}
+@media (max-width: 760px) {
+  .project-progress-card { width: 100%; }
+}
+
+
+.progress-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+.progress-link:hover,
+.progress-link:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(23, 50, 77, 0.14);
+  border-color: var(--blue);
+  outline: none;
+}
+.progress-link:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+
+
+
+/* SPA Next Meeting Notice Popup */
+.meeting-popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(23, 50, 77, 0.64);
+}
+.meeting-popup-overlay.is-visible {
+  display: flex;
+}
+body.meeting-popup-open {
+  overflow: hidden;
+}
+.meeting-popup {
+  position: relative;
+  width: min(640px, 100%);
+  max-height: min(92vh, 760px);
+  overflow: auto;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 28px;
+  box-shadow: 0 24px 60px rgba(23, 50, 77, 0.34);
+  animation: meetingPopupRise .22s ease-out;
+}
+.meeting-popup-kicker {
+  display: inline-block;
+  margin: 0 0 10px 0;
+  color: var(--navy);
+  background: var(--gold);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.meeting-popup h2 {
+  margin: 0 44px 12px 0;
+  color: var(--navy);
+  font-size: clamp(27px, 4vw, 38px);
+  line-height: 1.12;
+}
+.meeting-popup-intro {
+  margin: 0 0 18px 0;
+  color: var(--text);
+  font-size: 18px;
+  line-height: 1.5;
+}
+.meeting-detail-grid {
+  display: grid;
+  grid-template-columns: 155px 1fr;
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  margin: 16px 0 18px 0;
+}
+.meeting-detail-label,
+.meeting-detail-value {
+  padding: 13px 15px;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.45;
+  font-size: 16px;
+}
+.meeting-detail-label {
+  color: var(--navy);
+  background: var(--light-blue);
+  font-weight: 900;
+}
+.meeting-detail-value {
+  color: var(--text);
+  background: white;
+  word-break: break-word;
+}
+.meeting-detail-grid div:nth-last-child(-n+2) {
+  border-bottom: none;
+}
+.meeting-detail-value a {
+  color: var(--blue);
+  font-weight: 800;
+}
+.meeting-password {
+  display: inline-block;
+  color: var(--navy);
+  background: var(--gold);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 4px 7px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 900;
+  letter-spacing: .02em;
+}
+.meeting-popup-note {
+  margin: 14px 0 0 0;
+  padding: 14px 16px;
+  background: var(--green);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  color: var(--text);
+  line-height: 1.5;
+  font-size: 16px;
+}
+.meeting-popup-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+.meeting-popup-primary,
+.meeting-popup-secondary,
+.meeting-popup-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  border-radius: 999px;
+  padding: 11px 16px;
+  font-weight: 900;
+  font-size: 16px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.meeting-popup-primary {
+  color: white;
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  border: 1px solid var(--blue);
+}
+.meeting-popup-secondary,
+.meeting-popup-button {
+  color: var(--navy);
+  background: var(--light-blue);
+  border: 1px solid var(--border);
+}
+.meeting-popup-close-x {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: white;
+  color: var(--navy);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+.meeting-popup-primary:hover,
+.meeting-popup-secondary:hover,
+.meeting-popup-button:hover,
+.meeting-popup-close-x:hover {
+  filter: brightness(.98);
+  transform: translateY(-1px);
+}
+.meeting-popup-primary:focus-visible,
+.meeting-popup-secondary:focus-visible,
+.meeting-popup-button:focus-visible,
+.meeting-popup-close-x:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+@keyframes meetingPopupRise {
+  from { opacity: 0; transform: translateY(14px) scale(.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@media (max-width: 640px) {
+  .meeting-popup { padding: 24px 20px; }
+  .meeting-popup h2 { margin-right: 40px; }
+  .meeting-detail-grid { grid-template-columns: 1fr; }
+  .meeting-detail-label { border-bottom: none; padding-bottom: 4px; }
+  .meeting-detail-value { padding-top: 4px; }
+  .meeting-popup-actions { flex-direction: column; }
+  .meeting-popup-primary,
+  .meeting-popup-secondary,
+  .meeting-popup-button { width: 100%; }
+}
+
+
+
+/* Site Menu tile hover - matches Project Progress hover behavior */
+.card-grid .tile {
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+.card-grid .tile:hover,
+.card-grid .tile:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(23, 50, 77, 0.14);
+  border-color: var(--blue);
+  outline: none;
+}
+.card-grid .tile:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-grid .tile {
+    transition: none;
+  }
+  .card-grid .tile:hover,
+  .card-grid .tile:focus {
+    transform: none;
+  }
+}
+
+</style>
+</head>
+<body>
+<div aria-hidden="true" class="meeting-popup-overlay" id="nextMeetingPopup">
+<section aria-describedby="nextMeetingSummary" aria-labelledby="nextMeetingTitle" aria-modal="true" class="meeting-popup" role="dialog">
+<button aria-label="Close meeting notice" class="meeting-popup-close-x" data-meeting-popup-close="" type="button">×</button>
+<p class="meeting-popup-kicker">Next Meeting Notice</p>
+<h2 id="nextMeetingTitle">TSV Group 1 Meeting</h2>
+<p class="meeting-popup-intro" id="nextMeetingSummary"><strong>Wednesday, July 8th</strong> at <strong>8:00 PM EDT / 9:00 PM AST</strong> via WebEx.</p>
+<div aria-label="Meeting details" class="meeting-detail-grid">
+<div class="meeting-detail-label">Meeting</div>
+<div class="meeting-detail-value">(ONLINE) TSV Group 1 Meeting • District of Florida and Caribbean</div>
+<div class="meeting-detail-label">Date &amp; Time</div>
+<div class="meeting-detail-value">Wednesday • July 8th • 8:00 PM EDT / 9:00 PM AST</div>
+<div class="meeting-detail-label">Meeting Link</div>
+<div class="meeting-detail-value"><a href="https://miami-tsv.com/crimping-group1-meeting" rel="noopener" target="_blank">https://miami-tsv.com/crimping-group1-meeting</a></div>
+<div class="meeting-detail-label">Meeting Number</div>
+<div class="meeting-detail-value">2866 470 5833</div>
+<div class="meeting-detail-label">Password</div>
+<div class="meeting-detail-value"><span class="meeting-password">WEDNESDAYJULY8TH</span></div>
+<div class="meeting-detail-label">Alternate Link</div>
+<div class="meeting-detail-value"><a href="https://inc-maimi-tsv.my.webex.com/inc-maimi-tsv.my/j.php?MTID=m99151327373d4fc2473195c295355c46" rel="noopener" target="_blank">https://inc-maimi-tsv.my.webex.com/inc-maimi-tsv.my/j.php?MTID=m99151327373d4fc2473195c295355c46</a></div>
+</div>
+<div class="meeting-popup-actions">
+<a class="meeting-popup-primary" download="" href="crimping_group1_next_meeting.ics">Add to Calendar</a>
+<a class="meeting-popup-secondary" href="https://miami-tsv.com/crimping-group1-meeting" rel="noopener" target="_blank">Open Meeting Link</a>
+<button class="meeting-popup-button" data-meeting-popup-close="" type="button">Close Notice</button>
+</div>
+</section>
+</div>
+<main class="wrap">
+<section class="header"><h1>Crimping Team Group Site</h1></section>
+<nav class="nav">
+<a class="active" href="home.html">Home</a>
+<a href="action-items.html">Action Items</a>
+<a href="team-members.html">Team</a>
+<a href="priority-tasks.html">Priorities</a>
+<a href="deadline-reminder.html">Deliverables</a>
+<a href="note-section.html">Notes</a>
+<a href="resources.html">Resources</a>
+</nav>
+<section aria-label="Crimping project progress status" class="project-progress-card">
+<div class="progress-header">
+<div>
+<h2>Project Progress</h2>
+<p><strong>Current checkpoint:</strong> Pre-production is closed with no major changes. Tutorial setup and tools/materials have been tested. Tutorial recording is scheduled for this Saturday, with the title card and lower thirds still targeted for weekend completion.</p>
+</div>
+</div>
+<div class="progress-grid">
+<a aria-label="Go to Action Items page for current progress details" class="progress-panel progress-link" href="action-items.html">
+<div class="progress-meta"><strong>Current Progress</strong><span class="progress-percent">40%</span></div>
+<div aria-label="Current Crimping project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="40" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 40%;"></div></div>
+<p>Pre-production is locked, the tutorial setup has been tested, and the tools/materials have been tested. The project is now ready for Saturday tutorial recording and immediate footage handoff to editing.</p>
+</a>
+<a aria-label="Go to Deliverables page for target progress details" class="progress-panel target-progress progress-link" href="deadline-reminder.html">
+<div class="progress-meta"><strong>Target Progress</strong><span class="progress-percent">45%</span></div>
+<div aria-label="Target Crimping project progress" aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" class="progress-track" role="progressbar"><div class="progress-fill" style="width: 45%;"></div></div>
+<p>Target is to reach the next progress mark by the end of the weekend by completing Saturday tutorial recording, finishing the title card and lower thirds, confirming cable tester proof footage, and preparing the captured files for editing.</p>
+</a>
+</div>
+</section>
+<section class="immediate">
+<h2 class="section-title" style="margin-top: 0;">Immediate Next Step</h2>
+<div class="immediate-grid">
+<article class="action-card"><h2>Needed Next Week</h2><p>Move into edit/build after Saturday recording. Organize the captured close-ups, check the T568B order, RJ45 insertion, crimping action, second-end repeat, and cable tester proof, then list any pickup shots needed before rough-cut assembly.</p></article>
+<article class="action-card"><h2>Goal by End of Week</h2><p>Complete the title card and lower thirds by this weekend and finish the Saturday tutorial recording using the already-tested setup, tools, and materials. Confirm the recorded footage is clear enough for editing before the team moves on.</p></article>
+<article class="action-card"><h2>Main Reminder</h2><p>Recording is now the priority. Since the setup, tools, and materials have already been tested, stay with the locked tutorial plan and only allow accuracy, clarity, or necessary pickup-shot fixes.</p></article>
+</div>
+</section>
+<h2 class="section-title">Crimping Team Site Menu</h2>
+<section class="card-grid">
+<a class="tile" href="action-items.html"><h2>Action Items</h2><p>View action items assigned for this week's sprint.</p></a>
+<a class="tile" href="team-members.html"><h2>Team</h2><p>Roles, responsibilities, and name reference for the Crimping team.</p></a>
+<a class="tile" href="priority-tasks.html"><h2>Priorities</h2><p>Main due dates, leads, and helpers for the Crimping project.</p></a>
+<a class="tile" href="deadline-reminder.html"><h2>Deliverables</h2><p>Shared schedule checkpoints from planning to final submission.</p></a>
+<a class="tile" href="note-section.html"><h2>Notes</h2><p>Simple definitions for shot list, close-up shots, T568B, labels, callouts, and retakes.</p></a>
+<a class="tile" href="resources.html"><h2>Resources</h2><p>Quick links for the team site, Google Drive folders, production materials, and TSV graphics.</p></a>
+</section>
+</main>
+<script>
+(function () {
+  var popup = document.getElementById('nextMeetingPopup');
+  if (!popup) return;
+
+  var closeButtons = popup.querySelectorAll('[data-meeting-popup-close]');
+  var focusableSelector = 'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+  var previousFocus = null;
+
+  function openPopup() {
+    previousFocus = document.activeElement;
+    popup.classList.add('is-visible');
+    popup.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('meeting-popup-open');
+
+    var firstFocusable = popup.querySelector(focusableSelector);
+    if (firstFocusable) firstFocusable.focus();
+  }
+
+  function closePopup() {
+    popup.classList.remove('is-visible');
+    popup.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('meeting-popup-open');
+
+    if (previousFocus && typeof previousFocus.focus === 'function') {
+      previousFocus.focus();
+    }
+  }
+
+  closeButtons.forEach(function (button) {
+    button.addEventListener('click', closePopup);
+  });
+
+  popup.addEventListener('click', function (event) {
+    if (event.target === popup) closePopup();
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (!popup.classList.contains('is-visible')) return;
+
+    if (event.key === 'Escape') {
+      closePopup();
+      return;
+    }
+
+    if (event.key === 'Tab') {
+      var focusable = Array.prototype.slice.call(popup.querySelectorAll(focusableSelector));
+      if (!focusable.length) return;
+
+      var first = focusable[0];
+      var last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+  });
+
+  window.addEventListener('DOMContentLoaded', function () {
+    window.setTimeout(openPopup, 350);
+  });
+})();
+</script>
+</body>
+</html>

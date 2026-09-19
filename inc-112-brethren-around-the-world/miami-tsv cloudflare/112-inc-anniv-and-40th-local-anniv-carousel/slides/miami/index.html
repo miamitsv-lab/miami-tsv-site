@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#02261d" />
+  <title>Miami 40th Anniversary Countdown</title>
+  <link rel="preload" as="image" href="assets/miami-desktop.png" media="(min-width: 1025px)" />
+  <link rel="preload" as="image" href="assets/miami-tablet.png" media="(min-width: 701px) and (max-width: 1024px)" />
+  <link rel="preload" as="image" href="assets/miami-mobile.png" media="(max-width: 700px)" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="hero" aria-label="Miami 40th Anniversary Celebration countdown">
+    <section class="countdown-card" aria-live="polite">
+      <div class="countdown-title">Countdown to March 12, 2027</div>
+      <div class="countdown-grid" id="countdown">
+        <div class="time-box"><span id="days">000</span><small>Days</small></div>
+        <div class="time-box"><span id="hours">00</span><small>Hours</small></div>
+        <div class="time-box"><span id="minutes">00</span><small>Minutes</small></div>
+        <div class="time-box seconds-box"><span id="seconds">00.0</span><small>Seconds</small></div>
+      </div>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

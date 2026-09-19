@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Miami TSV//Signal Flow Group 2 Meeting//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:signal-flow-group2-next-meeting-20260706T210000@miami-tsv.com
+DTSTAMP:20260704T140000Z
+DTSTART;TZID=America/New_York:20260706T210000
+DTEND;TZID=America/New_York:20260706T220000
+SUMMARY:(ONLINE) TSV Group 2 Meeting
+LOCATION:WebEx
+URL:https://miami-tsv.com/signal-flow-group2-meeting
+DESCRIPTION:(ONLINE) TSV Group 2 Meeting • MONDAY • July 6th • 9PM EDT/8PM AST • District of Florida and Caribbean\n\nMeeting link: https://miami-tsv.com/signal-flow-group2-meeting\nMeeting number: 2867 500 7437\nMeeting password: MONDAYJULY6TH\nAlternate link: https://inc-maimi-tsv.my.webex.com/inc-maimi-tsv.my/j.php?MTID=m7d02e03c05a30f18b6764ebc00388081
+END:VEVENT
+END:VCALENDAR

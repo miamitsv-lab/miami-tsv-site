@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#17324D">
+<title>TSV Technical Video Competition — Thank You</title>
+<style>
+:root {
+  --navy: #17324D;
+  --blue: #2F6FAE;
+  --border: #C9D6E6;
+  --text: #1C2733;
+  --muted: #51606F;
+  --gold: #FFF3DC;
+  --green: #EAF7EF;
+  --purple: #F2ECFF;
+  --red: #FFEAEA;
+  --light-blue: #EAF3FF;
+  --white: #FFFFFF;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; width: 100%; }
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--text);
+  background: #fff;
+}
+button { font: inherit; }
+
+/* Same responsive TSV background-image treatment as the attached landing page. */
+.responsive-hero {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+}
+.responsive-hero picture,
+.responsive-hero img {
+  display: block;
+  width: 100%;
+  min-height: 100vh;
+}
+.responsive-hero img {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.reopen-button {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 9000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 12px 20px;
+  border: 1px solid rgba(255,255,255,.40);
+  border-radius: 999px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--navy), var(--blue));
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(23,50,77,.28);
+  transition: transform .15s ease, filter .15s ease;
+}
+.reopen-button:hover { transform: translateY(-1px); filter: brightness(1.03); }
+.reopen-button:focus-visible { outline: 3px solid rgba(255,255,255,.9); outline-offset: 3px; }
+
+/* Thank-you popup */
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(8,20,33,.78);
+  backdrop-filter: blur(5px);
+}
+.popup-overlay.is-visible { display: flex; }
+body.popup-open { overflow: hidden; }
+.popup {
+  position: relative;
+  width: min(900px, 100%);
+  max-height: 94vh;
+  overflow: auto;
+  padding: clamp(18px, 3vw, 28px);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: var(--white);
+  box-shadow: 0 24px 70px rgba(0,0,0,.38);
+  animation: popupRise .24s ease-out;
+}
+.popup-head { padding-right: 48px; text-align: center; }
+.popup-kicker {
+  display: inline-block;
+  margin: 0 0 10px;
+  padding: 7px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--green);
+  color: var(--navy);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+.popup h2 {
+  margin: 0;
+  color: var(--navy);
+  font-size: clamp(27px, 4.6vw, 42px);
+  line-height: 1.08;
+  letter-spacing: -.02em;
+}
+.popup-district {
+  margin: 8px 0 0;
+  color: var(--blue);
+  font-size: clamp(16px, 2.4vw, 21px);
+  font-weight: 800;
+  line-height: 1.4;
+}
+.close-x {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--navy);
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1;
+  cursor: pointer;
+}
+.close-x:hover { transform: translateY(-1px); filter: brightness(.98); }
+.close-x:focus-visible,
+.close-button:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+
+.thank-you-card {
+  position: relative;
+  overflow: hidden;
+  margin: 22px 0 18px;
+  padding: clamp(20px, 3vw, 28px);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: linear-gradient(135deg, var(--gold), var(--green));
+  text-align: center;
+}
+.thank-you-card::after {
+  content: "";
+  position: absolute;
+  width: 170px;
+  height: 170px;
+  right: -80px;
+  bottom: -92px;
+  border-radius: 50%;
+  background: rgba(47,111,174,.07);
+}
+.thank-you-card p {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  color: var(--navy);
+  font-size: clamp(20px, 3.2vw, 29px);
+  font-weight: 900;
+  line-height: 1.42;
+}
+.roll-card {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 8px 22px rgba(23,50,77,.08);
+}
+.roll-title {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 14px;
+  padding: 13px 18px;
+  background: #255D91;
+  color: white;
+  font-size: 14px;
+  font-weight: 900;
+  letter-spacing: .025em;
+}
+.roll-viewport {
+  position: relative;
+  height: clamp(270px, 40vh, 360px);
+  overflow: hidden;
+  background: #fff;
+}
+.roll-viewport::before,
+.roll-viewport::after {
+  content: "";
+  position: absolute;
+  z-index: 4;
+  left: 0;
+  right: 0;
+  height: 42px;
+  pointer-events: none;
+}
+.roll-viewport::before { top: 0; background: linear-gradient(to bottom,#fff 0%,rgba(255,255,255,0) 100%); }
+.roll-viewport::after { bottom: 0; background: linear-gradient(to top,#fff 0%,rgba(255,255,255,0) 100%); }
+.roll-track { will-change: transform; animation: participantScroll 40s linear infinite; }
+.roll-group { width: 100%; }
+.member-row {
+  display: grid;
+  grid-template-columns: minmax(0,1.4fr) minmax(0,1fr);
+  gap: 14px;
+  align-items: center;
+  min-height: 52px;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--border);
+}
+.member-row:nth-child(5n+1) { background: var(--light-blue); }
+.member-row:nth-child(5n+2) { background: var(--gold); }
+.member-row:nth-child(5n+3) { background: var(--green); }
+.member-row:nth-child(5n+4) { background: var(--purple); }
+.member-row:nth-child(5n+5) { background: var(--red); }
+.member-name { min-width: 0; color: var(--navy); font-size: clamp(15px,2.1vw,18px); font-weight: 900; overflow-wrap: anywhere; }
+.member-local { min-width: 0; color: #1D5F8F; font-size: clamp(14px,1.9vw,17px); font-weight: 800; overflow-wrap: anywhere; }
+.roll-card:hover .roll-track,
+.roll-card:focus-within .roll-track { animation-play-state: paused; }
+.roll-hint { margin: 10px 2px 0; text-align: center; color: var(--muted); font-size: 12px; line-height: 1.4; }
+.popup-actions { display: flex; justify-content: center; margin-top: 18px; }
+.close-button {
+  min-height: 44px;
+  padding: 10px 20px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--navy);
+  background: var(--light-blue);
+  font-weight: 900;
+  cursor: pointer;
+}
+.close-button:hover { transform: translateY(-1px); filter: brightness(.98); }
+
+@keyframes popupRise { from { opacity: 0; transform: translateY(14px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes participantScroll { from { transform: translateY(0); } to { transform: translateY(-50%); } }
+
+/* Desktop */
+@media (min-width: 1200px) {
+  .responsive-hero img { width: 100vw; height: 100vh; object-fit: cover; }
+}
+/* Tablet */
+@media (min-width: 600px) and (max-width: 1199px) {
+  .responsive-hero img { width: 100vw; height: 100vh; object-fit: cover; }
+}
+/* Mobile */
+@media (max-width: 599px) {
+  .responsive-hero img { width: 100vw; height: 100vh; object-fit: cover; }
+  .popup-overlay { padding: 10px; }
+  .popup { max-height: 96vh; border-radius: 18px; padding: 16px; }
+  .popup-head { padding: 4px 42px 0 0; }
+  .close-x { top: 10px; right: 10px; width: 38px; height: 38px; font-size: 25px; }
+  .thank-you-card { margin-top: 18px; padding: 18px 14px; }
+  .roll-title,
+  .member-row { grid-template-columns: minmax(0,1.25fr) minmax(0,.95fr); gap: 9px; padding-left: 12px; padding-right: 12px; }
+  .roll-title { font-size: 12px; }
+  .member-row { min-height: 50px; }
+  .roll-viewport { height: min(340px,43vh); }
+  .reopen-button { right: 12px; bottom: 12px; padding: 10px 14px; font-size: 13px; }
+}
+@media (max-width: 390px) {
+  .popup h2 { font-size: 25px; }
+  .popup-district { font-size: 15px; }
+  .thank-you-card p { font-size: 18px; }
+  .member-name { font-size: 14px; }
+  .member-local { font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; }
+  .popup { animation: none; }
+  .roll-viewport { overflow-y: auto; }
+  .roll-track { animation: none; }
+  .roll-group[aria-hidden="true"] { display: none; }
+}
+@media print {
+  .responsive-hero, .reopen-button { display: none; }
+  .popup-overlay { position: static; display: block !important; padding: 0; background: white; }
+  .popup { width: 100%; max-height: none; box-shadow: none; border: none; }
+  .close-x, .popup-actions, .roll-hint { display: none; }
+  .roll-viewport { height: auto; overflow: visible; }
+  .roll-track { animation: none; transform: none; }
+  .roll-group[aria-hidden="true"] { display: none; }
+}
+</style>
+</head>
+<body>
+<main class="responsive-hero" aria-label="TSV Technical Video Competition background">
+  <picture>
+    <source media="(min-width: 1200px)" srcset="images/tsv-desktop.png">
+    <source media="(min-width: 600px)" srcset="images/tsv-tablet.png">
+    <img src="images/tsv-mobile.png" alt="INC TSV technology background">
+  </picture>
+</main>
+
+<button class="reopen-button" id="openPopup" type="button" aria-haspopup="dialog" aria-controls="thankYouPopup">
+  View Thank You Message
+</button>
+
+<div class="popup-overlay" id="thankYouPopup" aria-hidden="true">
+  <section class="popup" role="dialog" aria-modal="true" aria-labelledby="popupTitle" aria-describedby="popupDistrict thankYouMessage">
+    <button class="close-x" type="button" data-close aria-label="Close thank you message">×</button>
+
+    <header class="popup-head">
+      <span class="popup-kicker">With Appreciation</span>
+      <h2 id="popupTitle">TSV Technical Video Competition</h2>
+      <p class="popup-district" id="popupDistrict">District of Florida and Caribbean</p>
+    </header>
+
+    <section class="thank-you-card" aria-label="Thank you message">
+      <p id="thankYouMessage">
+        Thank You po to all TSV Participants<br>
+        these are all made possible po<br>
+        from all your hard work and support
+      </p>
+    </section>
+
+    <section class="roll-card" aria-label="TSV participants and Local Congregation or GWS">
+      <div class="roll-title" aria-hidden="true">
+        <span>Team Member</span>
+        <span>Local Congregation / GWS</span>
+      </div>
+      <div class="roll-viewport" tabindex="0" aria-label="Continuously scrolling participant list. Hover or focus to pause.">
+        <div class="roll-track" id="rollTrack">
+          <div class="roll-group">
+            <div class="member-row"><span class="member-name">Aiden Mesina</span><span class="member-local">Miami</span></div>
+            <div class="member-row"><span class="member-name">AJ Ancheta</span><span class="member-local">Cayman Brac</span></div>
+            <div class="member-row"><span class="member-name">Angelino Romanos</span><span class="member-local">Orlando</span></div>
+            <div class="member-row"><span class="member-name">Austin Roson</span><span class="member-local">Miami</span></div>
+            <div class="member-row"><span class="member-name">Boon Franco</span><span class="member-local">Miami</span></div>
+            <div class="member-row"><span class="member-name">Charles Garcia</span><span class="member-local">Orlando</span></div>
+            <div class="member-row"><span class="member-name">Eden Umbal</span><span class="member-local">Miami</span></div>
+            <div class="member-row"><span class="member-name">Eduard Dayrit</span><span class="member-local">Miami</span></div>
+            <div class="member-row"><span class="member-name">Frank Mayores</span><span class="member-local">Grand Cayman</span></div>
+            <div class="member-row"><span class="member-name">Geo Urtula</span><span class="member-local">West Palm Beach</span></div>
+            <div class="member-row"><span class="member-name">Janna Tabanag</span><span class="member-local">Miami</span></div>
+            <div class="member-row"><span class="member-name">Jay Rosquites</span><span class="member-local">Tampa</span></div>
+            <div class="member-row"><span class="member-name">Jhules Bonifacio</span><span class="member-local">Orlando</span></div>
+            <div class="member-row"><span class="member-name">Jlyn Tugaeon</span><span class="member-local">Miami</span></div>
+            <div class="member-row"><span class="member-name">Jules Tasis</span><span class="member-local">Miami</span></div>
+            <div class="member-row"><span class="member-name">Julia Demetita</span><span class="member-local">Daytona</span></div>
+            <div class="member-row"><span class="member-name">Justyn DeGuzman</span><span class="member-local">Kissimmee</span></div>
+            <div class="member-row"><span class="member-name">NJ Tugaoen</span><span class="member-local">Miami</span></div>
+            <div class="member-row"><span class="member-name">TJ DeGuzman</span><span class="member-local">Kissimmee</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <p class="roll-hint">The participant list scrolls continuously. Hover over the list or focus it with the keyboard to pause.</p>
+
+    <div class="popup-actions">
+      <button class="close-button" type="button" data-close>Close</button>
+    </div>
+  </section>
+</div>
+
+<script>
+(function () {
+  const overlay = document.getElementById('thankYouPopup');
+  const popup = overlay.querySelector('.popup');
+  const openButton = document.getElementById('openPopup');
+  const closeButtons = overlay.querySelectorAll('[data-close]');
+  const rollTrack = document.getElementById('rollTrack');
+  const firstGroup = rollTrack.querySelector('.roll-group');
+  let previousFocus = null;
+
+  // Duplicate the participant group for a seamless, continuous vertical loop.
+  const duplicate = firstGroup.cloneNode(true);
+  duplicate.setAttribute('aria-hidden', 'true');
+  rollTrack.appendChild(duplicate);
+
+  function openPopup() {
+    previousFocus = document.activeElement;
+    overlay.classList.add('is-visible');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('popup-open');
+    overlay.querySelector('.close-x').focus();
+  }
+
+  function closePopup() {
+    overlay.classList.remove('is-visible');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('popup-open');
+    if (previousFocus && typeof previousFocus.focus === 'function') previousFocus.focus();
+  }
+
+  openButton.addEventListener('click', openPopup);
+  closeButtons.forEach(button => button.addEventListener('click', closePopup));
+
+  overlay.addEventListener('click', function (event) {
+    if (event.target === overlay) closePopup();
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (!overlay.classList.contains('is-visible')) return;
+    if (event.key === 'Escape') closePopup();
+
+    if (event.key === 'Tab') {
+      const focusable = popup.querySelectorAll('button, [tabindex]:not([tabindex="-1"])');
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+  });
+
+  // Open automatically when the page loads.
+  window.addEventListener('load', function () {
+    setTimeout(openPopup, 350);
+  });
+})();
+</script>
+</body>
+</html>

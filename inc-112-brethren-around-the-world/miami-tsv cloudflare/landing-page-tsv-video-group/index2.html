@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TSV Technical Video Competition | District of Florida and Caribbean</title>
+  <style>
+    :root {
+      --navy: #17324D;
+      --blue: #2F6FAE;
+      --border: #C9D6E6;
+      --bg: #F6F9FD;
+      --text: #1C2733;
+      --muted: #51606F;
+      --gold: #FFF3DC;
+      --green: #EAF7EF;
+      --purple: #F2ECFF;
+      --red: #FFEAEA;
+      --light-blue: #EAF3FF;
+      --white: #FFFFFF;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(47, 111, 174, 0.16), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(255, 243, 220, 0.95), transparent 34%),
+        var(--bg);
+      color: var(--text);
+      padding: 24px;
+      min-height: 100vh;
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .header {
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      color: white;
+      border-radius: 22px;
+      padding: 34px 34px 36px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 24px rgba(23, 50, 77, 0.18);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before,
+    .header::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.10);
+      pointer-events: none;
+    }
+
+    .header::before {
+      width: 180px;
+      height: 180px;
+      top: -70px;
+      left: -55px;
+    }
+
+    .header::after {
+      width: 240px;
+      height: 240px;
+      right: -90px;
+      bottom: -115px;
+    }
+
+    .kicker {
+      position: relative;
+      display: inline-block;
+      z-index: 1;
+      margin: 0 0 14px;
+      padding: 8px 14px;
+      color: var(--navy);
+      background: var(--gold);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      font-size: clamp(32px, 5vw, 54px);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
+      margin: 16px auto 0;
+      color: rgba(255, 255, 255, 0.92);
+      font-size: clamp(17px, 2.2vw, 21px);
+      line-height: 1.5;
+    }
+
+    .countdown-card {
+      background: var(--red);
+      border: 1px solid #F4BFC2;
+      border-radius: 20px;
+      padding: 24px;
+      margin: 0 0 20px;
+      box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+      text-align: center;
+    }
+
+    .weekend-message {
+      display: inline-block;
+      margin: 0 0 12px;
+      padding: 8px 15px;
+      color: #8A1C23;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid #E8A8AD;
+      border-radius: 999px;
+      font-size: clamp(16px, 2vw, 20px);
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .countdown-kicker {
+      margin: 0 0 6px;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .countdown-card h2 {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(25px, 3vw, 36px);
+    }
+
+    .countdown-display {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      max-width: 760px;
+      margin: 18px auto 12px;
+    }
+
+    .countdown-unit {
+      padding: 15px 10px 13px;
+      background: linear-gradient(180deg, #FFFFFF, #F2F7FD);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: inset 0 -3px 0 rgba(47, 111, 174, 0.08);
+    }
+
+    .countdown-value {
+      display: block;
+      color: var(--navy);
+      font-size: clamp(27px, 4vw, 44px);
+      font-weight: 900;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .countdown-label {
+      display: block;
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    @keyframes deadlineBlink {
+      0%, 45% {
+        opacity: 1;
+        text-shadow: 0 0 8px rgba(255, 255, 0, 0.95), 0 0 16px rgba(255, 255, 0, 0.7);
+      }
+      50%, 95% {
+        opacity: 0.2;
+        text-shadow: none;
+      }
+      100% {
+        opacity: 1;
+        text-shadow: 0 0 8px rgba(255, 255, 0, 0.95), 0 0 16px rgba(255, 255, 0, 0.7);
+      }
+    }
+
+    .countdown-display.deadline-reached .countdown-unit {
+      background: #FF0000;
+      border-color: #B80000;
+      box-shadow:
+        0 0 0 3px rgba(255, 0, 0, 0.22),
+        0 0 18px rgba(255, 0, 0, 0.72),
+        inset 0 -3px 0 rgba(120, 0, 0, 0.35);
+    }
+
+    .countdown-display.deadline-reached .countdown-value,
+    .countdown-display.deadline-reached .countdown-label {
+      color: #FFFF00;
+      animation: deadlineBlink 0.9s steps(1, end) infinite;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .countdown-display.deadline-reached .countdown-value,
+      .countdown-display.deadline-reached .countdown-label {
+        animation: none;
+        opacity: 1;
+      }
+    }
+
+
+    .intro-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 22px 24px;
+      margin: 0 0 22px;
+      box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+      text-align: center;
+    }
+
+    .intro-card h2 {
+      margin: 0 0 10px;
+      color: var(--navy);
+      font-size: clamp(24px, 3vw, 34px);
+    }
+
+    .intro-card p {
+      max-width: 820px;
+      margin: 0 auto;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 17px;
+    }
+
+    .portal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .portal-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 430px;
+      color: var(--text);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 8px 22px rgba(23, 50, 77, 0.10);
+      transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .portal-card:nth-child(1) {
+      background: var(--light-blue);
+    }
+
+    .portal-card:nth-child(2) {
+      background: var(--gold);
+    }
+
+    .portal-card:nth-child(3) {
+      background: var(--green);
+    }
+
+    .portal-card::after {
+      content: "";
+      position: absolute;
+      right: -42px;
+      bottom: -42px;
+      width: 130px;
+      height: 130px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid rgba(201, 214, 230, 0.7);
+    }
+
+    .portal-card:hover,
+    .portal-card:focus-visible {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 28px rgba(23, 50, 77, 0.16);
+      border-color: var(--blue);
+      outline: none;
+    }
+
+    .portal-card:focus-visible {
+      outline: 3px solid var(--blue);
+      outline-offset: 4px;
+    }
+
+    .portal-icon {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      width: 64px;
+      height: 64px;
+      margin-bottom: 20px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      color: var(--navy);
+      font-size: 32px;
+      box-shadow: 0 4px 12px rgba(23, 50, 77, 0.08);
+    }
+
+    .portal-icon.crimp-icon {
+      color: #111111;
+      font-family: "Arial Black", Arial, Helvetica, sans-serif;
+      font-size: 50px;
+      font-weight: 900;
+      line-height: 1;
+      -webkit-text-stroke: 1.2px currentColor;
+      text-stroke: 1.2px currentColor;
+      text-shadow:
+        1.1px 0 currentColor,
+        -1.1px 0 currentColor,
+        0 1.1px currentColor,
+        0 -1.1px currentColor,
+        0.8px 0.8px currentColor,
+        -0.8px 0.8px currentColor,
+        0.8px -0.8px currentColor,
+        -0.8px -0.8px currentColor;
+    }
+
+    .portal-icon svg {
+      width: 38px;
+      height: 38px;
+      display: block;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.1;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .portal-icon .person-icon-svg {
+      fill: currentColor;
+      stroke: none;
+    }
+
+    .portal-icon.webex-icon {
+      color: #111111;
+      background: white;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 12px rgba(23, 50, 77, 0.08);
+    }
+
+    .portal-icon.mic-icon {
+      color: #111111;
+      background: white;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 12px rgba(23, 50, 77, 0.08);
+    }
+
+    .portal-card h2 {
+      position: relative;
+      z-index: 1;
+      margin: 0 0 12px;
+      color: var(--navy);
+      font-size: clamp(24px, 2.6vw, 31px);
+      line-height: 1.16;
+    }
+
+    .portal-card p {
+      position: relative;
+      z-index: 1;
+      margin: 0 0 20px;
+      color: var(--text);
+      font-size: 17px;
+      line-height: 1.5;
+    }
+
+    .tile-progress {
+      position: relative;
+      z-index: 1;
+      margin: 0 0 20px;
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(201, 214, 230, 0.9);
+      border-radius: 15px;
+    }
+
+    .tile-progress-row + .tile-progress-row {
+      margin-top: 12px;
+    }
+
+    .tile-progress-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 6px;
+      color: var(--navy);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .tile-progress-percent {
+      font-variant-numeric: tabular-nums;
+    }
+
+    .tile-progress-track {
+      width: 100%;
+      height: 10px;
+      overflow: hidden;
+      background: #E2EAF3;
+      border: 1px solid rgba(23, 50, 77, 0.10);
+      border-radius: 999px;
+    }
+
+    .tile-progress-fill {
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--navy), var(--blue));
+    }
+
+    .tile-progress-row.target .tile-progress-fill {
+      background: linear-gradient(90deg, #9A6500, #E4A51A);
+    }
+
+    .portal-link-text {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: white;
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      border: 1px solid var(--blue);
+      border-radius: 999px;
+      padding: 11px 16px;
+      font: inherit;
+      font-size: 16px;
+      font-weight: 900;
+      line-height: 1.2;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .portal-actions {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    .portal-link-text.video-tile-button {
+      background: white;
+      color: var(--navy);
+      border-color: var(--blue);
+    }
+
+    .portal-link-text:hover,
+    .portal-link-text:focus-visible {
+      transform: translateY(-1px);
+      outline: 3px solid rgba(47, 111, 174, 0.22);
+      outline-offset: 2px;
+    }
+
+    .footer {
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 920px) {
+      .portal-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .portal-card {
+        min-height: auto;
+      }
+    }
+
+    @media (max-width: 760px) {
+      body {
+        padding: 14px;
+      }
+
+      .header {
+        border-radius: 18px;
+        padding: 28px 20px;
+      }
+
+      .countdown-card,
+      .intro-card,
+      .portal-card {
+        border-radius: 18px;
+      }
+
+      .countdown-display {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+
+    /* TSV Group Video Carousel Popup */
+    .video-popup-trigger {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+      padding: 12px 20px;
+      border: 0;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      color: white;
+      font: inherit;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(23, 50, 77, 0.16);
+    }
+
+    .video-popup-trigger:hover,
+    .video-popup-trigger:focus-visible {
+      transform: translateY(-1px);
+      outline: 3px solid rgba(47, 111, 174, 0.28);
+      outline-offset: 3px;
+    }
+
+    .video-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(8, 20, 33, 0.78);
+      backdrop-filter: blur(5px);
+    }
+
+    .video-modal.open {
+      display: flex;
+    }
+
+    .video-modal-panel {
+      width: min(980px, 100%);
+      max-height: calc(100vh - 36px);
+      overflow: auto;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.36);
+    }
+
+    .video-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .video-modal-header h2 {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(22px, 3vw, 32px);
+    }
+
+    .video-modal-close {
+      flex: 0 0 auto;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: #fff;
+      color: var(--navy);
+      font-size: 26px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .video-carousel {
+      position: relative;
+      padding: 18px 64px 8px;
+    }
+
+    .video-slide {
+      display: none;
+    }
+
+    .video-slide.active {
+      display: block;
+    }
+
+    .video-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: #000;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(23, 50, 77, 0.16);
+    }
+
+    .video-frame video {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+      background: #000;
+    }
+
+    .webex-draft-frame video {
+      filter: grayscale(38%) saturate(48%) contrast(82%) brightness(1.16);
+      opacity: 0.78;
+    }
+
+    .webex-draft-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      pointer-events: none;
+      padding: 18px;
+      background: rgba(255, 255, 255, 0.10);
+    }
+
+    .webex-badge-row {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .webex-draft-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 9px 14px;
+      border: 2px solid rgba(255, 255, 255, 0.95);
+      border-radius: 999px;
+      background: rgba(138, 28, 35, 0.86);
+      color: #fff;
+      font-size: clamp(13px, 1.7vw, 17px);
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+      white-space: nowrap;
+    }
+
+    .webex-draft-message {
+      margin: 0;
+      padding: 10px 16px;
+      border-radius: 12px;
+      background: rgba(23, 50, 77, 0.88);
+      color: #fff;
+      text-align: center;
+      font-size: clamp(14px, 2vw, 19px);
+      font-weight: 900;
+      line-height: 1.25;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+    }
+
+    .webex-draft-note {
+      color: #8A1C23;
+      font-weight: 900;
+    }
+
+    .video-slide-title {
+      margin: 15px 0 4px;
+      color: var(--navy);
+      text-align: center;
+      font-size: clamp(20px, 2.5vw, 28px);
+    }
+
+    .video-slide-note {
+      margin: 0 auto;
+      max-width: 760px;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .coming-soon-card {
+      min-height: 360px;
+      display: grid;
+      place-items: center;
+      padding: 36px;
+      text-align: center;
+      background:
+        radial-gradient(circle at top left, rgba(47, 111, 174, 0.16), transparent 36%),
+        linear-gradient(135deg, #F7FBFF, #FFF7E8);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .coming-soon-card strong {
+      display: block;
+      color: var(--navy);
+      font-size: clamp(30px, 5vw, 52px);
+      line-height: 1.12;
+    }
+
+    .carousel-nav-button {
+      position: absolute;
+      top: 46%;
+      transform: translateY(-50%);
+      z-index: 2;
+      width: 44px;
+      height: 44px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(23, 50, 77, 0.92);
+      color: white;
+      font-size: 26px;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+    }
+
+    .carousel-nav-button.prev { left: 10px; }
+    .carousel-nav-button.next { right: 10px; }
+
+    .video-carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px 22px;
+    }
+
+    .video-carousel-dot {
+      width: 12px;
+      height: 12px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: #B5C1CF;
+      cursor: pointer;
+    }
+
+    .video-carousel-dot.active {
+      background: var(--blue);
+      box-shadow: 0 0 0 4px rgba(47, 111, 174, 0.13);
+    }
+
+    body.video-modal-open {
+      overflow: hidden;
+    }
+
+    @media (max-width: 640px) {
+      .video-carousel {
+        padding: 14px 44px 4px;
+      }
+
+      .carousel-nav-button {
+        width: 38px;
+        height: 38px;
+        font-size: 22px;
+      }
+
+      .carousel-nav-button.prev { left: 4px; }
+      .carousel-nav-button.next { right: 4px; }
+
+      .coming-soon-card {
+        min-height: 260px;
+        padding: 24px;
+      }
+    }
+
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+
+      .header,
+      .countdown-card,
+      .intro-card,
+      .portal-card {
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="header" aria-label="TSV Technical Video Competition Header">
+      <p class="kicker">District of Florida and Caribbean</p>
+      <h1>TSV Technical Video Competition</h1>
+      <p class="subtitle">Select a team group portal below to view its project site.</p>
+    </section>
+
+    <section class="countdown-card" aria-labelledby="submissionCountdownTitle">
+      <p class="weekend-message" id="weekendMessage" aria-live="polite">Four More Weekends</p>
+      <p class="countdown-kicker">Final Submission Deadline</p>
+      <h2 id="submissionCountdownTitle">Countdown to August 17</h2>
+      <div class="countdown-display" id="submissionCountdown" role="timer" aria-label="Time remaining until the August 17, 2026 submission deadline">
+        <div class="countdown-unit"><span class="countdown-value" id="countdownDays">00</span><span class="countdown-label">Days</span></div>
+        <div class="countdown-unit"><span class="countdown-value" id="countdownHours">00</span><span class="countdown-label">Hours</span></div>
+        <div class="countdown-unit"><span class="countdown-value" id="countdownMinutes">00</span><span class="countdown-label">Minutes</span></div>
+        <div class="countdown-unit"><span class="countdown-value" id="countdownSeconds">00.0</span><span class="countdown-label">Seconds</span></div>
+      </div>
+    </section>
+
+    <section class="intro-card" aria-label="Portal overview">
+      <h2>Production Team Portals</h2>
+      <button class="video-popup-trigger" id="openVideoPopup" type="button">▶ Watch TSV Group Videos</button>
+    </section>
+
+    <section class="portal-grid" aria-label="TSV group portal links">
+      <article class="portal-card">
+        <div class="portal-icon crimp-icon" aria-hidden="true">⌁</div>
+        <h2>Crimping Team Group</h2>
+        <p>Open the Crimping team site for cable preparation, RJ45 crimping tutorial planning, action items, resources, and deliverables.</p>
+        <div class="tile-progress" aria-label="Crimping project progress">
+          <div class="tile-progress-row">
+            <div class="tile-progress-meta"><span>Current Progress</span><span class="tile-progress-percent">Completed</span></div>
+            <div class="tile-progress-track" role="progressbar" aria-label="Current Crimping project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" aria-valuetext="Completed"><div class="tile-progress-fill" style="width: 100%;"></div></div>
+          </div>
+          <div class="tile-progress-row target">
+            <div class="tile-progress-meta"><span>Target Progress</span><span class="tile-progress-percent">100%</span></div>
+            <div class="tile-progress-track" role="progressbar" aria-label="Target Crimping project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><div class="tile-progress-fill" style="width: 100%;"></div></div>
+          </div>
+        </div>
+        <div class="portal-actions">
+          <a class="portal-link-text" href="../crimping-team-site/index.html">Open Portal →</a>
+          <button class="portal-link-text video-tile-button" type="button" data-open-video-slide="0">Watch Video</button>
+        </div>
+      </article>
+
+      <article class="portal-card">
+        <div class="portal-icon mic-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false">
+            <path d="M12 14.5a3.5 3.5 0 0 0 3.5-3.5V6a3.5 3.5 0 0 0-7 0v5a3.5 3.5 0 0 0 3.5 3.5Z" />
+            <path d="M6.5 10.5v.5a5.5 5.5 0 0 0 11 0v-.5" />
+            <path d="M12 16.5V20" />
+            <path d="M8.5 20h7" />
+          </svg>
+        </div>
+        <h2>Signal Team Group</h2>
+        <p>Open the Signal Flow team site for audio signal path planning, visual script materials, graphics, production notes, and team resources.</p>
+        <div class="tile-progress" aria-label="Signal Flow project progress">
+          <div class="tile-progress-row">
+            <div class="tile-progress-meta"><span>Current Progress</span><span class="tile-progress-percent">Completed</span></div>
+            <div class="tile-progress-track" role="progressbar" aria-label="Current Signal Flow project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" aria-valuetext="Completed"><div class="tile-progress-fill" style="width: 100%;"></div></div>
+          </div>
+          <div class="tile-progress-row target">
+            <div class="tile-progress-meta"><span>Target Progress</span><span class="tile-progress-percent">100%</span></div>
+            <div class="tile-progress-track" role="progressbar" aria-label="Target Signal Flow project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><div class="tile-progress-fill" style="width: 100%;"></div></div>
+          </div>
+        </div>
+        <div class="portal-actions">
+          <a class="portal-link-text" href="../signal-flow-team-site/index.html">Open Portal →</a>
+          <button class="portal-link-text video-tile-button" type="button" data-open-video-slide="1">Watch Video</button>
+        </div>
+      </article>
+
+      <article class="portal-card">
+        <div class="portal-icon webex-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" focusable="false" class="person-icon-svg">
+            <circle cx="32" cy="20" r="13" />
+            <path d="M12 58c0-14.9 8.9-24.8 20-24.8S52 43.1 52 58H12Z" />
+          </svg>
+        </div>
+        <h2>WebEx Team Group</h2>
+        <p>Open the WebEx team site for hosting workflow, screen-recording demos, troubleshooting sections, action items, and deliverables.</p>
+        <div class="tile-progress" aria-label="WebEx project progress">
+          <div class="tile-progress-row">
+            <div class="tile-progress-meta"><span>Current Progress</span><span class="tile-progress-percent">Almost</span></div>
+            <div class="tile-progress-track" role="progressbar" aria-label="Current WebEx project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" aria-valuetext="Almost complete"><div class="tile-progress-fill" style="width: 100%;"></div></div>
+          </div>
+          <div class="tile-progress-row target">
+            <div class="tile-progress-meta"><span>Target Progress</span><span class="tile-progress-percent">100%</span></div>
+            <div class="tile-progress-track" role="progressbar" aria-label="Target WebEx project progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><div class="tile-progress-fill" style="width: 100%;"></div></div>
+          </div>
+        </div>
+        <div class="portal-actions">
+          <a class="portal-link-text" href="../webex-team-site/index.html">Open Portal →</a>
+          <button class="portal-link-text video-tile-button" type="button" data-open-video-slide="2">Watch Video</button>
+        </div>
+      </article>
+    </section>
+
+    <p class="footer">TSV Technical Video Competition • District of Florida and Caribbean</p>
+  </main>
+
+  <div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-labelledby="videoModalTitle" aria-hidden="true">
+    <div class="video-modal-panel">
+      <div class="video-modal-header">
+        <h2 id="videoModalTitle">TSV Group Videos</h2>
+        <button class="video-modal-close" id="closeVideoPopup" type="button" aria-label="Close video popup">×</button>
+      </div>
+
+      <div class="video-carousel" id="tsvVideoCarousel">
+        <button class="carousel-nav-button prev" id="videoPrev" type="button" aria-label="Previous video">‹</button>
+
+        <section class="video-slide active" data-video-slide="0" aria-label="Crimping Team video">
+          <div class="video-frame">
+            <video id="crimpingVideo" controls playsinline preload="auto">
+              <source src="https://pub-e605f3dc0e634e67928661918fa2d9d4.r2.dev/crimping.mp4" type="video/mp4" />
+              Your browser does not support HTML5 video.
+            </video>
+          </div>
+          <h3 class="video-slide-title">Crimping Team Group</h3>
+          <p class="video-slide-note">Crimping RJ45 Ethernet Cables — TSV technical video.</p>
+        </section>
+
+        <section class="video-slide" data-video-slide="1" aria-label="Signal Flow Team video">
+          <div class="video-frame">
+            <video id="signalFlowVideo" controls playsinline preload="auto">
+              <source src="https://pub-e605f3dc0e634e67928661918fa2d9d4.r2.dev/signal-flow.mp4" type="video/mp4" />
+              Your browser does not support HTML5 video.
+            </video>
+          </div>
+          <h3 class="video-slide-title">Signal Flow Team Group</h3>
+          <p class="video-slide-note">Signal Flow: Improving Sound for Worship Services — TSV technical video.</p>
+        </section>
+
+        <section class="video-slide" data-video-slide="2" data-draft-video-url="https://pub-e605f3dc0e634e67928661918fa2d9d4.r2.dev/webex-draft.mp4" data-final-video-url="PASTE_FINAL_WEBEX_VIDEO_URL_HERE" aria-label="WebEx Team draft video; final video coming soon">
+          <div class="video-frame webex-draft-frame" id="webexVideoFrame">
+            <video id="webexVideo" controls playsinline preload="auto">
+              <source src="https://pub-e605f3dc0e634e67928661918fa2d9d4.r2.dev/webex-draft.mp4" type="video/mp4" />
+              Your browser does not support HTML5 video.
+            </video>
+            <div class="webex-draft-overlay" id="webexDraftOverlay" aria-hidden="true">
+              <div class="webex-badge-row">
+                <span class="webex-draft-badge">Draft Only</span>
+                <span class="webex-draft-badge">Preview</span>
+              </div>
+            </div>
+          </div>
+          <h3 class="video-slide-title">WebEx Team Group</h3>
+          <p class="video-slide-note webex-draft-note" id="webexDraftNote">Draft preview only — final WebEx video is coming soon.</p>
+        </section>
+
+        <button class="carousel-nav-button next" id="videoNext" type="button" aria-label="Next video">›</button>
+      </div>
+
+      <div class="video-carousel-dots" aria-label="Choose a TSV group video">
+        <button class="video-carousel-dot active" type="button" data-video-dot="0" aria-label="Crimping video"></button>
+        <button class="video-carousel-dot" type="button" data-video-dot="1" aria-label="Signal Flow video"></button>
+        <button class="video-carousel-dot" type="button" data-video-dot="2" aria-label="WebEx draft video; final coming soon"></button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const modal = document.getElementById("videoModal");
+      const openButton = document.getElementById("openVideoPopup");
+      const closeButton = document.getElementById("closeVideoPopup");
+      const prevButton = document.getElementById("videoPrev");
+      const nextButton = document.getElementById("videoNext");
+      const slides = Array.from(document.querySelectorAll("[data-video-slide]"));
+      const dots = Array.from(document.querySelectorAll("[data-video-dot]"));
+      const tileVideoButtons = Array.from(document.querySelectorAll("[data-open-video-slide]"));
+
+      // WebEx uses the draft video until a final URL is supplied.
+      // To publish the final WebEx video later, replace PASTE_FINAL_WEBEX_VIDEO_URL_HERE
+      // in data-final-video-url with the real MP4 path. The page will then automatically
+      // use the final video and remove the washed-out draft treatment and draft notices.
+      const webexSlide = document.querySelector('[data-video-slide="2"]');
+      if (webexSlide) {
+        const finalUrl = webexSlide.getAttribute("data-final-video-url") || "";
+        if (finalUrl && !finalUrl.startsWith("PASTE_")) {
+          const webexVideo = document.getElementById("webexVideo");
+          const webexSource = webexVideo ? webexVideo.querySelector("source") : null;
+          const webexFrame = document.getElementById("webexVideoFrame");
+          const draftOverlay = document.getElementById("webexDraftOverlay");
+          const draftNote = document.getElementById("webexDraftNote");
+
+          if (webexSource) webexSource.src = finalUrl;
+          if (webexFrame) webexFrame.classList.remove("webex-draft-frame");
+          if (draftOverlay) draftOverlay.remove();
+          if (draftNote) {
+            draftNote.textContent = "Final WebEx technical video.";
+            draftNote.classList.remove("webex-draft-note");
+          }
+          webexSlide.setAttribute("aria-label", "WebEx Team final video");
+        }
+      }
+
+      const videos = Array.from(modal.querySelectorAll("video"));
+      let currentSlide = 0;
+      let lastTrigger = openButton;
+
+      // Finished videos use preload="auto". Calling load() here asks the browser
+      // to begin fetching/buffering them as early as browser policy allows.
+      videos.forEach(function (video) {
+        const source = video.querySelector("source");
+        if (source && source.getAttribute("src") && !source.getAttribute("src").startsWith("PASTE_")) {
+          video.load();
+        }
+      });
+
+      function randomSlideIndex() {
+        return Math.floor(Math.random() * slides.length);
+      }
+
+      function pauseAllVideos() {
+        videos.forEach(function (video) {
+          video.pause();
+        });
+      }
+
+      function showSlide(index) {
+        currentSlide = (index + slides.length) % slides.length;
+        pauseAllVideos();
+
+        slides.forEach(function (slide, slideIndex) {
+          slide.classList.toggle("active", slideIndex === currentSlide);
+        });
+
+        dots.forEach(function (dot, dotIndex) {
+          dot.classList.toggle("active", dotIndex === currentSlide);
+          dot.setAttribute("aria-current", dotIndex === currentSlide ? "true" : "false");
+        });
+      }
+
+      function openModal(startIndex, trigger) {
+        const requestedIndex = Number.isInteger(startIndex) ? startIndex : randomSlideIndex();
+        lastTrigger = trigger || openButton;
+        showSlide(requestedIndex);
+        modal.classList.add("open");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("video-modal-open");
+        closeButton.focus();
+      }
+
+      function closeModal() {
+        pauseAllVideos();
+        modal.classList.remove("open");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("video-modal-open");
+        if (lastTrigger && typeof lastTrigger.focus === "function") {
+          lastTrigger.focus();
+        }
+      }
+
+      // Main Watch TSV Group Videos button starts on a random group each time.
+      openButton.addEventListener("click", function () {
+        openModal(randomSlideIndex(), openButton);
+      });
+
+      // Each tile's Watch Video button opens directly to that group's slide.
+      tileVideoButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          openModal(Number(button.getAttribute("data-open-video-slide")), button);
+        });
+      });
+
+      closeButton.addEventListener("click", closeModal);
+      prevButton.addEventListener("click", function () { showSlide(currentSlide - 1); });
+      nextButton.addEventListener("click", function () { showSlide(currentSlide + 1); });
+
+      dots.forEach(function (dot) {
+        dot.addEventListener("click", function () {
+          showSlide(Number(dot.getAttribute("data-video-dot")));
+        });
+      });
+
+      modal.addEventListener("click", function (event) {
+        if (event.target === modal) {
+          closeModal();
+        }
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (!modal.classList.contains("open")) return;
+        if (event.key === "Escape") closeModal();
+        if (event.key === "ArrowLeft") showSlide(currentSlide - 1);
+        if (event.key === "ArrowRight") showSlide(currentSlide + 1);
+      });
+
+      // Automatic popup also starts on a random Crimping, Signal Flow, or WebEx slide.
+      window.addEventListener("load", function () {
+        window.setTimeout(function () {
+          openModal(randomSlideIndex(), openButton);
+        }, 250);
+      });
+    }());
+
+    (function () {
+      // Final submission deadline: the start of August 17, 2026 in Eastern Daylight Time.
+      const deadline = new Date("2026-08-17T00:00:00-04:00").getTime();
+      const deadlineDate = { year: 2026, month: 8, day: 17 };
+      const finalWeekendStart = { year: 2026, month: 8, day: 15 };
+      const finalWeekendEnd = { year: 2026, month: 8, day: 16 };
+      const easternDateFormatter = new Intl.DateTimeFormat("en-US", {
+        timeZone: "America/New_York",
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+        weekday: "short"
+      });
+
+      const daysEl = document.getElementById("countdownDays");
+      const hoursEl = document.getElementById("countdownHours");
+      const minutesEl = document.getElementById("countdownMinutes");
+      const secondsEl = document.getElementById("countdownSeconds");
+      const titleEl = document.getElementById("submissionCountdownTitle");
+      const weekendMessageEl = document.getElementById("weekendMessage");
+      const countdownDisplayEl = document.getElementById("submissionCountdown");
+
+      const numberWords = {
+        1: "One",
+        2: "Two",
+        3: "Three",
+        4: "Four"
+      };
+
+      function pad(value) {
+        return String(value).padStart(2, "0");
+      }
+
+      function easternDateParts(date) {
+        const parts = easternDateFormatter.formatToParts(date);
+        const values = {};
+
+        parts.forEach(function (part) {
+          if (part.type !== "literal") {
+            values[part.type] = part.value;
+          }
+        });
+
+        return {
+          year: Number(values.year),
+          month: Number(values.month),
+          day: Number(values.day),
+          weekday: values.weekday
+        };
+      }
+
+      function dateKey(dateParts) {
+        return (dateParts.year * 10000) + (dateParts.month * 100) + dateParts.day;
+      }
+
+      function utcDateFromParts(dateParts) {
+        return new Date(Date.UTC(dateParts.year, dateParts.month - 1, dateParts.day));
+      }
+
+      function getWeekendMessage(now) {
+        const today = easternDateParts(now);
+        const todayKey = dateKey(today);
+        const deadlineKey = dateKey(deadlineDate);
+        const finalWeekendStartKey = dateKey(finalWeekendStart);
+        const finalWeekendEndKey = dateKey(finalWeekendEnd);
+
+        if (todayKey >= deadlineKey) {
+          return "Video Entries Are Due Now";
+        }
+
+        if (todayKey >= finalWeekendStartKey && todayKey <= finalWeekendEndKey) {
+          return "Last Weekend";
+        }
+
+        const todayUtc = utcDateFromParts(today);
+        const weekdayNumber = todayUtc.getUTCDay();
+        let daysUntilSaturday = (6 - weekdayNumber + 7) % 7;
+
+        // Once Saturday or Sunday has started, count only weekends still ahead.
+        if (weekdayNumber === 6) {
+          daysUntilSaturday = 7;
+        } else if (weekdayNumber === 0) {
+          daysUntilSaturday = 6;
+        }
+
+        const firstUpcomingSaturday = new Date(todayUtc);
+        firstUpcomingSaturday.setUTCDate(firstUpcomingSaturday.getUTCDate() + daysUntilSaturday);
+        const finalSaturday = utcDateFromParts(finalWeekendStart);
+        const millisecondsPerWeek = 7 * 24 * 60 * 60 * 1000;
+        const weekendsRemaining = Math.max(
+          1,
+          Math.floor((finalSaturday - firstUpcomingSaturday) / millisecondsPerWeek) + 1
+        );
+        const displayedCount = Math.min(4, weekendsRemaining);
+        const weekendLabel = displayedCount === 1 ? "Weekend" : "Weekends";
+
+        return numberWords[displayedCount] + " More " + weekendLabel;
+      }
+
+      function updateCountdown() {
+        const now = new Date();
+        const remaining = Math.max(0, deadline - now.getTime());
+        const days = Math.floor(remaining / 86400000);
+        const hours = Math.floor((remaining % 86400000) / 3600000);
+        const minutes = Math.floor((remaining % 3600000) / 60000);
+        const seconds = Math.floor((remaining % 60000) / 100) / 10;
+        const easternToday = easternDateParts(now);
+        const deadlineReached = dateKey(easternToday) >= dateKey(deadlineDate);
+
+        daysEl.textContent = pad(days);
+        hoursEl.textContent = pad(hours);
+        minutesEl.textContent = pad(minutes);
+        secondsEl.textContent = seconds.toFixed(1).padStart(4, "0");
+        weekendMessageEl.textContent = getWeekendMessage(now);
+        countdownDisplayEl.classList.toggle("deadline-reached", remaining === 0);
+
+        if (deadlineReached) {
+          titleEl.textContent = "August 17";
+        } else {
+          titleEl.textContent = "Countdown to August 17";
+        }
+      }
+
+      updateCountdown();
+      window.setInterval(updateCountdown, 100);
+    }());
+  </script>
+</body>
+</html>

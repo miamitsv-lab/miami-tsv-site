@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b4f96" />
+  <title>Meeting of All Officers</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      min-width: 0;
+      min-height: 0;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #eef7fc;
+    }
+
+    body {
+      position: relative;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /*
+      Important for carousel/iframe use:
+      inherit the iframe's exact content box instead of recalculating
+      the size with vw/vh/svh viewport units.
+    */
+    .stage {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      min-width: 0;
+      min-height: 0;
+      overflow: hidden;
+      background: #eef7fc;
+    }
+
+    .stage > picture {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      overflow: hidden;
+    }
+
+    /* Blurred copy fills any unused space around the full poster. */
+    .poster-bg {
+      position: absolute;
+      inset: -32px;
+      width: calc(100% + 64px);
+      height: calc(100% + 64px);
+      object-fit: cover;
+      object-position: center;
+      filter: blur(28px);
+      transform: scale(1.06);
+      opacity: 0.9;
+      user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
+    }
+
+    /* Main image is never cropped. */
+    .poster {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+      object-position: center;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+  </style>
+</head>
+<body>
+  <main class="stage">
+    <picture aria-hidden="true">
+      <source media="(max-width: 600px) and (orientation: portrait)" srcset="image-mobile.png" />
+      <source media="(max-width: 1100px) and (orientation: landscape)" srcset="image-tablet.png" />
+      <img class="poster-bg" src="image-desktop.png" alt="" />
+    </picture>
+
+    <picture>
+      <source media="(max-width: 600px) and (orientation: portrait)" srcset="image-mobile.png" />
+      <source media="(max-width: 1100px) and (orientation: landscape)" srcset="image-tablet.png" />
+      <img
+        class="poster"
+        src="image-desktop.png"
+        alt="Meeting of All Officers — Friday, September 18, 2026 at 9:00 PM via Webex. We encourage everyone to join in our short meeting."
+      />
+    </picture>
+  </main>
+</body>
+</html>

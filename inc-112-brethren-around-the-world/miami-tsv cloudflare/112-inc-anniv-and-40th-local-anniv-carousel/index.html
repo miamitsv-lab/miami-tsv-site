@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#021711">
+  <meta name="color-scheme" content="light only">
+  <title>Anniversary Celebration Carousel</title>
+  <meta
+    name="description"
+    content="Responsive carousel featuring the 112th Anniversary Thanksgiving and Miami 40th Anniversary countdown."
+  >
+  <link rel="stylesheet" href="carousel.css">
+  <script src="carousel.js" defer></script>
+</head>
+<body>
+  <main class="carousel" aria-label="Anniversary celebration carousel">
+    <section
+      class="carousel__slide is-active"
+      data-slide="0"
+      aria-label="112th Anniversary Thanksgiving"
+      aria-hidden="false"
+    >
+      <iframe
+        class="carousel__frame"
+        src="slides/anniversary/index.html"
+        title="112th Anniversary Thanksgiving"
+        loading="eager"
+        tabindex="0"
+      ></iframe>
+    </section>
+
+    <section
+      class="carousel__slide"
+      data-slide="1"
+      aria-label="Miami 40th Anniversary countdown"
+      aria-hidden="true"
+    >
+      <iframe
+        class="carousel__frame"
+        src="slides/miami/index.html"
+        title="Miami 40th Anniversary countdown"
+        loading="eager"
+        tabindex="-1"
+      ></iframe>
+    </section>
+
+    <nav class="carousel__dots" aria-label="Choose anniversary page">
+      <button
+        class="carousel__dot is-active"
+        type="button"
+        data-slide-target="0"
+        aria-label="Show 112th Anniversary Thanksgiving"
+        aria-current="true"
+      ></button>
+      <button
+        class="carousel__dot"
+        type="button"
+        data-slide-target="1"
+        aria-label="Show Miami 40th Anniversary countdown"
+        aria-current="false"
+      ></button>
+    </nav>
+
+    <noscript>
+      <p class="carousel__noscript">
+        JavaScript is required for automatic slide switching. Open either page using the dots after enabling JavaScript.
+      </p>
+    </noscript>
+  </main>
+</body>
+</html>

@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <title>Unity Games Venue — Wells Activity Center</title>
+
+  <style>
+    :root{
+      --red:#b81922;
+      --navy:#0d2c54;
+      --green:#0a7a46;
+      --light:#f4f6f8;
+      --line:#d9dee5;
+      --white:#ffffff;
+    }
+
+    *{box-sizing:border-box}
+
+    html,body{
+      margin:0;
+      min-height:100%;
+      background:var(--white);
+      color:var(--navy);
+      font-family:Arial, Helvetica, sans-serif;
+    }
+
+    body{
+      min-height:100svh;
+      display:grid;
+      place-items:center;
+      padding:18px;
+    }
+
+    .sheet{
+      position:relative;
+      width:min(1180px,100%);
+      min-height:min(760px,calc(100svh - 36px));
+      border:10px solid var(--red);
+      background:
+        radial-gradient(circle at 72% 34%, rgba(13,44,84,.035), transparent 36%),
+        var(--white);
+      display:grid;
+      grid-template-rows:auto 1fr auto;
+      overflow:hidden;
+    }
+
+    .sheet::before{
+      content:"";
+      position:absolute;
+      width:min(560px,56vw);
+      aspect-ratio:1;
+      border:28px solid rgba(13,44,84,.035);
+      border-radius:50%;
+      right:-5%;
+      top:18%;
+      pointer-events:none;
+    }
+
+    .header{
+      text-align:center;
+      padding:32px 28px 14px;
+      position:relative;
+      z-index:1;
+    }
+
+    .eyebrow{
+      margin:0;
+      font-weight:800;
+      font-size:clamp(14px,1.7vw,24px);
+      letter-spacing:.08em;
+      line-height:1.25;
+      text-transform:uppercase;
+    }
+
+    .header-line{
+      height:5px;
+      width:min(210px,22vw);
+      background:var(--red);
+      margin:18px auto 0;
+    }
+
+    .content{
+      position:relative;
+      z-index:1;
+      display:grid;
+      grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);
+      gap:46px;
+      align-items:center;
+      padding:28px 54px 44px;
+    }
+
+    .brand{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+
+    .kicker{
+      display:inline-block;
+      width:max-content;
+      background:var(--navy);
+      color:#fff;
+      font-weight:800;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      padding:10px 16px;
+      margin-bottom:20px;
+      font-size:clamp(13px,1.25vw,18px);
+    }
+
+    h1{
+      margin:0;
+      color:var(--red);
+      text-transform:uppercase;
+      font-size:clamp(50px,7vw,104px);
+      line-height:.9;
+      letter-spacing:-.03em;
+    }
+
+    .venue-name{
+      margin:26px 0 0;
+      font-size:clamp(28px,3.1vw,50px);
+      font-weight:900;
+      text-transform:uppercase;
+      line-height:1.03;
+    }
+
+    .location{
+      margin:7px 0 0;
+      font-size:clamp(22px,2.25vw,36px);
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+    }
+
+    .copy{
+      margin:24px 0 0;
+      font-size:clamp(16px,1.55vw,22px);
+      line-height:1.5;
+      max-width:680px;
+      color:#324965;
+    }
+
+    .qr-card{
+      background:#fff;
+      border:3px solid var(--navy);
+      padding:28px;
+      box-shadow:0 14px 36px rgba(13,44,84,.10);
+      text-align:center;
+    }
+
+    .qr-card h2{
+      margin:0 0 8px;
+      font-size:clamp(24px,2.5vw,38px);
+      line-height:1;
+      text-transform:uppercase;
+      color:var(--navy);
+    }
+
+    .qr-card p{
+      margin:0 0 20px;
+      color:#4d6177;
+      font-size:clamp(15px,1.3vw,19px);
+      line-height:1.4;
+    }
+
+    .qr-placeholder{
+      width:min(100%,360px);
+      aspect-ratio:1;
+      margin:0 auto;
+      border:4px dashed var(--red);
+      background:
+        linear-gradient(45deg,#f7f8fa 25%,transparent 25%) 0 0/26px 26px,
+        linear-gradient(45deg,transparent 75%,#f7f8fa 75%) 0 0/26px 26px,
+        linear-gradient(45deg,transparent 75%,#f7f8fa 75%) 13px -13px/26px 26px,
+        linear-gradient(45deg,#f7f8fa 25%,#fff 25%) 13px -13px/26px 26px;
+      display:grid;
+      place-items:center;
+      padding:28px;
+    }
+
+    .qr-placeholder span{
+      display:block;
+      background:#fff;
+      border:3px solid var(--navy);
+      padding:18px 16px;
+      font-weight:900;
+      font-size:clamp(19px,2.2vw,30px);
+      line-height:1.05;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+      color:var(--navy);
+    }
+
+    .qr-note{
+      margin-top:18px !important;
+      color:var(--red) !important;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+    }
+
+    .footer{
+      position:relative;
+      z-index:1;
+      background:var(--navy);
+      color:#fff;
+      text-align:center;
+      padding:14px 20px 15px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.09em;
+      font-size:clamp(14px,1.45vw,20px);
+    }
+
+    /* Tablet */
+    @media (max-width: 900px){
+      body{padding:12px}
+
+      .sheet{
+        border-width:8px;
+        min-height:calc(100svh - 24px);
+      }
+
+      .header{
+        padding:26px 20px 10px;
+      }
+
+      .content{
+        grid-template-columns:1fr;
+        gap:28px;
+        padding:26px 34px 34px;
+        text-align:center;
+      }
+
+      .brand{
+        align-items:center;
+      }
+
+      .copy{
+        max-width:720px;
+      }
+
+      .qr-card{
+        width:min(560px,100%);
+        justify-self:center;
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 560px){
+      body{
+        padding:0;
+        align-items:start;
+      }
+
+      .sheet{
+        width:100%;
+        min-height:100svh;
+        border-width:6px;
+      }
+
+      .header{
+        padding:22px 16px 8px;
+      }
+
+      .header-line{
+        margin-top:12px;
+        height:4px;
+      }
+
+      .content{
+        padding:22px 18px 28px;
+        gap:24px;
+      }
+
+      h1{
+        font-size:clamp(46px,16vw,76px);
+      }
+
+      .venue-name{
+        font-size:clamp(28px,9vw,42px);
+      }
+
+      .location{
+        font-size:clamp(20px,6.4vw,30px);
+      }
+
+      .copy{
+        font-size:16px;
+        margin-top:18px;
+      }
+
+      .qr-card{
+        padding:20px;
+      }
+
+      .qr-placeholder{
+        width:min(84vw,340px);
+      }
+
+      .footer{
+        padding:13px 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="sheet">
+    <header class="header">
+      <p class="eyebrow">
+        Iglesia Ni Cristo (Church of Christ)<br>
+        Ecclesiastical District of Florida and Caribbean
+      </p>
+      <div class="header-line"></div>
+    </header>
+
+    <section class="content">
+      <div class="brand">
+        <span class="kicker">Unity Games • Venue</span>
+        <h1>Volleyball</h1>
+
+        <div class="venue-name">Wells Activity Center</div>
+        <div class="location">Apopka, Florida</div>
+
+        <p class="copy">
+          Scan the venue QR code for directions and location information.
+          Replace the placeholder with your final QR image when ready.
+        </p>
+      </div>
+
+      <aside class="qr-card" aria-label="Venue QR code">
+        <h2>Venue QR Code</h2>
+        <p>Scan for Wells Activity Center</p>
+
+        <!-- Replace this div with an <img> when your QR code is ready. -->
+        <div class="qr-placeholder">
+          <span>QR Code<br>Placeholder</span>
+        </div>
+
+        <p class="qr-note">Wells Activity Center • Apopka, Florida</p>
+      </aside>
+    </section>
+
+    <footer class="footer">
+      Unity Games • District of Florida &amp; Caribbean
+    </footer>
+  </main>
+</body>
+</html>
