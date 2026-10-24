@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
+  <meta name="theme-color" content="#000000">
+  <title>Miami Bulletin Board Carousel</title>
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --background: #000000;
+      --dot: rgba(255, 255, 255, 0.48);
+      --dot-border: rgba(0, 0, 0, 0.45);
+      --dot-active: #ffffff;
+      --transition-duration: 700ms;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: var(--background);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    button,
+    iframe {
+      font: inherit;
+    }
+
+    .carousel {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--background);
+      isolation: isolate;
+    }
+
+    .slides {
+      position: absolute;
+      inset: 0;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: scale(1.008);
+      transition:
+        opacity var(--transition-duration) ease,
+        transform var(--transition-duration) ease,
+        visibility 0s linear var(--transition-duration);
+      background: #000000;
+    }
+
+    .slide.is-active {
+      z-index: 1;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: scale(1);
+      transition:
+        opacity var(--transition-duration) ease,
+        transform var(--transition-duration) ease,
+        visibility 0s;
+    }
+
+    .slide iframe {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border: 0;
+      background: #000000;
+    }
+
+
+    @media (prefers-reduced-motion: reduce) {
+      .slide,
+      .dot {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main
+    id="carousel"
+    class="carousel"
+    aria-label="Bulletin board information carousel"
+  >
+    <section class="slides">
+      <!--
+        Happy 112 responsive HTML page
+        Display time: 5 seconds
+      -->
+        
+      <article
+        class="slide is-active"
+        data-slide-index="0"
+        data-duration="5000"
+        aria-hidden="false"
+      >
+        <iframe
+          src="../inc-112-brethren-around-the-world/index.html"
+          title="112th Anniversary Brethren Around the World"
+          allow="autoplay; fullscreen"
+          loading="eager"
+        ></iframe>
+      </article>
+
+      <!--
+        112th Anniversary Google Album slideshow
+        Display time: the complete 50-second
+      -->
+
+      <article
+        class="slide"
+        data-slide-index="5"
+        data-duration="30000"
+        data-video-slide="true"
+        aria-hidden="true"
+      >
+        <iframe
+          src="https://script.google.com/macros/s/AKfycbwjaMtIN5qi7DC8Ztc58EEW9l8fJ8HY9aBFOtXy81phkTSOdDUfwo-M3OB48-kE97Mqpg/exec"
+          title="Google Album Slideshow"
+          allow="autoplay; fullscreen"
+          loading="eager"
+        ></iframe>
+      </article>
+
+      <!--
+        112th Anniversary photo upload qr page
+        Display time: the complete 10-second
+      -->
+      <article
+        class="slide"
+        data-slide-index="6"
+        data-duration="8000"
+        data-video-slide="true"
+        aria-hidden="true"
+      >
+        <iframe
+          src="../inc-anniversary-photo-upload-qr/index.html"
+          title="Photo Uploads"
+          allow="autoplay; fullscreen"
+          loading="eager"
+        ></iframe>
+      </article>
+      
+      <!--
+        Unity Games District of Florida
+        Display time: 10 seconds
+      -->
+      <article
+        class="slide"
+        data-slide-index="10"
+        data-duration="10000"
+        aria-hidden="true"
+      >
+        <iframe
+          src="../unity-games-general/index.html"
+          title="Unity Games District of Florida"
+          allow="autoplay; fullscreen"
+          loading="eager"
+        ></iframe>
+      </article>
+
+      <!--
+        Pasugo God's Message for the 112th Anniversary
+        Display time: 13 seconds
+      -->
+      <article
+        class="slide"
+        data-slide-index="20"
+        data-duration="13000"
+        aria-hidden="true"
+      >
+        <iframe
+          src="../inc-112-from-pasugo/index.html"
+          title="Pasugo God's Message for the 112th Anniversary"
+          allow="autoplay; fullscreen"
+          loading="eager"
+        ></iframe>
+      </article>
+
+      <!--
+        Miami 40th Anniversary countdown
+        Display time: 8 seconds
+      -->
+      <article
+        class="slide"
+        data-slide-index="30"
+        data-duration="10000"
+        aria-hidden="true"
+      >
+        <iframe
+          src="../40th-countdown/miami/index.html"
+          title="Miami 40th Anniversary countdown"
+          allow="autoplay; fullscreen"
+          loading="eager"
+        ></iframe>
+      </article>
+
+      <!--
+        Happy 112 responsive HTML page
+        Display time: 5 seconds
+      -->
+        
+      <article
+        class="slide"
+        data-slide-index="40"
+        data-duration="5000"
+        data-video-slide="true"
+        aria-hidden="true"
+      >
+        <iframe
+          src="../inc-112-emblem/index.html"
+          title="112th Anniversary Emblem"
+          allow="autoplay; fullscreen"
+          loading="eager"
+        ></iframe>
+      </article>
+
+      <!--
+        112th Anniversary Google Album slideshow
+        Display time: the complete 30-second
+      -->
+      <article
+        class="slide"
+        data-slide-index="45"
+        data-duration="30000"
+        data-video-slide="true"
+        aria-hidden="true"
+      >
+        <iframe
+          src="https://script.google.com/macros/s/AKfycbwjaMtIN5qi7DC8Ztc58EEW9l8fJ8HY9aBFOtXy81phkTSOdDUfwo-M3OB48-kE97Mqpg/exec"
+          title="Google Album Slideshow"
+          allow="autoplay; fullscreen"
+          loading="eager"
+        ></iframe>
+      </article>
+
+      <!--
+        112th Anniversary photo upload qr page
+        Display time: the complete 10-second
+      -->
+      <article
+        class="slide"
+        data-slide-index="46"
+        data-duration="8000"
+        data-video-slide="true"
+        aria-hidden="true"
+      >
+        <iframe
+          src="../inc-anniversary-photo-upload-qr/index.html"
+          title="Photo Uploads"
+          allow="autoplay; fullscreen"
+          loading="eager"
+        ></iframe>
+      </article>
+      
+      <!--
+        Unity Games District of Florida
+        Display time: 8 seconds
+      -->
+      <article
+        class="slide"
+        data-slide-index="50"
+        data-duration="10000"
+        aria-hidden="true"
+      >
+        <iframe
+          src="../unity-games-miami-colors/index.html"
+          title="Unity Games District of Florida"
+          allow="autoplay; fullscreen"
+          loading="eager"
+        ></iframe>
+      </article>
+
+    </section>
+</main>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const carousel = document.getElementById("carousel");
+      const slides = Array.from(carousel.querySelectorAll(".slide"));
+
+      let currentIndex = 0;
+      let timerId = null;
+      let remainingTime = getSlideDuration(currentIndex);
+      let timerStartedAt = 0;
+      let isPaused = false;
+
+      function getSlideDuration(index) {
+        const duration = Number(slides[index].dataset.duration);
+        return Number.isFinite(duration) && duration > 0
+          ? duration
+          : 15000;
+      }
+
+      function getVideoIframe(slide) {
+        if (!slide || slide.dataset.videoSlide !== "true") {
+          return null;
+        }
+
+        return slide.querySelector("iframe");
+      }
+
+      function sendVideoCommand(slide, action) {
+        const iframe = getVideoIframe(slide);
+
+        if (!iframe || !iframe.contentWindow) {
+          return;
+        }
+
+        iframe.contentWindow.postMessage(
+          {
+            type: "video-slide",
+            action
+          },
+          "*"
+        );
+      }
+
+      function stopTimer() {
+        if (timerId !== null) {
+          window.clearTimeout(timerId);
+          timerId = null;
+        }
+      }
+
+      function scheduleNextSlide(customDelay) {
+        stopTimer();
+
+        if (isPaused || document.hidden) {
+          return;
+        }
+
+        remainingTime =
+          typeof customDelay === "number"
+            ? customDelay
+            : getSlideDuration(currentIndex);
+
+        timerStartedAt = performance.now();
+
+        timerId = window.setTimeout(() => {
+          showSlide((currentIndex + 1) % slides.length, {
+            restartTimer: true,
+            restartVideo: true
+          });
+        }, remainingTime);
+      }
+
+      function updateActiveStates(nextIndex) {
+        slides.forEach((slide, index) => {
+          const active = index === nextIndex;
+
+          slide.classList.toggle("is-active", active);
+          slide.setAttribute("aria-hidden", String(!active));
+        });
+      }
+
+      function showSlide(nextIndex, options = {}) {
+        const normalizedIndex =
+          ((nextIndex % slides.length) + slides.length) % slides.length;
+
+        const previousSlide = slides[currentIndex];
+        const nextSlide = slides[normalizedIndex];
+
+        /*
+          Pause the video whenever its slide is left.
+        */
+        if (previousSlide !== nextSlide) {
+          sendVideoCommand(previousSlide, "pause");
+        }
+
+        currentIndex = normalizedIndex;
+        updateActiveStates(currentIndex);
+
+        /*
+          Restart the video from the beginning whenever its slide appears.
+          The video page itself still has continuous looping enabled.
+        */
+        if (nextSlide.dataset.videoSlide === "true") {
+          sendVideoCommand(
+            nextSlide,
+            options.restartVideo === false ? "play" : "restart"
+          );
+        }
+
+        remainingTime = getSlideDuration(currentIndex);
+
+        if (options.restartTimer !== false) {
+          scheduleNextSlide();
+        }
+      }
+
+      function pauseCarousel() {
+        if (isPaused) {
+          return;
+        }
+
+        isPaused = true;
+
+        if (timerId !== null) {
+          const elapsed = performance.now() - timerStartedAt;
+          remainingTime = Math.max(0, remainingTime - elapsed);
+        }
+
+        stopTimer();
+        sendVideoCommand(slides[currentIndex], "pause");
+      }
+
+      function resumeCarousel() {
+        if (!isPaused) {
+          return;
+        }
+
+        isPaused = false;
+        sendVideoCommand(slides[currentIndex], "play");
+
+        scheduleNextSlide(
+          remainingTime > 0
+            ? remainingTime
+            : getSlideDuration(currentIndex)
+        );
+      }
+
+      /*
+        Keyboard navigation remains available without adding visible arrows.
+      */
+      window.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowRight") {
+          showSlide(currentIndex + 1, {
+            restartTimer: true,
+            restartVideo: true
+          });
+        }
+
+        if (event.key === "ArrowLeft") {
+          showSlide(currentIndex - 1, {
+            restartTimer: true,
+            restartVideo: true
+          });
+        }
+      });
+
+      /*
+        Pause timing when the browser tab is hidden.
+      */
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          pauseCarousel();
+        } else {
+          resumeCarousel();
+        }
+      });
+
+      /*
+        Optional public controls for other scripts:
+        window.anniversaryCarousel.next()
+        window.anniversaryCarousel.previous()
+        window.anniversaryCarousel.goTo(2)
+        window.anniversaryCarousel.pause()
+        window.anniversaryCarousel.play()
+      */
+      window.bulletinCarousel = {
+        next() {
+          showSlide(currentIndex + 1, {
+            restartTimer: true,
+            restartVideo: true
+          });
+        },
+
+        previous() {
+          showSlide(currentIndex - 1, {
+            restartTimer: true,
+            restartVideo: true
+          });
+        },
+
+        goTo(index) {
+          showSlide(Number(index), {
+            restartTimer: true,
+            restartVideo: true
+          });
+        },
+
+        pause: pauseCarousel,
+        play: resumeCarousel,
+
+        getCurrentIndex() {
+          return currentIndex;
+        }
+      };
+
+      /*
+        Start with the first slide.
+      */
+      updateActiveStates(currentIndex);
+      scheduleNextSlide();
+    })();
+  </script>
+</body>
+</html>
